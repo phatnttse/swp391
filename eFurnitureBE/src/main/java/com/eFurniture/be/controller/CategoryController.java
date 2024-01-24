@@ -2,7 +2,7 @@ package com.eFurniture.be.controller;
 
 import com.eFurniture.be.dto.CategoryDTO;
 import com.eFurniture.be.model.Category;
-import com.eFurniture.be.service.CategoryService;
+import com.eFurniture.be.service.ICategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("${be.prefix}/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryService categoryService;
+    private final ICategoryService categoryService;
     //Hiển thị tất cả các categories
     @GetMapping("")
     public ResponseEntity<List<Category>> getAllCategories(

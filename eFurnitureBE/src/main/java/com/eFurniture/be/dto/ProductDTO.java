@@ -31,7 +31,10 @@ public class ProductDTO extends BaseEntity {
 
     private String description;
 
+    private int purchases;
+
     @JsonProperty("category_id")
     private int categoryId;
+
 
 }

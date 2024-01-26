@@ -15,6 +15,7 @@ public class ProductResponse extends BaseResponse {
     private int quantity;
     private String thumbnail;
     private String description;
+    private int purchases;
 
     @JsonProperty("category_id")
     private int categoryId;
@@ -26,6 +27,7 @@ public class ProductResponse extends BaseResponse {
                 .quantity(product.getQuantity())
                 .thumbnail(product.getThumbnail())
                 .description(product.getDescription())
+                .purchases(product.getPurchases())
                 .categoryId(product.getCategory().getCategoryId())
                 .build();
         productResponse.setCreatedAt(product.getCreatedAt());

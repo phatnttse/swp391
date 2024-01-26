@@ -124,9 +124,28 @@ public class ProductController {
         String contentType = file.getContentType();
         return contentType != null && contentType.startsWith("image/");
     }
+    @GetMapping("/products")
+    public ResponseEntity<ProductListResponse> getAllProducts(
+            @RequestParam("page")  int page,
+            @RequestParam("limit") int limit
+    ){
+        // Tạo Pageable từ thông tin trang và giới hạn
+        PageRequest pageRequest = PageRequest.of(
+                page,limit
+        );
+        Page<ProductResponse> productPage = productService.getAllProducts(pageRequest);
+        //Lay tong so trang
+        int totalPages = productPage.getTotalPages();
+        List<ProductResponse> products = productPage.getContent();
+        return ResponseEntity.ok(ProductListResponse
+                .builder()
+                .products(products)
+                .totalPages(totalPages)
+                .build());
+    }
 
-    @GetMapping("")
-    public ResponseEntity<ProductListResponse> getProducts(
+    @GetMapping("/newest-products")
+    public ResponseEntity<ProductListResponse> getNewestProducts(
             @RequestParam("page")  int page,
             @RequestParam("limit") int limit
     ){
@@ -144,6 +163,27 @@ public class ProductController {
                         .products(products)
                         .totalPages(totalPages)
                         .build());
+    }
+
+    @GetMapping("/outstanding-products")
+    public ResponseEntity<ProductListResponse> getOutStandingProducts(
+            @RequestParam("page")  int page,
+            @RequestParam("limit") int limit
+    ){
+        // Tạo Pageable từ thông tin trang và giới hạn
+        PageRequest pageRequest = PageRequest.of(
+                page,limit,
+                Sort.by("purchases").descending()
+        );
+        Page<ProductResponse> productPage = productService.getAllProducts(pageRequest);
+        //Lay tong so trang
+        int totalPages = productPage.getTotalPages();
+        List<ProductResponse> products = productPage.getContent();
+        return ResponseEntity.ok(ProductListResponse
+                .builder()
+                .products(products)
+                .totalPages(totalPages)
+                .build());
     }
 
     @GetMapping("/{id}")
@@ -167,7 +207,6 @@ public class ProductController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(
             @PathVariable int id,

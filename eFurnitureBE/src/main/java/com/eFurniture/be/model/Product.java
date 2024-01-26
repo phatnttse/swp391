@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product extends BaseResponse {
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -32,6 +32,8 @@ public class Product extends BaseResponse {
     private String thumbnail;
 
     private String description;
+
+    private int purchases;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

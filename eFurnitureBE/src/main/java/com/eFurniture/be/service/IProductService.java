@@ -9,6 +9,8 @@ import com.eFurniture.be.response.ProductResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 public interface IProductService {
     Product createProduct(ProductDTO productDTO) throws DataNotFoundException;
     Product getProductById(int id) throws DataNotFoundException;

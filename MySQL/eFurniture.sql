@@ -2,21 +2,18 @@ CREATE DATABASE IF NOT EXISTS eFurniture;
 USE eFurniture;
 
 
-
 CREATE TABLE `user` (
-  `user_id` varchar(255) PRIMARY KEY NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `verified_email` varchar(10) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `given_name` varchar(255) NOT NULL,
-  `family_name` varchar(255) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `picture` varchar(255),
-  `address` varchar(255),
-  `date_of_birth` date,
-  `role` int NOT NULL,
-  `created_at` datetime
+    `user_id` VARCHAR(255) PRIMARY KEY NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `username` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `phone` VARCHAR(12) NOT NULL,
+    `picture` VARCHAR(255),
+    `address` VARCHAR(255),
+    `date_of_birth` DATE,
+    `role` INT NOT NULL,
+    `created_at` DATETIME
 );
 
 CREATE TABLE `role` (
@@ -25,15 +22,16 @@ CREATE TABLE `role` (
 );
 
 CREATE TABLE `product` (
-  `product_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `category_id` int NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `price` int NOT NULL,
-  `quantity` int NOT NULL,
-  `discount` double,
-  `thumbnail` varchar(255) NOT NULL,
-  `description` longtext NOT NULL,
-  `created_at` datetime
+    `product_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `category_id` INT NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `price` INT NOT NULL,
+    `quantity` INT NOT NULL,
+    `discount` DOUBLE,
+    `thumbnail` VARCHAR(255) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `purchases` INT DEFAULT 0,
+    `created_at` DATETIME
 );
 
 CREATE TABLE `category` (
@@ -42,38 +40,38 @@ CREATE TABLE `category` (
 );
 
 CREATE TABLE `order` (
-  `order_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `shipping_address` varchar(255) NOT NULL,
-  `note` longtext,
-  `status` varchar(50) NOT NULL,
-  `payment_type` varchar(50) NOT NULL,
-  `created_at` timestamp
+    `order_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `phone` VARCHAR(12) NOT NULL,
+    `shipping_address` VARCHAR(255) NOT NULL,
+    `note` LONGTEXT,
+    `status` VARCHAR(50) NOT NULL,
+    `payment_type` VARCHAR(50) NOT NULL,
+    `created_at` TIMESTAMP
 );
 
 CREATE TABLE `order_detail` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `order_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `price` int NOT NULL,
-  `transport_fee` int,
-  `quantity` int NOT NULL,
-  `total_money` int NOT NULL
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `order_id` INT NOT NULL,
+    `product_id` INT NOT NULL,
+    `price` INT NOT NULL,
+    `transport_fee` INT,
+    `quantity` INT NOT NULL,
+    `total_money` INT NOT NULL
 );
 
 CREATE TABLE `cart` (
-  `cart_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) NOT NULL,
-  `product_id` int NOT NULL,
-  `total_money` int NOT NULL
+    `cart_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(255) NOT NULL,
+    `product_id` INT NOT NULL,
+    `total_money` INT NOT NULL
 );
 
 CREATE TABLE `payment` (
-  `payment_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) NOT NULL,
-  `order_id` int NOT NULL
+    `payment_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(255) NOT NULL,
+    `order_id` INT NOT NULL
 );
 
 ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
@@ -316,8 +314,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Giá đỡ	Giá đỡ inox + ốc vít
  Xiphong: Xiphong thoát chậu ruột gà đầu inox đuôi nhựa', '2024-01-24 12:00:00');
  
-ALTER TABLE `product` ADD `purchases` INT DEFAULT 0;
 
 
-select * from Product
+select * from product
 

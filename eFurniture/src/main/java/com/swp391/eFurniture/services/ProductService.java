@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,13 @@ public class ProductService implements IProductService {
     @Autowired
     private final ProductRepository productRepository;
     @Override
-    public Page<Product> getNewestProducts(PageRequest pageRequest) {
-        return productRepository.findAll(pageRequest);
+    public Page<Product> getNewestProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
 }

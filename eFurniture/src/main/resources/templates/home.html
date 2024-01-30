@@ -3,56 +3,90 @@
 <head>
     <title>Home Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+    <link th:href="@{/css/Header.css}" rel="stylesheet" />
+    <link th:href="@{/css/Home.css}" rel="stylesheet" />
+    <script th:src="@{/js/ajax-function.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
-<div id ="product-list" class="d-flex d-inline container">
-<div th:each="product: ${page}" class="p-2 container">
-    <p th:text="${product.title}"></p>
-    <img width="100px" height="100px" th:src="${product.thumbnail}">
-    <p></p>
-</div>
-    <div class="pagination container" th:if="${page}">
-        <ul>
-            <li th:if="${page.number > 0}">
-                <button class="btn-pagination" th:onclick="'loadProducts(' + (${page.number - 1}) + ')'">Previous</button>
-            </li>
-            <li th:each="pageNumber : ${#numbers.sequence(0, page.totalPages - 1)}">
-                <button class="btn-pagination" th:onclick="'loadProducts(' + ${pageNumber} + ')'">
-                    <span th:text="${pageNumber + 1}"></span>
-                </button>
-            </li>
-            <li th:if="${page.number + 1 < page.totalPages}">
-                <button class="btn-pagination" th:onclick="'loadProducts(' + (${page.number + 1}) + ')'">Next</button>
-            </li>
-        </ul>
+<div th:insert="header :: header"></div>
+
+<div class="slider">
+    <div class="slider-body">
+        <h2 class="slider-hashtag">#Furnitures</h2>
+        <h2 class="slider-heading">Xu hướng nội thất</h2>
+        <p class="slider-des">Đồ nội thất cao cấp đến thương hiệu nội thất hàng đầu Việt nam</p>
+        <button class="buy-btn">Mua Ngay</button>
     </div>
 </div>
 
-<script th:inline="javascript">
-    /* Sử dụng JavaScript và Thymeleaf để thực hiện AJAX */
-    /* Sử dụng th:attr để truyền giá trị th:href và th:onclick */
+<section  class="section_flashsale_product">
+    <div class="container">
+        <ul class="sale-menulist">
+            <li class="active">
+                <a href="" title="">Sản phẩm nổi bật</a>
+            </li>
+            <li class="fire">
+                <img src="">
+            </li>
+        </ul>
+        <div class="current tab-content">
+            <div class="row row-fix" id="newest-products">
+                        <div th:each="product : ${products}" class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
+                            <div id="contain" class="product-action">
+                                <div class="product-thumbnail">
+                                    <a class="image_thumb">
+                                        <img width="520" height="520" class="lazyload loaded" th:src="${product.thumbnail}">
+                                    </a>
+                                    <div class="smart">
+                                        <span th:text="${'-' + product.discount * 100 +'%'}"></span>
+                                    </div>
+                                    <a class="btn-wishlist">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                    <div class="badge">
+                                        <span class="new" th:text="${product.purchases + ' lượt mua'}"></span>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-name">
+                                        <a class="line-clamp line-clamp-2" href="" >
 
-    // Hàm AJAX để tải dữ liệu sản phẩm
-    function loadProducts(page) {
-        $.ajax({
-            type: "GET",
-            url: "/home",
-            data: {
-                page: page,
-                size: 5
-            },
-            success: function(response) {
-                // Cập nhật giao diện với dữ liệu sản phẩm mới
-                $("#product-list").html(response);
-            },
-            error: function(xhr) {
-                console.error(xhr);
-            }
-        });
-    }
+                                        </a>
+                                    </h5>
+                                    <div class="price-box" th:text = "${product.price * product.discount}">
 
-</script>
+                                        <span class="compare-price" th:text = "${product.price}"></span>
+
+                                    </div>
+                                    <div class="btn-shopping">
+                                        <button type="submit" title="Thêm vào giỏ hàng" class="fas fa-shopping-cart" onclick=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <div class="pagination container" th:if="${page}">
+                <ul>
+                    <li th:if="${page.number > 0}">
+                        <button class="btn-pagination" th:onclick="'loadNewestProducts(' + (${page.number - 1}) + ')'">Previous</button>
+                    </li>
+                    <li th:each="pageNumber : ${#numbers.sequence(0, page.totalPages - 1)}">
+                        <button class="btn-pagination" th:onclick="'loadNewestProducts(' + ${pageNumber} + ')'">
+                            <span th:text="${pageNumber + 1}"></span>
+                        </button>
+                    </li>
+                    <li th:if="${page.number + 1 < page.totalPages}">
+                        <button class="btn-pagination" th:onclick="'loadNewestProducts(' + (${page.number + 1}) + ')'">Next</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

@@ -23,6 +23,6 @@ public class CategoryController {
     public String getAllCategories(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "home"; // Thymeleaf view template name
+        return "index"; // Thymeleaf view template name
     }
 }

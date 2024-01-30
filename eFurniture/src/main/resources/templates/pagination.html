@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="pagination">
+    <ul class="pagination">
+        <li th:if="${page.hasPrevious()}">
+            <a th:href="@{/}" th:attr="href=${page.previousPageable().pageNumber}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li th:each="i : ${#numbers.sequence(0, page.totalPages-1)}" th:class="${page.number == i}? 'active'">
+            <a th:href="@{/}" th:attr="href=${i}" th:text="${i} + 1"></a>
+        </li>
+        <li th:if="${page.hasNext()}">
+            <a th:href="@{/}" th:attr="href=${page.nextPageable().pageNumber}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

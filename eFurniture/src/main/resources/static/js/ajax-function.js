@@ -8,7 +8,6 @@ function loadNewestProducts(page) {
             dataType: 'html',
             success: function(response) {
             const content = $("#newest-products");
-            const contain = $("#contain");
             content.html(response);
             },
             error: function(xhr) {

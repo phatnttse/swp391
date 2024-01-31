@@ -1,0 +1,112 @@
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.page-login {
+    margin-bottom: 20px;
+}
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.pagecustome {
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    width: 100%;
+}
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+.pagecustome .wpx {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    padding: 10px 24px;
+    height: 100%;
+}
+
+.auth-block-menulist {
+    list-style: none;
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.auth-block-menulist li a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    line-height: 22px;
+    color: #000;
+    text-transform: uppercase;
+}
+.auth-block-menulist li {
+    flex: 1 1;
+    text-align: center;
+    position: relative;
+}
+.auth-block-menulist li.active a {
+    color: #f3a270;
+}
+.page-login .title-heads {
+    font-size: 26px !important;
+    font-weight: 400;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+    margin: 0;
+    color: #000;
+    text-align: center;
+}
+
+.page-login .form-signup {
+    margin-top: 18px;
+}
+.page-login .form-signup .form-group {
+    margin-bottom: 0px;
+    padding: 0;
+}
+fieldset {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.page-login .form-signup .form-group input {
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid #e6e6e6;
+    border-bottom: 2px solid #f3a270;
+    padding: 1px 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+    border: 1px solid #e6e6e6;
+    color: #1c1c1c;
+    padding: 0 20px;
+}
+.page-login .form-signup .btn_50 {
+    color: #fff;
+    background: #f3a270;
+    border: none;
+    font-size: 16px;
+    line-height: 42px;
+    width: 100%;
+    height: 45px;
+    border-radius: 4px;
+}
+.social-login-facebooks {
+    text-align: center;
+}

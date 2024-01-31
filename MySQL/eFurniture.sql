@@ -5,14 +5,14 @@ USE eFurniture;
 CREATE TABLE `user` (
     `user_id` VARCHAR(255) PRIMARY KEY NOT NULL,
     `email` VARCHAR(255) NOT NULL,
-    `username` VARCHAR(255) NOT NULL,
+    `username` VARCHAR(255) UNIQUE NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `phone` VARCHAR(12) NOT NULL,
     `picture` VARCHAR(255),
     `address` VARCHAR(255),
     `date_of_birth` DATE,
-    `role` INT NOT NULL,
+    `role` INT DEFAULT 1,
     `created_at` DATETIME
 );
 
@@ -314,7 +314,14 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Giá đỡ	Giá đỡ inox + ốc vít
  Xiphong: Xiphong thoát chậu ruột gà đầu inox đuôi nhựa', '2024-01-24 12:00:00');
  
+ insert into role (name) values
+ ("User"),
+ ("Staff"),
+ ("Admin");
 
 
-select * from product
+select * from product;
+select * from category;
+select * from user;
+select * from role;
 

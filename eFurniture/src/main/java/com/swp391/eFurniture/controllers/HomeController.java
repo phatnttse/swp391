@@ -28,16 +28,16 @@ public class HomeController {
         Page<Product> page = productService.getNewestProducts(PageRequest.of(0,4));
         model.addAttribute("products", page.getContent());
         model.addAttribute("page", page);
-        return "home";
+        return "views/home";
     }
     @GetMapping("/page")
     public ResponseEntity<String> getPage(Model model, @RequestParam(defaultValue = "0") int page) {
         Page<Product> pageable = productService.getNewestProducts(PageRequest.of(page, 4));
         model.addAttribute("products", pageable.getContent());
-        String newestProductsHtml = generateProductHtml(pageable.getContent()); // Tạo HTML từ danh sách sản phẩm
+        String newestProductsHtml = generateProductHtml(pageable.getContent());
         return ResponseEntity.ok().body(newestProductsHtml);
     }
-    private String generateProductHtml(List<Product> products) {
+    private String generateProductHtml(List<Product> products) { // Tạo HTML từ danh sách sản phẩm
         StringBuilder htmlBuilder = new StringBuilder();
         for (Product product : products) {
             htmlBuilder.append("<div th:each=\"product : ${products}\" class=\"col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix\">");

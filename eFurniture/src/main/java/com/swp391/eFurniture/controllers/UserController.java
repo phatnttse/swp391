@@ -4,10 +4,12 @@ import com.swp391.eFurniture.dtos.UserDTO;
 import com.swp391.eFurniture.models.Role;
 import com.swp391.eFurniture.models.User;
 import com.swp391.eFurniture.services.IUserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,9 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping("/register")
-    public String registerDispatch() {
+    public String registerForm(Model model) {
+        UserDTO user = new UserDTO();
+        model.addAttribute("user", user);
         return "views/register";
     }
 
@@ -30,18 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(
-            @RequestParam("fullName") String name,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("confirmPassword") String confirmPassword,
-            @RequestParam("email") String email,
+    public String register(@Valid @ModelAttribute("user") UserDTO userDTO,
+            BindingResult result,
             Model model
     ){
         try {
-          User newUser = userService.register(name,username,password, email);
+            userService.register(userDTO);
           model.addAttribute("successMessage", "Registration successful!");
-          return "views/home";
+          return "redirect:/home";
         }catch (Exception e){
             System.out.println(e.getMessage());
             model.addAttribute("errorMessage", "Registration failed");

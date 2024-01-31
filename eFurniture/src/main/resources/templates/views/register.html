@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link th:href="@{/css/Register.css}" rel="stylesheet" />
     <link th:href="@{/css/BreadCrumb.css}" rel="stylesheet" />
@@ -30,24 +30,24 @@
                                         <span>Đăng ký</span>
                                     </h1>
                                     <div id="login">
-                                        <form action="/users/register" method="POST">
+                                        <form th:action=@{/users/register} role="form" th:object="${user}" method="POST">
                                             <div class="form-signup clearfix">
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="text" name="fullName" placeholder="Họ và tên" required class="form-control form-control-lg">
+                                                            <input type="text" name="fullName" th:field="*{name}" placeholder="Họ và tên" required class="form-control form-control-lg">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="text" name="username"  placeholder="Tài khoản" required class="form-control form-control-lg">
+                                                            <input type="text" name="username" th:field="*{username}"  placeholder="Tài khoản" required class="form-control form-control-lg">
                                                         </fieldset>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="password" name="password" placeholder="Mật khẩu" required class="form-control form-control-lg">
+                                                            <input type="password" name="password" th:field="*{password}" placeholder="Mật khẩu" required class="form-control form-control-lg">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="email" name="email"  placeholder="Email" required class="form-control form-control-lg">
+                                                            <input type="email" name="email" th:field="*{email}"  placeholder="Email" required class="form-control form-control-lg">
                                                         </fieldset>
                                                     </div>
                                                 </div>

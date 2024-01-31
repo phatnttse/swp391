@@ -50,7 +50,7 @@ public class User
     private Date dateOfBirth;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
 
     @Temporal(TemporalType.TIMESTAMP)

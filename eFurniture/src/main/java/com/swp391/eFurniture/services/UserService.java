@@ -31,22 +31,25 @@ public class UserService implements IUserService{
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
     @Override
-    public User register(String name, String username, String password, String email) throws Exception {
-        if (userRepository.existsByUsername(username)){
+    public void register(UserDTO userDTO) throws Exception {
+        if (userRepository.existsByUsername(userDTO.getUsername())){
             throw new DataIntegrityViolationException("Username already exists");
         }
+        Role role = roleRepository.findById(1)
+                .orElseThrow(() -> new DataNotFoundException("Role does not exist"));
         String userId = UUID.randomUUID().toString();
         User newUser = User.builder()
                 .userId(userId)
-                .username(username)
-                .email(email)
-                .password(password)
-                .name(name)
+                .username(userDTO.getUsername())
+                .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
+                .name(userDTO.getName())
+                .role(role)
                 .createdAt(new Date())
                 .build();
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         newUser.setPassword(encodedPassword);
-        return userRepository.save(newUser);
+        userRepository.save(newUser);
     }
 
     @Override

@@ -8,11 +8,11 @@ CREATE TABLE `user` (
     `username` VARCHAR(255) UNIQUE NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `name` VARCHAR(255) NOT NULL,
-    `phone` VARCHAR(12) NOT NULL,
-    `picture` VARCHAR(255),
-    `address` VARCHAR(255),
+    `phone` VARCHAR(12) DEFAULT '',
+    `picture` VARCHAR(255) DEFAULT '',
+    `address` VARCHAR(255) DEFAULT '',
     `date_of_birth` DATE,
-    `role` INT DEFAULT 1,
+    `role_id` INT DEFAULT '1',
     `created_at` DATETIME
 );
 
@@ -88,7 +88,7 @@ ALTER TABLE `order_detail` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`ord
 
 ALTER TABLE `order_detail` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 
-ALTER TABLE `user` ADD FOREIGN KEY (`role`) REFERENCES `role` (`role_id`);
+ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 ALTER TABLE `payment` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
 

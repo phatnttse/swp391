@@ -52,7 +52,10 @@
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="password" name="confirmPassword"  placeholder="Nhập lại mật khẩu" required class="form-control form-control-lg">
+                                                            <input type="password" name="confirmPassword" th:field="*{confirmPassword}"  placeholder="Nhập lại mật khẩu" required class="form-control form-control-lg">
+                                                            <div th:if="${confirm_pass_notMatch}">
+                                                                <p th:text="${confirm_pass_notMatch}" style="color:red"></p>
+                                                            </div>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -79,15 +82,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </section>
-
 </div>
 </body>
 </html>

@@ -8,7 +8,10 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import java.security.InvalidParameterException;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,8 +39,7 @@ public class JwtTokenUtil {
                     .compact();
             return token;
         }catch (Exception e){
-            System.out.println("Cannot create jwt token, error: "+ e.getMessage());
-            return null;
+            throw new InvalidParameterException("Cannot create jwt token, error: "+e.getMessage());
         }
     }
     private Key getSignInKey() {
@@ -50,7 +52,7 @@ public class JwtTokenUtil {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
     //Lay rieng ra token cu the ta muon
@@ -62,5 +64,12 @@ public class JwtTokenUtil {
     public boolean isTokenExpired(String token){
         Date expirationDate = this.extractClaims(token, Claims::getExpiration);
         return expirationDate.before(new Date());
+    }
+    public String extractUsername(String token){
+        return extractClaims(token, Claims::getSubject);
+    }
+    public boolean validateToken(String token, UserDetails userDetails){
+        String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }

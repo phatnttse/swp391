@@ -324,4 +324,5 @@ select * from product;
 select * from category;
 select * from user;
 select * from role;
+delete from user where user_id = '9c32e037-7e57-49fe-b8f5-d4a43aa62347';
 

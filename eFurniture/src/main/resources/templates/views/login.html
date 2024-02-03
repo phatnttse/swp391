@@ -30,17 +30,17 @@
                                         <span>Đăng nhập</span>
                                     </h1>
                                     <div id="login">
-                                        <form action="/login"  method="POST">
+                                        <form th:action=@{/users/login} role="form" th:object="${userLogin}" method="POST">
                                             <div class="form-signup clearfix">
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="text" name="username"  value="" placeholder="Tài khoản" required class="form-control form-control-lg">
+                                                            <input type="text" name="username" th:field="*{username}" value="" placeholder="Tài khoản" required class="form-control form-control-lg">
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input type="password" name="password" value="" placeholder="Mật khẩu" required class="form-control form-control-lg">
+                                                            <input type="password" name="password" value="" th:field="*{password}" placeholder="Mật khẩu" required class="form-control form-control-lg">
                                                         </fieldset>
                                                         <p style="color: #f94d45;margin-left: 4px;"></p>
                                                     </div>

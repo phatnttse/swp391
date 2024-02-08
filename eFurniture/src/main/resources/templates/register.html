@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/register.css">
+
+    <title>Register</title>
+</head>
+
+<body>
+    <div class='register'>
+        <div class='colum'>
+            <div class='bread'>
+                <div class='container'>
+                    <img class="image" src='images\breadcrumb-bg.webp' alt='' />
+                    <div class='text'>Đăng kí tài khoản
+                        <ul class="link-menu">
+                            <li><a class="link_list" href="#"><span>Trang chủ  </span></a></li>
+                             <li><span> > </span></a></li>
+                            <li><a class="link_list" href="#"><span> Đăng kí tài khoản</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form'>
+                    <div class='row'>
+                        <h1>Đăng kí</h1>
+                        <div class='container'>
+                            <span>Đã có tài khoản, đăng nhập </span>
+                            <a href='#' class="login-product">tại đây</a>
+                        </div>
+                    </div>
+                </div>
+                <div class='info-list'>
+                    <form action='main' method='post'>
+                        <input type='text' value='' name='lastName' id='lastName' placeholder='Tên' /> <br />
+                        <input type='text' value='' name='firstName' id='firstName' placeholder='Họ' /><br />
+                        <input type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" value='' name='email' id='email' placeholder='Email' /><br />
+                        <input type='text' pattern='\d+' placeholder='Số điện thoại' name='phone' required /><br />
+                        <input type='password' value='' name='password' id='password' placeholder='Mật khẩu' />
+                    </form>
+                </div>
+                <div class="register-buton">
+                    <button>Đăng ký</button>
+                </div>
+                <div class="login-link">
+                    <button class="link_fb">Facebook</button>
+                    <button class="link_gg">Google</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

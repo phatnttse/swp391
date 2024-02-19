@@ -1,0 +1,92 @@
+.page_customer {
+    background-color: #f5f5f5;
+  }
+  
+  .colum {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bread {
+    position: relative;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image {
+    width: 100%;
+    filter: brightness(0.5);
+    height: 30vh;
+  }
+  
+  .text {
+    margin-left: 20px;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 650;
+    font-size: 30px;
+  }
+  
+  .link-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .link-menu li {
+    display: inline;
+    margin-right: 5px;
+  }
+  
+  .link_list {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .link_list span {
+    color: white;
+  }
+  
+  .container .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .block-account {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .tittle-account {
+    color: #333;
+  }
+  
+  .tittle-info {
+    color: #d94e28;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .info-account {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .info-account h1 {
+    color: #333;
+  }
+  

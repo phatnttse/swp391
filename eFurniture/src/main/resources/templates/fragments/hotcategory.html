@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Swiper Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+<!-- Hot Categories Section -->
+<div th:fragment="hot-category" class="hot-category-container">
+    <h2 class="category-title">Danh mục nổi bật</h2>
+    <!-- Swiper -->
+    <div class="swiper-container mySwiper">
+        <div class="swiper-wrapper">
+            <div th:each = "product: ${products}" class="swiper-slide">
+                <a href="your-category-link-1.html">
+                    <img width="200px" height="200px" th:src="${product.thumbnail}" />
+                    <div class="card-details">
+                        <button class="category-button">
+                            <h3 th:text = "${product.title}" class="button-title"></h3>
+                            <span class="product-count">6 sản phẩm</span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+
+
+<script>
+    // Các nội dung script khác
+</script>
+</body>
+
+</html>

@@ -5,6 +5,8 @@
     <link th:href="@{/css/BreadCrumb.css}" rel="stylesheet" />
     <link th:href="@{/css/Header.css}" rel="stylesheet" />
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -76,5 +78,35 @@
         </div>
     </section>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        // Lưu token vào localStorage sau khi đăng nhập thành công
+        function saveTokenToStorage(token) {
+            localStorage.setItem('accessToken', token);
+        }
+
+        // Thêm token vào header của mỗi yêu cầu HTTP
+        function addTokenToHttpRequest() {
+            const token = localStorage.getItem('accessToken');
+            if (token) {
+                // Nếu token tồn tại, thêm vào header "Authorization"
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+                console.log('Header Authorization:', axios.defaults.headers.common['Authorization']);
+
+            } else {
+                // Nếu không có token, xóa header "Authorization"
+                delete axios.defaults.headers.common['Authorization'];
+            }
+        }
+
+        // Gọi hàm addTokenToHttpRequest() trước khi gửi mỗi yêu cầu HTTP
+        axios.interceptors.request.use(function (config) {
+            addTokenToHttpRequest();
+            return config;
+        }, function (error) {
+            return Promise.reject(error);
+        });
+    /*]]>*/
+</script>
 </body>
 </html>

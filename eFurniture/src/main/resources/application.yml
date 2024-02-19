@@ -2,7 +2,7 @@ server:
   port: 8088
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/eFurniture?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/eFurniture?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: phat1910
@@ -23,5 +23,13 @@ spring:
 jwt:
   expiration: 259200  #30 days
   secretKey: TaqlmGv1iEDMRiFp/pHuID1+T84IABfuA0xXh4GhiUI=
+
+mailServer:
+  host: smtp.gmail.com
+  port: 587
+  email: furnitureproject1910@gmail.com
+  password: phat1910
+  protocol: smtp
+  isSSL: false
 
 

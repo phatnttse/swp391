@@ -70,7 +70,8 @@ public class UserService implements IUserService{
         );
         //authenticate with Java Spring security
         authenticationManager.authenticate(authenticationToken);
-        return jwtTokenUtil.generateToken(existingUser);
+        String token = jwtTokenUtil.generateToken(existingUser);
+        return token;
     }
 
 }

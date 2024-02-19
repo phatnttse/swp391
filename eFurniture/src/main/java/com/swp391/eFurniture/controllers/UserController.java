@@ -4,6 +4,7 @@ import com.swp391.eFurniture.dtos.UserDTO;
 import com.swp391.eFurniture.dtos.UserLoginDTO;
 import com.swp391.eFurniture.models.Role;
 import com.swp391.eFurniture.models.User;
+import com.swp391.eFurniture.services.IMailService;
 import com.swp391.eFurniture.services.IUserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +23,8 @@ import java.util.List;
 @RequestMapping("users")
 @RequiredArgsConstructor
 public class UserController {
+    @Autowired
+    private final IMailService mailService;
 
     @Autowired
     private final IUserService userService;
@@ -56,6 +58,7 @@ public class UserController {
                 model.addAttribute("confirm_pass_notMatch", "Mật khẩu nhập lại không chính xác");
                 return "views/register";
             }
+            mailService.sendEmail(userDTO);
             userService.register(userDTO);
             return "redirect:/home";
         }catch (Exception e){
@@ -83,9 +86,9 @@ public class UserController {
             }
             //Kiểm tra thông tin ng dùng đăng nhập và tạo ra token
             String token = userService.login(userDTO.getUsername(), userDTO.getPassword());
-            Cookie cookie = new Cookie("jwtToken", token);
-            cookie.setHttpOnly(true); // Đặt thuộc tính HTTP-only cho cookie
-            response.addCookie(cookie); // Thêm cookie vào phản hồi
+            // Lưu token vào header của phản hồi
+            response.setHeader("Authorization", "Bearer " + token);
+            // Lưu token vào localStorage bằng JavaScript
             model.addAttribute("token", token);
             return "redirect:/home";
         }catch (Exception e){

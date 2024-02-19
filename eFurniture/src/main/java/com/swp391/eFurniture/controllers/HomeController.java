@@ -25,7 +25,7 @@ public class HomeController {
 
     @GetMapping("")
     public String index(Model model) {
-        Page<Product> page = productService.getNewestProducts(PageRequest.of(0,4));
+        Page<Product> page = productService.getNewestProducts(PageRequest.of(0,6));
         model.addAttribute("products", page.getContent());
         model.addAttribute("page", page);
         return "views/home";

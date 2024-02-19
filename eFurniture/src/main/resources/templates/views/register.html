@@ -1,92 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
-    <link th:href="@{/css/Register.css}" rel="stylesheet" />
-    <link th:href="@{/css/BreadCrumb.css}" rel="stylesheet" />
-    <link th:href="@{/css/Header.css}" rel="stylesheet" />
-    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../../static/css/register.css">
+
+    <title>Register</title>
 </head>
+
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
-<div th:insert="~{fragments/breadcrumb :: breadcrumb}"></div>
-<div id="main">
-    <section class="section">
-        <div class="container">
-            <div class="background-aside page-login">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-xl-4 offset-xl-4 offset-lg-4 offset-md-3 offset-xl-3" style="margin: auto;">
-                        <div class="row no-margin align-items-center" style="background: #fff;border-radius: 5px;">
-                            <div class="page-login pagecustome clearfix no-padding">
-                                <div class="wpx">
-                                    <ul class="auth-block-menulist">
-                                        <li>
-                                            <a href="" title="Đăng nhập">Đăng nhập</a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="" title="Đăng ký">Đăng ký</a>
-                                        </li>
-                                    </ul>
-                                    <h1 class="title-heads a-center">
-                                        <span>Đăng ký</span>
-                                    </h1>
-                                    <div id="login">
-                                        <form th:action=@{/users/register} role="form" th:object="${user}" method="POST">
-                                            <div class="form-signup clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                        <fieldset class="form-group">
-                                                            <input type="text" name="fullName" th:field="*{name}" placeholder="Họ và tên" required class="form-control form-control-lg">
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                        <fieldset class="form-group">
-                                                            <input type="text" name="username" th:field="*{username}"  placeholder="Tài khoản" required class="form-control form-control-lg">
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                        <fieldset class="form-group">
-                                                            <input type="password" name="password" th:field="*{password}" placeholder="Mật khẩu" required class="form-control form-control-lg">
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                        <fieldset class="form-group">
-                                                            <input type="password" name="confirmPassword" th:field="*{confirmPassword}"  placeholder="Nhập lại mật khẩu" required class="form-control form-control-lg">
-                                                            <div th:if="${confirm_pass_notMatch}">
-                                                                <p th:text="${confirm_pass_notMatch}" style="color:red"></p>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                        <fieldset class="form-group">
-                                                            <input type="email" name="email" th:field="*{email}"  placeholder="Email" required class="form-control form-control-lg">
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                                <div class="section">
-                                                    <button type="submit" value="Đăng ký" class="btn btn-style btn_50">Đăng ký</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="block social-login-facebooks margin-top-15">
-                                            <p class="a-center">Hoặc đăng nhập bằng</p>
-                                            <a href="" class="social-login-facebooks">
-                                                <img width="129px" height="37px" src="" alt="">
-                                            </a>
-                                            <a href="" class="social-login-google">
-                                                <img width="129px" height="37px" src="" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class='register'>
+    <div class='colum'>
+        <div class='bread'>
+            <div class='container'>
+                <img class="image" src='https://bizweb.dktcdn.net/100/499/932/themes/926650/assets/breadcrumb-bg.jpg?1705830293643%27)' alt='' />
+                <div class='text'>Đăng kí tài khoản
+                    <ul class="link-menu">
+                        <li><a class="link_list" href="#"><span>Trang chủ  </span></a></li>
+                        <li><span> > </span></a></li>
+                        <li><a class="link_list" href="#"><span> Đăng kí tài khoản</span></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+        <div class='form-row'>
+            <div class='form'>
+                <div class='row'>
+                    <h1>Đăng kí</h1>
+                    <div class='container'>
+                        <span>Đã có tài khoản, đăng nhập </span>
+                        <a href='#' class="login-product">tại đây</a>
+                    </div>
+                </div>
+            </div>
+            <div class='info-list'>
+                <form action='main' method='post'>
+                    <input type='text' value='' name='lastName' id='lastName' placeholder='Tên' /> <br />
+                    <input type='text' value='' name='firstName' id='firstName' placeholder='Họ' /><br />
+                    <input type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" value='' name='email' id='email' placeholder='Email' /><br />
+                    <input type='text' pattern='\d+' placeholder='Số điện thoại' name='phone' required /><br />
+                    <input type='password' value='' name='password' id='password' placeholder='Mật khẩu' />
+                </form>
+            </div>
+            <div class="register-buton">
+                <button>Đăng ký</button>
+            </div>
+            <div class="login-link">
+                <button class="link_fb">Facebook</button>
+                <button class="link_gg">Google</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
+
 </html>

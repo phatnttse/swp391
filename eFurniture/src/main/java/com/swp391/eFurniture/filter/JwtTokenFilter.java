@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import com.swp391.eFurniture.models.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             final String username = jwtTokenUtil.extractUsername(token);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                 User userDetails = (User) userDetailsService.loadUserByUsername(username);
+//                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (jwtTokenUtil.validateToken(token, userDetails)){
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(
@@ -64,6 +66,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         final List<Pair<String, String>> byPassTokens = Arrays.asList(
                 Pair.of("home", "GET"),
                 Pair.of("users/register", "GET"),
+                Pair.of("users/register", "POST"),
                 Pair.of("users/login", "GET"),
                 Pair.of("users/login", "POST"),
                 Pair.of("/css/", "GET"),

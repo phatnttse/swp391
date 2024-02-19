@@ -19,9 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User
-        implements UserDetails
-{
+public class User implements UserDetails {
     @Id
     @Column(name = "user_id", nullable = false)
     private String userId;

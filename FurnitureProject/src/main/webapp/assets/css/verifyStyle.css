@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 17, 2023, 12:03:04 PM
+    Author     : Admin
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+}
+
+.header {
+    margin: 40px;
+}
+
+.code-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.code-input input {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 2px;
+}
+
+.link a {
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.link button {
+    color: #000;
+    border: none;
+    background-color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.section {
+    padding: 60px;   
+}
+.link a.disabled {
+    opacity: 0.5; /* Màu chữ nhạt đi */  
+}

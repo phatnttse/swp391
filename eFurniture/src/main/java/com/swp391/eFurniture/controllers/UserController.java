@@ -32,7 +32,7 @@ public class UserController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         UserDTO user = new UserDTO();
-        model.addAttribute("user", user);
+        model.addAttribute("userRegister", user);
         return "views/register";
     }
 
@@ -45,22 +45,21 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(
-            @Valid @ModelAttribute("user") UserDTO userDTO,
+            @Valid @ModelAttribute("userRegister") UserDTO userDTO,
             BindingResult result,
             Model model
     ){
         try {
             if (result.hasErrors()){
-                model.addAttribute("user", userDTO);
+                model.addAttribute("userRegister", userDTO);
                 return "redirect:/users/register";
             }
             if (!userDTO.getConfirmPassword().equals(userDTO.getPassword())){
                 model.addAttribute("confirm_pass_notMatch", "Mật khẩu nhập lại không chính xác");
                 return "views/register";
             }
-            mailService.sendEmail(userDTO);
-            userService.register(userDTO);
-            return "redirect:/home";
+            model.addAttribute("userRegister", userDTO);
+            return "views/confirmVerify";
         }catch (Exception e){
             System.out.println(e.getMessage());
             model.addAttribute("errorMessage", "Registration failed");

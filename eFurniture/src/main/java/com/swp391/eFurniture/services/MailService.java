@@ -1,6 +1,7 @@
 package com.swp391.eFurniture.services;
 
 import com.swp391.eFurniture.dtos.DataMailDTO;
+import com.swp391.eFurniture.dtos.EmailDTO;
 import com.swp391.eFurniture.dtos.UserDTO;
 import com.swp391.eFurniture.utils.Constants;
 import jakarta.mail.MessagingException;
@@ -15,6 +16,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -44,17 +46,13 @@ public class MailService implements IMailService{
     }
 
     @Override
-    public void sendEmail(UserDTO userDTO) {
+    public void sendEmail(EmailDTO emailDTO) {
         try {
             DataMailDTO dataMail = new DataMailDTO();
-
-            dataMail.setTo(userDTO.getEmail());
+            dataMail.setTo(emailDTO.getEmail());
             dataMail.setSubject("Xac nhan thong tin");
-
             Map<String, Object> props = new HashMap<>();
-            props.put("name", userDTO.getName());
-            props.put("username", userDTO.getUsername());
-            props.put("password", userDTO.getPassword());
+            props.put("verify_code", emailDTO.getCode());
             dataMail.setProps(props);
 
             sendHtmlMail(dataMail, Constants.EMAIL_FEATURE.EMAIL_FILE);
@@ -63,6 +61,13 @@ public class MailService implements IMailService{
             exp.printStackTrace();
         }
 
+    }
+
+    @Override
+    public String getRandom() {
+        Random random = new Random();
+        int code = random.nextInt(999999);
+        return String.format("%06d", code);
     }
 
 }

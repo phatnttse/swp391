@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dto.EmailDTO;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 /**
@@ -52,12 +53,12 @@ public class CheckVerificationCode extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UsersDAO dao = new UsersDAO();
-                  
+
             String givenName = (String) session.getAttribute("GIVEN_NAME");
             String familyName = (String) session.getAttribute("FAMILY_NAME");
             String email = (String) session.getAttribute("EMAIL");
             String username = (String) session.getAttribute("USERNAME");
-            String password = (String) session.getAttribute("PASSWORD");           
+            String password = (String) session.getAttribute("PASSWORD");
             int role = 0;
 
             String code1 = request.getParameter("code1");
@@ -73,12 +74,17 @@ public class CheckVerificationCode extends HttpServlet {
             if (emailCode.equals(dto.getCode())) {
                 Calendar calendar = Calendar.getInstance();
                 Timestamp createdAt = new Timestamp(calendar.getTime().getTime());
-                
-                boolean result = dao.registerAccount(username, password, email, givenName, familyName, role, createdAt);
-                if (result) {
-                    url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
+                UsersDTO existingUser = dao.getUserByEmail(email);
+                if (existingUser != null) {
+                    dao.linkGoogleAccount(username, password, createdAt, existingUser.getId());
+                } else {
+                    boolean result = dao.registerAccount(username, password, email, givenName, familyName, role, createdAt);
+                    if (result) {
+                        url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
+                    }
                 }
-            } 
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CheckVerificationCode.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

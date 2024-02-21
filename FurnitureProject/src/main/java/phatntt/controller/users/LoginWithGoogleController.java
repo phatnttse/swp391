@@ -47,12 +47,13 @@ public class LoginWithGoogleController extends HttpServlet {
 
             String code = request.getParameter("code");
             String accessToken = utils.getToken(code);
-            
-            
+                        
             UsersDTO userInfo = utils.getUserInfo(accessToken);
 
-            UsersDTO currentUsers = dao.getUserById(userInfo.getId());
-            if (currentUsers == null) {
+            UsersDTO currentUsers = dao.getUserByEmail(userInfo.getEmail());
+            if (currentUsers != null) {
+                dao.linkSystemAccount(userInfo.getId(), currentUsers.getId());
+            }else {
                 dao.loginWithGoogle(userInfo);
             }
             HttpSession session = request.getSession();

@@ -54,10 +54,11 @@ public class UsersDAO implements Serializable {
                     String family_name = rs.getString("family_name");
                     String phone = rs.getString("phone");
                     String picture = rs.getString("picture");
-                    String address = rs.getString("address");                                  
+                    String address = rs.getString("address"); 
+                    String googleId = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    result = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, role, createdAt);
+                    result = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
                     //5.2 set data to DTO
 
                 }
@@ -101,10 +102,11 @@ public class UsersDAO implements Serializable {
                     String family_name = rs.getString("family_name");
                     String phone = rs.getString("phone");
                     String picture = rs.getString("picture");
-                    String address = rs.getString("address");                                  
+                    String address = rs.getString("address");  
+                    String googleId = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    UsersDTO u = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, role, createdAt);
+                    UsersDTO u = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
                     result.add(u);
                 }
 
@@ -141,10 +143,11 @@ public class UsersDAO implements Serializable {
                     String family_name = rs.getString("family_name");
                     String phone = rs.getString("phone");
                     String picture = rs.getString("picture");
-                    String address = rs.getString("address");                                    
+                    String address = rs.getString("address");
+                    String googleId = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    UsersDTO u = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, role, createdAt);
+                    UsersDTO u = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
                     result.add(u);
                 }
 
@@ -168,7 +171,7 @@ public class UsersDAO implements Serializable {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "Select * from user "
-                        + "Where role_id = '3'";
+                        + "Where role_id = '2'";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -181,10 +184,11 @@ public class UsersDAO implements Serializable {
                     String family_name = rs.getString("family_name");
                     String phone = rs.getString("phone");
                     String picture = rs.getString("picture");
-                    String address = rs.getString("address");                 
+                    String address = rs.getString("address"); 
+                    String googleId = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    UsersDTO u = new UsersDTO(id, email, name, password, name, given_name, family_name, picture, phone, address, role, createdAt);
+                    UsersDTO u = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
                     result.add(u);
                 }
 
@@ -199,7 +203,6 @@ public class UsersDAO implements Serializable {
         }
         return result;
     }
-    
     public UsersDTO getUserById(String userId) throws SQLException, NamingException {
 
         UsersDTO result = null;
@@ -223,9 +226,10 @@ public class UsersDAO implements Serializable {
                     String phone = rs.getString("phone");
                     String picture = rs.getString("picture");
                     String address = rs.getString("address");
+                    String googleId = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    result = new UsersDTO(userId, email, username, password, name, given_name, family_name, picture, phone, address, role, createdAt);
+                    result = new UsersDTO(userId , email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
 
                 }
 
@@ -239,6 +243,91 @@ public class UsersDAO implements Serializable {
             }
         }
         return result;
+    }
+    
+    public UsersDTO getUserByEmail(String email) throws SQLException, NamingException {
+
+        UsersDTO result = null;
+
+        try {
+
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "Select * from user where email = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String userId = rs.getString("user_id");
+                    email = rs.getString("email");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String given_name = rs.getString("given_name");
+                    String family_name = rs.getString("family_name");
+                    String phone = rs.getString("phone");
+                    String picture = rs.getString("picture");
+                    String address = rs.getString("address");
+                    String googleId = rs.getString("google_id");
+                    int role = rs.getInt("role_id");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    result = new UsersDTO(userId , email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
+
+                }
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    public void linkSystemAccount(String googleUserId, String existingUserId) throws SQLException, NamingException {
+        
+        try {
+            con = DBConnect.createConnection();
+            if (con != null ){                     
+            String sql = "UPDATE user SET google_id = ? WHERE user_id = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, googleUserId);
+            stm.setString(2, existingUserId);
+            stm.executeUpdate();
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public void linkGoogleAccount(String username, String password, Timestamp createdAt, String userId) throws SQLException, NamingException {
+        
+        try {
+            con = DBConnect.createConnection();
+            if (con != null ){                     
+            String sql = "UPDATE user SET username = ?, password = ?, created_at = ? WHERE user_id = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setString(2, password);
+            stm.setTimestamp(3, createdAt);
+            stm.setString(4, userId);
+            stm.executeUpdate();
+            
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
     public boolean registerAccount( String username, String password, String email, String givenName, String familyName, int roleId, Timestamp createdAt ) throws SQLException, NamingException {
@@ -277,26 +366,25 @@ public class UsersDAO implements Serializable {
         }
         return result;
     }
-    public boolean loginWithGoogle(UsersDTO dto) throws SQLException, NamingException {
+    public boolean loginWithGoogle(UsersDTO userDTO) throws SQLException, NamingException {
 
-        boolean result = false;
+       boolean result = false;
         try {
             //1. Create connection
             con = DBConnect.createConnection();
             if (con != null) {
                 //2. create sql string
-                String sql = "Insert Into user(user_id, email, password, name, given_name, family_name, phone, picture, role_id) "
-                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "Insert Into user(user_id , email, name, given_name, family_name, google_id, role_id, created_at) "
+                        + "Values(?, ?, ?, ?, ?, ?, ?, ?)";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, dto.getId());
-                stm.setString(2, dto.getEmail());              
-                stm.setString(4, dto.getPassword());
-                stm.setString(5, dto.getName());
-                stm.setString(6, dto.getGiven_name());
-                stm.setString(7, dto.getFamily_name());
-                stm.setString(8, dto.getPhone());
-                stm.setString(9, dto.getPicture());
-                stm.setInt(10, dto.getRole());
+                stm.setString(1,UUID.randomUUID().toString());             
+                stm.setString(2, userDTO.getEmail());
+                stm.setString(3, userDTO.getGiven_name() +" "+ userDTO.getFamily_name());
+                stm.setString(4, userDTO.getGiven_name());
+                stm.setString(5, userDTO.getFamily_name());
+                stm.setString(6, userDTO.getId());
+                stm.setInt(7, userDTO.getRole());
+                stm.setTimestamp(8, userDTO.getCreatedAt());
                 int affectedRows = stm.executeUpdate();
                 //4.Excute Query
                 if (affectedRows > 0) {

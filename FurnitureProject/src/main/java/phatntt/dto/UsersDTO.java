@@ -6,7 +6,7 @@
 package phatntt.dto;
 
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 /**
  *
@@ -23,14 +23,15 @@ public class UsersDTO {
     private String family_name;
     private String picture;
     private String phone;
-    private String address; 
+    private String address;
+    private String google_id;
     private int role;
     private Timestamp createdAt;
        
     public UsersDTO() {
     }
 
-    public UsersDTO(String id, String email, String username, String password, String name, String given_name, String family_name, String picture, String phone, String address, int role, Timestamp createdAt) {
+    public UsersDTO(String id, String email, String username, String password, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -41,11 +42,10 @@ public class UsersDTO {
         this.picture = picture;
         this.phone = phone;
         this.address = address;
+        this.google_id = google_id;
         this.role = role;
         this.createdAt = createdAt;
     }
-
-    
 
     /**
      * @return the id
@@ -73,6 +73,20 @@ public class UsersDTO {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -174,6 +188,20 @@ public class UsersDTO {
     }
 
     /**
+     * @return the google_id
+     */
+    public String getGoogle_id() {
+        return google_id;
+    }
+
+    /**
+     * @param google_id the google_id to set
+     */
+    public void setGoogle_id(String google_id) {
+        this.google_id = google_id;
+    }
+
+    /**
      * @return the role
      */
     public int getRole() {
@@ -201,19 +229,7 @@ public class UsersDTO {
         this.createdAt = createdAt;
     }
 
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    
     
     
 

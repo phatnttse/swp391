@@ -105,7 +105,7 @@
                     </header>
 
                     <div class="modal-body">
-                        <input type="text" name="txtSearchValue" value="${param.txtSearchValue}" placeholder="Nhập tên sản phẩm">
+                        <input type="text" name="searchvalue" value="${param.searchvalue}" placeholder="Nhập tên sản phẩm">
 
                     </div>
                     <div class="modal-btn">

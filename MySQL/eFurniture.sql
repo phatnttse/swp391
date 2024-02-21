@@ -38,7 +38,8 @@ CREATE TABLE `product` (
 
 CREATE TABLE `category` (
   `category_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `thumbnail` varchar(200) NULL
 );
 
 CREATE TABLE `order` (
@@ -94,13 +95,13 @@ ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 ALTER TABLE `payment` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
 
-INSERT INTO category (category_id, name) VALUES
-  (01, 'Bồn tắm'),
-  (02, 'Bồn cầu'),
-  (03, 'Sen tắm'),
-  (04, 'Tủ chậu Lavabo'),
-  (05, 'Vòi Lavabo'),
-  (06, 'Phụ kiện');
+INSERT INTO category (category_id, name, thumbnail) VALUES
+  (1, 'Bồn tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-tam.jpg?v=1699504371993'),
+  (2, 'Bồn cầu', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-cau.jpg?v=1699504384923'),
+  (3, 'Sen tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/sen-tam.jpg?v=1699504399643'),
+  (4, 'Tủ chậu Lavabo', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/chau-lavabo.jpg?v=1699504446760'),
+  (5, 'Vòi Lavabo', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/voi-lavabo.jpg?v=1699504435520'),
+  (6, 'Phụ kiện', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/guong.jpg?v=1699504456387');
   
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (1, 'Bồn tắm Massage đặt góc', 55950000, 10, 0.1, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/js-8098-js-8099.jpg', 

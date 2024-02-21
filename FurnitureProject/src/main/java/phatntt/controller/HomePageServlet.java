@@ -6,6 +6,7 @@
 package phatntt.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -17,7 +18,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
+
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -43,18 +47,78 @@ public class HomePageServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
-        
-        try  {
-                                  
-            ProductsDAO product = new ProductsDAO();            
-            List<ProductsDTO> listProducts = product.getAllProducts();
+
+        try {
+            //sản phẩm mới
+            ProductsDAO productDAO = new ProductsDAO();
+            List<ProductsDTO> listProducts = productDAO.getNewestProducts();
             request.setAttribute("PRODUCTS_LIST", listProducts);
-           
+            
+            //sản phẩm theo phân loại
+            String categoryIdStr = request.getParameter("categoryId");
+            int categoryId = 1;
+            categoryId = Integer.parseInt(categoryIdStr);
+            ProductsDAO productbycategory = new ProductsDAO();
+            List<ProductsDTO> listProductsByCategory = productbycategory.getProductByCategoryId(categoryId);
+
+            StringBuilder out = new StringBuilder();
+            out.append("<div>");
+
+            for (ProductsDTO product : listProductsByCategory) {
+                out.append("<div class=\"col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix\">");
+                out.append("    <div class=\"product-action\">");
+                out.append("        <div class=\"product-thumbnail\">");
+                out.append("            <a class=\"image_thumb\">");
+                out.append("                <img width=\"520\" height=\"520\" class=\"lazyload loaded\" src=\"" + product.getThumbnail() + "\">");
+                out.append("            </a>");
+                out.append("            <p>" + product.getTitle() + "</p>");
+                out.append("            <div class=\"smart\">");
+                out.append("                <span>-" + product.getDiscount() + "</span>");
+                out.append("            </div>");
+                out.append("            <a class=\"btn-wishlist\">");
+                out.append("                <i class=\"ti-search\"></i>");
+                out.append("            </a>");
+                out.append("            <div class=\"badge\">");
+                out.append("                <span class=\"new\">" + product.getPrice() + "</span>");
+                out.append("            </div>");
+                out.append("            <div class=\"btn-shopping\">");
+                out.append("                <button type=\"submit\" title=\"Thêm vào giỏ hàng\" class=\"ti-shopping-cart\" onclick=\"addProductToCart(" + product.getProductId() + ")\"></button>");
+                out.append("            </div>");
+                out.append("        </div>");
+                out.append("        <div class=\"product-info\">");
+                out.append("            <h5 class=\"product-name\">");
+                out.append("                <a class=\"line-clamp line-clamp-2\" href=\"\">");
+                out.append("                    " + product.getTitle());
+                out.append("                </a>");
+                out.append("            </h5>");
+                out.append("            <div class=\"price-box\">");
+                out.append("                " + product.getPrice());
+                out.append("                <span class=\"compare-price\">170.000₫</span>");
+                out.append("            </div>");
+                out.append("        </div>");
+                out.append("    </div>");
+                out.append("</div>");
+            }
+
+            out.append("</div>");
+
+            request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
+            // Gửi HTML về trang JSP sử dụng HttpServletResponse
+        response.setContentType("text/html");
+        PrintWriter htmlResponse = response.getWriter();
+        htmlResponse.write(out.toString());
+        htmlResponse.flush();
+        
+        //Danh muc san pham
+        CategoryDAO categoryDAO = new CategoryDAO();
+        List<CategoryDTO> categoryDTOs = categoryDAO.getCategoryCount();
+        request.setAttribute("CATEGORY_ALL", categoryDTOs);
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
-        }finally {
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

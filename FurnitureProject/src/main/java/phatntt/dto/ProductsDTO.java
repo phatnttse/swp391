@@ -6,6 +6,7 @@
 package phatntt.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,139 +14,129 @@ import java.io.Serializable;
  */
 public class ProductsDTO implements Serializable{
     private int productId;
-    private String name;
+    private int categoryId;
+    private String title;
     private String description;
     private int quantity;
     private float price;
-    private String image;
-    private String discount;
-    private String status;
+    private String thumbnail;
+    private float discount;
+    private int purchase;
+    private Timestamp createdAt;
+    
+    private int productCount;
 
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int productId, String name, String description, int quantity, float price, String image, String discount, String status) {
+    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchase, Timestamp createdAt) {
         this.productId = productId;
-        this.name = name;
+        this.categoryId = categoryId;
+        this.title = title;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
-        this.image = image;
+        this.thumbnail = thumbnail;
         this.discount = discount;
-        this.status = status;
+        this.purchase = purchase;
+        this.createdAt = createdAt;
     }
 
-    /**
-     * @return the productId
-     */
+    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchase, Timestamp createdAt, int productCount) {
+        this.productId = productId;
+        this.categoryId = categoryId;
+        this.title = title;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.thumbnail = thumbnail;
+        this.discount = discount;
+        this.purchase = purchase;
+        this.createdAt = createdAt;
+        this.productCount = productCount;
+    }
+    
+    
+
     public int getProductId() {
         return productId;
     }
 
-    /**
-     * @param productId the productId to set
-     */
     public void setProductId(int productId) {
         this.productId = productId;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    /**
-     * @return the description
-     */
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description the description to set
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the quantity
-     */
     public int getQuantity() {
         return quantity;
     }
 
-    /**
-     * @param quantity the quantity to set
-     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    /**
-     * @return the price
-     */
     public float getPrice() {
         return price;
     }
 
-    /**
-     * @param price the price to set
-     */
     public void setPrice(float price) {
         this.price = price;
     }
 
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
-    /**
-     * @return the discount
-     */
-    public String getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
-    /**
-     * @param discount the discount to set
-     */
-    public void setDiscount(String discount) {
+    public void setDiscount(float discount) {
         this.discount = discount;
     }
 
-    /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
+    public int getPurchase() {
+        return purchase;
     }
 
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPurchase(int purchase) {
+        this.purchase = purchase;
     }
-    
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
     
 }

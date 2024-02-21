@@ -34,7 +34,7 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "Select * from Products";
+                String sql = "Select * from product";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
 

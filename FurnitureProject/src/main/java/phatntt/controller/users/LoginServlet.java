@@ -47,22 +47,28 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-            
-        String url = siteMaps.getProperty(Constants.LoginFeatures.LOGIN_PAGE);
+        String url = siteMaps.getProperty(Constants.LoginFeatures.LOGIN_PAGE);  
+        String googleCode = request.getParameter("code"); 
 
         try {
             UsersDAO dao = new UsersDAO();
-            Key_Utils utils = Key_Utils.getInstance();           
-            UsersDTO result = dao.checkLogin(username);
+            Key_Utils utils = Key_Utils.getInstance();
+            UsersDTO result;
 
-            if (result != null && utils.checkPassword(password, result.getPassword())) {
-                HttpSession session = request.getSession();
-                session.setAttribute("USER_INFO", result);
-                url = "home";
+            if (googleCode != null && !googleCode.isEmpty()) {
+                url = "loginWithGoogle";
             } else {
-                request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác.");
-            }
+                // Đăng nhập bằng username/password
+                result = dao.checkLogin(username);
 
+                if (result != null && utils.checkPassword(password, result.getPassword())) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("USER_INFO", result);
+                    url = "home";
+                } else {
+                    request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác.");
+                }
+            }
         } catch (SQLException ex) {
             log("LoginServlet_SQL: " + ex.getMessage());
         } catch (NamingException ex) {
@@ -73,43 +79,47 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

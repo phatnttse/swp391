@@ -67,7 +67,7 @@ public class RegisterAccountServlet extends HttpServlet {
             List<UsersDTO> userInfo = dao.getAllUsers();
             for (UsersDTO dto : userInfo) {
                 if (username.trim().equals(dto.getUsername().trim())){
-                    errors.setEmailDuplicateError("Email "+ username + " đã tồn tại.");
+                    errors.setEmailDuplicateError("Tên tài khoản "+ username + " đã tồn tại.");
                     foundErr = true;
                 }
             }              
@@ -77,21 +77,21 @@ public class RegisterAccountServlet extends HttpServlet {
 //                foundErr = true;
 //                errors.setPasswordLengthError(
 //                        siteMaps.getProperty(MyApplicationConstants.SignUpFeatures.PASSWORD_LENGTH_ERR_MESSAGE));
-            if (!confirm.trim().equals(password.trim())) {
-                foundErr = true;
-                errors.setConfirmNotMatch(
-                        siteMaps.getProperty(Constants.SignUpFeatures.CONFIRM_NOTMATCHED_ERR_MESSAGE));
-            }
-            if (given_name.trim().length() < 2 || given_name.trim().length() > 50) {
-                foundErr = true;
-                errors.setFullnameLengthError(
-                        siteMaps.getProperty(Constants.SignUpFeatures.FULLNAME_LENGTH_ERR_MESSAGE));
-            }        
-            if (foundErr) { // error occur
-                // cache to attribute then 
-                request.setAttribute("REGISTER_ERRORS", errors);
-               
-            } else { //no error
+//            if (!confirm.trim().equals(password.trim())) {
+//                foundErr = true;
+//                errors.setConfirmNotMatch(
+//                        siteMaps.getProperty(Constants.SignUpFeatures.CONFIRM_NOTMATCHED_ERR_MESSAGE));
+//            }
+//            if (given_name.trim().length() < 2 || given_name.trim().length() > 50) {
+//                foundErr = true;
+//                errors.setFullnameLengthError(
+//                        siteMaps.getProperty(Constants.SignUpFeatures.FULLNAME_LENGTH_ERR_MESSAGE));
+//            }        
+//            if (foundErr) { // error occur
+//                // cache to attribute then 
+//                request.setAttribute("REGISTER_ERRORS", errors);
+//               
+//            } else { //no error
                 Key_Utils utils = Key_Utils.getInstance();
                 String newPassword = utils.hashPassword(password);
                 HttpSession session = request.getSession();
@@ -103,7 +103,7 @@ public class RegisterAccountServlet extends HttpServlet {
                 
                 url = siteMaps.getProperty(Constants.VerifyEmailFeatures.EMAIL_PAGE);
                 
-            }
+            
         } catch (SQLException ex) {
             log("RegisterAccountServlet_SQLException: " + ex.getMessage());                                 
         } catch (NamingException ex) {

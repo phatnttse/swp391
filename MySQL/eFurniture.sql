@@ -5,14 +5,15 @@ USE eFurniture;
 CREATE TABLE `user` (
     `user_id` VARCHAR(255) PRIMARY KEY NOT NULL,
     `email` VARCHAR(255) NOT NULL,
-    `username` VARCHAR(255) UNIQUE NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
+    `username` VARCHAR(255),
+    `password` VARCHAR(255),
     `name` VARCHAR(255) NOT NULL,
     `given_name` VARCHAR(255) NOT NULL,
     `family_name` VARCHAR(255) NOT NULL,
-    `phone` VARCHAR(12) DEFAULT '',
-    `picture` VARCHAR(255) DEFAULT '',
-    `address` VARCHAR(255) DEFAULT '',
+    `phone` VARCHAR(12),
+    `picture` VARCHAR(255),
+    `address` VARCHAR(255),
+    `google_id` VARCHAR(255),
     `role_id` INT NOT NULL,
     `created_at` DATETIME
 );
@@ -325,7 +326,6 @@ select * from product where category_id = '1';
 select * from category;
 select * from user;
 select * from role;
-delete from user where user_id = '9c32e037-7e57-49fe-b8f5-d4a43aa62347';
-
+delete from user where user_id = 'e989f302-20ca-42cc-bd59-e5f3d2def0bb';
 select * from user where username = 'phatntt000';
 

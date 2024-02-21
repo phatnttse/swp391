@@ -48,7 +48,6 @@
                                                             <fieldset class="form-group">
                                                                 <input type="text" name="family_name" value="${param.family_name}" placeholder="Họ" required class="form-control form-control-lg">
                                                             </fieldset>
-<!--                                                            <p style="color:red;font-size: 14px">${error.fullnameLengthError}</p>-->
                                                         </div>
                                                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                             <fieldset class="form-group">
@@ -66,19 +65,16 @@
                                                             <fieldset class="form-group">
                                                                 <input type="text" name="username" placeholder="Tài khoản" required class="form-control form-control-lg">
                                                             </fieldset>
-<!--                                                            <p style="color:red;font-size: 14px">${error.emailDuplicateError}</p>-->
                                                         </div>
                                                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                             <fieldset class="form-group">
                                                                 <input type="password" name="password"  value="" placeholder="Mật khẩu" required class="form-control form-control-lg">
                                                             </fieldset>
-<!--                                                            <p style="color:red;font-size: 14px">${error.passwordLengthError}</p>-->
                                                         </div>
                                                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                             <fieldset class="form-group">
                                                                 <input type="password" name="confirm_password"  value="" placeholder="Nhập lại mật khẩu" required class="form-control form-control-lg">
                                                             </fieldset>
-<!--                                                            <p style="color:red;font-size: 14px">${error.confirmNotMatch}</p>-->
                                                         </div>
                                                     </div>
                                                     <div class="section">

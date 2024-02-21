@@ -13,6 +13,7 @@ phatntt\util\Constants$VerifyEmailFeatures.class
 phatntt\filter\DispatcherFilter.class
 phatntt\util\Constants$UsersFeatures.class
 phatntt\controller\users\LoginServlet.class
+phatntt\filter\AuthorizationFilter.class
 phatntt\util\Constants$LoginFeatures.class
 phatntt\controller\email\VerificationToResetPassController.class
 phatntt\util\Constants$ForgotPasswordFeatures.class

@@ -15,6 +15,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\Reg
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UserAccountsController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\AccountInfoController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\ProductsDAO.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\AuthorizationFilter.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\CategoryDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFilter.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java

@@ -326,6 +326,6 @@ select * from product where category_id = '1';
 select * from category;
 select * from user;
 select * from role;
-delete from user where user_id = 'e989f302-20ca-42cc-bd59-e5f3d2def0bb';
+delete from user where user_id = 'c1474cd8-3c18-425c-bc4c-52ba90f89e90';
 select * from user where username = 'phatntt000';
 

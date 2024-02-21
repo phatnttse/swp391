@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+}
+
+.email-container {
+    background-color: #fff;
+    width: 500px;
+    min-height: 400px;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 40px;
+    border-radius: 1rem;
+}
+
+.logo {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.title {
+    color: #f3a270;
+    text-align: center;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.des {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-continue {
+    padding-top: 60px;
+    text-align: right;
+}
+.btn-continue button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.back {
+    padding: 10px;
+}
+
+.back a {
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #000;
+}
+.back a:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+.gmail {
+    display: inline-block;
+    align-items: center;
+    border: 1px solid #ccc;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 1rem;
+}
+.gmail-body {
+    display: flex;
+    align-items: center;
+}
+
+.gmail .gmail-body img {
+    margin-right: 10px;
+    border-radius: 50%;
+}
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="email-container">
+        <form th:action=@{/email/confirmVerify} role="form" th:object="${userRegister}" method="POST">
+            <input type="hidden" th:name="userRegister" th:value="${userRegister}">
+            <div class="logo">
+                <a href="home">
+                    <img src="https://bizweb.dktcdn.net/100/499/932/themes/926650/assets/logo.png?1705830293643" alt="Logo">
+                </a>
+            </div>
+            <div class="title">
+                <h2>Xác minh tài khoản</h2>
+            </div>
+            <div class="des">
+                <p>Để giữ an toàn cho tài khoản của bạn, chúng tôi muốn đảm bảo rằng bạn chính là người đang cố đăng nhập</p>
+            </div>
+            <div class="gmail">
+                <div class="gmail-body">
+                    <img width="20px" src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-vector-260nw-1725655669.jpg" alt="IMG">
+                    <span class="email" th:text="${userRegister.email}"></span>
+                </div>
+            </div>
+            <div class="btn-continue">
+                <button type="submit">Tiếp tục</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "keen-slider": "^6.8.6",
-    "materialize-css": "^1.0.0-rc.2",
-    "swiper": "^11.0.6"
-  }
-}

@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 14, 2023, 11:55:47 PM
+    Author     : Admin
+*/
+
+
+.bread-crumb {
+    min-height: 200px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    
+}
+.breadcrumb-body {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px 
+    
+}
+.title-bread-crumb {
+    text-align: center;
+    font-size: 30px;
+    color: #f3a270;
+    font-weight: 600;
+}
+.breadcrumb-des{
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    border-radius: 4px;
+    margin: 0;
+    font-size: 14px;
+    padding: 15px 10px;
+    border-radius: 0;
+    font-weight: 400;
+    line-height: 24px;
+    width: 100%;
+    text-align: center;
+}
+.breadcrumb-des li {
+   display: inline;
+}
+.breadcrumb .home i {
+    width: 10px;
+    height: 10px;
+    margin-top: -2px;
+}
+.home {
+    color: #fff;
+}
+.home a {
+    color: #fff;
+     text-decoration: none !important;
+}
+
+.home a:hover {
+    color: #f3a270;
+}
+.breadcrumb>li+li::before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "" !important; 
+}
+.breadcrumb-des li strong {
+    color: #f3a270;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+
+
+.register-container {
+    margin-top: 74px;
+    padding: 20px;
+}
+
+@media (min-width: 1366px){
+.breadcrumb-body {
+    max-width: 1279px;
+}
+}

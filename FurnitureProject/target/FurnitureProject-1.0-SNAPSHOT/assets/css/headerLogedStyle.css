@@ -1,0 +1,140 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 22, 2023, 12:57:38 PM
+    Author     : Admin
+*/
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    background: #fff;
+    font-weight: 500;
+}
+
+.header {
+   top: 0 !important;
+   box-shadow: 0 0 10px rgba(0,0,0,0.3);
+   background-color: #fff;
+   left: 0;
+   right: 0;
+   height: 74px;
+   display: flex;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   max-width: 100%;
+/*   position: fixed;*/
+}
+.header-menu {
+    padding-top: 10px;
+    width: 100%;
+}
+.item-big li {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600; /* Apply font-weight 600 to the main navigation links */
+    padding: 10px 16px; /* Adjust padding for better spacing */
+}
+.item-big li {
+    position: relative;
+}
+.item-big li:hover .sub-nav {
+    display: block;
+}
+.sub-nav {
+    position: absolute;
+    display: none;
+    min-width: 200px;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+}
+.sub-nav li > a {
+    text-decoration: none;
+    color: #000;
+    display: block; 
+    font-weight: normal; 
+}
+.sub-nav li > a:hover {
+    color: #f3a270;
+}
+.item-big .sub-nav li {
+    padding: 12px;
+}
+
+.item-big li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.item-big li {
+    display: inline-block;
+    padding: 0 16px;
+    border-radius: 10px;
+}
+
+.item-big > li:hover {
+    background-color: #f3a270;
+    cursor: pointer;
+}
+
+.ul-control {
+    display: flex;
+    align-items: center;
+}
+
+.ul-control li {
+    align-items: center;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.ul-control li a:hover {
+   color: #f3a270;
+}
+
+.menu-user {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    top: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.ul-control li{
+    position: relative;
+}
+.ul-control li:hover .menu-user{
+   display: block;
+}
+.menu-user li {
+    list-style: none;
+    min-width: 120px;
+    min-height: 32px;
+    padding: 10px;
+    text-align: left;
+}
+.menu-user li a {
+    text-decoration: none;
+    color: #000;
+}
+.menu-user li a:hover {
+    color: #f3a270;
+}
+
+
+

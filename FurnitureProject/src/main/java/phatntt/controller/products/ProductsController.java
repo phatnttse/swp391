@@ -53,6 +53,10 @@ public class ProductsController extends HttpServlet {
                 url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
                 request.setAttribute("PRODUCTS_LIST", listProducts);
             }
+            
+            ProductsDAO productbycategory = new ProductsDAO();
+            int productCategoryId = productbycategory.countProductByCategoryId();
+            request.setAttribute("COUNT_PRODUCT", productCategoryId);
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

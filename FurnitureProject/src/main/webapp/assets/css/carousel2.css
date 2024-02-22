@@ -1,0 +1,48 @@
+/* Add your existing CSS styles here */
+
+.owl-carousel {
+    width: 100%;
+  }
+  
+  .owl-carousel img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .slide-content-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+  }
+  
+  .slide-content {
+    max-width: 600px;
+    width: 100%;
+    max-height: 250px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+  }
+  
+  .buy-now-btn {
+    background-color: #d94e28;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-now-btn:hover {
+    background-color: #b12e09;
+  }
+  

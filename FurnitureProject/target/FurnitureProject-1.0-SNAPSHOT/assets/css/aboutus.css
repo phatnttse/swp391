@@ -1,0 +1,94 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.bread-crumb {
+    position: relative;
+    padding: 100px 0;
+    color: #ffffff; /* Chuyển màu chữ thành trắng */
+    text-align: center;
+    z-index: 1; /* Đặt z-index để nằm trên layer */
+}
+
+.bread-crumb:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1; /* Đặt z-index để nằm dưới layer */
+    pointer-events: none;
+}
+
+.bread-crumb .title-breadcrumb {
+    font-size: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 8;
+}
+
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Can giữa dấu mũi tên */
+}
+
+.breadcrumb li {
+    font-size: 14px;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb li::before {
+    margin-right: 10px;
+    color: #ffffff; /* Màu chữ trắng */
+}
+
+.breadcrumb li a,
+.breadcrumb li span {
+    color: #ffffff; /* Màu chữ trắng */
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.breadcrumb li.home a::before {
+    content: none;
+    margin-right: 0;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: none;
+    margin-left: 5px;
+}
+
+.page {
+    padding: 30px 0;
+}
+
+.page .title-head {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.page .content-page p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}

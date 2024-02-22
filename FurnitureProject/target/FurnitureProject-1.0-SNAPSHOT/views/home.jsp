@@ -47,33 +47,19 @@
                 <div class="current tab-content">
                     <div class="row row-fix">
                         <c:if test="${not empty listAllCategory}">
-                            <c:forEach var="product" items="${listAllCategory}" varStatus="loopStatus">
+                            <c:forEach var="category" items="${listAllCategory}" varStatus="loopStatus">
                                 <div class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
                                     <div class="product-action">
                                         <div class="product-thumbnail">
 
                                             <a class="image_thumb">
-                                                <img width="520" height="520" class="lazyload loaded" src="${product.thumbnail}">
+                                                <img width="520" height="520" class="lazyload loaded" src="${category.thumbnail}">
                                             </a>
                                             <p>
-                                                ${product.title}
+                                                ${category.title}
                                             </p>
-                                            <div class="smart">
-                                                <span>-${product.discount}</span>
-                                            </div>
-
-                                            <a class="btn-wishlist">
-                                                <i class="ti-search"></i>
-                                            </a>
 
 
-                                            <div class="badge">
-                                                <span class="new">${product.price}</span>
-                                            </div>
-
-                                            <div  class="btn-shopping">                                               
-                                                <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId})"></button>
-                                            </div>
 
                                         </div> 
 
@@ -81,14 +67,12 @@
 
                                             <h5 class="product-name">
                                                 <a class="line-clamp line-clamp-2" href="" >
-                                                    ${product.title}
+                                                    ${category.title}
                                                 </a>
                                             </h5>
 
                                             <div class="price-box">
-                                                ${product.price}
-                                                <span class="compare-price">170.000₫</span>
-
+                                                ${category.thumbnail}
                                             </div>
 
                                         </div>

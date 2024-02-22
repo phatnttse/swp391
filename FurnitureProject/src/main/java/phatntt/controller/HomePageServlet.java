@@ -49,11 +49,16 @@ public class HomePageServlet extends HttpServlet {
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
 
         try {
+            //Danh muc san pham
+            CategoryDAO categoryDAO = new CategoryDAO();
+            List<CategoryDTO> categoryDTOs = categoryDAO.getCategoryCount();
+            request.setAttribute("CATEGORY_ALL", categoryDTOs);
+
             //sản phẩm mới
             ProductsDAO productDAO = new ProductsDAO();
             List<ProductsDTO> listProducts = productDAO.getNewestProducts();
             request.setAttribute("PRODUCTS_LIST", listProducts);
-            
+
             //sản phẩm theo phân loại
             String categoryIdStr = request.getParameter("categoryId");
             int categoryId = 1;
@@ -104,16 +109,11 @@ public class HomePageServlet extends HttpServlet {
 
             request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
             // Gửi HTML về trang JSP sử dụng HttpServletResponse
-        response.setContentType("text/html");
-        PrintWriter htmlResponse = response.getWriter();
-        htmlResponse.write(out.toString());
-        htmlResponse.flush();
-        
-        //Danh muc san pham
-        CategoryDAO categoryDAO = new CategoryDAO();
-        List<CategoryDTO> categoryDTOs = categoryDAO.getCategoryCount();
-        request.setAttribute("CATEGORY_ALL", categoryDTOs);
-            
+            response.setContentType("text/html");
+            PrintWriter htmlResponse = response.getWriter();
+            htmlResponse.write(out.toString());
+            htmlResponse.flush();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {

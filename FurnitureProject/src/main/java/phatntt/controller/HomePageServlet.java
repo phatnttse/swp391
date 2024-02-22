@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.CategoryDAO;
-
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
@@ -59,11 +58,8 @@ public class HomePageServlet extends HttpServlet {
             List<ProductsDTO> listProducts = productDAO.getNewestProducts();
             request.setAttribute("PRODUCTS_LIST", listProducts);
 
-            //sản phẩm theo phân loại
-            String categoryIdStr = request.getParameter("categoryId");
-
-            int categoryId = 1;
-            categoryId = Integer.parseInt(categoryIdStr);
+            //sản phẩm theo phân loại                 
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             ProductsDAO productbycategory = new ProductsDAO();
             List<ProductsDTO> listProductsByCategory = productbycategory.getProductByCategoryId(categoryId);
             request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
@@ -73,7 +69,6 @@ public class HomePageServlet extends HttpServlet {
             out.append("<div class=\"current tab-content\">");
             out.append("<div class=\"row row-fix\">");
             for (ProductsDTO product : listProductsByCategory) {
-
                 out.append("<div class=\"col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix\">");
                 out.append("    <div class=\"product-action\">");
                 out.append("        <div class=\"product-thumbnail\">");
@@ -102,13 +97,11 @@ public class HomePageServlet extends HttpServlet {
                 out.append("            </div>");
                 out.append("        </div>");
                 out.append("    </div>");
-                out.append("</div>");
-                
+                out.append("</div>");                
             }
-
             out.append("</div>");
             out.append("</div>");
-             out.append("</div>");
+            out.append("</div>");
 
             // Gửi HTML về trang JSP sử dụng HttpServletResponse
             response.setContentType("text/html");

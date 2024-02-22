@@ -18,8 +18,8 @@
         <title>Register</title>
     </head>
     <body>
-        <!-- <%@include file="../UIcomponents/header.jsp"%>
-        <%@include file="../UIcomponents/breadCrumb.jsp" %> -->
+        <%@include file="../UIcomponents/header.jsp"%>
+        <%@include file="../UIcomponents/breadCrumb.jsp" %>
         <section class="section">
             <div class="container">
                 <div class="background-aside page-login">                                    

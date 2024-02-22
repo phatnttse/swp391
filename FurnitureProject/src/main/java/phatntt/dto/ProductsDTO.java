@@ -21,15 +21,13 @@ public class ProductsDTO implements Serializable{
     private float price;
     private String thumbnail;
     private float discount;
-    private int purchase;
+    private int purchases;
     private Timestamp createdAt;
     
-    private int productCount;
-
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchase, Timestamp createdAt) {
+    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchases, Timestamp createdAt) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.title = title;
@@ -38,105 +36,153 @@ public class ProductsDTO implements Serializable{
         this.price = price;
         this.thumbnail = thumbnail;
         this.discount = discount;
-        this.purchase = purchase;
+        this.purchases = purchases;
         this.createdAt = createdAt;
     }
 
-    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchase, Timestamp createdAt, int productCount) {
-        this.productId = productId;
-        this.categoryId = categoryId;
-        this.title = title;
-        this.description = description;
-        this.quantity = quantity;
-        this.price = price;
-        this.thumbnail = thumbnail;
-        this.discount = discount;
-        this.purchase = purchase;
-        this.createdAt = createdAt;
-        this.productCount = productCount;
-    }
-    
-    
-
+    /**
+     * @return the productId
+     */
     public int getProductId() {
         return productId;
     }
 
+    /**
+     * @param productId the productId to set
+     */
     public void setProductId(int productId) {
         this.productId = productId;
     }
 
+    /**
+     * @return the categoryId
+     */
     public int getCategoryId() {
         return categoryId;
     }
 
+    /**
+     * @param categoryId the categoryId to set
+     */
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
+    /**
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @param title the title to set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description the description to set
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return the quantity
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * @param quantity the quantity to set
+     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * @return the price
+     */
     public float getPrice() {
         return price;
     }
 
+    /**
+     * @param price the price to set
+     */
     public void setPrice(float price) {
         this.price = price;
     }
 
+    /**
+     * @return the thumbnail
+     */
     public String getThumbnail() {
         return thumbnail;
     }
 
+    /**
+     * @param thumbnail the thumbnail to set
+     */
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 
+    /**
+     * @return the discount
+     */
     public float getDiscount() {
         return discount;
     }
 
+    /**
+     * @param discount the discount to set
+     */
     public void setDiscount(float discount) {
         this.discount = discount;
     }
 
-    public int getPurchase() {
-        return purchase;
+    /**
+     * @return the purchase
+     */
+    public int getPurchases() {
+        return purchases;
     }
 
-    public void setPurchase(int purchase) {
-        this.purchase = purchase;
+    /**
+     * @param purchase the purchase to set
+     */
+    public void setPurchases(int purchase) {
+        this.purchases = purchase;
     }
 
+    /**
+     * @return the createdAt
+     */
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * @param createdAt the createdAt to set
+     */
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+    
+    
+
+    
 
     
 }

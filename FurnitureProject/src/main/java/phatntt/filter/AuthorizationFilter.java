@@ -21,7 +21,7 @@ import phatntt.dto.UsersDTO;
  *
  * @author Admin
  */
-@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/products"})
+@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/addProductsToCart"})
 public class AuthorizationFilter implements Filter {
     
     @Override
@@ -40,8 +40,8 @@ public class AuthorizationFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này!");
-        request.getRequestDispatcher("login").forward(request, response);
+        req.setAttribute("notification", "Để thực hiện, bạn cần phải đăng nhập!");
+        request.getRequestDispatcher("views/login.jsp").forward(request, response);
     }
 
     @Override

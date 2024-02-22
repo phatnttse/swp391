@@ -10,23 +10,10 @@ package phatntt.dto;
  */
 public class CategoryDTO {
     private int categoryId;
-    private String name;
-    private int count;
+    private String name;  
     private String thumbnail;
 
-    public CategoryDTO(int categoryId, String name, int count, String thumbnail) {
-        this.categoryId = categoryId;
-        this.name  = name;
-        this.count = count;
-        this.thumbnail = thumbnail;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public CategoryDTO() {
     }
 
     public CategoryDTO(int categoryId, String name, String thumbnail) {
@@ -34,46 +21,54 @@ public class CategoryDTO {
         this.name = name;
         this.thumbnail = thumbnail;
     }
-    
-    
-
-    public CategoryDTO(int categoryId, String name, int count) {
-        this.categoryId = categoryId;
-        this.name = name;
-        this.count = count;
-    }
-
-    public CategoryDTO(int categoryId, String name) {
-        this.categoryId = categoryId;
-        this.name = name;
-    }
-
-    public CategoryDTO() {
-    }
-
+       
+    /**
+     * @return the categoryId
+     */
     public int getCategoryId() {
         return categoryId;
     }
 
+    /**
+     * @param categoryId the categoryId to set
+     */
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public String getTitle() {
+    /**
+     * @return the name
+     */
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String name) {
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    /**
+     * @return the thumbnail
+     */
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    /**
+     * @param thumbnail the thumbnail to set
+     */
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
+
+ 
+
+   
     
+
+
     
 }

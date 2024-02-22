@@ -499,7 +499,7 @@ public class UsersDAO implements Serializable {
         }
         return result;
     }
-      public boolean createNewPassword(String username, String password) throws SQLException, NamingException {
+      public boolean createNewPassword(String email, String password) throws SQLException, NamingException {
 
         boolean result = false;
 
@@ -508,10 +508,10 @@ public class UsersDAO implements Serializable {
             if (con != null) {
                 String sql = "UPDATE user "
                         + "SET password = ? "
-                        + "WHERE username = ?";
+                        + "WHERE email = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, password);
-                stm.setString(2, username);
+                stm.setString(2, email);
 
                 int affectedRows = stm.executeUpdate();
                 if (affectedRows > 0) {

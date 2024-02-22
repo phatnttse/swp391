@@ -101,7 +101,7 @@ public class EmailDAO implements Serializable {
                     + "        #verificationCode {\n"
                     + "            font-size: 24px;\n"
                     + "            width: 25%;\n"
-                    + "            margin-left: 290px;\n"
+                    + "            margin-left: 190px;\n"
                     + "            padding: 15px;\n"
                     + "            letter-spacing: 6px;\n"
                     + "            font-weight: 600;\n"

@@ -21,6 +21,7 @@
         <c:set var="loginURI" value="/FurnitureProject/views/login.jsp"/>
         <c:set var="productsURI" value="/FurnitureProject/views/products.jsp"/>
         <c:set var="accountInfoURI" value="/FurnitureProject/views/accountInfo.jsp"/>
+        <c:set var="searchProductsURI" value="/FurnitureProject/views/searchProducts.jsp"/>
 
         <div class="bread-crumb" style="background: url(assets/img/breadcrumb.webp) center no-repeat;">
             <div class="breadcrumb-body">
@@ -88,6 +89,22 @@
                         <li>
                             <strong>
                                 <span>Thông tin tài khoản</span>
+                            </strong>
+                        </li>
+                    </ul>
+                </c:if>
+                <c:if test="${uri eq searchProductsURI}">
+                    <div class="title-bread-crumb">Tìm kiếm sản phẩm</div>
+                    <ul class="breadcrumb-des">
+                        <li class="home">
+                            <a href="home">
+                                <span>Trang chủ</span>                      
+                            </a>
+                            <i class="ti-angle-right"></i>
+                        </li>
+                        <li>
+                            <strong>
+                                <span>Tìm kiếm sản phẩm</span>
                             </strong>
                         </li>
                     </ul>

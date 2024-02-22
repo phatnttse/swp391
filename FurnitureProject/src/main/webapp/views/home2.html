@@ -1,0 +1,57 @@
+<!-- Modified class names in home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <div id="carousel"></div>
+
+    <div id="hotcategory"></div> <!-- Updated ID for hotcategory -->
+
+    <div id="footer"></div>
+
+    <script>
+        // Using fetch to load HTML content
+        function loadHTML(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById(elementId).innerHTML = html;
+
+                    // Check if the script should be loaded
+                    if (elementId === 'carousel') {
+                        loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', function () {
+                            loadScript('./carousel.js');
+                        });
+                    } else if (elementId === 'hotcategory') { // Load hotcategory.js
+                        loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', function () {
+                            loadScript('./hotcategory.js');
+                        });
+                    }
+                });
+        }
+
+        // Function to dynamically load and execute a script
+        function loadScript(url, callback) {
+            const script = document.createElement('script');
+            script.src = url;
+            script.async = true;
+            script.onload = callback;
+            document.head.appendChild(script);
+        }
+
+        // Load the header, footer, carousel, and hotcategory content
+        loadHTML('../UIcomponents/header2.html', 'header');
+        loadHTML('./carousel.html', 'carousel');
+        loadHTML('./hotcategory.html', 'hotcategory');
+        loadHTML('../UIcomponents/footer2.html', 'footer');
+    </script>
+
+</body>
+</html>

@@ -71,7 +71,7 @@ public class AddProductsToCartController extends HttpServlet {
                             + "                            </div>\n"
                             + "                            <div class=\"media-content bodycart-mobile\">\n"
                             + "                                <div class=\"thumb-1x1\">\n"
-                            + "                                    <img src=\"assets/img/products/"+product.getThumbnail()+"\" alt=\"${product.name}\"></div>\n"
+                            + "                                    <img src=\""+product.getThumbnail()+"\" alt=\"${product.name}\"></div>\n"
                             + "                                <div class=\"body_content\">\n"
                             + "                                    <h4 class=\"product-title\">"+product.getTitle()+"</h4>\n"
                             + "                                    <div class=\"product-new-price\">\n"

@@ -21,6 +21,9 @@
         <%@include file="../UIcomponents/breadCrumb.jsp" %>      
         <c:set var="error" value="${requestScope.LOGIN_ERROR}"/>
         <div id="main">
+            <c:if test="${requestScope.notification != null}">
+                <p class="a-center" style="color: #f94d45;margin-left: 4px;">${requestScope.notification}</p>
+            </c:if>
             <section class="section">
                 <div class="container">
                     <div class="background-aside page-login">                                    
@@ -53,7 +56,10 @@
                                                                 <fieldset class="form-group">
                                                                     <input type="password" name="password" value="" placeholder="Mật khẩu" required class="form-control form-control-lg">
                                                                 </fieldset>
-                                                                <p style="color: #f94d45;margin-left: 4px;">${requestScope.LOGIN_ERROR}</p>
+                                                                <c:if test="${requestScope.LOGIN_ERROR != null}">
+                                                                    <p style="color: #f94d45;margin-left: 4px;">${requestScope.LOGIN_ERROR}</p>
+                                                                </c:if>
+
                                                             </div>
                                                         </div>
 

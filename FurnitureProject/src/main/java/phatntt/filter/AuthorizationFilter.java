@@ -42,6 +42,8 @@ public class AuthorizationFilter implements Filter {
         }
         req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này!");
         request.getRequestDispatcher("login").forward(request, response);
+        req.setAttribute("notification", "Để thực hiện, bạn cần phải đăng nhập!");
+        request.getRequestDispatcher("views/login.jsp").forward(request, response);
     }
 
     @Override

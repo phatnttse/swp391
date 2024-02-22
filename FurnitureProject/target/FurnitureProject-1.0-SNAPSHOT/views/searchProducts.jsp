@@ -42,7 +42,7 @@
                                             <form action="" method="" class="variants product-action">
                                                 <div class="product-thumbnail">
                                                     <a class="image_thumb">
-                                                        <img width="520" height="520" class="lazyload loaded" src="assets/img/products/${product.image}">
+                                                        <img width="520" height="520" class="lazyload loaded" src="${product.thumbnail}">
                                                     </a>
                                                     <div class="smart">
                                                         <span>-${product.discount}</span>
@@ -50,22 +50,14 @@
 
                                                     <a class="btn-wishlist">
                                                         <i class="ti-search"></i>
-                                                    </a>
-
-
-                                                    <div class="badge">
-                                                        <span class="new">${product.status}</span>
-                                                    </div>
-
-
-
+                                                    </a>                                                 
                                                 </div> 
 
                                                 <div class="product-info">
 
                                                     <h5 class="product-name">
                                                         <a class="line-clamp line-clamp-2" href="" >
-                                                            ${product.name}
+                                                            ${product.title}
                                                         </a>
                                                     </h5>
 

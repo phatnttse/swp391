@@ -51,7 +51,7 @@ public class ProductsController extends HttpServlet {
             
             if (listProducts != null){
                 url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
-                request.setAttribute("PRODUCTS_LIST", listProducts);
+                request.setAttribute("PRODUCTS_LIST", listProducts);           
             }
             
             ProductsDAO productbycategory = new ProductsDAO();

@@ -27,12 +27,11 @@
                 <button class="buy-btn">Mua Ngay</button>
             </div>
         </div>
-        <c:set var="listSale" value="${requestScope.SALE_LIST}"/>
         <c:set var="listHotProduct" value="${requestScope.PRODUCTS_LIST}"/>
         <c:set var="listProductByCategory" value="${requestScope.PRODUCTS_CATEGORY}"/>
         <c:set var="listAllCategory" value="${requestScope.CATEGORY_ALL}"/>
 
-        
+
         <!<!-- Danh mục nổi bật -->
         <section class="section_product_notbat">
             <div class="container">
@@ -61,6 +60,8 @@
 
 
 
+                                                ${category.name}
+                                            </p>                                        
                                         </div> 
 
                                         <div class="product-info">
@@ -75,6 +76,9 @@
                                                 ${category.thumbnail}
                                             </div>
 
+
+                                                </a>
+                                            </h5>                                          
                                         </div>
 
 
@@ -88,7 +92,7 @@
             </div>
 
         </section> 
-        
+
         <!-- sản phẩm mới -->
         <section class="section_product_notbat">
             <div class="container">
@@ -111,9 +115,7 @@
                                             <a class="image_thumb">
                                                 <img width="520" height="520" class="lazyload loaded" src="${product.thumbnail}">
                                             </a>
-                                            <p>
-                                                ${product.title}
-                                            </p>
+
                                             <div class="smart">
                                                 <span>-${product.discount}</span>
                                             </div>
@@ -121,12 +123,6 @@
                                             <a class="btn-wishlist">
                                                 <i class="ti-search"></i>
                                             </a>
-
-
-                                            <div class="badge">
-                                                <span class="new">${product.price}</span>
-                                            </div>
-
                                             <div  class="btn-shopping">                                               
                                                 <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId})"></button>
                                             </div>
@@ -162,7 +158,7 @@
         </section>
 
         <!-- Sản phẩm theo loại -->
-        <section class="section_product_tab">
+        <section class="section_product_notbat">
             <div class="container">
                 <!--                <ul class="noibat-menulist">
                                     <li class="active">
@@ -194,10 +190,7 @@
 
                                                 <a class="image_thumb">
                                                     <img width="520" height="520" class="lazyload loaded" src="${productcategory.thumbnail}">
-                                                </a>
-                                                <p>
-                                                    ${productcategory.title}
-                                                </p>
+                                                </a>                                              
                                                 <div class="smart">
                                                     <span>-${productcategory.discount}</span>
                                                 </div>
@@ -205,11 +198,6 @@
                                                 <a class="btn-wishlist">
                                                     <i class="ti-search"></i>
                                                 </a>
-
-
-                                                <div class="badge">
-                                                    <span class="new">${productcategory.price}</span>
-                                                </div>
 
                                                 <div  class="btn-shopping">                                               
                                                     <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${productcategory.productId})"></button>
@@ -260,11 +248,11 @@
             $(document).ready(function () {
                 loadProductsByCategory(1); // 0 hoặc giá trị mặc định tùy thuộc vào logic của hàm loadProductsByCategory()
             });
-            
+
             function loadProductsByCategory(categoryId) {
                 $.ajax({
                     type: "GET",
-                    url: "/FurnitureProject",
+                    url: "/FurnitureProject/home",
                     data: {categoryId: categoryId},
                     success: function (data) {
                         // Hiển thị dữ liệu HTML trực tiếp lên trang JSP
@@ -283,16 +271,26 @@
                         productId: productId
                     },
                     success: function (response) {
-                        const content = document.getElementById("content");
-                        // Thêm nội dung sản phẩm mới vào giỏ hàng
-                        content.innerHTML = response;
-                        // Hiển thị giỏ hàng
-                        showCartModal();
+                        // Kiểm tra phản hồi từ server
+                        if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
+                            // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
+                            window.location.href = "/FurnitureProject/loginPage";
+                            showNotification("Để thực hiện, bạn cần phải đăng nhập!");
+                        } else {
+                            // Nếu không, hiển thị giỏ hàng
+                            const content = document.getElementById("content");
+                            content.innerHTML = response;
+                            showCartModal();
+                        }
                     },
                     error: function (xhr) {
-                        // Xử lý lỗi
+                        // Xử lý lỗi nếu cần
                     }
                 });
+            }
+            function showNotification(message) {
+                // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
+                alert(message);
             }
 
             function showCartModal() {

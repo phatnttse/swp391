@@ -61,31 +61,31 @@ public class HomePageServlet extends HttpServlet {
 
             //sản phẩm theo phân loại
             String categoryIdStr = request.getParameter("categoryId");
+
             int categoryId = 1;
             categoryId = Integer.parseInt(categoryIdStr);
             ProductsDAO productbycategory = new ProductsDAO();
             List<ProductsDTO> listProductsByCategory = productbycategory.getProductByCategoryId(categoryId);
+            request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
 
             StringBuilder out = new StringBuilder();
-            out.append("<div>");
-
+            out.append("<div id=\"product-list\">");
+            out.append("<div class=\"current tab-content\">");
+            out.append("<div class=\"row row-fix\">");
             for (ProductsDTO product : listProductsByCategory) {
+
                 out.append("<div class=\"col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix\">");
                 out.append("    <div class=\"product-action\">");
                 out.append("        <div class=\"product-thumbnail\">");
                 out.append("            <a class=\"image_thumb\">");
                 out.append("                <img width=\"520\" height=\"520\" class=\"lazyload loaded\" src=\"" + product.getThumbnail() + "\">");
-                out.append("            </a>");
-                out.append("            <p>" + product.getTitle() + "</p>");
+                out.append("            </a>");              
                 out.append("            <div class=\"smart\">");
                 out.append("                <span>-" + product.getDiscount() + "</span>");
                 out.append("            </div>");
                 out.append("            <a class=\"btn-wishlist\">");
                 out.append("                <i class=\"ti-search\"></i>");
-                out.append("            </a>");
-                out.append("            <div class=\"badge\">");
-                out.append("                <span class=\"new\">" + product.getPrice() + "</span>");
-                out.append("            </div>");
+                out.append("            </a>");               
                 out.append("            <div class=\"btn-shopping\">");
                 out.append("                <button type=\"submit\" title=\"Thêm vào giỏ hàng\" class=\"ti-shopping-cart\" onclick=\"addProductToCart(" + product.getProductId() + ")\"></button>");
                 out.append("            </div>");
@@ -103,11 +103,13 @@ public class HomePageServlet extends HttpServlet {
                 out.append("        </div>");
                 out.append("    </div>");
                 out.append("</div>");
+                
             }
 
             out.append("</div>");
+            out.append("</div>");
+             out.append("</div>");
 
-            request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
             // Gửi HTML về trang JSP sử dụng HttpServletResponse
             response.setContentType("text/html");
             PrintWriter htmlResponse = response.getWriter();

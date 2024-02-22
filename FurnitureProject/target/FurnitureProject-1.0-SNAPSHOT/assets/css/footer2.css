@@ -1,0 +1,81 @@
+
+/* Styles for footer */
+.footer {
+    background: #1b1d1f;
+    color: #fff;
+    overflow: hidden;
+    padding: 25px 0;
+}
+
+/* Styles for company information */
+.company-info {
+    float: left;
+    width: 33.33%;
+    box-sizing: border-box;
+    padding: 0 20px; /* Ajust the padding as needed */
+}
+.company-info a{
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+/* Styles for navigation links */
+.navigation-links {
+    text-align: center;
+    float: left;
+    width: 33.33%;
+    box-sizing: border-box;
+    padding: 0 20px; /* Ajust the padding as needed */
+}
+
+/* Styles for social media and payment methods */
+.social-payment {
+    float: left;
+    width: 33.33%;
+    box-sizing: border-box;
+    padding: 0 100px; /* Ajust the padding as needed */
+}
+
+/* Styles for footer titles */
+.footer-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Styles for social media logos and payment method logos if needed */
+.social-media a, .payment-methods img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    max-width: 40px; /* Điều chỉnh kích thước tối đa */
+    max-height: 40px; /* Điều chỉnh kích thước tối đa */
+}
+
+/* Add styles for social media logos */
+.facebook-logo, .twitter-logo, .linkedin-logo, .youtube-logo {
+    display: inline-block;
+}
+
+/* Resetting margin and padding for ul and li elements */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+/* Thêm CSS cho separator */
+.separator {
+    border: 1px solid #fff;
+    margin: 10px 0;
+    width: 100%; /* Đặt chiều rộng cho gạch dài trắng */
+}
+
+/* Đặt nội dung của bản quyền vào giữa */
+.text-center {
+    text-align: center;
+}

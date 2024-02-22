@@ -1,11 +1,11 @@
-<%-- 
+<!-- <%-- 
     Document   : register
     Created on : Dec 14, 2023, 6:24:38 PM
     Author     : Admin
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,8 +18,8 @@
         <title>Register</title>
     </head>
     <body>
-        <%@include file="../UIcomponents/header.jsp"%>
-        <%@include file="../UIcomponents/breadCrumb.jsp" %>
+        <!-- <%@include file="../UIcomponents/header.jsp"%>
+        <%@include file="../UIcomponents/breadCrumb.jsp" %> -->
         <section class="section">
             <div class="container">
                 <div class="background-aside page-login">                                    
@@ -99,7 +99,7 @@
                 </div>    
             </div>
         </section>
-        <%@include file="../UIcomponents/footer.jsp" %>
+        <!-- <%@include file="../UIcomponents/footer.jsp" %> -->
     </body>
 </html>
 

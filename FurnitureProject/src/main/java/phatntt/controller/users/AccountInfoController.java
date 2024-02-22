@@ -112,7 +112,7 @@ public class AccountInfoController extends HttpServlet {
             String avatar = u.getPicture();
             Part part = request.getPart("avatar");
             if (part.getSize() > 0) {
-                String absolutePath = "E:\\Vit\\JavaWeb\\FurnitureProject\\web\\assets\\img\\users";
+                String absolutePath = "E:\\Vit\\SWP391\\swp391\\FurnitureProject\\src\\main\\webapp\\assets\\img\\users";
                 String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
                 if (!Files.exists(Paths.get(absolutePath))) {

@@ -40,24 +40,24 @@
 
 
                                             <li class="nav-item">
-                                                <a href="/den-trang-tri" class="nav-link" title="Đèn trang trí">Đèn trang trí </a>
+                                                <a href="/den-trang-tri" class="nav-link" title="Đèn trang trí">Bồn tắm </a>
                                                 <span class="Collapsible__Plus"></span>
                                                 <ul class="dropdown-menu">
 
                                                     <li class="nav-item ">
-                                                        <a class="nav-link" href="/den-chum" title="Đèn chùm">Đèn chùm </a>
+                                                        <a class="nav-link" href="/den-chum" title="Đèn chùm">Bồn cầu </a>
                                                     </li>                                                                            
 
                                                     <li class="nav-item ">
-                                                        <a class="nav-link" href="/den-am-tran" title="Đèn âm trần">Đèn âm trần </a>
+                                                        <a class="nav-link" href="/den-am-tran" title="Đèn âm trần">Sen tắm</a>
                                                     </li>
 
                                                     <li class="nav-item ">
-                                                        <a class="nav-link" href="/den-tha-tran" title="Đèn thả trần">Đèn thả trần </a>
+                                                        <a class="nav-link" href="/den-tha-tran" title="Đèn thả trần">Tủ chậu Lavabo</a>
                                                     </li>
 
                                                     <li class="nav-item ">
-                                                        <a class="nav-link" href="/den-cay-den-ban" title="Đèn cây - đèn bàn">Đèn cây - đèn bàn </a>
+                                                        <a class="nav-link" href="/den-cay-den-ban" title="Đèn cây - đèn bàn">Vòi Lavabo</a>
                                                     </li>
 
                                                 </ul>
@@ -251,20 +251,20 @@
                                                                 <div class="product-thumbnail">
 
                                                                     <a class="image_thumb">
-                                                                        <img width="520" height="520" class="lazyload loaded" src="assets/img/products/${product.image}">
+                                                                        <img width="520" height="520" class="lazyload loaded" src="${product.thumbnail}">
                                                                     </a>
 
                                                                     <div class="smart">
-                                                                        <span>-${product.discount}</span>
+                                                                        <span>-${product.discount}%</span>
                                                                     </div>
 
                                                                     <a class="btn-wishlist" title="Xem nhanh">
                                                                         <i class="ti-search"></i>
                                                                     </a>
 
-                                                                    <div class="badge">
-                                                                        <span class="new">${product.status}</span>
-                                                                    </div>
+                                                                    <!--                                                                    <div class="badge">
+                                                                                                                                            <span class="new"></span>
+                                                                                                                                        </div>-->
 
                                                                 </div> 
 
@@ -272,7 +272,7 @@
 
                                                                     <h5 class="product-name">
                                                                         <a class="line-clamp line-clamp-2" href="" >
-                                                                            ${product.name}
+                                                                            ${product.title}
                                                                         </a>
                                                                     </h5>
 
@@ -314,17 +314,28 @@
                         productId: productId
                     },
                     success: function (response) {
-                        const content = document.getElementById("content");
-                        // Thêm nội dung sản phẩm mới vào giỏ hàng
-                        content.innerHTML = response;
-                        // Hiển thị giỏ hàng
-                        showCartModal();
+                        // Kiểm tra phản hồi từ server
+                        if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
+                            // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
+                            window.location.href = "/FurnitureProject/loginPage";
+                            showNotification("Để thực hiện, bạn cần phải đăng nhập!");
+                        } else {
+                            // Nếu không, hiển thị giỏ hàng
+                            const content = document.getElementById("content");
+                            content.innerHTML = response;
+                            showCartModal();
+                        }
                     },
                     error: function (xhr) {
-                        // Xử lý lỗi
+                        // Xử lý lỗi nếu cần
                     }
                 });
             }
+            function showNotification(message) {
+                // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
+                alert(message);
+            }
+
 
             function showCartModal() {
                 const cartModal = document.querySelector('.cart-modal');

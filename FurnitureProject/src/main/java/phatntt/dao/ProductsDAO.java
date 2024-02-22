@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -54,6 +55,9 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
+                    // Định dạng giá tiền
+                    DecimalFormat decimalFormat = new DecimalFormat("#,### đ");
+                    String formattedPrice = decimalFormat.format(price);
 
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     result.add(p);
@@ -89,8 +93,8 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "Select * from product"
-                        + "Where name like ? ";
+                String sql = "Select * from product "
+                        + "Where title like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
                 rs = stm.executeQuery();
@@ -104,7 +108,7 @@ public class ProductsDAO implements Serializable {
                     float discount = rs.getFloat("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
-                    int purchases = rs.getInt("purchaes");
+                    int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
                     ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
@@ -137,7 +141,7 @@ public class ProductsDAO implements Serializable {
 
             if (con != null) {
                 String sql = "Select * from product "
-                        + "Where productId = ?";
+                        + "Where product_id = ?";
                 stm = con.prepareCall(sql);
                 stm.setInt(1, productId);
                 rs = stm.executeQuery();
@@ -152,10 +156,10 @@ public class ProductsDAO implements Serializable {
                     float discount = rs.getFloat("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
-                    int purchases = rs.getInt("purchaes");
+                    int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
-                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    result = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     //5.2 set data to DTO
                 }
             }
@@ -286,7 +290,7 @@ public class ProductsDAO implements Serializable {
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    
+
                     count = rs.getInt("productCount");
                 }
             }

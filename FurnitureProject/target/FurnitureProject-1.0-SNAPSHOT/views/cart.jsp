@@ -19,7 +19,7 @@
 
              <c:forEach var="items" items="${cart}">
                  <c:set var="item" value="${items.key}"/>
-                 ${item.name}
+                 ${item.title}
              </c:forEach>
             
                 

@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Khởi tạo Swiper
-  var swiper = new Swiper(".mySwiper", {
+  var swiper = new Swiper(".hotcategorySwiper", {
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
-    slidesPerView: 4, // Số lượng card hiển thị trên mỗi trang
+    slidesPerView: 3, // Số lượng card hiển thị trên mỗi trang
     spaceBetween: 20, // Khoảng cách giữa các card
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
       depth: 100,
-      modifier: 0, // độ nghiêng 
+      modifier: 1, // độ nghiêng 
       slideShadows: true,
     },
     pagination: {

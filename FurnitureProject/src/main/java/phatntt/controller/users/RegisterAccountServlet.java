@@ -63,14 +63,14 @@ public class RegisterAccountServlet extends HttpServlet {
         String url = siteMaps.getProperty(Constants.SignUpFeatures.REGISTER_PAGE);
         try {
             //2. verify all user's error 
-            UsersDAO dao = new UsersDAO();
-            List<UsersDTO> userInfo = dao.getAllUsers();
-            for (UsersDTO dto : userInfo) {
-                if (username.trim().equals(dto.getUsername().trim())){
-                    errors.setEmailDuplicateError("Tên tài khoản "+ username + " đã tồn tại.");
-                    foundErr = true;
-                }
-            }              
+//            UsersDAO dao = new UsersDAO();
+//            List<UsersDTO> userInfo = dao.getAllUsers();
+//            for (UsersDTO dto : userInfo) {
+//                if (username.trim().equals(dto.getUsername().trim())){
+//                    errors.setEmailDuplicateError("Tên tài khoản "+ username + " đã tồn tại.");
+//                    foundErr = true;
+//                }
+//            }              
                     
 //            if (!password.trim().matches(siteMaps.getProperty(
 //                    MyApplicationConstants.SignUpFeatures.PASSWORD_REGEX))) {
@@ -104,10 +104,10 @@ public class RegisterAccountServlet extends HttpServlet {
                 url = siteMaps.getProperty(Constants.VerifyEmailFeatures.EMAIL_PAGE);
                 
             
-        } catch (SQLException ex) {
-            log("RegisterAccountServlet_SQLException: " + ex.getMessage());                                 
-        } catch (NamingException ex) {
-            log("RegisterAccountServlet_NamingException: " + ex.getMessage());
+//        } catch (SQLException ex) {
+//            log("RegisterAccountServlet_SQLException: " + ex.getMessage());                                 
+//        } catch (NamingException ex) {
+//            log("RegisterAccountServlet_NamingException: " + ex.getMessage());
         } 
 
         finally {

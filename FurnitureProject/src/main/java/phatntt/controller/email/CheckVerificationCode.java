@@ -77,6 +77,7 @@ public class CheckVerificationCode extends HttpServlet {
                 UsersDTO existingUser = dao.getUserByEmail(email);
                 if (existingUser != null) {
                     dao.linkGoogleAccount(username, password, createdAt, existingUser.getId());
+                    url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
                 } else {
                     boolean result = dao.registerAccount(username, password, email, givenName, familyName, role, createdAt);
                     if (result) {

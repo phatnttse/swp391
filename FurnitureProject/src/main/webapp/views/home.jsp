@@ -55,6 +55,11 @@
                                                 <img width="520" height="520" class="lazyload loaded" src="${category.thumbnail}">
                                             </a>
                                             <p>
+                                                ${category.title}
+                                            </p>
+
+
+
                                                 ${category.name}
                                             </p>                                        
                                         </div> 
@@ -63,6 +68,14 @@
 
                                             <h5 class="product-name">
                                                 <a class="line-clamp line-clamp-2" href="" >
+                                                    ${category.title}
+                                                </a>
+                                            </h5>
+
+                                            <div class="price-box">
+                                                ${category.thumbnail}
+                                            </div>
+
 
                                                 </a>
                                             </h5>                                          

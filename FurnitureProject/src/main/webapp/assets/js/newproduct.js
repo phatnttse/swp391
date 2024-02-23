@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
       grid: {
         rows: 2,
       },
-      spaceBetween: 30,
+      spaceBetween: 25,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,

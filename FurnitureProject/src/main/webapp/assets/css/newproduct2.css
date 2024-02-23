@@ -1,3 +1,4 @@
+/* General Styles */
 html, body {
     position: relative;
     height: 100%;
@@ -9,28 +10,6 @@ html, body {
     padding: 0;
   }
   
-
-  /* title */
-.block-title h2 {
-    color: #000;
-    font-size: 32px;
-    position: relative;
-    margin-bottom: 20px;
-    line-height: 42px;
-    font-weight: 600;
-    letter-spacing: 0.64px;
-}
-.block-title a {
-    color: #231f20;
-    text-decoration: none;
-    background-color: transparent;
-    transition: all .3s;
-}
-.block-title:hover a{
-    transition: all .3s;
-    color: #d94e28;
-}
-
   /* Swiper Styles */
   .swiper-container {
     width: 100%;
@@ -40,39 +19,51 @@ html, body {
   }
   
   .swiper-slide {
+    text-align: center;
     font-size: 18px;
+    background: #fff;
     height: calc((100% - 30px) / 2) !important;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
+  /* Your existing styles remain unchanged */
+
+/* Update the product card styles */
 .product-card {
     position: relative;
     overflow: hidden;
-    /* border: 1px solid #ddd; */
+    border: 1px solid #ddd;
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-}
-
-.product-card .image-container {
+  }
+  
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .image-container {
     overflow: hidden;
     position: relative;
-}
-
-.product-card .image-container img {
+  }
+  
+  .product-card img {
     max-width: 100%;
     height: auto;
     border-bottom: 1px solid #ddd;
-    transition: transform 0.5s ease-in-out;
-}
-
-.product-card:hover .image-container img {
-    transform: scale(1.2); /* Thay đổi hệ số phóng to tùy ý */
-}
-
-.discount-label {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .product-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Other styles remain unchanged */
+  
+  
+  .discount-label {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,22 +71,22 @@ html, body {
     background: #d94e28;
     font-size: 15px;
     font-weight: bold;
-    color: #ffff;
+    color: #fff;
     padding: 7px 14px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0 0 15px 0;
-    /* Loại bỏ transition khi hover vào product-card */
+    border-radius: 0 15px;
+  }
+  
+  /* Remove transition on discount label hover */
+  .product-card:hover .discount-label {
+    transform: scale(1);
     transition: none;
-}
-
-.product-card:hover .discount-label {
-    transform: scale(1); /* Hiệu ứng phóng to ở đây */
-}
-
-.action {
+  }
+  
+  .action {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -104,14 +95,14 @@ html, body {
     flex-direction: column;
     align-items: flex-end;
     transition: opacity 0.3s ease-in-out;
-}
-
-.product-card:hover .action {
+  }
+  
+  .product-card:hover .action {
     opacity: 1;
-}
-
-.btn-cart,
-.btn-views {
+  }
+  
+  /* Button Styles */
+  .btn-cart, .btn-views {
     background-color: #f5f5f5;
     color: #000;
     border: none;
@@ -119,21 +110,21 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 5px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Thêm transition cho màu và background-color */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     width: 30px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.btn-cart:hover,
-.btn-views:hover {
+  }
+  
+  .btn-cart:hover, .btn-views:hover {
     background-color: #d94e28;
     color: #fff;
-}
-
-.product-info {
+  }
+  
+  /* Product Info Styles */
+  .product-info {
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -141,43 +132,60 @@ html, body {
     list-style: none;
     padding: 0;
     z-index: 1;
-    margin-top: -25px;
-    padding: 10px 0px;
-}
-
-.product-name {
+  }
+  
+  .product-name {
     font-size: 16px;
     margin-bottom: 5px;
     text-decoration: none;
-}
-.product-name:hover  a{
-    color: #d94e28;
-    transition: all .3s;
-}
-
-.product-name a {
+  }
+  
+  .product-name a {
     color: #000;
-}
-
-.price-box {
+  }
+  
+  /* Price Styles */
+  .price-box {
     display: flex;
     align-items: center;
-}
-
-.price {
+  }
+  
+  .price {
     font-weight: 700;
     font-size: 16px;
     color: #e12c43;
     display: flex;
     align-items: center;
     margin-right: 10px;
-}
-
-.compare-price {
+  }
+  
+  .compare-price {
     text-decoration: line-through;
     font-size: 14px;
     color: var(--textColor);
     font-weight: 400;
-}
-
-
+  }
+  
+  /* Image Container Styles */
+  .product-card .image-container {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .product-card .image-container img {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .product-card:hover .image-container img {
+    transform: scale(1.2);
+  }
+  
+  /* Hover Effect on Card */
+  .product-card img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .product-card:hover img {
+    transform: scale(1.1);
+  }
+  

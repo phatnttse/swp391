@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
-    slidesPerView: 3, // Số lượng card hiển thị trên mỗi trang
+    slidesPerView: 4, // Số lượng card hiển thị trên mỗi trang
     spaceBetween: 20, // Khoảng cách giữa các card
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
       depth: 100,
-      modifier: 1, // độ nghiêng 
+      modifier: 0, // độ nghiêng 
       slideShadows: true,
     },
     pagination: {
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Tùy chọn autoplay
     autoplay: {
-      delay: 2000, // Thời gian hiển thị giữa các slide (đơn vị: miliseconds)
+      delay: 4000, // Thời gian hiển thị giữa các slide (đơn vị: miliseconds)
       disableOnInteraction: false, // Tắt autoplay khi người dùng tương tác
     },
 

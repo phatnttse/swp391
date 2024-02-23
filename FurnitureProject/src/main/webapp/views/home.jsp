@@ -10,38 +10,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">              
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Furniture Project</title>
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
-        <link rel="stylesheet" href="assets/css/homeStyle.css">
-        <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+        <link rel="stylesheet" href="/FurnitureProject/assets/css/homeStyle.css">
+        <link rel="stylesheet" href="/FurnitureProject/assets/themify-icons/themify-icons.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     </head>
     <body>      
-        <%@include file="../UIcomponents/header.jsp"%>
-        <div class="slider">
-            <div class="slider-body">
-                <h2 class="slider-hashtag">#Furnitures</h2>
-                <h2 class="slider-heading">Xu hướng nội thất</h2>
-                <p class="slider-des">Đồ nội thất cao cấp đến thương hiệu nội thất hàng đầu Việt nam</p>
-                <button class="buy-btn">Mua Ngay</button>
-            </div>
-        </div>
+        <%@include file="../UIcomponents/header3.jsp"%>
+        <%@include file="../UIcomponents/slider.jsp"%>
+
         <c:set var="listHotProduct" value="${requestScope.PRODUCTS_LIST}"/>
         <c:set var="listProductByCategory" value="${requestScope.PRODUCTS_CATEGORY}"/>
         <c:set var="listAllCategory" value="${requestScope.CATEGORY_ALL}"/>
 
 
-        <!<!-- Danh mục nổi bật -->
+        <!-- Danh mục nổi bật -->
         <section class="section_product_notbat">
             <div class="container">
                 <ul class="noibat-menulist">
                     <li class="active">
                         <a href="" title="">Danh Mục Nổi Bật</a>
                     </li>
-                    <!--                    <li class="active">
-                                            <a href="registerPage" title="">Hàng mới về</a>
-                                        </li>-->
+                   
                 </ul>
                 <div class="current tab-content">
                     <div class="row row-fix">
@@ -50,38 +44,18 @@
                                 <div class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
                                     <div class="product-action">
                                         <div class="product-thumbnail">
-
                                             <a class="image_thumb">
                                                 <img width="520" height="520" class="lazyload loaded" src="${category.thumbnail}">
-                                            </a>
-                                            <p>
-                                                ${category.title}
-                                            </p>
-
-
-
-                                                ${category.name}
-                                            </p>                                        
+                                            </a>                                                                               
                                         </div> 
 
                                         <div class="product-info">
-
                                             <h5 class="product-name">
                                                 <a class="line-clamp line-clamp-2" href="" >
-                                                    ${category.title}
+                                                    ${category.name}
                                                 </a>
-                                            </h5>
-
-                                            <div class="price-box">
-                                                ${category.thumbnail}
-                                            </div>
-
-
-                                                </a>
-                                            </h5>                                          
+                                            </h5>                                                                                                                                                                          
                                         </div>
-
-
                                     </div>
 
                                 </div>                           
@@ -100,9 +74,7 @@
                     <li class="active">
                         <a href="" title="">Sản phẩm mới</a>
                     </li>
-                    <!--                    <li class="active">
-                                            <a href="registerPage" title="">Hàng mới về</a>
-                                        </li>-->
+                   
                 </ul>
                 <div class="current tab-content">
                     <div class="row row-fix">
@@ -160,14 +132,7 @@
         <!-- Sản phẩm theo loại -->
         <section class="section_product_notbat">
             <div class="container">
-                <!--                <ul class="noibat-menulist">
-                                    <li class="active">
-                                        <a href="" title="">SẢN PHẨM</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="registerPage" title="">Hàng mới về</a>
-                                    </li>
-                                </ul>-->
+              
                 <div class="block-title">
                     <h2><a href="/collections/all">Sản phẩm</a></h2>
                     <button onclick="loadProductsByCategory(1)">Bồn tắm</button>

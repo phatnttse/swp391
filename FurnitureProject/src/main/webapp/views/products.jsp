@@ -21,7 +21,7 @@
         <title>Products Page</title>
     </head>
     <body>
-        <%@include file="../UIcomponents/header.jsp"%>
+        <%@include file="../UIcomponents/header3.jsp"%>
         <div class="bodywrap">
 
             <div class="layout-collection"> 
@@ -265,7 +265,6 @@
                                                                     <!--                                                                    <div class="badge">
                                                                                                                                             <span class="new"></span>
                                                                                                                                         </div>-->
-
                                                                 </div> 
 
                                                                 <div class="product-info">
@@ -289,7 +288,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>                           
                                                 </c:forEach>
                                             </c:if>                                        
@@ -318,7 +316,7 @@
                         if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
                             // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
                             window.location.href = "/FurnitureProject/loginPage";
-//                            showNotification("Để thực hiện, bạn cần phải đăng nhập!");
+                            showNotification("Để thực hiện, bạn cần phải đăng nhập!");
                         } else {
                             // Nếu không, hiển thị giỏ hàng
                             const content = document.getElementById("content");
@@ -331,12 +329,10 @@
                     }
                 });
             }
-//            function showNotification(message) {
-//                // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
-//                alert(message);
-//            }
-
-
+            function showNotification(message) {
+                // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
+                alert(message);
+            }
             function showCartModal() {
                 const cartModal = document.querySelector('.cart-modal');
                 // Hiển thị giỏ hàng

@@ -32,7 +32,7 @@
                     <li><a href="products">Sản phẩm</a></li>
                     <li><a href="#">Hệ thống</a></li>
                     <li><a href="#">Tin tức</a></li>
-                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="contactPage">Liên hệ</a></li>
                 </ul>                                
             </div>
 

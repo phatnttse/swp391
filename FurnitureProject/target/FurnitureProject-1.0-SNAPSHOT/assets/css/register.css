@@ -1,0 +1,288 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Feb 23, 2024, 11:50:37 PM
+    Author     : Admin
+*/
+
+.a-center {
+    text-align: center;
+}
+.margin-top-15{
+    margin-top: 15px;
+}
+
+.block {
+    display: block;
+}
+
+.page_login {
+    background: #fff
+}
+
+@media (max-width: 991px) {
+    .page_login {
+        margin-top:0
+    }
+}
+
+#pagelogin {
+    margin-top: 5px
+}
+
+.btn_45 {
+    height: 45px;
+    width: 100%;
+    background: #d94e28;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 45px
+}
+
+.btn_45:hover {
+    background: #d94e28;
+    color: #fff
+}
+
+.btn-primary,.btn-dark-address {
+    border-radius: 5px !important
+}
+
+.pagecustome {
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px
+}
+
+.pagecustome .wpx {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    background: #fff;
+    padding: 30px
+}
+
+.h_recover {
+    width: 100%;
+    float: left;
+    margin-bottom: 15px
+}
+
+.page-login .title_heads {
+    font-size: 26px !important;
+    font-weight: 400;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+    margin: 0;
+    color: #333333
+}
+
+.page-login .dkm a {
+    color: #d94e28
+}
+
+.page-login .dkm a:hover {
+    color: #333
+}
+
+.page-login span.intr {
+    font-size: 15px;
+    line-height: 23px;
+    color: #636363;
+    text-align: center;
+    display: block
+}
+
+.page-login .form-signup {
+    margin-top: 25px
+}
+
+.page-login .form-signup .form-group {
+    margin-bottom: 0px;
+    padding: 0
+}
+
+.page-login .form-signup .form-group label {
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333
+}
+
+.page-login .form-signup .form-group input {
+    height: 45px;
+    padding: 0 20px;
+    color: #333;
+    line-height: 45px;
+    border-color: #ebebeb;
+    box-shadow: none;
+    background: #ebebeb;
+    margin-bottom: 15px;
+    width: 100%;
+    outline: none;
+    border: initial;
+    border-radius: 5px
+}
+
+.page-login .form-signup .form-group input::-webkit-input-placeholder {
+    color: #333
+}
+
+.page-login .form-signup .form-group input::-moz-placeholder {
+    color: #333
+}
+
+.page-login .form-signup .form-group input:-ms-input-placeholder {
+    color: #333
+}
+
+.page-login .form-signup .form-group textarea {
+    box-shadow: none;
+    border-color: #eaebf3;
+    border-radius: 5px
+}
+
+.page-login .form-signup .btn-lienhe {
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none
+}
+
+.page-login .form-signup .text-upper {
+    width: 150px;
+    height: 45px;
+    font-size: 12px;
+    font-weight: bold
+}
+
+.page-login .form-signup .accept_submit {
+    margin-left: 20px;
+    margin-top: 10px
+}
+
+.page-login .form-signup .accept_submit span {
+    font-size: 15px;
+    color: #111111
+}
+
+.page-login .form-signup .btn_50 {
+    color: #fff;
+    background: #d94e28;
+    border: none;
+    font-size: 16px;
+    line-height: 42px;
+    width: 100%;
+    height: 45px;
+    border-radius: 5px
+}
+
+.page-login .form-signup .btn_50:hover {
+    background: #d94e28
+}
+
+.page-login .form-signup .quenmk {
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+    margin: 15px 0
+}
+
+.page-login .form-signup .quenmk:hover {
+    cursor: pointer;
+    color: #d94e28
+}
+
+.page-login .form-signup .dkm a {
+    text-decoration: underline
+}
+
+.page-login .form-signup .have_ac {
+    font-size: 15px;
+    color: #111111;
+    margin-left: 15px
+}
+
+.page-login .form-signup .have_ac a {
+    color: #d94e28;
+    text-decoration: underline
+}
+
+.login-width-social #social_login_widget #social_login {
+    margin: 0 auto 50px
+}
+
+.recv-text {
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 15px;
+    margin: 0 15px
+}
+
+.recv-text a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #d94e28
+}
+
+@media (max-width: 991px) {
+    .form-signup .button-50 {
+        width:100% !important
+    }
+
+    .form-signup .have_ac {
+        display: block;
+        text-align: center;
+        margin-top: 15px
+    }
+}
+
+.embedContent .embedHeader {
+    display: none !important
+}
+
+.social-login--facebooks {
+    text-align: center
+}
+
+.social-login--facebooks .social-login--facebook {
+    margin-bottom: 10px
+}
+
+.table-order {
+    width: 100%;
+    font-size: 14px
+}
+
+#change_customer_password .btn-more {
+    padding: 0 15px;
+    border-radius: 3px !important;
+    height: 40px;
+    line-height: 40px;
+    background: #d94e28;
+    position: relative;
+    margin-left: 0px;
+    color: #fff;
+    border: solid 1px transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px
+}
+
+#change_customer_password .btn-more:hover {
+    background: #d94e28;
+    border: 1px solid #d94e28
+}
+
+@media (max-width: 767px) {
+    .social-login--facebook {
+        display:block;
+        margin-bottom: 7px
+    }
+}

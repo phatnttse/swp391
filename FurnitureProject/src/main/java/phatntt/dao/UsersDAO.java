@@ -80,6 +80,58 @@ public class UsersDAO implements Serializable {
         return result;
 
     }
+    
+     public UsersDTO checkLoginByGoogle(String googleId) throws SQLException, NamingException {
+
+        UsersDTO result = null;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "Select * from user where google_id = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, googleId);
+                
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    // mapping
+                    //5.1 get data from tu resultset
+                    String id = rs.getString("user_id");   
+                    String email = rs.getString("email");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String given_name = rs.getString("given_name");
+                    String family_name = rs.getString("family_name");
+                    String phone = rs.getString("phone");
+                    String picture = rs.getString("picture");
+                    String address = rs.getString("address"); 
+                    googleId = rs.getString("google_id");
+                    int role = rs.getInt("role_id");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    result = new UsersDTO(id, email, username, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
+                    //5.2 set data to DTO
+
+                }
+            }
+
+        } 
+        finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+
+    }
 
     public List<UsersDTO> getAllUsers() throws SQLException, NamingException {
 
@@ -374,17 +426,18 @@ public class UsersDAO implements Serializable {
             con = DBConnect.createConnection();
             if (con != null) {
                 //2. create sql string
-                String sql = "Insert Into user(user_id , email, name, given_name, family_name, google_id, role_id, created_at) "
-                        + "Values(?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "Insert Into user(user_id , email, name, given_name, family_name, picture, google_id, role_id, created_at) "
+                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 stm = con.prepareStatement(sql);
                 stm.setString(1,UUID.randomUUID().toString());             
                 stm.setString(2, userDTO.getEmail());
                 stm.setString(3, userDTO.getGiven_name() +" "+ userDTO.getFamily_name());
                 stm.setString(4, userDTO.getGiven_name());
                 stm.setString(5, userDTO.getFamily_name());
-                stm.setString(6, userDTO.getId());
-                stm.setInt(7, userDTO.getRole());
-                stm.setTimestamp(8, userDTO.getCreatedAt());
+                stm.setString(6, userDTO.getPicture());
+                stm.setString(7, userDTO.getId());
+                stm.setInt(8, userDTO.getRole());
+                stm.setTimestamp(9, userDTO.getCreatedAt());
                 int affectedRows = stm.executeUpdate();
                 //4.Excute Query
                 if (affectedRows > 0) {

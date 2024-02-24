@@ -21,11 +21,11 @@
         <title>Products Page</title>
     </head>
     <body>
-        <%@include file="../UIcomponents/header3.jsp"%>
+        <%@include file="../UIcomponents/header.jsp"%>
         <div class="bodywrap">
 
             <div class="layout-collection"> 
-                <%@include file="../UIcomponents/breadCrumb.jsp" %> 
+                <%@include file="../UIcomponents/breadcrumb.jsp" %> 
                 <div class="container">
                     <div class="row">
                         <aside class="dqdt-sidebar col-lg-3 col-12">
@@ -260,11 +260,7 @@
 
                                                                     <a class="btn-wishlist" title="Xem nhanh">
                                                                         <i class="ti-search"></i>
-                                                                    </a>
-
-                                                                    <!--                                                                    <div class="badge">
-                                                                                                                                            <span class="new"></span>
-                                                                                                                                        </div>-->
+                                                                    </a>                                                                  
                                                                 </div> 
 
                                                                 <div class="product-info">
@@ -276,13 +272,13 @@
                                                                     </h5>
 
                                                                     <div class="price-box">
-                                                                        ${product.price}
-                                                                        <span class="compare-price">170.000₫</span>
+                                                                        ${product.formattedPrice}
+                                                                        <span class="compare-price">${product.formattedPrice}</span>
 
                                                                     </div>
 
                                                                     <div class="btn-shopping">
-                                                                        <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId})"></button>
+                                                                        <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId},'${product.title}', '${product.thumbnail}', ${product.price})"></button>
                                                                     </div>
 
                                                                 </div>
@@ -304,12 +300,15 @@
         <div id="content" class="cart-modal"></div>                                    
 
         <script>
-            function addProductToCart(productId) {
+            function addProductToCart(productId, title, thumbnail, price) {
                 $.ajax({
                     url: "/FurnitureProject/addProductsToCart",
                     type: "get",
                     data: {
-                        productId: productId
+                        productId: productId,
+                        title: title,
+                        thumbnail: thumbnail,                     
+                        price: price
                     },
                     success: function (response) {
                         // Kiểm tra phản hồi từ server
@@ -353,7 +352,7 @@
                 content.innerHTML = '';
             }
         </script>
-    </script>
+   
 
     <%@include file="../UIcomponents/footer.jsp" %>
 </body>

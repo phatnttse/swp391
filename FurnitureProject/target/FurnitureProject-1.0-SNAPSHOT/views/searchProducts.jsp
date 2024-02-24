@@ -18,7 +18,7 @@
     </head>
     <body>
         <%@include file="../UIcomponents/header.jsp"%>
-        <%@include file="../UIcomponents/breadCrumb.jsp" %> 
+        <%@include file="../UIcomponents/breadcrumb.jsp" %> 
         <c:set var="searchList" value="${requestScope.SEARCH_RESULT}"/>
         <div class="bodywrap">
             <section class="signup search-main wrap_background background_white clearfix">

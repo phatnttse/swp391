@@ -468,7 +468,7 @@ a {
     transform: translate(-50%, -50%);   
     border-radius: 7px;
     overflow: hidden;
-    border: 1px solid #f3a270;
+/*    border: 1px solid #f3a270;*/
     display: none;
 }
 

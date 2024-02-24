@@ -5,11 +5,10 @@
  */
 package phatntt.controller.products;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.cart.CartObject;
-import phatntt.dto.ProductsDTO;
+import phatntt.dao.CartDAO;
+import phatntt.dto.CartDTO;
+import phatntt.dto.UsersDTO;
 
 /**
  *
@@ -41,62 +41,64 @@ public class AddProductsToCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        int itemId = Integer.parseInt(request.getParameter("productId"));
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        String title = request.getParameter("title");
+        String thumbnail = request.getParameter("thumbnail");
+//        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        float price = Float.parseFloat(request.getParameter("price"));
 
         try {
-            //1. Customer goes to the cart place
+
             HttpSession session = request.getSession();
-            
-            //2. Customer takes his/her cart ==> attribute
-            CartObject cart = (CartObject) session.getAttribute("CART");
-            if (cart == null) {
-                cart = new CartObject();
-            }// cart has initialized
-            
-            //3. customer drops item to cart                                              
-            cart.addItemToCart(itemId, 1);
-            session.setAttribute("CART", cart);
-            
-            Map<ProductsDTO, Integer> listProducts = cart.getItems();
-            for (Map.Entry<ProductsDTO, Integer> entry : listProducts.entrySet()) {
-                ProductsDTO product = entry.getKey();
-                if (product.getProductId() == itemId) {
-                    out.println(
-                             "                    <div id=\"popup-cart-mobile\" class=\"popup-cart-mobile active\">\n"
-                            + "                        <div class=\"header-popcart\">\n"
-                            + "                            <div class=\"top-cart-header\">\n"
-                            + "                                <span>\n"
-                            + "                                    Bạn đã thêm 1 sản phẩm vào giỏ hàng\n"
-                            + "                                </span>\n"
-                            + "                            </div>\n"
-                            + "                            <div class=\"media-content bodycart-mobile\">\n"
-                            + "                                <div class=\"thumb-1x1\">\n"
-                            + "                                    <img src=\""+product.getThumbnail()+"\" alt=\"${product.name}\"></div>\n"
-                            + "                                <div class=\"body_content\">\n"
-                            + "                                    <h4 class=\"product-title\">"+product.getTitle()+"</h4>\n"
-                            + "                                    <div class=\"product-new-price\">\n"
-                            + "                                        <b>"+product.getPrice()+"</b>\n"
-                            + "                                        <span></span>\n"
-                            + "                                    </div>\n"
-                            + "                                </div>\n"
-                            + "                            </div>\n"
-                            + "                            <a class=\"noti-cart-count\" href=\"\" title=\"Giỏ hàng\"> Giỏ hàng của bạn hiện có <span class=\"count_item_pr\">"+listProducts.size()+"</span> sản phẩm </a>\n"
-                            + "                            <div class=\"modal-close js-modal-close2\">\n"
-                            + "                                <i class=\"ti-close\" title=\"Đóng\"></i>\n"
-                            + "                            </div>\n"
-                            + "                            </a>\n"
-                            + "                            <div class=\"bottom-action\">\n"
-                            + "                                <a href=\"cartPage\" class=\"viewcart\">\n"
-                            + "                                    Xem giỏ hàng\n"
-                            + "                                </a>\n"
-                            + "                                <a href=\"#\" class=\"checkout\">\n"
-                            + "                                    Thanh toán ngay\n"
-                            + "                                </a>\n"
-                            + "                            </div>\n"
-                            + "                        </div>\n"
-                            + "                    </div>\n"
-                            );
-                    break;
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+
+            CartDAO cartDAO = new CartDAO();
+            boolean result = cartDAO.addProductToCart(user.getId(), productId, title, thumbnail, 1, price);
+            List<CartDTO> carts = null;
+            int totalProductsInCart = 0;
+            if (result) {
+                carts = cartDAO.getProductFromCartByProductId(productId);              
+                totalProductsInCart = cartDAO.getTotalQuantityInCart(user.getId());
+                session.setAttribute("CART_QUANTITY", totalProductsInCart);
+                for (CartDTO cart : carts) {
+                    if (cart.getProductId() == productId) {
+                        out.println(
+                                "                    <div id=\"popup-cart-mobile\" class=\"popup-cart-mobile active\">\n"
+                                + "                        <div class=\"header-popcart\">\n"
+                                + "                            <div class=\"top-cart-header\">\n"
+                                + "                                <span>\n"
+                                + "                                    Bạn đã thêm 1 sản phẩm vào giỏ hàng\n"
+                                + "                                </span>\n"
+                                + "                            </div>\n"
+                                + "                            <div class=\"media-content bodycart-mobile\">\n"
+                                + "                                <div class=\"thumb-1x1\">\n"
+                                + "                                    <img src=\"" + cart.getThumbnail() + "\" alt=\"${product.title}\"></div>\n"
+                                + "                                <div class=\"body_content\">\n"
+                                + "                                    <h4 class=\"product-title\">" + cart.getTitle() + "</h4>\n"
+                                + "                                    <div class=\"product-new-price\">\n"
+                                + "                                        <b>" + cart.getPrice() + "</b>\n"
+                                + "                                        <span></span>\n"
+                                + "                                    </div>\n"
+                                + "                                </div>\n"
+                                + "                            </div>\n"
+                                + "                            <a class=\"noti-cart-count\" href=\"\" title=\"Giỏ hàng\"> Giỏ hàng của bạn hiện có <span class=\"count_item_pr\">" + totalProductsInCart + "</span> sản phẩm </a>\n"
+                                + "                            <div class=\"modal-close js-modal-close2\">\n"
+                                + "                                <i class=\"ti-close\" title=\"Đóng\"></i>\n"
+                                + "                            </div>\n"
+                                + "                            </a>\n"
+                                + "                            <div class=\"bottom-action\">\n"
+                                + "                                <a href=\"cart\" class=\"viewcart\">\n"
+                                + "                                    Xem giỏ hàng\n"
+                                + "                                </a>\n"
+                                + "                                <a href=\"#\" class=\"checkout\">\n"
+                                + "                                    Thanh toán ngay\n"
+                                + "                                </a>\n"
+                                + "                            </div>\n"
+                                + "                        </div>\n"
+                                + "                    </div>\n"
+                        );
+                        break;
+                    }
                 }
 
             }

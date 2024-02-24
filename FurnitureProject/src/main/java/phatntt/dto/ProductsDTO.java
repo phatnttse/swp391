@@ -19,6 +19,7 @@ public class ProductsDTO implements Serializable{
     private String description;
     private int quantity;
     private float price;
+    private String formattedPrice;
     private String thumbnail;
     private float discount;
     private int purchases;
@@ -39,6 +40,8 @@ public class ProductsDTO implements Serializable{
         this.purchases = purchases;
         this.createdAt = createdAt;
     }
+
+    
 
     /**
      * @return the productId
@@ -120,9 +123,11 @@ public class ProductsDTO implements Serializable{
     /**
      * @param price the price to set
      */
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
+    
+    
 
     /**
      * @return the thumbnail
@@ -179,10 +184,19 @@ public class ProductsDTO implements Serializable{
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-    
-    
 
-    
+    /**
+     * @return the formattedPrice
+     */
+    public String getFormattedPrice() {
+        return formattedPrice;
+    }
 
-    
+    /**
+     * @param formattedPrice the formattedPrice to set
+     */
+    public void setFormattedPrice(String formattedPrice) {
+        this.formattedPrice = formattedPrice;
+    }
+
 }

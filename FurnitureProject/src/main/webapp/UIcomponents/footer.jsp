@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-4 ft-info"> 
                             <h4 class="title-menu">
-                                Bean Furniture
+                                Lofi Furniture
                             </h4>
 
                             <div class="des_foo">

@@ -92,7 +92,7 @@ public class HomePageServlet extends HttpServlet {
                 out.append("                </a>");
                 out.append("            </h5>");
                 out.append("            <div class=\"price-box\">");
-                out.append("                " + product.getPrice());
+                out.append("                " + product.getFormattedPrice());
                 out.append("                <span class=\"compare-price\">170.000₫</span>");
                 out.append("            </div>");
                 out.append("        </div>");

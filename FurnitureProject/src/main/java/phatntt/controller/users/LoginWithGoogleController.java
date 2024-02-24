@@ -42,6 +42,7 @@ public class LoginWithGoogleController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
+            HttpSession session = request.getSession();
             UsersDAO dao = new UsersDAO();
             Key_Utils utils = Key_Utils.getInstance();
 
@@ -53,14 +54,16 @@ public class LoginWithGoogleController extends HttpServlet {
             UsersDTO currentUsers = dao.getUserByEmail(userInfo.getEmail());
             if (currentUsers != null) {
                 dao.linkSystemAccount(userInfo.getId(), currentUsers.getId());
+                UsersDTO user = dao.checkLoginByGoogle(userInfo.getId());              
+                session.setAttribute("USER_INFO", user);           
+                response.sendRedirect("home");
             }else {
                 dao.loginWithGoogle(userInfo);
+                UsersDTO user = dao.checkLoginByGoogle(userInfo.getId());             
+                session.setAttribute("USER_INFO", user);              
+                response.sendRedirect("home");
             }
-            HttpSession session = request.getSession();
-            session.setAttribute("USER_INFO", userInfo);
-            session.setAttribute("LOGIN_WITH_GOOGLE", "check");
-            response.sendRedirect("home");
-
+                                    
         } catch (SQLException ex) {
             Logger.getLogger(LoginWithGoogleController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

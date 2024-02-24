@@ -9,28 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/contact.css">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/FurnitureProject/assets/css/contact.css">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">    
         <title>Lofi Furniture - Liên Hệ</title>
     </head>
     <body>
-        <%@include file="../UIcomponents/header3.jsp"%>
-        <section class="bread-crumb" style="background-image: url('//bizweb.dktcdn.net/100/499/932/themes/926650/assets/breadcrumb-bg.jpg?1705830293643')">
-        <div class="container">
-          <div class="title-breadcrumb">
-            Liên Hệ
-          </div>
-          <ul class="breadcrumb">                  
-            <li class="home">
-              <a href="/"><span>Trang chủ</span></a>                        
-              <span class="mr_lr">&nbsp;<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-chevron-right fa-w-10"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" class=""></path></svg>&nbsp;</span>
-            </li>
-            
-            <li><strong><span>Liên Hệ</span></strong></li>
-            
-          </ul>
-        </div>
-      </section>
+        <%@include file="../UIcomponents/header.jsp"%>
+        <%@include file="../UIcomponents/breadcrumb.jsp"%>
 
     <section class="layout-contact">
         <div class="container">
@@ -81,23 +66,7 @@
                         </span>
                         <div id="pagelogin">
                             <!-- Form liên hệ -->
-                            <form method="post" action="/postcontact" id="contact" accept-charset="UTF-8">
-                                <input name="FormType" type="hidden" value="contact">
-                                <input name="utf8" type="hidden" value="true">
-                                <input type="hidden" id="Token-f2c6b927c0c1491dbaa49afb745ac8ba" name="Token"
-                                    value="03AFcWeA5cUhX9TOnNDsSENvsV2rtZvjwWuyJc3f3MzbWBD9kXyUcRBk0d48gX_nn4OSjEcdKmB7k-Ge15Y7hdsMVJY40bmSoI3-pW53egr5oT66KGzLCRMIhi-Du5gjhXpnyoDieV_9Ihe1TSO56eiwJM0dNOo1i4FBaHxskh1NxIGc1ydVCvmsP6RuRHduIXD-FsAlFPD-8m4m-gtZRySTXrw_--3KTGbkQhnNld3Cnqsu7qCIjrlDCpElCQvCo77aHRL0iUb2KDnra7t69tWeu-8Rrcbm-VH2TMei0vS3xezCsxE0kdGIZTcR5ZyCVgF2tL9M0lDaxjw8rXp3CzB0zi2AvK2lmtbu8vS9GKqHTRfVW5Es_R52QJR7K2DudmQIGQ8NXFbFdU01rfyTL8dxCNdFRnM4xMQVhFW4eVyD4rjyI4rUF7M4TXdCOdd1v6Hq1E1iJa5LmeOHvPVO_dmSQQDA-Bh6O0BeUCyu-gU3SE1qrMiQTcX1HH_7jDypW-bzOSTC8gLdgIHORjG_NYO9cGnMvHHzBppNqcNIp_W8SAJeLqh5sW0y4VDNtQbCi2gPx0ue-5CVaguFkhnGCETnl7Lm0RMxP21L-0na4t5jJJMdLYhJDOfPLttxySXgIx5kF8NDLL0ne7UameEgDCemb0realjLIBynjYBGBG3jGC3s-U2tpCxm0">
-                                <script
-                                    src="https://www.google.com/recaptcha/api.js?render=6Ldtu4IUAAAAAMQzG1gCw3wFlx_GytlZyLrXcsuK"></script>
-                                <script>
-                                    grecaptcha.ready(function () {
-                                        grecaptcha.execute("6Ldtu4IUAAAAAMQzG1gCw3wFlx_GytlZyLrXcsuK", {
-                                            action: "contact"
-                                        }).then(function (token) {
-                                            document.getElementById("Token-f2c6b927c0c1491dbaa49afb745ac8ba").value = token
-                                        });
-                                    });
-                                </script>
-
+                            <form method="post" action="/postcontact" id="contact" accept-charset="UTF-8">                                                          
                                 <div class="group_contact">
                                     <input placeholder="Họ và tên" type="text"
                                         class="form-control  form-control-lg" required="" value=""

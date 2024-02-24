@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
     <body>
-
-        <%@include file="../UIcomponents/breadCrumb.jsp" %>
+        <%@include file="../UIcomponents/header.jsp" %>
+        <%@include file="../UIcomponents/breadcrumb.jsp" %>
 
         <c:set var="user" value="${sessionScope.USER_INFO}"/>
         <c:set var="error" value="${requestScope.CHANGE_PASS_ERROR}"/>
@@ -28,19 +28,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-12">
-                        <div class="offset-lg-2 user-img">
-                            <c:if test="${sessionScope.LOGIN_WITH_GOOGLE == null}">
-                                <img width="50px" style="border-radius: 50%" src="assets/img/users/${user.picture}">
-                                <p style="text-align: center;font-size: 18px;padding-top: 10px;color: #f3a270;font-weight: 600">
-                                    Ảnh Đại Diện
-                                </p>
-                            </c:if>
-                            <c:if test="${sessionScope.LOGIN_WITH_GOOGLE != null}">
-                                <img width="50px" style="border-radius: 50%" src="${user.picture}">
-                                <p style="text-align: center;font-size: 18px;padding-top: 10px;color: #f3a270;font-weight: 600">
-                                    Ảnh Đại Diện
-                                </p>
-                            </c:if>
+                        <div class="offset-lg-2 user-img">                          
+
+                            <img width="50px" style="border-radius: 50%" src="${user.picture}">
+                            <p style="text-align: center;font-size: 18px;padding-top: 10px;color: #f3a270;font-weight: 600">
+                                Ảnh Đại Diện
+                            </p>
+
                         </div>
                     </div>
 
@@ -77,13 +71,8 @@
                                 <div class="col-lg-12">
                                     <label for="">Mật khẩu</label>
 
-                                    <c:if test="${sessionScope.LOGIN_WITH_GOOGLE == null}">
-                                        <input type="submit" class="js-RsPassBtn" value="Đổi mật khẩu" onclick="showChangePassword()">
-                                    </c:if>
+                                    <input type="submit" class="js-RsPassBtn" value="Đổi mật khẩu" onclick="showChangePassword()">
 
-                                    <c:if test="${sessionScope.LOGIN_WITH_GOOGLE != null}">
-                                        <a href="https://support.google.com/mail/answer/41078?hl=vi&co=GENIE.Platform%3DDesktop">Đổi mật khẩu</a>
-                                    </c:if>
 
                                 </div>
                             </div>
@@ -98,8 +87,9 @@
                 </div>
             </div>
         </section>
-                                
-                                
+        <%@include file="../UIcomponents/footer.jsp" %>
+
+
         <div class="modal">
             <form action="changePassword" method="POST">
                 <input type="hidden" name="hdId" value="${user.id}" />
@@ -145,7 +135,7 @@
             }
             function hideChangePassword() {
                 modal.classList.remove('open');
-            }        
+            }
             resetPassBtn.addEventListener('click', showChangePassword);
             modalClose.addEventListener('click', hideChangePassword);
         </script>

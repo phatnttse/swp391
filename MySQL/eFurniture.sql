@@ -27,7 +27,7 @@ CREATE TABLE `product` (
     `product_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `category_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `price` INT NOT NULL,
+    `price` FLOAT NOT NULL,
     `quantity` INT NOT NULL,
     `discount` DOUBLE,
     `thumbnail` VARCHAR(255) NOT NULL,
@@ -68,7 +68,10 @@ CREATE TABLE `cart` (
     `cart_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `product_id` INT NOT NULL,
-    `total_money` INT NOT NULL
+    `title` VARCHAR(255) NOT NULL,
+    `thumbnail` VARCHAR(255) NOT NULL,
+    `quantity` INT NOT NULL,
+    `price` FLOAT NOT NULL
 );
 
 CREATE TABLE `payment` (
@@ -321,12 +324,15 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  (0,"User"),
  (1,"Staff"),
  (2,"Admin");
+ 
+
 
 
 select * from product where category_id = '1';
 select * from category;
 select * from user;
 select * from role;
-delete from user where user_id = "44c4bf89-0517-43c2-8bf7-9bd2bca3de98";
+select * from cart;
+delete from user where role_id = 0;
 select * from user where username = 'phatntt000';
 

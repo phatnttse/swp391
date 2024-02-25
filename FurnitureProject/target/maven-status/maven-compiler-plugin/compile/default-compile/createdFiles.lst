@@ -20,6 +20,7 @@ phatntt\util\Constants$ForgotPasswordFeatures.class
 phatntt\controller\products\AddProductsToCartController.class
 phatntt\controller\email\UserVerifyServlet.class
 phatntt\util\Constants$SignUpFeatures.class
+phatntt\cart\ProductQuantity.class
 phatntt\controller\category\CategoryController.class
 phatntt\dao\CartDAO.class
 phatntt\util\Constants$AdminFeatures.class
@@ -31,16 +32,17 @@ phatntt\controller\admin\UserAccountsController.class
 phatntt\controller\products\ProductsController.class
 phatntt\controller\users\LoginWithGoogleController.class
 phatntt\cart\CartController.class
+phatntt\cart\UpdateTotalPrice.class
 phatntt\dto\ProductsDTO.class
 phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
-phatntt\cart\CartObject.class
 phatntt\controller\users\LogOutServlet.class
 phatntt\dto\UsersAccountInfoError.class
 phatntt\dto\CartDTO.class
 phatntt\dto\EmailDTO.class
 phatntt\dto\UsersRegisterError.class
 phatntt\controller\users\ChangePasswordController.class
+phatntt\cart\RemoveProductFromCart.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\dao\EmailDAO.class
 phatntt\util\Constants.class

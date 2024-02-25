@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
-        <title>Register</title>
+        <title>Đăng ký</title>
     </head>
     <body>
         <%@include file="../UIcomponents/header.jsp"%>

@@ -44,7 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="slider-content">
                                     <h2 class="title">Đương đại cổ điển</h2>
                                     <div class="desc">Những vật liệu tốt nhất kết hợp với kỹ năng sản xuất truyền thống tạo nên vẻ ngoài hoàn hảo</div>
-                                    <a class="button clearfix" href="/collections/all" title="Mua ngay">Mua ngay</a>
+                                    <a class="button clearfix" href="products" title="Mua ngay">Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="slider-content">
                                     <h2 class="title">Thiết kế tinh tế</h2>
                                     <div class="desc">Đi đầu trong thiết kế phòng tắm sang trọng</div>
-                                    <a class="button clearfix" href="/collections/all" title="Mua ngay">Mua ngay</a>
+                                    <a class="button clearfix" href="products" title="Mua ngay">Mua ngay</a>
                                 </div>
                             </div>
                         </div>

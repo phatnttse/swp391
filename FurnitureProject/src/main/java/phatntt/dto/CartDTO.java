@@ -4,11 +4,13 @@
  */
 package phatntt.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
  */
-public class CartDTO {
+public class CartDTO implements Serializable{
     private int cartId;
     private String userId;
     private int productId;

@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <link rel="stylesheet" type="text/css" href="assets/css/searchProductsStyle.css">
-        <title>JSP Page</title>
+        <title>Tìm kiếm</title>
     </head>
     <body>
         <%@include file="../UIcomponents/header.jsp"%>

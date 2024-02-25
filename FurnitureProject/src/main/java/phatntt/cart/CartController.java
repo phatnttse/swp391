@@ -57,7 +57,7 @@ public class CartController extends HttpServlet {
                 cartList = dao.getCartByUserId(user.getId());
                 if (cartList != null) {
                     session.setAttribute("CART", cartList);
-                     url = siteMaps.getProperty(Constants.ShoppingFeatures.CART_PAGE);
+                    url = siteMaps.getProperty(Constants.ShoppingFeatures.CART_PAGE);
                 } 
             }else {
                 session.setAttribute("CART", cartList);

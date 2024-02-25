@@ -88,6 +88,65 @@ public class CartDAO {
         return result;
     }
 
+    public boolean reduceProductToCart(String userId, int productId) throws SQLException, NamingException {
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+                // Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
+                String checkIfExistsSQL = "SELECT * FROM cart WHERE user_id = ? AND product_id = ?";
+                stm = con.prepareStatement(checkIfExistsSQL);
+                stm.setString(1, userId);
+                stm.setInt(2, productId);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    int currentQuantity = rs.getInt("quantity");
+                    int newQuantity = currentQuantity - 1;
+                    if (newQuantity == 0) {
+                        String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+                        stm = con.prepareStatement(sql);
+                        stm.setString(1, userId);
+                        stm.setInt(2, productId);
+                        int rowsUpdated = stm.executeUpdate();
+
+                        if (rowsUpdated > 0) {
+                            result = true;
+                        }
+                    }
+
+                    // Cập nhật số lượng sản phẩm trong giỏ hàng
+                    String updateQuantitySQL = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+                    stm = con.prepareStatement(updateQuantitySQL);
+                    stm.setInt(1, newQuantity);
+                    stm.setString(2, userId);
+                    stm.setInt(3, productId);
+                    int rowsUpdated = stm.executeUpdate();
+
+                    if (rowsUpdated > 0) {
+                        result = true;
+                    }
+                } 
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
+
     public List<CartDTO> getProductFromCartByProductId(int productId) throws SQLException, NamingException {
 
         List<CartDTO> result = new ArrayList<>();
@@ -179,7 +238,7 @@ public class CartDAO {
                 }
             }
         } finally {
-            
+
             if (rs != null) {
                 rs.close();
             }
@@ -192,7 +251,7 @@ public class CartDAO {
         }
         return totalQuantity;
     }
-    
+
     public void removeProductFromCart(String userId, int productId) throws SQLException, NamingException {
 //        boolean result = false;
         try {

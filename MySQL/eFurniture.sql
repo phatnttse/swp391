@@ -46,11 +46,13 @@ CREATE TABLE `order` (
     `order_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
     `phone` VARCHAR(12) NOT NULL,
     `shipping_address` VARCHAR(255) NOT NULL,
     `note` LONGTEXT,
     `status` VARCHAR(50) NOT NULL,
     `payment_type` VARCHAR(50) NOT NULL,
+    `total_amount` VARCHAR(50) NOT NULL,
     `created_at` TIMESTAMP
 );
 
@@ -58,9 +60,10 @@ CREATE TABLE `order_detail` (
     `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `order_id` INT NOT NULL,
     `product_id` INT NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
     `price` INT NOT NULL,
-    `transport_fee` INT,
     `quantity` INT NOT NULL,
+    `thumbnail` VARCHAR(255) NOT NULL,
     `total_money` INT NOT NULL
 );
 

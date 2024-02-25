@@ -79,11 +79,10 @@
                         </div>
                         <div class="col-xl-6 col-lg-5 col-12 search-header">
                             <div class="search-smart">
-                                <form action="/search" method="get" class="search-form header-search-form" role="search">
-                                    <input type="text" name="query" required
+                                <form action="searchProducts" method="get" class="search-form header-search-form">
+                                    <input type="text" name="search" value="${param.search}" required
                                            class="input-group-field auto-search search-auto form-control"
-                                           placeholder="Nhập tên sản phẩm..." autocomplete="off">
-                                    <input type="hidden" name="type" value="product" />
+                                           placeholder="Nhập tên sản phẩm..." autocomplete="off">                                  
                                     <button class="btn btn-default" type="submit" aria-label="Tìm kiếm">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
@@ -150,7 +149,7 @@
                                 </c:if>
 
                                 <div class="header-wish">
-                                    <a href="/san-pham-yeu-thich" class="wishlist_header" title="Sản phẩm yêu thích">
+                                    <a href="#" class="wishlist_header" title="Sản phẩm yêu thích">
                                         <span class="headerWishlistCount count-item">0</span>
                                         <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/wish-icon.png?1708512217480"
                                              alt="Lofi Furniture" width="25" height="25" class="icon">
@@ -198,7 +197,7 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="a-img" href="/tin-tuc" title="Tin tức">
+                                        <a class="a-img" href="#" title="Tin tức">
                                             Tin tức
                                         </a>
                                     </li>
@@ -211,7 +210,7 @@
                                 </ul>
                             </nav>                           
                             <div class="flash-scroll">
-                                <a href="javascript:;" data-href=".section_flash_sale" class="scroll-down">
+                                <a href="#" data-href=".section_flash_sale" class="scroll-down">
                                     <img width="12"
                                          src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/menu_icon_3.png?1708512217480"
                                          alt="Lofi Furniture"> Hot Sale

@@ -74,7 +74,7 @@ public class SearchProductsController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.ProductsFeatures.SEARCH_PRODUCTS_PAGE);
         
-        String searchValue = request.getParameter("searchvalue");
+        String searchValue = request.getParameter("search");
         
 
         try {

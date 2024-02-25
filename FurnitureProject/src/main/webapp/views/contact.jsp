@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="/FurnitureProject/assets/css/contact.css">
         <link rel="icon" href="favicon.ico" type="image/x-icon">    
-        <title>Lofi Furniture - Liên Hệ</title>
+        <title>Liên Hệ</title>
     </head>
     <body>
         <%@include file="../UIcomponents/header.jsp"%>

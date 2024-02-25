@@ -42,6 +42,7 @@ phatntt\dto\CartDTO.class
 phatntt\dto\EmailDTO.class
 phatntt\dto\UsersRegisterError.class
 phatntt\controller\users\ChangePasswordController.class
+phatntt\dto\OrderDTO.class
 phatntt\cart\RemoveProductFromCart.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\dao\EmailDAO.class
@@ -52,5 +53,6 @@ phatntt\dto\UsersCreateNewPassErr.class
 phatntt\listener\MyContextServletListener.class
 phatntt\util\Constants$DispatchFeatures.class
 phatntt\dao\CategoryDAO.class
+phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\controller\email\CreateNewPasswordController.class

@@ -26,48 +26,7 @@
 
         <c:set var="listHotProduct" value="${requestScope.PRODUCTS_LIST}"/>
         <c:set var="listProductByCategory" value="${requestScope.PRODUCTS_CATEGORY}"/>
-        <c:set var="listAllCategory" value="${requestScope.CATEGORY_ALL}"/>
-
-
-        <!-- Danh mục nổi bật -->
-        <section class="section_product_notbat">
-            <div class="container">
-                <ul class="noibat-menulist">
-                    <li class="active">
-                        <a href="" title="">Danh Mục Nổi Bật</a>
-                    </li>
-                   
-                </ul>
-                <div class="current tab-content">
-                    <div class="row row-fix">
-                        <c:if test="${not empty listAllCategory}">
-                            <c:forEach var="category" items="${listAllCategory}" varStatus="loopStatus">
-                                <div class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
-                                    <div class="product-action">
-                                        <div class="product-thumbnail">
-                                            <a class="image_thumb">
-                                                <img width="520" height="520" class="lazyload loaded" src="${category.thumbnail}">
-                                            </a>                                                                               
-                                        </div> 
-
-                                        <div class="product-info">
-                                            <h5 class="product-name">
-                                                <a class="line-clamp line-clamp-2" href="" >
-                                                    ${category.name}
-                                                </a>
-                                            </h5>                                                                                                                                                                          
-                                        </div>
-                                    </div>
-
-                                </div>                           
-                            </c:forEach>
-                        </c:if>
-                    </div>                       
-                </div>
-            </div>
-
-        </section> 
-
+    
         <!-- sản phẩm mới -->
         <section class="section_product_notbat">
             <div class="container">

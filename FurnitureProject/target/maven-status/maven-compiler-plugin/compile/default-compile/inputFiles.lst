@@ -5,6 +5,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\HomePageS
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\UsersRegisterError.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\category\CategoryController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\RemoveProductFromCart.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\orders\OrdersController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\AddProductsToCartController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\CartController.java
@@ -19,6 +20,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\Use
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\CartDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\AccountInfoController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\ProductsDAO.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\AuthorizationFilter.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\CategoryDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFilter.java

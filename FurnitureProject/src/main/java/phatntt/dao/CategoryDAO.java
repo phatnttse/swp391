@@ -32,7 +32,7 @@ public class CategoryDAO {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "SELECT * FROM category LIMIT 4";
+                String sql = "SELECT * FROM category LIMIT 6";
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
 

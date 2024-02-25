@@ -9,91 +9,54 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="assets/css/hotcategory.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />            
+        <link rel="stylesheet" href="assets/css/hotcategorynew.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <!-- Hot Categories Section -->
-  <div class="hot-category-container">
-    <h2 class="category-title">Danh mục nổi bật</h2>
-    <!-- Swiper -->
-    <div class="swiper-container hotcategorySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <a href="your-category-link-1.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-cau.jpg?v=1699504384923" />
-            <div class="card-details">
-              <button class="category-button">
-                  <h3 class="button-title">Bồn cầu</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
+    <c:set var="listAllCategory" value="${requestScope.CATEGORY_ALL}"/>
+    <div class="section_collection">
+        <div class="container">
+            <div class="block-title">
+                <h2>Danh mục nổi bật</h2>
             </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="your-category-link-2.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-tam.jpg?v=1699504371993" />
-            <div class="card-details">
-              <button class="category-button">
-                <h3 class="button-title">Bồn tắm</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="your-category-link-3.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/chau-lavabo.jpg?v=1699504446760" />
-            <div class="card-details">
-              <button class="category-button">
-                <h3 class="button-title">Tủ Chậu Lavabo</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="your-category-link-4.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/guong.jpg?v=1699504456387" />
-            <div class="card-details">
-              <button class="category-button">
-                <h3 class="button-title">Gương</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="your-category-link-5.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/sen-tam.jpg?v=1699504399643" />
-            <div class="card-details">
-              <button class="category-button">
-                <h3 class="button-title">Sen Tắm</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="your-category-link-6.html">
-            <img src="https://bizweb.dktcdn.net/thumb/large/100/499/932/collections/voi-lavabo.jpg?v=1699504435520" />
-            <div class="card-details">
-              <button class="category-button">
-                <h3 class="button-title">Vòi Lavabo</h3>
-                <span class="product-count">6 sản phẩm</span>
-              </button>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
+            <div class="block-content">
+                <div class="collection-swiper swiper-container">
+                    <div class="swiper-wrapper">
+                        <c:if test="${not empty listAllCategory}">
+                            <c:forEach var="category" items="${listAllCategory}" varStatus="loopStatus">
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image">
+                                            <a href="/bon-tam" title="Bồn tắm"><img class="lazyload" width="300" height="300" src="${category.thumbnail}" alt="Bồn tắm"/></a>
+                                        </div>
+                                        <div class="info">
+                                            <h3>
+                                                <a href="/bon-tam" title="Bồn tắm">
+                                                    ${category.name}
+                                                    <span class="icon-wrap">
+                                                        <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="count">9 sản phẩm</span>
+                                                </a>
+                                            </h3>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <!-- Initialize Swiper -->
-  <script src="assets/js/hotcategory2.js"></script>
-    </body>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:if>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/hotecategorynew.js"></script>
+
+</body>
 </html>

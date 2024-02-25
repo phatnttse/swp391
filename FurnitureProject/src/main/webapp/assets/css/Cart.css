@@ -279,6 +279,7 @@
     line-height: 40px;
     border-radius: 5px;
     background-color: #d94e28;
+    border: none;
 }
 
 .cart-page .ajaxcart__footer .cart__btn-proceed-checkout-dt button:hover {

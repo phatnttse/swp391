@@ -1,14 +1,54 @@
-document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper(".mySwiperNew", {
+var swiperCollection = new Swiper('.collection-swiper', {
+  slidesPerView: 4,
+  loop: false,
+  grabCursor: true,
+  spaceBetween: 20,
+  watchSlidesVisibility: true, 
+  watchSlidesProgress: true,
+  pagination: {
+    el: '.collection-swiper .swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.collection-swiper .swiper-button-next',
+    prevEl: '.collection-swiper .swiper-button-prev',
+  },
+  autoplay: {
+    delay: 4000,
+  },
+  breakpoints: {
+    300: {
+      slidesPerView: 1,
+      spaceBetween: 0
+    },
+    500: {
+      slidesPerView: 2,
+      spaceBetween: 15
+    },
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 15
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20
+    },
+    1200: {
       slidesPerView: 4,
-      grid: {
-        rows: 2,
-      },
-      spaceBetween: 25,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-    });
-  });
-  
+      spaceBetween: 20
+    }
+  }
+});
+var galleryTop = new Swiper('.product-sale-gallery', {
+  spaceBetween: 0,
+  lazy: true,
+  hashNavigation: true,
+  navigation: {
+    nextEl: '.product-sale-gallery .swiper-button-next',
+    prevEl: '.product-sale-gallery .swiper-button-prev',
+  },
+});

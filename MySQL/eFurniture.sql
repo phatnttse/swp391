@@ -52,7 +52,7 @@ CREATE TABLE `order` (
     `note` LONGTEXT,
     `status` VARCHAR(50) NOT NULL,
     `payment_type` VARCHAR(50) NOT NULL,
-    `total_amount` VARCHAR(50) NOT NULL,
+    `total_amount` FLOAT NOT NULL,
     `created_at` TIMESTAMP
 );
 

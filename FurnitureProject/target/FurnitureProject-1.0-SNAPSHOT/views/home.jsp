@@ -88,6 +88,7 @@
             </div>
 
         </section>
+        <%@include file="../views/productset.jsp"%>
 
         <!-- Sản phẩm theo loại -->
         <section class="section_product_notbat">

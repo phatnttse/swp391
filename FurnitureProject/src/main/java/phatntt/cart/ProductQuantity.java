@@ -4,9 +4,11 @@
  */
 package phatntt.cart;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dao.CartDAO;
+import phatntt.dto.CartDTO;
 import phatntt.dto.UsersDTO;
 
 /**
@@ -64,19 +67,22 @@ public class ProductQuantity extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         int productId = Integer.parseInt(request.getParameter("productId"));
+
         try {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
             CartDAO cartDAO = new CartDAO();
-           
             boolean result = cartDAO.reduceProductToCart(user.getId(), productId);
             if (result) {
-                // Đảm bảo rằng servlet không trả về bất kỳ nội dung HTML nào
-                response.setContentType("text/plain");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write("success");
+                List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
+                Gson gson = new Gson();
+                String json = gson.toJson(products);
+                out.println(json);
             }
 
         } catch (SQLException ex) {
@@ -99,6 +105,9 @@ public class ProductQuantity extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         int productId = Integer.parseInt(request.getParameter("productId"));
 
         try {
@@ -106,13 +115,12 @@ public class ProductQuantity extends HttpServlet {
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
             CartDAO cartDAO = new CartDAO();
-            // Hãy lưu ý rằng ở đây chúng ta không truyền vào title, thumbnail, và price, vì chúng ta chỉ cần cập nhật số lượng
             boolean result = cartDAO.addProductToCart(user.getId(), productId, null, null, 1, 0);
             if (result) {
-                // Đảm bảo rằng servlet không trả về bất kỳ nội dung HTML nào
-                response.setContentType("text/plain");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write("success");
+                List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
+                Gson gson = new Gson();
+                String json = gson.toJson(products);              
+                out.println(json);        
             }
 
         } catch (SQLException ex) {

@@ -1,12 +1,3 @@
-var galleryTop = new Swiper('.product-sale-gallery', {
-    spaceBetween: 0,
-    lazy: true,
-    hashNavigation: true,
-    navigation: {
-        nextEl: '.product-sale-gallery .swiper-button-next',
-        prevEl: '.product-sale-gallery .swiper-button-prev',
-    },
-});
 var swiperProductNew = new Swiper('.flash-sale-swiper', {
     slidesPerView: 3,
     loop: false,

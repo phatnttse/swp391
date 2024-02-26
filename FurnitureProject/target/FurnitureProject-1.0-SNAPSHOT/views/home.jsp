@@ -14,171 +14,35 @@
         <title>Furniture Project</title>
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
-        <link rel="stylesheet" href="/FurnitureProject/assets/css/homeStyle.css">
-        <link rel="stylesheet" href="/FurnitureProject/assets/themify-icons/themify-icons.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/FurnitureProject/assets/css/product.css" />
+        <link rel="stylesheet" href="/FurnitureProject/assets/js/product.js" />
 
     </head>
     <body>      
         <%@include file="../UIcomponents/header.jsp"%>
         <%@include file="../UIcomponents/slider.jsp"%>
         <%@include file="../views/hotcategory.jsp"%>
+       
 
-        <c:set var="listHotProduct" value="${requestScope.PRODUCTS_LIST}"/>
         <c:set var="listProductByCategory" value="${requestScope.PRODUCTS_CATEGORY}"/>
-    
-        <!-- sản phẩm mới -->
-        <section class="section_product_notbat">
-            <div class="container">
-                <ul class="noibat-menulist">
-                    <li class="active">
-                        <a href="" title="">Sản phẩm mới</a>
-                    </li>
-                   
-                </ul>
-                <div class="current tab-content">
-                    <div class="row row-fix">
-                        <c:if test="${not empty listHotProduct}">
-                            <c:forEach var="product" items="${listHotProduct}" varStatus="loopStatus">
-                                <div class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
-                                    <div class="product-action">
-                                        <div class="product-thumbnail">
-
-                                            <a class="image_thumb">
-                                                <img width="520" height="520" class="lazyload loaded" src="${product.thumbnail}">
-                                            </a>
-
-                                            <div class="smart">
-                                                <span>-${product.discount}</span>
-                                            </div>
-
-                                            <a class="btn-wishlist">
-                                                <i class="ti-search"></i>
-                                            </a>
-                                            <div  class="btn-shopping">                                               
-                                                <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId})"></button>
-                                            </div>
-
-                                        </div> 
-
-                                        <div class="product-info">
-
-                                            <h5 class="product-name">
-                                                <a class="line-clamp line-clamp-2" href="" >
-                                                    ${product.title}
-                                                </a>
-                                            </h5>
-
-                                            <div class="price-box">
-                                                ${product.formattedPrice}
-                                                <span class="compare-price">170.000₫</span>
-
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>                           
-                            </c:forEach>
-                        </c:if>
-                    </div>                       
-                </div>
-            </div>
-
-        </section>
+        
         <%@include file="../views/productset.jsp"%>
-
-        <!-- Sản phẩm theo loại -->
-        <section class="section_product_notbat">
-            <div class="container">
-              
-                <div class="block-title">
-                    <h2><a href="/collections/all">Sản phẩm</a></h2>
-                    <button onclick="loadProductsByCategory(1)">Bồn tắm</button>
-                    <button onclick="loadProductsByCategory(2)">Bồn cầu</button>
-                    <button onclick="loadProductsByCategory(3)">Sen tắm</button>
-                    <button onclick="loadProductsByCategory(4)">Tủ chậu Lavabo</button>
-                    <button onclick="loadProductsByCategory(5)">Vòi Lavado</button>
-                    <button onclick="loadProductsByCategory(6)">Phụ kiện</button>
-                    <!-- Các nút khác tương ứng với danh mục trong cơ sở dữ liệu -->
-
-                </div>
-                <div id="product-list">
-                    <div class="current tab-content">
-                        <div class="row row-fix">
-                            <c:if test="${not empty listProductByCategory}">
-                                <c:forEach var="productcategory" items="${listProductByCategory}" varStatus="loopStatus">
-                                    <div class="col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix">
-                                        <div class="product-action">
-                                            <div class="product-thumbnail">
-
-                                                <a class="image_thumb">
-                                                    <img width="520" height="520" class="lazyload loaded" src="${productcategory.thumbnail}">
-                                                </a>                                              
-                                                <div class="smart">
-                                                    <span>-${productcategory.discount}</span>
-                                                </div>
-
-                                                <a class="btn-wishlist">
-                                                    <i class="ti-search"></i>
-                                                </a>
-
-                                                <div  class="btn-shopping">                                               
-                                                    <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${productcategory.productId})"></button>
-                                                </div>
-
-                                            </div> 
-
-                                            <div class="product-info">
-
-                                                <h5 class="product-name">
-                                                    <a class="line-clamp line-clamp-2" href="" >
-                                                        ${productcategory.title}
-                                                    </a>
-                                                </h5>
-
-                                                <div class="price-box">
-                                                    ${productcategory.price}
-                                                    <span class="compare-price">170.000₫</span>
-
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>                           
-                                </c:forEach>
-                            </c:if>
-                        </div>                       
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-
-        <div class="btn-view">
-            <input type="submit" value="XEM TẤT CẢ" />
-        </div>
+        
+        <%@include file="../views/productsHome.jsp"%>
+        
+         <%@include file="../views/abouthome.jsp"%>
+        
 
 
         <div id="content" class="cart-modal"></div>  
 
 
         <script>
-            // Gọi hàm loadProductsByCategory() khi trang được tải lên với giá trị mặc định
-            $(document).ready(function () {
-                loadProductsByCategory(1); // 0 hoặc giá trị mặc định tùy thuộc vào logic của hàm loadProductsByCategory()
-            });
-
             function loadProductsByCategory(categoryId) {
                 $.ajax({
-                    type: "GET",
-                    url: "/FurnitureProject/home",
+                    type: "POST",
+                    url: "/FurnitureProject/category",
                     data: {categoryId: categoryId},
                     success: function (data) {
                         // Hiển thị dữ liệu HTML trực tiếp lên trang JSP

@@ -58,8 +58,8 @@ public class CartController extends HttpServlet {
                 if (cartList != null) {
                     session.setAttribute("CART", cartList);
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.CART_PAGE);
-                } 
-            }else {
+                }
+            } else {
                 session.setAttribute("CART", cartList);
                 url = siteMaps.getProperty(Constants.ShoppingFeatures.CART_PAGE);
             }
@@ -68,7 +68,7 @@ public class CartController extends HttpServlet {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
@@ -100,7 +100,22 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            HttpSession session = request.getSession();
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+
+            CartDAO cartDAO = new CartDAO();
+            List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
+            session.setAttribute("ORDER_DETAILS", products);
+            response.sendRedirect("checkOutPage");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
+        } catch (NamingException ex) {
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
+        }
     }
 
     /**

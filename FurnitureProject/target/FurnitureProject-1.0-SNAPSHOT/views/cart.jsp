@@ -4,8 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       
-        <link rel="stylesheet" href="assets/css/Cart.css">
-        <link href="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/cartpage.scss.css?1708512217480" rel="stylesheet" type="text/css" media="all">
+        <link rel="stylesheet" href="/FurnitureProject/assets/css/cartStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <title>Giỏ Hàng</title>
     </head>
@@ -25,7 +24,7 @@
                                         <div class="drawer__inner">
                                             <div class="CartPageContainer">
                                                 <c:if test="${not empty cart}">
-                                                <form id="products" action="/cart" method="post" class="cart ajaxcart cartpage">
+                                                <form id="products" action="cart" method="post" class="cart ajaxcart cartpage">
                                                     <div class="cart-header-info">
                                                         <div>Thông tin sản phẩm</div>
                                                         <div>Đơn giá</div>
@@ -35,7 +34,8 @@
                                                     <div 
                                                         class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">
                                                         <c:forEach var="product" items="${cart}">
-                                                            <c:set var="total" value="${total + product.price * product.quantity}" />
+                                                            <c:set var="total_money" value="${product.price * product.quantity}" />
+                                                            <c:set var="total_amount" value="${total + product.price * product.quantity}" />
                                                             <div class="ajaxcart__row">
                                                                 <div class="ajaxcart__product cart_product">
                                                                     <a href=""
@@ -83,7 +83,7 @@
                                                                         </div>
                                                                         <div class="grid">
                                                                             <div class="grid__item one-half text-right cart_prices">
-                                                                                <span class="cart-price" data-quantity="${product.quantity}">${product.price * product.quantity}</span>
+                                                                                <span class="cart-price">${total_money}</span>
                                                                             </div>
 
                                                                         </div>
@@ -100,11 +100,11 @@
                                                                     <div class="cart__subtotal">
                                                                         <div class="cart__col-6">Tổng tiền:</div>
                                                                         <div id="totalPrice" class="text-right cart__totle"><span
-                                                                                class="total-price">${total}₫</span></div>
+                                                                                class="total-price">${total_amount}₫</span></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="cart__btn-proceed-checkout-dt">
-                                                                    <button onclick="" type="button"
+                                                                    <button  type="submit"
                                                                             class="button btn btn-default cart__btn-proceed-checkout"
                                                                             title="Thanh toán">Thanh
                                                                         toán</button>
@@ -156,7 +156,7 @@
                                 newHTML = '<div><center><h3 class="" style="margin-top: 20px;">Không có sản phẩm nào trong giỏ hàng của bạn</h3></center></div>';
                             } else {
                                 // Tạo HTML mới cho giỏ hàng
-                                newHTML += '<form id="content" action="/cart" method="post" class="cart ajaxcart cartpage">' +
+                                newHTML += '<form id="content" action="cart" method="post" class="cart ajaxcart cartpage">' +
                                         '<div class="cart-header-info">' +
                                         '<div>Thông tin sản phẩm</div>' +
                                         '<div>Đơn giá</div>' +
@@ -215,7 +215,7 @@
                                         '</div>' +
                                         '</div>' +
                                         '<div class="cart__btn-proceed-checkout-dt">' +
-                                        '<button onclick="" type="button" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
+                                        '<button type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
                                         '</div>' +
                                         '</div>' +
                                         '</div>' +

@@ -10,7 +10,7 @@ html::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background: var(--mainColor)
+    background: #d94e28
 }
 
 body {
@@ -44,7 +44,7 @@ a {
 }
 
 a:hover {
-    color: var(--mainColor)
+    color: #d94e28
 }
 
 ul,ol {
@@ -260,12 +260,12 @@ button.close {
 .swiper-button-next:after,.swiper-button-prev:after {
     font-size: 14px;
     font-weight: bold;
-    color: var(--mainColor)
+    color: #d94e28
 }
 
 .swiper-button-next:hover,.swiper-button-prev:hover {
-    background: var(--mainColor);
-    border-color: var(--mainColor)
+    background: #d94e28;
+    border-color: #d94e28
 }
 
 .swiper-button-next:hover:after,.swiper-button-prev:hover:after {
@@ -288,14 +288,14 @@ button.close {
     width: 10px;
     opacity: .5;
     transition: all .3s;
-    background-color: var(--mainColor)
+    background-color: #d94e28
 }
 
 .swiper-pagination .swiper-pagination-bullet-active {
     width: 25px;
     opacity: 1;
     border-radius: 14px;
-    background-color: var(--mainColor)
+    background-color: #d94e28
 }
 
 .line-clamp {
@@ -444,7 +444,7 @@ button.close {
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist:hover {
-    background-color: var(--mainColor)
+    background-color: #d94e28
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist:hover svg path {
@@ -452,7 +452,7 @@ button.close {
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist.active {
-    background-color: var(--mainColor)
+    background-color: #d94e28
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist.active svg path {

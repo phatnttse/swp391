@@ -1,77 +1,65 @@
-body {
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    font-size: 14px;
-    font-family: "Roboto",sans-serif;
-    box-sizing: border-box;
-    display: block;
-    padding: 0px 0px 60px 0px;
-}
-
 .section_about {
-    padding: 50px 0;
+    padding: 0px 0px 60px 0px
 }
 
-.row {
-    display: flex;
-    align-items: center;
+.section_about .about-image {
+    text-align: center
 }
 
-.col-lg-6 {
-    width: 50%;
+.section_about .about-image img {
+    max-width: 100%
 }
 
-.about-image img {
-    max-width: 100%;
-    height: auto;
+@media (max-width: 991px) {
+    .section_about .about-image {
+        margin-bottom:20px
+    }
 }
 
-.about-info {
-    padding: 0 20px;
-}
-
-.title-top {
-    font-size: 18px;
+.section_about .about-info .title-top {
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 2px;
     display: block;
     margin-bottom: 10px;
     line-height: 25px;
-    text-transform: uppercase;
+    text-transform: uppercase
 }
 
-
-
-.title {
+.section_about .about-info .title {
     font-size: 32px;
     margin-bottom: 25px;
-    line-height: 40px;
+    line-height: 40px
 }
 
-.desc {
+@media (max-width: 320px) {
+    .section_about .about-info .title {
+        font-size:26px;
+        line-height: 35px
+    }
+}
+
+.section_about .about-info .desc {
     font-size: 16px;
-    color: #000000;
-    margin-bottom: 20px;
+    line-height: 25px;
+    margin-bottom: 25px
 }
 
-.item {
+.section_about .about-info .item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
-.icon img {
-    max-width: 100%;
-    height: auto;
-    margin-right: 10px;
+.section_about .about-info .item .icon {
+    margin-right: 10px
 }
 
-.info {
-    font-size: 16px;
-    color: var(--textColor);
+.section_about .about-info .item .icon img {
+    width: 20px
+}
+
+.section_about .about-info .item .info {
+    font-weight: 500;
+    font-size: 16px
 }

@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -58,66 +60,20 @@ public class HomePageServlet extends HttpServlet {
             List<ProductsDTO> listProducts = productDAO.getNewestProducts();
             request.setAttribute("PRODUCTS_LIST", listProducts);
 
-            //sản phẩm theo phân loại                 
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            ProductsDAO productbycategory = new ProductsDAO();
-            List<ProductsDTO> listProductsByCategory = productbycategory.getProductByCategoryId(categoryId);
+            List<ProductsDTO> listProductsByCategory = productDAO.getProductByCategory();
             request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
-
-            StringBuilder out = new StringBuilder();
-            out.append("<div id=\"product-list\">");
-            out.append("<div class=\"current tab-content\">");
-            out.append("<div class=\"row row-fix\">");
-            for (ProductsDTO product : listProductsByCategory) {
-                out.append("<div class=\"col-lg-3 col-6 col-xl-3 col-md-4 col-sm-6 col-fix\">");
-                out.append("    <div class=\"product-action\">");
-                out.append("        <div class=\"product-thumbnail\">");
-                out.append("            <a class=\"image_thumb\">");
-                out.append("                <img width=\"520\" height=\"520\" class=\"lazyload loaded\" src=\"" + product.getThumbnail() + "\">");
-                out.append("            </a>");              
-                out.append("            <div class=\"smart\">");
-                out.append("                <span>-" + product.getDiscount() + "</span>");
-                out.append("            </div>");
-                out.append("            <a class=\"btn-wishlist\">");
-                out.append("                <i class=\"ti-search\"></i>");
-                out.append("            </a>");               
-                out.append("            <div class=\"btn-shopping\">");
-                out.append("                <button type=\"submit\" title=\"Thêm vào giỏ hàng\" class=\"ti-shopping-cart\" onclick=\"addProductToCart(" + product.getProductId() + ")\"></button>");
-                out.append("            </div>");
-                out.append("        </div>");
-                out.append("        <div class=\"product-info\">");
-                out.append("            <h5 class=\"product-name\">");
-                out.append("                <a class=\"line-clamp line-clamp-2\" href=\"\">");
-                out.append("                    " + product.getTitle());
-                out.append("                </a>");
-                out.append("            </h5>");
-                out.append("            <div class=\"price-box\">");
-                out.append("                " + product.getFormattedPrice());
-                out.append("                <span class=\"compare-price\">170.000₫</span>");
-                out.append("            </div>");
-                out.append("        </div>");
-                out.append("    </div>");
-                out.append("</div>");                
-            }
-            out.append("</div>");
-            out.append("</div>");
-            out.append("</div>");
-
-            // Gửi HTML về trang JSP sử dụng HttpServletResponse
-            response.setContentType("text/html");
-            PrintWriter htmlResponse = response.getWriter();
-            htmlResponse.write(out.toString());
-            htmlResponse.flush();
+            
+            url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
+        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -14,28 +14,28 @@
         <title>Thanh Toán</title>
     </head>
     <body>
-        <c:set var="cart" value="${sessionScope.CART}"/>
+        <c:set var="order_details" value="${sessionScope.ORDER_DETAILS}"/>
         <header class="banner">
             <div class="wrap">
                 <div class="logo logo--left">
                     <h1 class="shop__name">
-                        <a href="/">Lofi Furniture</a>
+                        <a href="home">Lofi Furniture</a>
                     </h1>
                 </div>
             </div>
         </header>
-<!--        <aside>
-            <button class="order-summary-toggle">
-                <span class="wrap">
-                    <span class="order-summary-toggle__inner">
-                        <span class="order-summary-toggle__text expandable">
-                            Đơn hàng (3)
+        <!--        <aside>
+                    <button class="order-summary-toggle">
+                        <span class="wrap">
+                            <span class="order-summary-toggle__inner">
+                                <span class="order-summary-toggle__text expandable">
+                                    Đơn hàng (3)
+                                </span>
+                                <span class="order-summary-toggle__total-recap">68.750.000₫</span>
+                            </span>
                         </span>
-                        <span class="order-summary-toggle__total-recap">68.750.000₫</span>
-                    </span>
-                </span>
-            </button>
-        </aside>-->
+                    </button>
+                </aside>-->
 
         <div id="checkout" class="content">
             <form id="checkoutForm" method="post">
@@ -223,31 +223,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="product" items="${cart}">
-                                                <tr class="product">
-                                                    <td class="product__image">
-                                                        <div class="product-thumbnail">
-                                                            <div class="product-thumbnail__wrapper">
-                                                                <img src="${product.thumbnail}"
-                                                                     alt="" class="product-thumbnail__image">
+                                                <c:forEach var="product" items="${order_details}">
+                                                    <c:set var="total_money" value="${product.price * product.quantity}" />
+                                                    <c:set var="total_amount" value="${total + product.price * product.quantity}" />
+                                                    <tr class="product">
+                                                        <td class="product__image">
+                                                            <div class="product-thumbnail">
+                                                                <div class="product-thumbnail__wrapper">
+                                                                    <img src="${product.thumbnail}"
+                                                                         alt="" class="product-thumbnail__image">
+                                                                </div>
+                                                                <span class="product-thumbnail__quantity">${product.quantity}</span>
                                                             </div>
-                                                            <span class="product-thumbnail__quantity">${product.quantity}</span>
-                                                        </div>
-                                                    </td>
-                                                    <th class="product__description">
-                                                        <span class="product__description__name">
-                                                            ${product.title}
-                                                        </span>
-                                                    </th>
-                                                    <td class="product__quantity visually-hidden"><em>Số lượng:</em> 2
-                                                    </td>
-                                                    <td class="product__price">
-                                                        ${product.price/1000 * product.quantity}₫
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
+                                                        </td>
+                                                        <th class="product__description">
+                                                            <span class="product__description__name">
+                                                                ${product.title}
+                                                            </span>
+                                                        </th>
+                                                        <td class="product__quantity visually-hidden"><em>Số lượng:</em> 2
+                                                        </td>
+                                                        <td class="product__price">
+                                                            ${total_money}₫
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
 
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -267,7 +269,7 @@
                                                     <th class="total-line__name">
                                                         Tạm tính
                                                     </th>
-                                                    <td class="total-line__price">68.750.000₫</td>
+                                                    <td class="total-line__price">${total_amount}₫</td>
                                                 </tr>
 
                                                 <tr class="total-line total-line--shipping-fee">
@@ -287,7 +289,7 @@
                                                         </span>
                                                     </th>
                                                     <td class="total-line__price">
-                                                        <span class="payment-due__price">68.750.000₫</span>
+                                                        <span class="payment-due__price">${total_amount}₫</span>
                                                     </td>
                                                 </tr>
                                             </tfoot>

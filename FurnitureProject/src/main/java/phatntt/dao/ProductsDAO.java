@@ -185,6 +185,59 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
+    
+    public List<ProductsDTO> getProductByCategory() throws SQLException, NamingException {
+
+        List<ProductsDTO> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE category_id= 1  LIMIT 8";
+                stm = con.prepareCall(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    //
+                    // mapping
+                    //5.1 get data from tu resultset
+                    int productId = rs.getInt("product_id");
+                    String title = rs.getString("title");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    float discount = rs.getFloat("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    String formattedPrice = decimalFormat.format(price);
+
+                    ProductsDTO p = new ProductsDTO(productId, 1, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    p.setFormattedPrice(formattedPrice);
+                    result.add(p);
+                    //5.2 set data to DTO
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+
+    }
 
     public List<ProductsDTO> getProductByCategoryId(int categoryId) throws SQLException, NamingException {
 

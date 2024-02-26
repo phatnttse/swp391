@@ -12,7 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="assets/css/register.css">
-        <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <title>Đăng ký</title>

@@ -690,7 +690,7 @@ button.swiper-pagination-bullet {
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist:hover {
-    background-color: var(--mainColor)
+    background-color: #d94e28;
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist:hover svg path {
@@ -698,7 +698,7 @@ button.swiper-pagination-bullet {
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist.active {
-    background-color: var(--mainColor)
+    background-color: #d94e28;
 }
 
 .product-action:not(.not) .product-thumbnail .setWishlist.active svg path {

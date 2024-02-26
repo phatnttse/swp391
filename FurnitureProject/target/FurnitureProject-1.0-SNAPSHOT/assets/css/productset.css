@@ -73,11 +73,13 @@
     border-radius: 50px;
     display: inline-block;
     text-transform: uppercase
+    
 }
 
 .section_product_set .product-set-content .text-start .ctas-btn .btn:hover {
-    border-color: var(--mainColor);
-    background-color: var(--mainColor)
+    border-color: #d94e28;
+    background-color: #d94e28;
+    transition: all 0.3s;
 }
 
 .section_product_set .thumb {

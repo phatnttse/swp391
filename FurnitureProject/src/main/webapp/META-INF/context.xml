@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/FurnitureProject">
-    <Resource name="FurnitureProject" type="javax.sql.DataSource" auth="Container" 
-              driverClassName="com.mysql.cj.jdbc.Driver"               
-              url="jdbc:mysql://localhost:3306/efurniture" 
-              username="root" password="^.^tipro"/>
-</Context>

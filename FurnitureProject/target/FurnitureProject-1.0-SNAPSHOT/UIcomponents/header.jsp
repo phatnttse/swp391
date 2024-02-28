@@ -136,7 +136,7 @@
                                         <a href="#" title="Tài khoản của bạn" rel="nofollow">
                                             <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/account.png?1708512217480"
                                                  alt="Lofi Furniture" width="25" height="25" class="icon">
-                                            <span class="info">${user.given_name}</span>
+                                            <span class="info">${user.name}</span>
                                         </a>
                                         <div class="drop-account">                                          
                                             <a href="accountInfo">Tài khoản</a>

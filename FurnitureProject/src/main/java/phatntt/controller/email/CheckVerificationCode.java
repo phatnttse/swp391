@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dto.EmailDTO;
 import phatntt.dao.UsersDAO;
-import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 /**
@@ -56,10 +55,8 @@ public class CheckVerificationCode extends HttpServlet {
 
             String givenName = (String) session.getAttribute("GIVEN_NAME");
             String familyName = (String) session.getAttribute("FAMILY_NAME");
-            String email = (String) session.getAttribute("EMAIL");
-            String username = (String) session.getAttribute("USERNAME");
+            String email = (String) session.getAttribute("EMAIL");       
             String password = (String) session.getAttribute("PASSWORD");
-            int role = 0;
 
             String code1 = request.getParameter("code1");
             String code2 = request.getParameter("code2");
@@ -74,15 +71,10 @@ public class CheckVerificationCode extends HttpServlet {
             if (emailCode.equals(dto.getCode())) {
                 Calendar calendar = Calendar.getInstance();
                 Timestamp createdAt = new Timestamp(calendar.getTime().getTime());
-                UsersDTO existingUser = dao.getUserByEmail(email);
-                if (existingUser != null) {
-                    dao.linkGoogleAccount(username, password, createdAt, existingUser.getId());
+               
+                boolean result = dao.registerAccount(email, password, givenName, familyName, 0, createdAt);
+                if (result) {
                     url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
-                } else {
-                    boolean result = dao.registerAccount(username, password, email, givenName, familyName, role, createdAt);
-                    if (result) {
-                        url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
-                    }
                 }
 
             }

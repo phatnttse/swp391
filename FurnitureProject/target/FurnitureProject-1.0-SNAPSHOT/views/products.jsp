@@ -13,17 +13,45 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <link rel="stylesheet" type="text/css" href="assets/css/productStyle.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/productStyles.css">
         <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
         <title>Sản phẩm</title>
+        <style>
+            .backdrop__body-backdrop___1rvky {
+                position: fixed;
+                opacity: 0;
+                width: 100%;
+                left: 0;
+                top: 0 !important;
+                right: 0;
+                bottom: 0;
+                background-color: #363636;
+                z-index: 9;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out
+            }
+
+            @media (max-width: 991px) {
+                .backdrop__body-backdrop___1rvky {
+                    z-index:9
+                }
+            }
+
+            .backdrop__body-backdrop___1rvky.active {
+                visibility: visible;
+                opacity: 0.5
+            }
+        </style>
     </head>
     <body>
         <%@include file="../UIcomponents/header.jsp"%>
+        <div class="backdrop__body-backdrop___1rvky"></div>
         <div class="bodywrap">
-
             <div class="layout-collection"> 
                 <%@include file="../UIcomponents/breadcrumb.jsp" %> 
                 <div class="container">
@@ -278,7 +306,7 @@
                                                                     </div>
 
                                                                     <div class="btn-shopping">
-                                                                        <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId},'${product.title}', '${product.thumbnail}', ${product.price})"></button>
+                                                                        <button type="submit" title="Thêm vào giỏ hàng" class="ti-shopping-cart" onclick="addProductToCart(${product.productId}, '${product.title}', '${product.thumbnail}', ${product.price})"></button>
                                                                     </div>
 
                                                                 </div>
@@ -297,17 +325,17 @@
             </div>
         </div>
 
-        <div id="content" class="cart-modal"></div>                                    
+        <div id="popup-cart-desktop" class="popup-cart"></div>
 
         <script>
             function addProductToCart(productId, title, thumbnail, price) {
                 $.ajax({
                     url: "/FurnitureProject/addProductsToCart",
-                    type: "get",
+                    type: "post",
                     data: {
                         productId: productId,
                         title: title,
-                        thumbnail: thumbnail,                     
+                        thumbnail: thumbnail,
                         price: price
                     },
                     success: function (response) {
@@ -318,7 +346,7 @@
                             showNotification("Để thực hiện, bạn cần phải đăng nhập!");
                         } else {
                             // Nếu không, hiển thị giỏ hàng
-                            const content = document.getElementById("content");
+                            const content = document.getElementById("popup-cart-desktop");
                             content.innerHTML = response;
                             showCartModal();
                         }
@@ -333,27 +361,32 @@
                 alert(message);
             }
             function showCartModal() {
-                const cartModal = document.querySelector('.cart-modal');
+                const popupcart = document.querySelector('.popup-cart');
+                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
+              
                 // Hiển thị giỏ hàng
-                cartModal.style.display = 'block';
+                popupcart.classList.add('active');
+                backdrop.classList.add('active');
                 // Khởi tạo bộ lắng nghe sự kiện cho nút đóng giỏ hàng
                 initializeCloseEvent();
             }
 
             function initializeCloseEvent() {
-                const iconClose = document.querySelector('.js-modal-close2');
+                const iconClose = document.querySelector('.js-popup-close');
                 if (iconClose) {
                     iconClose.addEventListener('click', hideCartModal);
                 }
             }
 
             function hideCartModal() {
-                const content = document.getElementById("content");
-                content.innerHTML = '';
+                const popupcart = document.querySelector('.popup-cart');
+                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
+                popupcart.classList.remove('active');
+                backdrop.classList.remove('active');
             }
         </script>
-   
 
-    <%@include file="../UIcomponents/footer.jsp" %>
-</body>
+
+        <%@include file="../UIcomponents/footer.jsp" %>
+    </body>
 </html>

@@ -96,8 +96,8 @@ public class CategoryController extends HttpServlet {
                 
                 for (ProductsDTO product : listProductsByCategoryId) {
                     out.append("                <div class=\"swiper-slide swiper-slide-active\" style=\"width: 300px; margin-right: 20px;\">");
-                    out.append("                    <div class=\"item_product_main\" data-url=\"/bon-tam-massage-dat-goc\" data-id=\"" + product.getProductId() + "\">");
-                    out.append("                        <form action=\"/cart/add\" method=\"post\" class=\"variants product-action\" enctype=\"multipart/form-data\">");
+                    out.append("                    <div class=\"item_product_main\"\">");
+                    out.append("                        <form action=\"cart\" method=\"post\" class=\"variants product-action\" enctype=\"multipart/form-data\">");
                     out.append("                            <div class=\"product-thumbnail\">");
                     out.append("                                <a class=\"image_thumb\" href=\"/bon-tam-massage-dat-goc\" title=\"Bồn tắm Massage đặt góc\">");
                     out.append("                                    <img class=\"lazyload loaded\" width=\"480\" height=\"480\" src=\"" + product.getThumbnail() + "\" alt=\"" + product.getTitle() + "\">");
@@ -110,7 +110,7 @@ public class CategoryController extends HttpServlet {
                     out.append("                                    <div class=\"actions-secondary\">");
                     out.append("                                        <div class=\"actions-primary\">");
                     out.append("                                            <input type=\"hidden\" name=\"\" value=\"\">");
-                    out.append("                                            <button class=\"btn-cart add_to_cart\" title=\"Thêm vào giỏ hàng\">");
+                    out.append("                                            <button  type=\"button\" class=\"btn-cart add_to_cart \" title=\"Thêm vào giỏ hàng\" onclick=\"addProductToCart("+product.getProductId()+", '"+product.getTitle()+"', '"+product.getThumbnail()+"', "+product.getPrice()+")\">");
                     out.append("                                                <span class=\"icon icon-cart\">");
                     out.append("                                                    <svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title></title><g><polyline class=\"cls-1\" points=\"15 31 5 31 6 9 26 9 26.14 12\"></polyline><path class=\"cls-1\" d=\"M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6\"></path><circle class=\"cls-1\" cx=\"23\" cy=\"23\" r=\"8\"></circle><line class=\"cls-1\" x1=\"23\" x2=\"23\" y1=\"19\" y2=\"27\"></line><line class=\"cls-1\" x1=\"27\" x2=\"19\" y1=\"23\" y2=\"23\"></line></g></svg>");
                     out.append("                                                </span>");
@@ -125,8 +125,8 @@ public class CategoryController extends HttpServlet {
                     out.append("                            <div class=\"product-info\">");
                     out.append("                                <h3 class=\"product-name\"><a href=\"/bon-tam-massage-dat-goc\" title=\"Bồn tắm Massage đặt góc\">" + product.getTitle() + "</a></h3>");
                     out.append("                                <div class=\"price-box\">");
-                    out.append("                                    <span class=\"price\">" + product.getFormattedPrice() + "</span>");
-                    out.append("                                    <span class=\"compare-price\">" + product.getFormattedPrice() + "</span>");
+                    out.append("                                    <span class=\"price\">" + product.getFormattedPrice() + "₫</span>");
+                    out.append("                                    <span class=\"compare-price\">" + product.getFormattedPrice() + "₫</span>");
                     out.append("                                </div>");
                     out.append("                            </div>");
                     out.append("                        </form>");

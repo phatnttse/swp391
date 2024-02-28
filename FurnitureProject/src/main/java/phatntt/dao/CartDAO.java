@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import phatntt.dto.CartDTO;
-import phatntt.dto.CategoryDTO;
 import phatntt.util.DBConnect;
 
 /**
@@ -222,6 +221,44 @@ public class CartDAO {
         }
 
         return cartList;
+    }
+    
+    public CartDTO getProductFromCart(int productId) throws SQLException, NamingException {
+        CartDTO result = null;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT * FROM cart WHERE product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int cartId = rs.getInt("cart_id");
+                    String userId = rs.getString("user_id");
+                    productId = rs.getInt("product_id");
+                    String title = rs.getString("title");
+                    String thumbnail = rs.getString("thumbnail");
+                    int quantity = rs.getInt("quantity");
+                    float price = rs.getFloat("price");
+
+                   result = new CartDTO(cartId, userId, productId, title, thumbnail, quantity, price);
+                    
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
     }
 
     public int getTotalQuantityInCart(String userId) throws SQLException, NamingException {

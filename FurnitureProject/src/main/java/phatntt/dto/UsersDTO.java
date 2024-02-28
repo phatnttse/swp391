@@ -16,7 +16,6 @@ public class UsersDTO {
 
     private String id;
     private String email;
-    private String username;
     private String password;
     private String name;
     private String given_name;
@@ -31,11 +30,24 @@ public class UsersDTO {
     public UsersDTO() {
     }
 
-    public UsersDTO(String id, String email, String username, String password, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt) {
+    public UsersDTO(String id, String email, String password, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt) {
         this.id = id;
         this.email = email;
-        this.username = username;
         this.password = password;
+        this.name = name;
+        this.given_name = given_name;
+        this.family_name = family_name;
+        this.picture = picture;
+        this.phone = phone;
+        this.address = address;
+        this.google_id = google_id;
+        this.role = role;
+        this.createdAt = createdAt;
+    }
+    
+    public UsersDTO(String id, String email, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt) {
+        this.id = id;
+        this.email = email;      
         this.name = name;
         this.given_name = given_name;
         this.family_name = family_name;
@@ -73,20 +85,6 @@ public class UsersDTO {
      */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
@@ -228,9 +226,6 @@ public class UsersDTO {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-
     
     
-    
-
 }

@@ -21,14 +21,14 @@ public class ProductsDTO implements Serializable{
     private float price;
     private String formattedPrice;
     private String thumbnail;
-    private float discount;
+    private int discount;
     private int purchases;
     private Timestamp createdAt;
     
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, float discount, int purchases, Timestamp createdAt) {
+    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, int discount, int purchases, Timestamp createdAt) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.title = title;
@@ -40,8 +40,6 @@ public class ProductsDTO implements Serializable{
         this.purchases = purchases;
         this.createdAt = createdAt;
     }
-
-    
 
     /**
      * @return the productId
@@ -123,11 +121,23 @@ public class ProductsDTO implements Serializable{
     /**
      * @param price the price to set
      */
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
-    
-    
+
+    /**
+     * @return the formattedPrice
+     */
+    public String getFormattedPrice() {
+        return formattedPrice;
+    }
+
+    /**
+     * @param formattedPrice the formattedPrice to set
+     */
+    public void setFormattedPrice(String formattedPrice) {
+        this.formattedPrice = formattedPrice;
+    }
 
     /**
      * @return the thumbnail
@@ -146,29 +156,29 @@ public class ProductsDTO implements Serializable{
     /**
      * @return the discount
      */
-    public float getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
     /**
      * @param discount the discount to set
      */
-    public void setDiscount(float discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
 
     /**
-     * @return the purchase
+     * @return the purchases
      */
     public int getPurchases() {
         return purchases;
     }
 
     /**
-     * @param purchase the purchase to set
+     * @param purchases the purchases to set
      */
-    public void setPurchases(int purchase) {
-        this.purchases = purchase;
+    public void setPurchases(int purchases) {
+        this.purchases = purchases;
     }
 
     /**
@@ -185,18 +195,6 @@ public class ProductsDTO implements Serializable{
         this.createdAt = createdAt;
     }
 
-    /**
-     * @return the formattedPrice
-     */
-    public String getFormattedPrice() {
-        return formattedPrice;
-    }
-
-    /**
-     * @param formattedPrice the formattedPrice to set
-     */
-    public void setFormattedPrice(String formattedPrice) {
-        this.formattedPrice = formattedPrice;
-    }
+   
 
 }

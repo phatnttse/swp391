@@ -46,7 +46,7 @@
                                                 <span class="form-signup" style="color:red;"></span>
                                                 <div class="form-signup clearfix">
                                                     <fieldset class="form-group">
-                                                        <input type="text" class="form-control form-control-lg" value="${param.username}" name="username" id="customer_email" placeholder="Tài khoản" Required>
+                                                        <input type="email" class="form-control form-control-lg" value="${param.email}" name="email" id="customer_email" placeholder="Email" Required>
                                                     </fieldset>
                                                     <fieldset class="form-group">
                                                         <input type="password" class="form-control form-control-lg" value="" name="password" id="customer_password" placeholder="Mật khẩu" Required>

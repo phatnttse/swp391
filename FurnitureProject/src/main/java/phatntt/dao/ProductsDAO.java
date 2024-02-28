@@ -52,7 +52,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
@@ -112,7 +112,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
@@ -160,7 +160,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
@@ -185,7 +185,7 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
     public List<ProductsDTO> getProductByCategory() throws SQLException, NamingException {
 
         List<ProductsDTO> result = new ArrayList<>();
@@ -206,7 +206,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
@@ -260,7 +260,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
@@ -314,7 +314,7 @@ public class ProductsDAO implements Serializable {
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    float discount = rs.getFloat("discount");
+                    int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");

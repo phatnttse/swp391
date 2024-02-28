@@ -7,6 +7,7 @@ package phatntt.controller.users;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -73,31 +74,28 @@ public class LoginServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
 
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String url = siteMaps.getProperty(Constants.LoginFeatures.LOGIN_PAGE);
-        String googleCode = request.getParameter("code");
+        HttpSession session = request.getSession();
 
         try {
             UsersDAO dao = new UsersDAO();
             Key_Utils utils = Key_Utils.getInstance();
-            UsersDTO result;
-
-            if (googleCode != null && !googleCode.isEmpty()) {
-                url = "loginWithGoogle";
-            } else {
-                // Đăng nhập bằng username/password
-                result = dao.checkLogin(username);
-
-                if (result != null && utils.checkPassword(password, result.getPassword())) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("USER_INFO", result);
-                    url = "home";
-                } else {
-                    request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác.");
+            List<UsersDTO> users = dao.checkLogin(email);
+            if (users != null) {
+                for (UsersDTO user : users) {
+                    if (user.getPassword() != null && user.getGoogle_id() == null && utils.checkPassword(password, user.getPassword())) {
+                        session.setAttribute("USER_INFO", user);
+                        url = "home";
+                    } else {
+                        request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
+                    }
                 }
+            } else {
+                request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác");
             }
-            
+
         } catch (SQLException ex) {
             log("LoginServlet_SQL: " + ex.getMessage());
         } catch (NamingException ex) {

@@ -82,8 +82,9 @@ public class ProductQuantity extends HttpServlet {
                 List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
                 Gson gson = new Gson();
                 String json = gson.toJson(products);
-                out.println(json);
+                out.println(json);        
             }
+            out.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,8 +121,9 @@ public class ProductQuantity extends HttpServlet {
                 List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
                 Gson gson = new Gson();
                 String json = gson.toJson(products);              
-                out.println(json);        
+                out.println(json);     
             }
+            out.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);

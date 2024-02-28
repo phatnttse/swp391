@@ -43,10 +43,9 @@ public class RegisterAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        request.setCharacterEncoding("UTF-8");
         
         String email = request.getParameter("email");
-        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm_password");
         String given_name = request.getParameter("given_name");
@@ -96,7 +95,6 @@ public class RegisterAccountServlet extends HttpServlet {
                 String newPassword = utils.hashPassword(password);
                 HttpSession session = request.getSession();
                 session.setAttribute("EMAIL", email);
-                session.setAttribute("USERNAME", username);
                 session.setAttribute("GIVEN_NAME",  given_name );
                 session.setAttribute("FAMILY_NAME", family_name);
                 session.setAttribute("PASSWORD", newPassword);              

@@ -24,7 +24,7 @@
                 <input type="hidden" name="family_name" value="${sessionScope.FAMILY_NAME}">
                 <input type="hidden" name="email" value="${sessionScope.EMAIL}">
                 <input type="hidden" name="password" value="${sessionScope.PASSWORD}">
-                <input type="hidden" name="username" value="${sessionScope.USERNAME}" />
+                
 
 
                 <div class="logo">

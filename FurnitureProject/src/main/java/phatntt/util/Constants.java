@@ -80,6 +80,8 @@ public class Constants {
     public class ProductsFeatures {
         public static final String SEARCH_PRODUCTS_PAGE = "searchProductsPage";
         public static final String HOME_PAGE = "homePage";
+        public static final String PRODUCTS_PAGE = "productsPage";
+        public static final String PRODUCTS_DETAIL = "productdetailPage";
     }
     public class ForgotPasswordFeatures {
         public static final String ENTER_EMAIL_PAGE = "enterEmailPage";
@@ -94,5 +96,7 @@ public class Constants {
     public class ShoppingFeatures {
         public static final String CART_PAGE = "cartPage";
         public static final String PRODUCTS_PAGE = "productsPage";
+        public static final String CHECK_OUT_PAGE = "checkOutPage";
+        public static final String CHECK_OUT_SUCCESS_PAGE = "checkOutSuccessPage";
     }
 }

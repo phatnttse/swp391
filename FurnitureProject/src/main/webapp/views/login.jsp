@@ -77,7 +77,6 @@
             </div>
         </section>
 
-
         <%@include file="../UIcomponents/footer.jsp" %>
     </body>
 </html>

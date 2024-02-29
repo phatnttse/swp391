@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class OrderDTO {
+    
     private int order_id;
     private String user_id;
     private String email;
@@ -18,15 +19,14 @@ public class OrderDTO {
     private String phone;
     private String address;
     private String note;
-    private String status;
-    private String paymentType;
-    private float total_amount;
+    private int status;
+    private String payment_method;
     private Timestamp createdAt;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(int order_id, String user_id, String email, String name, String phone, String address, String note, String status, String paymentType, float total_amount, Timestamp createdAt) {
+    public OrderDTO(int order_id, String user_id, String email, String name, String phone, String address, String note, int status, String payment_method, Timestamp createdAt) {
         this.order_id = order_id;
         this.user_id = user_id;
         this.email = email;
@@ -35,8 +35,7 @@ public class OrderDTO {
         this.address = address;
         this.note = note;
         this.status = status;
-        this.paymentType = paymentType;
-        this.total_amount = total_amount;
+        this.payment_method = payment_method;
         this.createdAt = createdAt;
     }
 
@@ -141,43 +140,29 @@ public class OrderDTO {
     /**
      * @return the status
      */
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
     /**
-     * @return the paymentType
+     * @return the payment_method
      */
-    public String getPaymentType() {
-        return paymentType;
+    public String getPayment_method() {
+        return payment_method;
     }
 
     /**
-     * @param paymentType the paymentType to set
+     * @param payment_method the payment_method to set
      */
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    /**
-     * @return the total_amount
-     */
-    public float getTotal_amount() {
-        return total_amount;
-    }
-
-    /**
-     * @param total_amount the total_amount to set
-     */
-    public void setTotal_amount(float total_amount) {
-        this.total_amount = total_amount;
+    public void setPayment_method(String payment_method) {
+        this.payment_method = payment_method;
     }
 
     /**
@@ -193,7 +178,7 @@ public class OrderDTO {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-    
-    
+
+   
     
 }

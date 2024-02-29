@@ -65,7 +65,7 @@
                                             
                                                 <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                     <div class="product-thumbnail">
-                                                        <a class="image_thumb" href="" title="${product.title}">
+                                                        <a class="image_thumb" href="LoadProductDetailController?productId=${product.productId}" title="${product.title}">
                                                             <img class="lazyload loaded" width="480" height="480" src="${product.thumbnail}"  alt="${product.title}" >
                                                         </a>
                                                         <span class="smart">-

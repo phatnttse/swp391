@@ -19,7 +19,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -45,27 +47,29 @@ public class ProductsController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
-        try  {
-            ProductsDAO product = new ProductsDAO();            
+        try {
+            ProductsDAO product = new ProductsDAO();
             List<ProductsDTO> listProducts = product.getAllProducts();
-            
-            if (listProducts != null){
-                url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
-                request.setAttribute("PRODUCTS_LIST", listProducts);           
-            }
-            
-            ProductsDAO productbycategory = new ProductsDAO();
-            int productCategoryId = productbycategory.countProductByCategoryId();
-            request.setAttribute("COUNT_PRODUCT", productCategoryId);
+
+            request.setAttribute("PRODUCTS_LIST", listProducts);
+
+            CategoryDAO dao = new CategoryDAO();
+            List<CategoryDTO> cdtos = dao.getAllCategoryDTOs();
+            request.setAttribute("CATEGORY_LIST", cdtos);
+            url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
+
+//            ProductsDAO productbycategory = new ProductsDAO();
+//            int productCategoryId = productbycategory.countProductByCategoryId();
+//            request.setAttribute("COUNT_PRODUCT", productCategoryId);
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
-            
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

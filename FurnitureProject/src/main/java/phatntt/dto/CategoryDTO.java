@@ -12,6 +12,15 @@ public class CategoryDTO {
     private int categoryId;
     private String name;  
     private String thumbnail;
+    private int countProduct;
+
+    public int getCountProduct() {
+        return countProduct;
+    }
+
+    public void setCountProduct(int countProduct) {
+        this.countProduct = countProduct;
+    }
 
     public CategoryDTO() {
     }
@@ -21,7 +30,15 @@ public class CategoryDTO {
         this.name = name;
         this.thumbnail = thumbnail;
     }
+
+    public CategoryDTO(int categoryId, String name, String thumbnail, int countProduct) {
+        this.categoryId = categoryId;
+        this.name = name;
+        this.thumbnail = thumbnail;
+        this.countProduct = countProduct;
+    }
        
+    
     /**
      * @return the categoryId
      */
@@ -64,11 +81,4 @@ public class CategoryDTO {
         this.thumbnail = thumbnail;
     }
 
- 
-
-   
-    
-
-
-    
 }

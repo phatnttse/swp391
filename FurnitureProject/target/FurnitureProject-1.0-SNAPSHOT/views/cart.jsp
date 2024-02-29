@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,22 +15,22 @@
         <div>
             <c:set var="cart" value="${sessionScope.CART}"/>
 
-            
-                <section class="main-cart-page main-container col1-layout">
-                    <div class="main container cartpcstyle">
-                        <div class="wrap_background_aside">
-                            <div class="row">
-                                <div class="col-xl-12 col-12 col-cart-left">
-                                    <div class="cart-page d-xl-block d-none">
-                                        <div class="drawer__inner">
-                                            <div class="CartPageContainer">
-                                                <c:if test="${not empty cart}">
+
+            <section class="main-cart-page main-container col1-layout">
+                <div class="main container cartpcstyle">
+                    <div class="wrap_background_aside">
+                        <div class="row">
+                            <div class="col-xl-12 col-12 col-cart-left">
+                                <div class="cart-page d-xl-block d-none">
+                                    <div class="drawer__inner">
+                                        <div class="CartPageContainer">
+                                            <c:if test="${not empty cart}">
                                                 <form id="products" action="cart" method="post" class="cart ajaxcart cartpage">
                                                     <div class="cart-header-info">
                                                         <div>Thông tin sản phẩm</div>
-                                                        <div>Đơn giá</div>
+                                                        <div>Đơn giá (VNĐ)</div>
                                                         <div>Số lượng</div>
-                                                        <div>Thành tiền</div>
+                                                        <div>Thành tiền (VNĐ)</div>
                                                     </div>
                                                     <div 
                                                         class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">
@@ -54,7 +55,13 @@
                                                                         </div>
                                                                         <div class="grid">
                                                                             <div class="grid__item one-half text-right cart_prices">
-                                                                                <span class="cart-price" data-price="${product.price}">${product.price}</span>
+                                                                                <span class="cart-price">
+                                                                                    <script>
+                                                                                        var totalMoney = parseFloat('${product.price}');
+                                                                                        var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                                        document.write(formattedTotalMoney);
+                                                                                    </script>
+                                                                                </span>
                                                                             </div>
 
                                                                         </div>
@@ -83,7 +90,15 @@
                                                                         </div>
                                                                         <div class="grid">
                                                                             <div class="grid__item one-half text-right cart_prices">
-                                                                                <span class="cart-price">${total_money}</span>
+                                                                                <span class="cart-price">
+                                                                                    <script>
+                                                                                        var totalMoney = parseFloat('${total_money}');
+                                                                                        var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                                        document.write(formattedTotalMoney);
+                                                                                    </script>
+
+                                                                                </span>
+
                                                                             </div>
 
                                                                         </div>
@@ -99,14 +114,21 @@
                                                                 <div class="ajaxcart__subtotal">
                                                                     <div class="cart__subtotal">
                                                                         <div class="cart__col-6">Tổng tiền:</div>
-                                                                        <div id="totalPrice" class="text-right cart__totle"><span
-                                                                                class="total-price">${total_amount}₫</span></div>
+                                                                        <div id="totalPrice" class="text-right cart__totle">
+                                                                            <span class="total-price">
+                                                                                <script>
+                                                                                    var totalMoney = parseFloat('${total_amount}');
+                                                                                    var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                                    document.write(formattedTotalMoney);
+                                                                                </script>
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="cart__btn-proceed-checkout-dt">
                                                                     <button  type="submit"
-                                                                            class="button btn btn-default cart__btn-proceed-checkout"
-                                                                            title="Thanh toán">Thanh
+                                                                             class="button btn btn-default cart__btn-proceed-checkout"
+                                                                             title="Thanh toán">Thanh
                                                                         toán</button>
                                                                 </div>
                                                             </div>
@@ -138,6 +160,12 @@
             <%@include file="../UIcomponents/footer.jsp" %>
 
             <script>
+                function formatAndDisplayPrice(priceElementId, price) {
+                    var formattedPrice = parseFloat(price).toLocaleString('vi-VN') + '₫';
+                    document.getElementById(priceElementId).textContent = formattedPrice;
+                }
+
+
                 function addProductQuantity(userId, productId) {
                     $.ajax({
                         url: "/FurnitureProject/productQuantity",
@@ -147,24 +175,22 @@
                             productId: productId
                         },
                         success: function (response) {
-                            // Parse JSON response từ servlet
                             var products = JSON.parse(response);
                             var totalPrice = 0;
                             var newHTML = '';
-                            // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
+
                             if (products.length === 0) {
                                 newHTML = '<div><center><h3 class="" style="margin-top: 20px;">Không có sản phẩm nào trong giỏ hàng của bạn</h3></center></div>';
                             } else {
-                                // Tạo HTML mới cho giỏ hàng
                                 newHTML += '<form id="content" action="cart" method="post" class="cart ajaxcart cartpage">' +
                                         '<div class="cart-header-info">' +
                                         '<div>Thông tin sản phẩm</div>' +
-                                        '<div>Đơn giá</div>' +
+                                        '<div>Đơn giá (VNĐ)</div>' +
                                         '<div>Số lượng</div>' +
-                                        '<div>Thành tiền</div>' +
+                                        '<div>Thành tiền (VNĐ)</div>' +
                                         '</div>' +
                                         '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">';
-                                // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
+
                                 products.forEach(function (product) {
                                     if (product.quantity > 0) {
                                         newHTML += '<div class="ajaxcart__row">';
@@ -179,7 +205,7 @@
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
                                         newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                        newHTML += '<span class="cart-price" data-price="' + product.price + '">' + product.price + '</span>';
+                                        newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
@@ -193,7 +219,7 @@
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
                                         newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                        newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + (product.price * product.quantity) + '</span>';
+                                        newHTML += '<span class="cart-price">' + formatCurrency(product.price * product.quantity) + '</span>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
@@ -201,9 +227,11 @@
                                         newHTML += '</div>';
                                     }
                                 });
+
                                 products.forEach(function (product) {
                                     totalPrice += product.price * product.quantity;
                                 });
+
                                 newHTML += '</div>' +
                                         '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
                                         '<div class="row">' +
@@ -211,7 +239,7 @@
                                         '<div class="ajaxcart__subtotal">' +
                                         '<div class="cart__subtotal">' +
                                         '<div class="cart__col-6">Tổng tiền:</div>' +
-                                        '<div class="text-right cart__totle"><span class="total-price">' + totalPrice + '</span></div>' +
+                                        '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
                                         '</div>' +
                                         '</div>' +
                                         '<div class="cart__btn-proceed-checkout-dt">' +
@@ -223,7 +251,6 @@
                                         '</form>';
                             }
 
-                            // Thay đổi nội dung của phần tử giỏ hàng
                             $("#products").html(newHTML);
                         },
                         error: function (xhr) {
@@ -231,6 +258,12 @@
                         }
                     });
                 }
+
+               // Hàm để định dạng số tiền
+                function formatCurrency(amount) {
+                    return amount.toLocaleString('vi-VN') + '₫';
+                }
+
 
                 function reduceProductQuantity(userId, productId) {
                     $.ajax({
@@ -250,12 +283,12 @@
                                 newHTML = '<div><center><h3 class="" style="margin-top: 20px;">Không có sản phẩm nào trong giỏ hàng của bạn</h3></center></div>';
                             } else {
                                 // Tạo HTML mới cho giỏ hàng
-                                newHTML += '<form id="content" action="/cart" method="post" class="cart ajaxcart cartpage">' +
+                                newHTML += '<form id="content" action="cart" method="post" class="cart ajaxcart cartpage">' +
                                         '<div class="cart-header-info">' +
                                         '<div>Thông tin sản phẩm</div>' +
-                                        '<div>Đơn giá</div>' +
+                                        '<div>Đơn giá (VNĐ)</div>' +
                                         '<div>Số lượng</div>' +
-                                        '<div>Thành tiền</div>' +
+                                        '<div>Thành tiền (VNĐ)</div>' +
                                         '</div>' +
                                         '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">';
                                 // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
@@ -273,7 +306,7 @@
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
                                         newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                        newHTML += '<span class="cart-price" data-price="' + product.price + '">' + product.price + '</span>';
+                                        newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
@@ -287,7 +320,7 @@
                                         newHTML += '</div>';
                                         newHTML += '<div class="grid">';
                                         newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                        newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + (product.price * product.quantity) + '</span>';
+                                        newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
                                         newHTML += '</div>';
@@ -305,11 +338,11 @@
                                         '<div class="ajaxcart__subtotal">' +
                                         '<div class="cart__subtotal">' +
                                         '<div class="cart__col-6">Tổng tiền:</div>' +
-                                        '<div class="text-right cart__totle"><span class="total-price">' + totalPrice + '</span></div>' +
+                                        '<div class="text-right cart__totle"><span class="total-price">' +  formatCurrency(totalPrice)+ '</span></div>' +
                                         '</div>' +
                                         '</div>' +
                                         '<div class="cart__btn-proceed-checkout-dt">' +
-                                        '<button onclick="" type="button" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
+                                        '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
                                         '</div>' +
                                         '</div>' +
                                         '</div>' +

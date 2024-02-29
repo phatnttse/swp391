@@ -63,7 +63,7 @@ public class LoginWithGoogleController extends HttpServlet {
                         }
                     }
                 }
-
+                
                 } else {
                     response.sendRedirect("loginPage");
                 }

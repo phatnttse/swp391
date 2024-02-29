@@ -100,6 +100,10 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_PAGE);
         try {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
@@ -107,7 +111,7 @@ public class CartController extends HttpServlet {
             CartDAO cartDAO = new CartDAO();
             List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
             session.setAttribute("ORDER_DETAILS", products);
-            response.sendRedirect("checkOutPage");
+            request.setAttribute("NUMBER_PRODUCT", products.size());
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,6 +119,9 @@ public class CartController extends HttpServlet {
         } catch (NamingException ex) {
             Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
             // Xử lý lỗi nếu cần
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

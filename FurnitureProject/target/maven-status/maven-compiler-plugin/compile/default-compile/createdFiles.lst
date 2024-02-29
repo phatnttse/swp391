@@ -5,6 +5,7 @@ phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
 phatntt\controller\email\ConfirmVerificationResetPassController.class
 phatntt\dao\ProductsDAO.class
+phatntt\controller\products\LoadProductDetailController.class
 phatntt\util\Constants$LoginWithGoogleFeatures.class
 phatntt\controller\admin\ViewProductsController.class
 phatntt\dto\CategoryDTO.class

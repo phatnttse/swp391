@@ -14,9 +14,8 @@ CREATE TABLE `user` (
     `address` VARCHAR(255),
     `google_id` VARCHAR(255),
     `role_id` INT NOT NULL,
-    `created_at` DATETIME
+	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 
 CREATE TABLE `role` (
@@ -34,7 +33,7 @@ CREATE TABLE `product` (
     `thumbnail` VARCHAR(255) NOT NULL,
     `description` LONGTEXT,
     `purchases` INT DEFAULT 0,
-    `created_at` DATETIME
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `category` (
@@ -51,10 +50,14 @@ CREATE TABLE `order` (
     `phone` VARCHAR(12) NOT NULL,
     `shipping_address` VARCHAR(255) NOT NULL,
     `note` LONGTEXT,
-    `status` VARCHAR(50) NOT NULL,
-    `payment_type` VARCHAR(50) NOT NULL,
-    `total_amount` FLOAT NOT NULL,
-    `created_at` TIMESTAMP
+    `status` INT NOT NULL,
+    `payment_method` VARCHAR(50) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `order_status` (
+    `status_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE `order_detail` (
@@ -62,7 +65,7 @@ CREATE TABLE `order_detail` (
     `order_id` INT NOT NULL,
     `product_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `price` INT NOT NULL,
+    `price` FLOAT NOT NULL,
     `quantity` INT NOT NULL,
     `thumbnail` VARCHAR(255) NOT NULL,
     `total_money` INT NOT NULL
@@ -78,11 +81,47 @@ CREATE TABLE `cart` (
     `price` FLOAT NOT NULL
 );
 
+
 CREATE TABLE `payment` (
     `payment_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `order_id` INT NOT NULL
 );
+
+INSERT INTO `order_status` (`name`) VALUES
+    ('Đang xử lý'),
+    ('Đã gửi cho đơn vị vận chuyển'),
+    ('Đang giao hàng'),
+    ('Đã giao hàng'),
+    ('Đã hủy');
+
+
+
+ 
+ DELIMITER $$
+
+CREATE TRIGGER TR_OrderDetail_Insert AFTER INSERT ON order_detail 
+FOR EACH ROW 
+BEGIN
+    DECLARE quantity_ordered INT;
+    DECLARE order_status INT;
+
+    -- Lấy số lượng sản phẩm và trạng thái của đơn hàng mới được thêm vào
+    SELECT NEW.quantity, `status` INTO quantity_ordered, order_status
+    FROM `order` 
+    WHERE `order_id` = NEW.order_id;
+
+    -- Kiểm tra nếu đơn hàng đã được thanh toán
+    IF order_status = 1 THEN
+        -- Giảm số lượng sản phẩm trong kho tương ứng
+        UPDATE `product` 
+        SET `quantity` = `quantity` - NEW.quantity
+        WHERE `product_id` = NEW.product_id;
+    END IF;
+END$$
+
+DELIMITER ;
+
 
 ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
 
@@ -101,6 +140,8 @@ ALTER TABLE `order_detail` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (
 ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 ALTER TABLE `payment` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+
+ALTER TABLE `order` ADD FOREIGN KEY (`status`) REFERENCES `order_status` (`status_id`);
 
 INSERT INTO category (category_id, name, thumbnail) VALUES
   (1, 'Bồn tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-tam.jpg?v=1699504371993'),
@@ -324,7 +365,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Giá đỡ	Giá đỡ inox + ốc vít
  Xiphong: Xiphong thoát chậu ruột gà đầu inox đuôi nhựa', '2024-01-24 12:00:00');
  
- insert into role (role_id, name) values
+ INSERT INTO role (role_id, name) values
  (0,"User"),
  (1,"Staff"),
  (2,"Admin");
@@ -337,5 +378,5 @@ select * from category;
 select * from user;
 select * from role;
 select * from cart;
-delete from user where role_id = 0;
+/*delete from user where role_id = 0;
 

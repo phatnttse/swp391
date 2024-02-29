@@ -84,7 +84,28 @@ public class HomePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
+        String thumbnail = request.getParameter("");
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            List<CategoryDTO> categoryDTOs = categoryDAO.countProduct();
+            request.setAttribute("COUNT_PRODUCT", categoryDTOs);
+            
+            ProductsDAO productsDAO = new ProductsDAO();
+            //ProductsDTO dTO = productsDAO.getProductByThumbnail(url)
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } finally {
+            processRequest(request, response);
+        }
+        
+        
     }
 
     /**

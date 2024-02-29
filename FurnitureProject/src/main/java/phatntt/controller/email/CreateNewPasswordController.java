@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dto.UsersCreateNewPassErr;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.UsersDTO;
 import phatntt.util.Key_Utils;
 import phatntt.util.Constants;
 
@@ -90,6 +91,8 @@ public class CreateNewPasswordController extends HttpServlet {
         String email = request.getParameter("email");
         String newPassword = request.getParameter("newPass");
         String confirm = request.getParameter("confirmNewPass");
+        UsersDAO dao = new UsersDAO();
+       
 
         UsersCreateNewPassErr errors = new UsersCreateNewPassErr();
         boolean foundErr = false;
@@ -97,6 +100,7 @@ public class CreateNewPasswordController extends HttpServlet {
         String url = siteMaps.getProperty(Constants.ForgotPasswordFeatures.CREATE_NEW_PASS);
 
         try {
+            UsersDTO user = dao.checkLogin(email);
             if (!newPassword.trim().matches(siteMaps.getProperty(Constants.ForgotPasswordFeatures.PASSWORD_REGEX))) {
                 foundErr = true;
                 errors.setPasswordErr(
@@ -109,12 +113,11 @@ public class CreateNewPasswordController extends HttpServlet {
             }
             if (foundErr) {
                 request.setAttribute("RESET_PASSWORD_ERR", errors);
-            } else {
-                UsersDAO dao = new UsersDAO();
+            } else {             
                 Key_Utils utils = Key_Utils.getInstance();
 
                 String hashedPassword = utils.hashPassword(newPassword);
-                boolean result = dao.createNewPassword(email, hashedPassword);
+                boolean result = dao.createNewPassword(user.getId(), hashedPassword);
                 if (result) {
                     url = siteMaps.getProperty(Constants.ForgotPasswordFeatures.LOGIN_PAGE);
                 }

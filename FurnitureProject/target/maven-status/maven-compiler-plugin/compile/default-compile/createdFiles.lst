@@ -1,4 +1,5 @@
 phatntt\controller\email\ForgotPasswordController.class
+phatntt\dto\OrderDetailDTO.class
 phatntt\dto\UsersDTO.class
 phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
@@ -34,8 +35,10 @@ phatntt\controller\users\LoginWithGoogleController.class
 phatntt\cart\CartController.class
 phatntt\cart\UpdateTotalPrice.class
 phatntt\dto\ProductsDTO.class
+phatntt\dao\OrderDetailDAO.class
 phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
+phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\users\LogOutServlet.class
 phatntt\dto\UsersAccountInfoError.class
 phatntt\dto\CartDTO.class
@@ -56,3 +59,4 @@ phatntt\dao\CategoryDAO.class
 phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\controller\email\CreateNewPasswordController.class
+phatntt\dao\OrdersDAO.class

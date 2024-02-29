@@ -55,7 +55,7 @@ public class CheckVerificationCode extends HttpServlet {
 
             String givenName = (String) session.getAttribute("GIVEN_NAME");
             String familyName = (String) session.getAttribute("FAMILY_NAME");
-            String email = (String) session.getAttribute("EMAIL");       
+            String email = (String) session.getAttribute("EMAIL");
             String password = (String) session.getAttribute("PASSWORD");
 
             String code1 = request.getParameter("code1");
@@ -69,10 +69,8 @@ public class CheckVerificationCode extends HttpServlet {
 
             String emailCode = code1 + code2 + code3 + code4 + code5 + code6;
             if (emailCode.equals(dto.getCode())) {
-                Calendar calendar = Calendar.getInstance();
-                Timestamp createdAt = new Timestamp(calendar.getTime().getTime());
-               
-                boolean result = dao.registerAccount(email, password, givenName, familyName, 0, createdAt);
+
+                boolean result = dao.registerAccount(email, password, givenName, familyName, 0);
                 if (result) {
                     url = siteMaps.getProperty(Constants.VerifyEmailFeatures.LOGIN_PAGE);
                 }

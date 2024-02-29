@@ -8,7 +8,10 @@ package phatntt.controller.products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,21 +82,31 @@ public class AddProductsToCartController extends HttpServlet {
 
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+            symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+            DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+           
 
             CartDAO cartDAO = new CartDAO();
             boolean result = cartDAO.addProductToCart(user.getId(), productId, title, thumbnail, 1, price);
             List<CartDTO> carts = null;
             int totalProductsInCart = 0;
+            float totalMoney = 0;
             if (result) {
                 CartDTO product = cartDAO.getProductFromCart(productId);
                 carts = cartDAO.getCartByUserId(user.getId());
                 totalProductsInCart = cartDAO.getTotalQuantityInCart(user.getId());
+                for (CartDTO cart : carts) {
+                    totalMoney += (cart.getPrice() * cart.getQuantity());
+                }
+               
                 session.setAttribute("CART_QUANTITY", totalProductsInCart);
+                session.setAttribute("CART", carts);
                 // Gửi mã HTML về phía client
                 out.println(
                         "    <div class=\"header-popcart\">\n"
                         + "        <div class=\"top-cart-header\">\n"
-                        + "            <span>Bạn đã thêm [<a class=\"cart-popup-name\" href=\"\">"+product.getTitle()+"</a>] vào giỏ hàng</span>\n"
+                        + "            <span>Bạn đã thêm [<a class=\"cart-popup-name\" href=\"\">" + product.getTitle() + "</a>] vào giỏ hàng</span>\n"
                         + "        </div>\n"
                         + "        <a class=\"noti-cart-count\" href=\"/cart\" title=\"Giỏ hàng\">\n"
                         + "            Giỏ hàng của bạn hiện có <span class=\"count_item_pr\">" + totalProductsInCart + "</span> sản phẩm\n"
@@ -124,7 +137,9 @@ public class AddProductsToCartController extends HttpServlet {
                             + "                        </div>\n"
                             + "                        <div class=\"grid\">\n"
                             + "                            <div class=\"grid__item one-half text-right cart_prices\">\n"
-                            + "                                <span class=\"cart-price\">" + cart.getPrice() + "</span>\n"
+                            + "                                <span class=\"cart-price\">\n"
+                            + "                          <span class=\"cart-price\">" + decimalFormat.format(cart.getPrice()) + "₫</span>\n"
+                            + "                                </span>"
                             + "                            </div>\n"
                             + "                        </div>\n"
                             + "                        <div class=\"grid\">\n"
@@ -138,7 +153,9 @@ public class AddProductsToCartController extends HttpServlet {
                             + "                        </div>\n"
                             + "                        <div class=\"grid\">\n"
                             + "                            <div class=\"grid__item one-half text-right cart_prices\">\n"
-                            + "                                <span class=\"cart-price\">" + cart.getPrice() + "</span>\n"
+                            + "                                <span class=\"cart-price\">\n"
+                            + "                                     <span class=\"cart-price\">" + decimalFormat.format(cart.getPrice() * cart.getQuantity()) + "₫</span>\n"
+                            + "                                </span>"
                             + "                            </div>\n"
                             + "                        </div>\n"
                             + "                    </div>\n"
@@ -153,7 +170,7 @@ public class AddProductsToCartController extends HttpServlet {
                         + "                    <div class=\"ajaxcart__subtotal\">\n"
                         + "                        <div class=\"cart__subtotal\">\n"
                         + "                            <div class=\"cart__col-6\">Tổng tiền:</div>\n"
-                        + "                            <div class=\"text-right cart__totle\"><span class=\"total-price\">95.810.000₫</span></div>\n"
+                        + "                            <div class=\"text-right cart__totle\"><span class=\"total-price\">" + decimalFormat.format(totalMoney)+ "₫</span></div>\n"
                         + "                        </div>\n"
                         + "                    </div>\n"
                         + "                    <div class=\"cart__btn-proceed-checkout-dt\">\n"

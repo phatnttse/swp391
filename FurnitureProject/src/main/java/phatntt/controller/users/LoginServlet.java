@@ -82,16 +82,15 @@ public class LoginServlet extends HttpServlet {
         try {
             UsersDAO dao = new UsersDAO();
             Key_Utils utils = Key_Utils.getInstance();
-            List<UsersDTO> users = dao.checkLogin(email);
-            if (users != null) {
-                for (UsersDTO user : users) {
-                    if (user.getPassword() != null && user.getGoogle_id() == null && utils.checkPassword(password, user.getPassword())) {
-                        session.setAttribute("USER_INFO", user);
-                        url = "home";
-                    } else {
-                        request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
-                    }
+            UsersDTO user = dao.checkLogin(email);
+            if (user != null) {
+                if (utils.checkPassword(password, user.getPassword())) {
+                    session.setAttribute("USER_INFO", user);
+                    url = "home";
+                } else {
+                    request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }
+
             } else {
                 request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác");
             }

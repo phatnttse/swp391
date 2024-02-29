@@ -14,31 +14,11 @@
         <title>Thanh Toán</title>
     </head>
     <body>
+        <c:set var="user" value="${sessionScope.USER_INFO}"/>
         <c:set var="order_details" value="${sessionScope.ORDER_DETAILS}"/>
-        <header class="banner">
-            <div class="wrap">
-                <div class="logo logo--left">
-                    <h1 class="shop__name">
-                        <a href="home">Lofi Furniture</a>
-                    </h1>
-                </div>
-            </div>
-        </header>
-        <!--        <aside>
-                    <button class="order-summary-toggle">
-                        <span class="wrap">
-                            <span class="order-summary-toggle__inner">
-                                <span class="order-summary-toggle__text expandable">
-                                    Đơn hàng (3)
-                                </span>
-                                <span class="order-summary-toggle__total-recap">68.750.000₫</span>
-                            </span>
-                        </span>
-                    </button>
-                </aside>-->
-
+         
         <div id="checkout" class="content">
-            <form id="checkoutForm" method="post">
+            <form id="checkoutForm" action="orders" method="post">
                 <div class="wrap">
                     <main class="main">
                         <header class="main__header">
@@ -57,45 +37,42 @@
                                                 <h2 class="section__title layout-flex__item layout-flex__item--stretch">
                                                     <span>Thông tin nhận hàng</span>
                                                 </h2>
-                                                <a href="">
-                                                    <i class="fa fa-user-circle-o fa-lg"></i>
-                                                    <span>Đăng nhập</span>
-                                                </a>
+                                                
                                             </div>
                                         </div>
                                         <div class="section__content">
                                             <div class="fieldset">
                                                 <div class="field  field--show-floating-label">
                                                     <div class="field__input-wrapper">
-                                                        <label for="email" class="field__label">Email</label>
+                                                        <label for="email" class="field__label">Email*</label>
                                                         <input name="email" id="email" type="email" class="field__input"
-                                                               value="">
+                                                               value="${user.email}">
                                                     </div>
                                                 </div>
 
                                                 <div class="field  field--show-floating-label">
                                                     <div class="field__input-wrapper">
-                                                        <label for="name" class="field__label">Họ và tên</label>
+                                                        <label for="name" class="field__label">Họ và tên*</label>
                                                         <input name="name" id="name" type="text" class="field__input"
-                                                               value="">
+                                                               value="${user.name}">
                                                     </div>
                                                 </div>
 
                                                 <div class="field  field--show-floating-label">
                                                     <div class="field__input-wrapper">
-                                                        <label for="phone" class="field__label">Số điện thoại</label>
+                                                        <label for="phone" class="field__label">Số điện thoại*</label>
                                                         <input name="phone" id="phone" type="phone" class="field__input"
-                                                               value="">
+                                                               value="${user.phone}" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="field ">
                                                     <div class="field__input-wrapper">
                                                         <label for="billingAddress" class="field__label">
-                                                            Địa chỉ
+                                                            Địa chỉ*
                                                         </label>
                                                         <input name="billingAddress" id="billingAddress" type="text"
-                                                               class="field__input" value="">
+                                                               class="field__input" value="${user.address}" required>
                                                     </div>
                                                 </div>
 
@@ -128,8 +105,7 @@
                                             </div>
                                         </div>
                                         <div class="section__content" id="shippingMethodList">
-                                            <div class="alert alert--loader spinner spinner--active hide"
-                                                 data-bind-show="isLoadingShippingMethod">
+                                            <div class="alert alert--loader spinner spinner--active hide">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="spinner-loader">
                                                 <use href="#spinner"></use>
                                                 </svg>
@@ -157,9 +133,9 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" class="input-radio">
+                                                            <input name="paymentMethod" type="radio" value="Thu hộ (COD)" class="input-radio">
                                                         </div>
-                                                        <label for="paymentMethod-673383" class="radio__label">
+                                                        <label for="" class="radio__label">
                                                             <span class="radio__label__primary">Thu hộ (COD)</span>
                                                             <span class="radio__label__accessory">
                                                                 <span class="radio__label__icon">
@@ -173,9 +149,9 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" class="input-radio">
+                                                            <input name="paymentMethod" type="radio" value="Chuyển khoản" class="input-radio">
                                                         </div>
-                                                        <label for="paymentMethod-673381" class="radio__label">
+                                                        <label for="" class="radio__label">
                                                             <span class="radio__label__primary">Chuyển khoản</span>
                                                             <span class="radio__label__accessory">
                                                                 <span class="radio__label__icon">
@@ -196,7 +172,7 @@
                     <aside class="sidebar">
                         <div class="sidebar__header">
                             <h2 class="sidebar__title">
-                                Đơn hàng (3)
+                                Đơn hàng (${requestScope.NUMBER_PRODUCT} sản phẩm)
                             </h2>
                         </div>
                         <div class="sidebar__content">
@@ -225,7 +201,7 @@
                                             <tbody>
                                                 <c:forEach var="product" items="${order_details}">
                                                     <c:set var="total_money" value="${product.price * product.quantity}" />
-                                                    <c:set var="total_amount" value="${total + product.price * product.quantity}" />
+                                                    <c:set var="total_amount" value="${total_amount + product.price * product.quantity}" />
                                                     <tr class="product">
                                                         <td class="product__image">
                                                             <div class="product-thumbnail">
@@ -244,7 +220,11 @@
                                                         <td class="product__quantity visually-hidden"><em>Số lượng:</em> 2
                                                         </td>
                                                         <td class="product__price">
-                                                            ${total_money}₫
+                                                            <script>
+                                                                var totalMoney = parseFloat('${total_money}');
+                                                                var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                document.write(formattedTotalMoney);
+                                                            </script>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -269,7 +249,13 @@
                                                     <th class="total-line__name">
                                                         Tạm tính
                                                     </th>
-                                                    <td class="total-line__price">${total_amount}₫</td>
+                                                    <td class="total-line__price">
+                                                        <script>
+                                                            var totalMoney = parseFloat('${total_amount}');
+                                                            var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                            document.write(formattedTotalMoney);
+                                                        </script>
+                                                    </td>
                                                 </tr>
 
                                                 <tr class="total-line total-line--shipping-fee">
@@ -289,7 +275,13 @@
                                                         </span>
                                                     </th>
                                                     <td class="total-line__price">
-                                                        <span class="payment-due__price">${total_amount}₫</span>
+                                                        <span class="payment-due__price">
+                                                            <script>
+                                                                var totalMoney = parseFloat('${total_amount}');
+                                                                var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                document.write(formattedTotalMoney);
+                                                            </script>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             </tfoot>

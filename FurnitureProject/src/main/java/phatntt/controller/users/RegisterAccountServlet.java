@@ -80,46 +80,47 @@ public class RegisterAccountServlet extends HttpServlet {
 
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-
         String url = siteMaps.getProperty(Constants.SignUpFeatures.REGISTER_PAGE);
-        if (!password.trim().matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))) {
-            foundErr = true;
-            errors.setConfirmNotMatch(
-                    siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
-        }
 
-        if (!confirm.trim().equals(password.trim())) {
-            foundErr = true;
-            errors.setConfirmNotMatch(
-                    siteMaps.getProperty(Constants.ValidateFeatures.CONFIRM_NOTMATCH_ERR_MSG));
-        }
-        if (given_name.trim().length() < 2 || given_name.trim().length() > 50) {
-            foundErr = true;
-            errors.setGivenNameLengthError(
-                    siteMaps.getProperty(Constants.ValidateFeatures.GIVENNAME_LENGTH_ERR_MSG));
-        }
-        if (family_name.trim().length() < 2 || given_name.trim().length() > 50) {
-            foundErr = true;
-            errors.setGivenNameLengthError(
-                    siteMaps.getProperty(Constants.ValidateFeatures.GIVENNAME_LENGTH_ERR_MSG));
-        }
-        if (foundErr) { // error occur 
+        try {
+            if (!password.trim().matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))) {
+                foundErr = true;
+                errors.setPasswordRegexError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
+            }
 
-            request.setAttribute("REGISTER_ERRORS", errors);
+            if (!confirm.trim().equals(password.trim())) {
+                foundErr = true;
+                errors.setConfirmNotMatch(
+                        siteMaps.getProperty(Constants.ValidateFeatures.CONFIRM_NOTMATCH_ERR_MSG));
+            }
+            if (given_name.trim().length() < 2 || given_name.trim().length() > 50) {
+                foundErr = true;
+                errors.setGivenNameLengthError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.GIVENNAME_LENGTH_ERR_MSG));
+            }
+            if (family_name.trim().length() < 2 || given_name.trim().length() > 50) {
+                foundErr = true;
+                errors.setFamilyNameLengthError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.FAMILYNAME_LENGTH_ERR_MSG));
+            }
+            if (foundErr) {
+                request.setAttribute("REGISTER_ERRORS", errors);
+            } else { //no error
+                Key_Utils utils = Key_Utils.getInstance();
+                String newPassword = utils.hashPassword(password);
+                HttpSession session = request.getSession();
+                session.setAttribute("EMAIL", email);
+                session.setAttribute("GIVEN_NAME", given_name);
+                session.setAttribute("FAMILY_NAME", family_name);
+                session.setAttribute("PASSWORD", newPassword);
 
-        } else { //no error
-            Key_Utils utils = Key_Utils.getInstance();
-            String newPassword = utils.hashPassword(password);
-            HttpSession session = request.getSession();
-            session.setAttribute("EMAIL", email);
-            session.setAttribute("GIVEN_NAME", given_name);
-            session.setAttribute("FAMILY_NAME", family_name);
-            session.setAttribute("PASSWORD", newPassword);
-
-            url = siteMaps.getProperty(Constants.VerifyEmailFeatures.EMAIL_PAGE);
+                url = siteMaps.getProperty(Constants.VerifyEmailFeatures.EMAIL_PAGE);
+            }
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
     }
 
     /**

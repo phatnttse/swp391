@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.dto.UsersAccountInfoError;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.ErrorDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Key_Utils;
 import phatntt.util.Constants;
@@ -53,7 +53,7 @@ public class ChangePasswordController extends HttpServlet {
         String id = request.getParameter("hdId");
         
         
-        UsersAccountInfoError error = new UsersAccountInfoError();
+         ErrorDTO errors = new ErrorDTO();
         boolean foundErr = false;
         
         UsersDAO dao = new UsersDAO();
@@ -63,18 +63,18 @@ public class ChangePasswordController extends HttpServlet {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO)session.getAttribute("USER_INFO");
             if (!utils.checkPassword(oldPass, user.getPassword().trim()) && !oldPass.trim().equals(user.getPassword().trim())){
-                error.setOldPassNotMatch(siteMaps.getProperty(Constants.UsersFeatures.OLD_PASS_ERR_MESSAGE));
+                errors.setOldPassNotMatch(siteMaps.getProperty(Constants.UsersFeatures.OLD_PASS_ERR_MESSAGE));
                 foundErr = true;
             }
-            if (!newPass.matches(siteMaps.getProperty(Constants.SignUpFeatures.PASSWORD_REGEX))){
-                error.setPasswordLengthError(siteMaps.getProperty(Constants.UsersFeatures.PASSWORD_LENGTH_ERR_MESSAGE));
+            if (!newPass.matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))){
+                errors.setPasswordRegexError(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
                 foundErr = true;
             }else if(!confirmNewPass.trim().equals(newPass)){
-                error.setConfirmNotMatch(siteMaps.getProperty(Constants.UsersFeatures.CONFIRM_NOTMATCHED_ERR_MESSAGE));
+                errors.setConfirmNotMatch(siteMaps.getProperty(Constants.ValidateFeatures.CONFIRM_NOTMATCH_ERR_MSG));
                 foundErr = true;
             }
             if (foundErr){
-                request.setAttribute("CHANGE_PASS_ERROR", error);
+                request.setAttribute("CHANGE_PASS_ERROR", errors);
             }else {                
                 String newPassHashed = utils.hashPassword(newPass);
                 boolean result = dao.changePassword(id, newPassHashed);

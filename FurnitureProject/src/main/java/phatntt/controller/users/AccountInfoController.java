@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import phatntt.dto.UsersAccountInfoError;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.ErrorDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
@@ -104,7 +104,7 @@ public class AccountInfoController extends HttpServlet {
             String phone = request.getParameter("txtPhone");
             String address = request.getParameter("txtAddress");
 
-            UsersAccountInfoError errors = new UsersAccountInfoError();
+            ErrorDTO errors = new ErrorDTO();
             boolean foundErr = false;
 
             HttpSession session = request.getSession();
@@ -126,13 +126,13 @@ public class AccountInfoController extends HttpServlet {
 
             if (name.trim().length() < 2 || name.trim().length() > 50) {
                 foundErr = true;
-                errors.setFullnameLengthError(
-                        siteMaps.getProperty(Constants.SignUpFeatures.FULLNAME_LENGTH_ERR_MESSAGE));
+                errors.setGivenNameLengthError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.GIVENNAME_LENGTH_ERR_MSG));
             }
             if (phone.trim().length() != 10) {
                 foundErr = true;
-                errors.setPhoneLengthError(
-                        siteMaps.getProperty(Constants.SignUpFeatures.PHONE_LENGTH_ERR_MESSAGE));
+                errors.setPhoneRegexError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.PHONE_LENGTH_ERR_MSG));
             }
             if (foundErr) {
                 request.setAttribute("UPDATE_ACCOUNT_INFO_ERR", errors);

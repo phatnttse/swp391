@@ -68,10 +68,11 @@
                                                                 <fieldset class="form-group">
                                                                     <input type="password" class="form-control form-control-lg" value="" name="password" id="password" placeholder="Mật khẩu" required>
                                                                 </fieldset>
-                                                            </div>
-                                                            <c:if test="${error != null}">
+                                                                <c:if test="${error != null}">
                                                                 <p style="color: red;font-size: 14px">${error.passwordRegexError}</p>
                                                             </c:if>
+                                                            </div>
+                                                            
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <fieldset class="form-group">
                                                                     <input type="password" class="form-control form-control-lg" value="" name="confirm_password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>

@@ -116,7 +116,7 @@
                                                 <li class="filter-item filter-item--check-box filter-item--green">
                                                     <span>
                                                         <label for="filter-duoi-500-000d">
-                                                            <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
+                                                            <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" name="priceRange" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
                                                             <i class="fa"></i>
                                                             Giá dưới 500.000đ
                                                         </label>

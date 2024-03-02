@@ -6,10 +6,7 @@
 package phatntt.controller.users;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.dao.UsersDAO;
-import phatntt.dto.UsersDTO;
 import phatntt.dto.UsersRegisterError;
 import phatntt.util.Key_Utils;
 import phatntt.util.Constants;
@@ -61,21 +56,9 @@ public class RegisterAccountServlet extends HttpServlet {
         
         String url = siteMaps.getProperty(Constants.SignUpFeatures.REGISTER_PAGE);
         try {
-            //2. verify all user's error 
-//            UsersDAO dao = new UsersDAO();
-//            List<UsersDTO> userInfo = dao.getAllUsers();
-//            for (UsersDTO dto : userInfo) {
-//                if (username.trim().equals(dto.getUsername().trim())){
-//                    errors.setEmailDuplicateError("Tên tài khoản "+ username + " đã tồn tại.");
-//                    foundErr = true;
-//                }
-//            }              
+          
                     
-//            if (!password.trim().matches(siteMaps.getProperty(
-//                    MyApplicationConstants.SignUpFeatures.PASSWORD_REGEX))) {
-//                foundErr = true;
-//                errors.setPasswordLengthError(
-//                        siteMaps.getProperty(MyApplicationConstants.SignUpFeatures.PASSWORD_LENGTH_ERR_MESSAGE));
+
 //            if (!confirm.trim().equals(password.trim())) {
 //                foundErr = true;
 //                errors.setConfirmNotMatch(

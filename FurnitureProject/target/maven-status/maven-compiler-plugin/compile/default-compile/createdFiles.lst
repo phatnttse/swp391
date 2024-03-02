@@ -50,6 +50,7 @@ phatntt\dto\OrderDTO.class
 phatntt\cart\RemoveProductFromCart.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\dao\EmailDAO.class
+phatntt\controller\staff\StaffController.class
 phatntt\util\Constants.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class

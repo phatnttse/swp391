@@ -253,7 +253,7 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "SELECT * FROM product WHERE category_id= 1";
+                String sql = "SELECT * FROM product WHERE category_id= 1  LIMIT 8";
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
 

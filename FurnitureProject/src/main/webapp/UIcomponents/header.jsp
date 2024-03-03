@@ -56,7 +56,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <ul class="ul-control">                      
                             <li>
-                                <a href="/apps/kiem-tra-don-hang" title="Kiểm tra đơn hàng"><img
+                                <a href="ViewAllOrder" title="Kiểm tra đơn hàng"><img
                                         src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/box.png?1708512217480"
                                         class="img-fluid" alt="Lofi Furniture"> Kiểm tra đơn hàng</a>
                             </li>

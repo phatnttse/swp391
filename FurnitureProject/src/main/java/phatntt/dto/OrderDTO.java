@@ -4,6 +4,7 @@
  */
 package phatntt.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -23,9 +24,42 @@ public class OrderDTO {
     private String statusName;
     private String paymentMethod;
     private Timestamp createdAt;
+    private float priceOfOrder;
+    private String formattedPrice;
 
     public OrderDTO() {
     }
+
+    public OrderDTO(int order_id, String user_id, String email, String name, String phone, String address, String note, int status, String status_name, String payment_method, Timestamp createdAt, float priceOfOrder, String formattedPrice) {
+        this.order_id = order_id;
+        this.user_id = user_id;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.note = note;
+        this.status = status;
+        this.status_name = status_name;
+        this.payment_method = payment_method;
+        this.createdAt = createdAt;
+        this.priceOfOrder = priceOfOrder;
+        this.formattedPrice = formattedPrice;
+    }
+
+    public OrderDTO(int order_id, String user_id, String email,String name ,String phone, String address, String note, String status_name, String payment_method, Timestamp createdAt, float priceOfOrder) {
+        this.order_id = order_id;
+        this.user_id = user_id;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.note = note;
+        this.status_name = status_name;
+        this.payment_method = payment_method;
+        this.createdAt = createdAt;
+        this.priceOfOrder = priceOfOrder;
+    }
+
 
     /**
      * @return the orderId
@@ -55,86 +89,50 @@ public class OrderDTO {
         this.userId = userId;
     }
 
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the phone
-     */
     public String getPhone() {
         return phone;
     }
 
-    /**
-     * @param phone the phone to set
-     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    /**
-     * @return the address
-     */
     public String getAddress() {
         return address;
     }
 
-    /**
-     * @param address the address to set
-     */
     public void setAddress(String address) {
         this.address = address;
     }
 
-    /**
-     * @return the note
-     */
     public String getNote() {
         return note;
     }
 
-    /**
-     * @param note the note to set
-     */
     public void setNote(String note) {
         this.note = note;
     }
 
-    /**
-     * @return the status
-     */
     public int getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(int status) {
         this.status = status;
     }
@@ -167,19 +165,30 @@ public class OrderDTO {
         this.paymentMethod = paymentMethod;
     }
 
-    /**
-     * @return the createdAt
-     */
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    /**
-     * @param createdAt the createdAt to set
-     */
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    public float getPriceOfOrder() {
+        return priceOfOrder;
+    }
+
+    public void setPriceOfOrder(float priceOfOrder) {
+        this.priceOfOrder = priceOfOrder;
+    }
+
+    public String getFormattedPrice() {
+        return formattedPrice;
+    }
+
+    public void setFormattedPrice(String formattedPrice) {
+        this.formattedPrice = formattedPrice;
+    }
+    
 
    
 

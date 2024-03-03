@@ -73,6 +73,12 @@ public class Constants {
         public static final String ADMIN_PAGE = "adminPage";
         public static final String USERACCOUNT_PAGE = "viewUsersPage";
         public static final String VIEW_PRODUCTS_PAGE = "viewProductsPage";
+        
+    }
+    
+    public class OderFeatures {
+        public static final String ORDER_PAGE = "orderPage";
+        
     }
 
     public class UsersFeatures {

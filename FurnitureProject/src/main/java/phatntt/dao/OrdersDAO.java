@@ -9,6 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -180,4 +186,63 @@ public class OrdersDAO {
         return order;
     }
 
+    public List<OrderDTO> allOwnOrder(String user_id) throws SQLException, NamingException {
+        List<OrderDTO> list = new ArrayList<>();
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT \n"
+                        + "    o.*,\n"
+                        + "    os.name AS status_name,\n"
+                        + "    SUM(od.total_money) AS total_order_price\n"
+                        + "FROM \n"
+                        + "    `order` o\n"
+                        + "JOIN \n"
+                        + "    `order_detail` od ON o.order_id = od.order_id\n"
+                        + "JOIN \n"
+                        + "    `order_status` os ON o.status = os.status_id\n"
+                        + "WHERE \n"
+                        + "    o.user_id = ? \n"
+                        + "GROUP BY \n"
+                        + "    o.order_id;";
+                stm = con.prepareCall(sql);
+                stm.setString(1, user_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int order_id = rs.getInt("order_id");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    String phone = rs.getString("phone");
+                    String shipping_address = rs.getString("shipping_address");
+                    String note = rs.getString("note");
+                    int status = rs.getInt("status");
+                    String statusName = rs.getString("status_name");
+                    String payment_method = rs.getString("payment_method");
+                    Timestamp created_at = rs.getTimestamp("created_at");
+                    float priceOfOrder = rs.getFloat("total_order_price");
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    String formattedPrice = decimalFormat.format(priceOfOrder);
+                    OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_method, created_at, priceOfOrder, formattedPrice);
+                    odto.setFormattedPrice(formattedPrice);
+                    list.add(odto);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
 }

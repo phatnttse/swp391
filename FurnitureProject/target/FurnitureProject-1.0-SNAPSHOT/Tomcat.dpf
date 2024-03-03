@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/FurnitureProject">
-  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" name="FurnitureProject" password="phat1910" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/efurniture" username="root"/>
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" name="FurnitureProject" password="^.^tipro" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/efurniture" username="root"/>
 </Context>

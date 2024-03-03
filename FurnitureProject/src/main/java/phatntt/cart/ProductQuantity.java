@@ -81,7 +81,7 @@ public class ProductQuantity extends HttpServlet {
             if (result) {
                 List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
                 Gson gson = new Gson();
-                String json = gson.toJson(products);
+                String json = gson.toJson(products);               
                 out.println(json);        
             }
             out.close();

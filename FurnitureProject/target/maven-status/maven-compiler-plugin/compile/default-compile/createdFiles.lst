@@ -9,6 +9,7 @@ phatntt\controller\products\LoadProductDetailController.class
 phatntt\util\Constants$LoginWithGoogleFeatures.class
 phatntt\controller\admin\ViewProductsController.class
 phatntt\dto\CategoryDTO.class
+phatntt\util\Constants$Management.class
 phatntt\controller\products\SearchProductsController.class
 phatntt\controller\HomePageServlet.class
 phatntt\util\Constants$VerifyEmailFeatures.class
@@ -36,6 +37,7 @@ phatntt\controller\users\LoginWithGoogleController.class
 phatntt\cart\CartController.class
 phatntt\cart\UpdateTotalPrice.class
 phatntt\dto\ProductsDTO.class
+phatntt\controller\staff\OrderDetailManagementController.class
 phatntt\dao\OrderDetailDAO.class
 phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
@@ -49,6 +51,7 @@ phatntt\dto\OrderDTO.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
 phatntt\controller\admin\UpdateUsersController.class
+phatntt\controller\staff\OrderManagementController.class
 phatntt\dao\EmailDAO.class
 phatntt\controller\staff\StaffController.class
 phatntt\util\Constants.class

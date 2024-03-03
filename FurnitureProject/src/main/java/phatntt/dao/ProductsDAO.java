@@ -193,6 +193,195 @@ public class ProductsDAO implements Serializable {
         }
     }
 
+    public List<ProductsDTO> searchProductsByPrice(float minPrice, float maxPrice) throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE price >= ? AND price <=?";
+                stm = con.prepareCall(sql);
+                stm.setFloat(1, minPrice);
+                stm.setFloat(2, maxPrice);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    int categoryId = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    if (this.products == null) {
+                        this.products = new ArrayList<>();
+                    }
+                    this.products.add(dto);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
+
+    public List<ProductsDTO> searchProductsByQuantity(int minQuantity, int maxQuantity) throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE quantity >= ? AND quantity <= ?";
+                stm = con.prepareCall(sql);
+                stm.setInt(1, minQuantity);
+                stm.setInt(2, maxQuantity);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    int categoryId = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    if (this.products == null) {
+                        this.products = new ArrayList<>();
+                    }
+                    this.products.add(dto);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
+
+    public List<ProductsDTO> searchProductsByPurchases(int minPurchases, int maxPurchases) throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE purchases >= ? AND purchases <= ?";
+                stm = con.prepareCall(sql);
+                stm.setInt(1, minPurchases);
+                stm.setInt(2, maxPurchases);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    int categoryId = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    if (this.products == null) {
+                        this.products = new ArrayList<>();
+                    }
+                    this.products.add(dto);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
+    
+    public List<ProductsDTO> searchOutOfStockProducts() throws SQLException, NamingException {
+    List<ProductsDTO> result = new ArrayList<>();
+    
+    try {
+        con = DBConnect.createConnection();
+
+        if (con != null) {
+            String sql = "SELECT * FROM product WHERE quantity = 0";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                    int categoryId = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    if (this.products == null) {
+                        this.products = new ArrayList<>();
+                    }
+                    this.products.add(dto);
+            }
+        }
+    } finally {
+        if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+    }
+
+    return result;
+}
+
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
 
         ProductsDTO result = null;

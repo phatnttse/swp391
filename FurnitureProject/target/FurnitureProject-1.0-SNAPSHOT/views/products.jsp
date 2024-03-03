@@ -18,13 +18,6 @@
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-            />
-
-        <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <title>Sản phẩm</title>
         <style>
             .backdrop__body-backdrop___1rvky {
@@ -291,7 +284,7 @@
                                                                 ${product.discount}% 
                                                             </span>
                                                             <a href="" class="btn-compare js-btn-wishlist setWishlist btn-views"  title="Thêm vào yêu thích">
-                                                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181"></path></svg>
+                                                                <svg width="24" height="24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181"></path></svg>
                                                             </a>
 
                                                             <div class="action">
@@ -334,11 +327,10 @@
                             <div class="pagenav">
                                 <nav class="clearfix relative nav_pagi w_100 ">
                                     <ul class="pagination clearfix">
-
                                         <li class="page-item disabled"><a class="page-link" href="#">
                                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
                                             </a></li>
-                                        <li class="active page-item disabled"><a class="page-link" href="javascript:;">1</a></li>
+                                        <li class="active page-item disabled"><a class="page-link" href="">1</a></li>
 
                                         <li class="page-item"><a class="page-link" onclick="" href="">2</a></li>
 
@@ -399,7 +391,6 @@
             function showCartModal() {
                 const popupcart = document.querySelector('.popup-cart');
                 const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
-
                 // Hiển thị giỏ hàng
                 popupcart.classList.add('active');
                 backdrop.classList.add('active');
@@ -419,6 +410,200 @@
                 const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
                 popupcart.classList.remove('active');
                 backdrop.classList.remove('active');
+            }
+
+            function addProductQuantity(userId, productId) {
+                $.ajax({
+                    url: "/FurnitureProject/productQuantity",
+                    type: "post",
+                    data: {
+                        userId: userId,
+                        productId: productId
+                    },
+                    success: function (response) {
+                        // Parse JSON response từ servlet
+                        var products = JSON.parse(response);
+                        var totalPrice = 0;
+                        var newHTML = '';
+                        // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
+                        if (products.length === 0) {
+                            hideCartModal();
+                        } else {
+                            // Tạo HTML mới cho giỏ hàng
+                            newHTML +=
+                                    '<div id="cart-popup-container" class="cartPopupContainer">' +
+                                    '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
+                                    '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
+                                    '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
+                                    ;
+                            // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
+                            products.forEach(function (product) {
+                                if (product.quantity > 0) {
+                                    newHTML += '<div class="ajaxcart__row">';
+                                    newHTML += '<div class="ajaxcart__product cart_product">';
+                                    newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
+                                    newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
+                                    newHTML += '</a>';
+                                    newHTML += '<div class="grid__item cart_info">';
+                                    newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
+                                    newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
+                                    newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
+                                    newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half cart_select">';
+                                    newHTML += '<div class="ajaxcart__qty input-group-btn">';
+                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
+                                    newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
+                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
+                                    newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                }
+                            });
+                            products.forEach(function (product) {
+                                totalPrice += product.price * product.quantity;
+                            });
+                            newHTML += '</div>' +
+                                    '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
+                                    '<div class="row">' +
+                                    '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
+                                    '<div class="ajaxcart__subtotal">' +
+                                    '<div class="cart__subtotal">' +
+                                    '<div class="cart__col-6">Tổng tiền:</div>' +
+                                    '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="cart__btn-proceed-checkout-dt">' +
+                                    '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</form>' +
+                                    '</div>';
+
+                        }
+
+                        // Thay đổi nội dung của phần tử giỏ hàng
+                        $("#cart-popup-container").html(newHTML);
+                    },
+                    error: function (xhr) {
+                        console.error("Lỗi khi phân tích cú pháp JSON: ", error);
+                    }
+                });
+            }
+
+            // Hàm để định dạng số tiền
+            function formatCurrency(amount) {
+                return amount.toLocaleString('vi-VN') + '₫';
+            }
+
+
+            function reduceProductQuantity(userId, productId) {
+                $.ajax({
+                    url: "/FurnitureProject/productQuantity",
+                    type: "get",
+                    data: {
+                        userId: userId,
+                        productId: productId
+                    },
+                    success: function (response) {
+                        // Parse JSON response từ servlet
+                        var products = JSON.parse(response);
+                        var totalPrice = 0;
+                        var newHTML = '';
+                        // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
+                        if (products.length === 0) {
+                            hideCartModal();
+                        } else {
+                            // Tạo HTML mới cho giỏ hàng
+                            newHTML +=
+                                    '<div id="cart-popup-container" class="cartPopupContainer">' +
+                                    '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
+                                    '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
+                                    '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
+                                    ;
+                            // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
+                            products.forEach(function (product) {
+                                if (product.quantity > 0) {
+                                    newHTML += '<div class="ajaxcart__row">';
+                                    newHTML += '<div class="ajaxcart__product cart_product">';
+                                    newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
+                                    newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
+                                    newHTML += '</a>';
+                                    newHTML += '<div class="grid__item cart_info">';
+                                    newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
+                                    newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
+                                    newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
+                                    newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half cart_select">';
+                                    newHTML += '<div class="ajaxcart__qty input-group-btn">';
+                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
+                                    newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
+                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '<div class="grid">';
+                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
+                                    newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                    newHTML += '</div>';
+                                }
+                            });
+                            products.forEach(function (product) {
+                                totalPrice += product.price * product.quantity;
+                            });
+                            newHTML += '</div>' +
+                                    '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
+                                    '<div class="row">' +
+                                    '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
+                                    '<div class="ajaxcart__subtotal">' +
+                                    '<div class="cart__subtotal">' +
+                                    '<div class="cart__col-6">Tổng tiền:</div>' +
+                                    '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="cart__btn-proceed-checkout-dt">' +
+                                    '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</form>'+
+                                    '</div>';
+
+                        }
+
+                        // Thay đổi nội dung của phần tử giỏ hàng
+                        $("#cart-popup-container").html(newHTML);
+                    },
+                    error: function (xhr) {
+                        console.error("Lỗi khi phân tích cú pháp JSON: ", error);
+                    }
+                });
             }
         </script>
 

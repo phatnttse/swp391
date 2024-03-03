@@ -44,11 +44,11 @@ public class OrdersController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        List<CartDTO> products = (List<CartDTO>) session.getAttribute("CART");
-        session.setAttribute("CART", products);
-        session.setAttribute("CART_SIZE", products.size());
-        response.sendRedirect("checkOutPage");
+//        HttpSession session = request.getSession();
+//        List<CartDTO> products = (List<CartDTO>) session.getAttribute("CART");
+//        session.setAttribute("CART", products);
+//        session.setAttribute("CART_SIZE", products.size());
+//        response.sendRedirect("checkOutPage");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,12 +95,12 @@ public class OrdersController extends HttpServlet {
             OrdersDAO orderDAO = new OrdersDAO();
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
             int orderId = orderDAO.createOrder(user.getId(), email, name, phone, billingAddress, note, 1, paymentMethod);
-            OrderDTO order = orderDetailDAO.getOrderById(orderId);
+            OrderDTO order = orderDAO.getOrderById(orderId);
 
             // Thêm order_details, tạo trigger giảm số lg sp trong kho khi tạo order.
             if (orderId > 0) {
                 for (CartDTO orderDetail : orderDetails) {
-                    orderDetailDAO.addOrderDetail(order.getOrder_id(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
+                    orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
                 }
                 orderDAO.clearCartByUserId(user.getId());
                 session.setAttribute("CHECK_OUT_SUCCESS", order);

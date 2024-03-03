@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="contact">
-                        <h4>Cửa hàng nội thất 3PTN Furniture</h4>
+                        <h4>Cửa hàng nội thất Lofi Furniture</h4>
                         <div class="time_work">
                             <div class="item">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas"

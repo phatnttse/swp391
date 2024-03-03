@@ -439,4 +439,84 @@ public class ProductsDAO implements Serializable {
 
         return count;
     }
+
+
+    public List<ProductsDTO> getProductByPrice(double from, double to) {
+        List<ProductsDTO> list = new ArrayList<>();
+        
+        try {
+          con = DBConnect.createConnection();
+            if (con!= null) {
+                String sql = "SELECT * FROM product \n"
+                + "WHERE price between ? and ?";
+                stm = con.prepareCall(sql);
+                stm.setDouble(1, from);
+                stm.setDouble(2, to);
+                rs = stm.executeQuery();
+                while (rs.next()) {                    
+                    //
+                    // mapping
+                    //5.1 get data from tu resultset
+                    int productId = rs.getInt("product_id");
+                    String title = rs.getString("title");
+                    int categoryId = rs.getInt("category_id");
+                    float price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    String formattedPrice = decimalFormat.format(price);
+
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    p.setFormattedPrice(formattedPrice);
+                    list.add(p);
+                    //5.2 set data to DTO
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+      public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "INSERT INTO products (categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                stm = con.prepareStatement(sql);
+
+                stm.setInt(1, product.getCategoryId());
+                stm.setString(2, product.getTitle());
+                stm.setString(3, product.getDescription());
+                stm.setInt(4, product.getQuantity());
+                stm.setFloat(5, product.getPrice());
+                stm.setString(6, product.getThumbnail());
+                stm.setInt(7, product.getDiscount());
+                stm.setInt(8, product.getPurchases());
+                stm.setTimestamp(9, product.getCreatedAt());
+
+                int rowsAffected = stm.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } finally {
+            // Close resources
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    
+
 }

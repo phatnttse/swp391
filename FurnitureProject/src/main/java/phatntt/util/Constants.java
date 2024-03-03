@@ -101,7 +101,6 @@ public class Constants {
     }
 
     public class ShoppingFeatures {
-        
         public static final String CART_PAGE = "cartPage";
         public static final String PRODUCTS_PAGE = "productsPage";
         public static final String CHECK_OUT_PAGE = "checkOutPage";
@@ -111,5 +110,7 @@ public class Constants {
     public class Management {
         public static final String ORDER_MANAGEMENT_PAGE = "orderManagementPage";
         public static final String VIEW_ORDERDETAIL_PAGE = "orderDetailPage";
+        public static final String PRODUCT_MANAGEMENT_PAGE = "productManagementPage";
+
     }
 }

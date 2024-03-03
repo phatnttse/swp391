@@ -30,32 +30,32 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(int order_id, String user_id, String email, String name, String phone, String address, String note, int status, String status_name, String payment_method, Timestamp createdAt, float priceOfOrder, String formattedPrice) {
-        this.order_id = order_id;
-        this.user_id = user_id;
+    public OrderDTO(int orderId, String userId, String email, String name, String phone, String address, String note, int status, String statusName, String paymentMethod, Timestamp createdAt, float priceOfOrder, String formattedPrice) {
+        this.orderId = orderId;
+        this.userId = userId;
         this.email = email;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.note = note;
         this.status = status;
-        this.status_name = status_name;
-        this.payment_method = payment_method;
+        this.statusName = statusName;
+        this.paymentMethod = paymentMethod;
         this.createdAt = createdAt;
         this.priceOfOrder = priceOfOrder;
         this.formattedPrice = formattedPrice;
     }
 
-    public OrderDTO(int order_id, String user_id, String email,String name ,String phone, String address, String note, String status_name, String payment_method, Timestamp createdAt, float priceOfOrder) {
-        this.order_id = order_id;
-        this.user_id = user_id;
+    public OrderDTO(int order_id, String user_id, String email,String name ,String phone, String address, String note, String statusName, String paymentMethod, Timestamp createdAt, float priceOfOrder) {
+        this.orderId = order_id;
+        this.userId = user_id;
         this.email = email;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.note = note;
-        this.status_name = status_name;
-        this.payment_method = payment_method;
+        this.statusName = statusName;
+        this.paymentMethod = paymentMethod;
         this.createdAt = createdAt;
         this.priceOfOrder = priceOfOrder;
     }

@@ -20,8 +20,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phatntt.dto.UsersCreateNewPassErr;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.ErrorDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Key_Utils;
 import phatntt.util.Constants;
@@ -94,7 +94,7 @@ public class CreateNewPasswordController extends HttpServlet {
         UsersDAO dao = new UsersDAO();
        
 
-        UsersCreateNewPassErr errors = new UsersCreateNewPassErr();
+        ErrorDTO errors = new ErrorDTO();
         boolean foundErr = false;
 
         String url = siteMaps.getProperty(Constants.ForgotPasswordFeatures.CREATE_NEW_PASS);
@@ -103,13 +103,13 @@ public class CreateNewPasswordController extends HttpServlet {
             UsersDTO user = dao.checkLogin(email);
             if (!newPassword.trim().matches(siteMaps.getProperty(Constants.ForgotPasswordFeatures.PASSWORD_REGEX))) {
                 foundErr = true;
-                errors.setPasswordErr(
-                        siteMaps.getProperty(Constants.SignUpFeatures.PASSWORD_LENGTH_ERR_MESSAGE));
+                errors.setPasswordRegexError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
             }
             if (!confirm.trim().equals(newPassword.trim())) {
                 foundErr = true;
-                errors.setConfirmPassErr(
-                        siteMaps.getProperty(Constants.SignUpFeatures.CONFIRM_NOTMATCHED_ERR_MESSAGE));
+                errors.setConfirmNotMatch(
+                        siteMaps.getProperty(Constants.ValidateFeatures.CONFIRM_NOTMATCH_ERR_MSG));
             }
             if (foundErr) {
                 request.setAttribute("RESET_PASSWORD_ERR", errors);

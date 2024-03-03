@@ -17,6 +17,7 @@
         <title>Đăng ký</title>
     </head>
     <body>
+        <c:set var="error" value="${requestScope.REGISTER_ERRORS}"/>
         <%@include file="../UIcomponents/header.jsp"%>
         <%@include file="../UIcomponents/breadcrumb.jsp" %>
 
@@ -43,17 +44,23 @@
                                                                 <fieldset class="form-group">
                                                                     <input type="text" class="form-control form-control-lg" value="${param.family_name}" name="family_name" id="lastName" placeholder="Họ" required>
                                                                 </fieldset>
+                                                                <c:if test="${error != null}">
+                                                                    <p style="color: red;font-size: 14px">${error.familyNameLengthError}</p>
+                                                                </c:if>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <fieldset class="form-group">
-                                                                    <input type="text" class="form-control form-control-lg" value="${param.given_name}" name="given_name" id="firstName" placeholder="Tên" required>
+                                                                    <input type="text" class="form-control form-control-lg" value="${param.given_name}" name="given_name" id="firstName" placeholder="Tên" required> 
                                                                 </fieldset>
+                                                                <c:if test="${error != null}">
+                                                                    <p style="color: red;font-size: 14px">${error.givenNameLengthError}</p>
+                                                                </c:if>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <fieldset class="form-group">
-                                                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" class="form-control form-control-lg" value="${param.email}" name="email" id="email" placeholder="Email" required="">
+                                                                    <input type="email" class="form-control form-control-lg" value="${param.email}" name="email" id="email" placeholder="Email" required>
                                                                 </fieldset>
                                                             </div>
 
@@ -61,11 +68,18 @@
                                                                 <fieldset class="form-group">
                                                                     <input type="password" class="form-control form-control-lg" value="" name="password" id="password" placeholder="Mật khẩu" required>
                                                                 </fieldset>
+                                                                <c:if test="${error != null}">
+                                                                <p style="color: red;font-size: 14px">${error.passwordRegexError}</p>
+                                                            </c:if>
                                                             </div>
+                                                            
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <fieldset class="form-group">
                                                                     <input type="password" class="form-control form-control-lg" value="" name="confirm_password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
                                                                 </fieldset>
+                                                                <c:if test="${error != null}">
+                                                                    <p style="color: red;font-size: 14px">${error.confirmNotMatch}</p>
+                                                                </c:if>
                                                             </div>
                                                         </div>
                                                         <div class="section">

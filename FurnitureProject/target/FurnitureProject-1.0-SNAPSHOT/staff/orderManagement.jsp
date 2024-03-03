@@ -185,7 +185,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng sản phẩm</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng đơn hàng</h6>
                             </div>
                             <div class="card-body">
                                 <form action="orderDetailManagement" method="get">
@@ -224,8 +224,6 @@
 
                             </div>
                         </div>
-
-
 
                     </div>
                     <!-- /.container-fluid -->

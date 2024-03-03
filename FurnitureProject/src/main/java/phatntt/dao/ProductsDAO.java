@@ -336,20 +336,20 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
     public List<ProductsDTO> searchOutOfStockProducts() throws SQLException, NamingException {
-    List<ProductsDTO> result = new ArrayList<>();
-    
-    try {
-        con = DBConnect.createConnection();
+        List<ProductsDTO> result = new ArrayList<>();
 
-        if (con != null) {
-            String sql = "SELECT * FROM product WHERE quantity = 0";
-            stm = con.prepareStatement(sql);
-            rs = stm.executeQuery();
+        try {
+            con = DBConnect.createConnection();
 
-            while (rs.next()) {
-                int productId = rs.getInt("product_id");
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE quantity = 0";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
@@ -365,10 +365,10 @@ public class ProductsDAO implements Serializable {
                         this.products = new ArrayList<>();
                     }
                     this.products.add(dto);
+                }
             }
-        }
-    } finally {
-        if (rs != null) {
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
             if (stm != null) {
@@ -377,10 +377,10 @@ public class ProductsDAO implements Serializable {
             if (con != null) {
                 con.close();
             }
-    }
+        }
 
-    return result;
-}
+        return result;
+    }
 
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
 
@@ -629,20 +629,19 @@ public class ProductsDAO implements Serializable {
         return count;
     }
 
-
     public List<ProductsDTO> getProductByPrice(double from, double to) {
         List<ProductsDTO> list = new ArrayList<>();
-        
+
         try {
-          con = DBConnect.createConnection();
-            if (con!= null) {
+            con = DBConnect.createConnection();
+            if (con != null) {
                 String sql = "SELECT * FROM product \n"
-                + "WHERE price between ? and ?";
+                        + "WHERE price between ? and ?";
                 stm = con.prepareCall(sql);
                 stm.setDouble(1, from);
                 stm.setDouble(2, to);
                 rs = stm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {
                     //
                     // mapping
                     //5.1 get data from tu resultset
@@ -673,7 +672,8 @@ public class ProductsDAO implements Serializable {
         }
         return list;
     }
-      public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
+
+    public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
         try {
             con = DBConnect.createConnection();
             if (con != null) {
@@ -706,6 +706,72 @@ public class ProductsDAO implements Serializable {
         return false;
     }
 
-    
+    public void editProduct(ProductsDTO editedProduct) throws SQLException, NamingException {
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "UPDATE product SET title=?, description=?, quantity=?, price=?, thumbnail=?, discount=?, purchases=?, created_at=? WHERE product_id=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, editedProduct.getTitle());
+                stm.setString(2, editedProduct.getDescription());
+                stm.setInt(3, editedProduct.getQuantity());
+                stm.setFloat(4, editedProduct.getPrice());
+                stm.setString(5, editedProduct.getThumbnail());
+                stm.setInt(6, editedProduct.getDiscount());
+                stm.setInt(7, editedProduct.getPurchases());
+                stm.setTimestamp(8, editedProduct.getCreatedAt());
+                stm.setInt(9, editedProduct.getProductId());
 
+                int rowsAffected = stm.executeUpdate();
+
+                // Handle success or failure within the method
+                if (rowsAffected > 0) {
+                    System.out.println("Update successful. Rows affected: " + rowsAffected);
+                } else {
+                    System.out.println("Update failed. No rows affected.");
+                }
+            }
+        } finally {
+            // Close resources
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void updateProduct(ProductsDTO updatedProduct) throws SQLException, NamingException {
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "UPDATE product SET quantity=?, price=?, discount=?, purchases=? WHERE product_id=?";
+                stm = con.prepareStatement(sql);
+
+                stm.setInt(1, updatedProduct.getQuantity());
+                stm.setFloat(2, updatedProduct.getPrice());
+                stm.setInt(3, updatedProduct.getDiscount());
+                stm.setInt(4, updatedProduct.getPurchases());
+                stm.setInt(5, updatedProduct.getProductId());
+
+                int rowsAffected = stm.executeUpdate();
+
+                // Handle success or failure within the method
+                if (rowsAffected > 0) {
+                    System.out.println("Update successful. Rows affected: " + rowsAffected);
+                } else {
+                    System.out.println("Update failed. No rows affected.");
+                }
+            }
+        } finally {
+            // Close resources
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

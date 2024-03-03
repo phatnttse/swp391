@@ -220,7 +220,9 @@
                                                         <!--<td style="color: red">${order.statusName}</td>-->
                                                         <td>
                                                             <input type="hidden" name="productId" value="${product.productId}" />
-                                                            <button type="submit" class="btn btn-outline-info">ADD</button>                                                           
+                                                            <button type="submit" class="btn btn-outline-info">ADD</button>                                                       
+                                                            <button type="submit" class="btn btn-outline-info">Edit</button>                                                           
+                                                            <button type="submit" class="btn btn-outline-info">Delete</button>
                                                         </td>                                                                                  
                                                     </tr>  
                                                 </c:forEach>

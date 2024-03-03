@@ -13,6 +13,7 @@ import java.util.List;
 import javax.naming.NamingException;
 import phatntt.dto.OrderDTO;
 import phatntt.dto.OrderDetailDTO;
+import phatntt.dto.OrderStatusDTO;
 import phatntt.util.DBConnect;
 
 /**
@@ -26,7 +27,7 @@ public class OrderDetailDAO {
     private ResultSet rs = null;
 
     public void addOrderDetail(int orderId, int productId, String title, float price, int quantity, String thumbnail, float totalMoney) throws SQLException, NamingException {
-       
+
         try {
             con = DBConnect.createConnection();
             if (con != null) {
@@ -41,7 +42,7 @@ public class OrderDetailDAO {
                 stm.setString(6, thumbnail);
                 stm.setFloat(7, totalMoney);
                 stm.executeUpdate();
-                
+
             }
         } finally {
             if (stm != null) {
@@ -51,12 +52,11 @@ public class OrderDetailDAO {
                 con.close();
             }
         }
-       
+
     }
-    
+
     public List<OrderDetailDTO> getOrderDetailsByOrderId(int orderId) throws SQLException, NamingException {
         List<OrderDetailDTO> orderDetails = new ArrayList<>();
-       
 
         try {
             con = DBConnect.createConnection();
@@ -95,6 +95,67 @@ public class OrderDetailDAO {
         return orderDetails;
     }
 
-    
+    public List<OrderStatusDTO> getAllOrderStatus() throws SQLException, NamingException {
+        List<OrderStatusDTO> orderStatusList = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT * FROM order_status";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    OrderStatusDTO orderStatus = new OrderStatusDTO();
+                    orderStatus.setStatusId(rs.getInt("status_id"));
+                    orderStatus.setName(rs.getString("name"));
+                    orderStatusList.add(orderStatus);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return orderStatusList;
+    }
+
+    public boolean updateOrderStatus(int orderId, int statusId) throws SQLException, NamingException {
+
+        boolean result = false;
+        
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+               
+                String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, statusId);
+                stm.setInt(2, orderId);
+                int affectedRows = stm.executeUpdate();
+                
+                if (affectedRows > 0){
+                    result = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 
 }

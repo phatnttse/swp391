@@ -192,11 +192,11 @@
                                 <!-- Hiển thị thông tin chi tiết của sản phẩm -->
                                 <p>Mã sản phẩm: ${product.productId}</p>
                                 <p>Loại: ${product.categoryId}</p>
-                                <p>Giá: ${product.formattedPrice}</p>
-                                <p>Số lượng: ${product.quantity}</p>
-                                <p>Discount: ${product.discount}</p>
-                                <p>Thumbnail: ${product.thumbnail}</p>
-                                <p>Nội dung: ${product.description}</p>
+                                <p>Giá: <input type="text" name="price" value="${product.formattedPrice}" /></p>
+                                <p>Số lượng: <input type="text" name="quantity" value="${product.quantity}" /></p>
+                                <p>Discount: <input type="text" name="discount" value="${product.discount}" /></p>
+                                <p>Thumbnail: <input type="text" name="thumbnail" value="${product.thumbnail}" /></p>
+                                <p>Nội dung: <textarea name="description">${product.description}</textarea></p>
 
                                 <!-- Nút chỉnh sửa sản phẩm -->
                                 <button type="submit" class="btn btn-outline-info">Chỉnh sửa</button>

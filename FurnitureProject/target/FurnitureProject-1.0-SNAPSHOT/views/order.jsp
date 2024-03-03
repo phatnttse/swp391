@@ -257,7 +257,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                         <li class="orf row">
                                                             <div class="col-md-7 ng-binding">
                                                                 <p>
-                                                                </p><h4> <b class="ng-binding"><span class="thong-tin-ma-don-hang">Mã đơn hàng</span>: ${order.order_id} </b> </h4> <br>
+                                                                </p><h4> <b class="ng-binding"><span class="thong-tin-ma-don-hang">Mã đơn hàng</span>: ${order.orderId} </b> </h4> <br>
                                                                 <span class="thong-tin-ho-va-ten-khach-hang">Họ và tên khách hàng</span>: ${order.name}<br>
                                                                 <span class="thong-tin-so-dien-thoai">Số điện thoại</span>: <span class="order-phone ng-binding">${order.phone}</span><br>
                                                                 <span class="thong-tin-email">Email</span>: <span class="order-email ng-binding">${order.email}</span><br>
@@ -268,7 +268,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                 <br>
                                                                 <br>
                                                                 <span style="color:red;">
-                                                                    <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b ng-bind="order.financial_status" class="ng-binding">${order.status_name}</b><br>
+                                                                    <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b ng-bind="order.financial_status" class="ng-binding">${order.statusName}</b><br>
                                                                 </span>
                                                                 <p></p>
                                                             </div>
@@ -281,10 +281,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                 <br>
                                                                 <a href="AllOrderDetail">Xem chi tiết đơn hàng của bạn</a>
                                                                 
-                                                                <p style="font-size:28px;">
+<!--                                                                <p style="font-size:28px;">
                                                                     <span style="font-size:18px;color:#333333;"><span class="thong-tin-so-luong-san-pham">Số lượng sản phẩm</span> : </span>
                                                                     <span style="font-size:28px;color:#FF0000;" class="ng-binding">1</span>
-                                                                </p>
+                                                                </p>-->
                                                             </div>
                                                         </li>
                                                     </c:forEach>

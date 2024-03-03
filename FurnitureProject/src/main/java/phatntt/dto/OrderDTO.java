@@ -13,16 +13,16 @@ import java.sql.Timestamp;
  */
 public class OrderDTO {
     
-    private int order_id;
-    private String user_id;
+    private int orderId;
+    private String userId;
     private String email;
     private String name;
     private String phone;
     private String address;
     private String note;
     private int status;
-    private String status_name;
-    private String payment_method;
+    private String statusName;
+    private String paymentMethod;
     private Timestamp createdAt;
     private float priceOfOrder;
     private String formattedPrice;
@@ -60,20 +60,33 @@ public class OrderDTO {
         this.priceOfOrder = priceOfOrder;
     }
 
-    public int getOrder_id() {
-        return order_id;
+
+    /**
+     * @return the orderId
+     */
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    /**
+     * @param orderId the orderId to set
+     */
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public String getUser_id() {
-        return user_id;
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -124,20 +137,32 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public String getStatus_name() {
-        return status_name;
+    /**
+     * @return the statusName
+     */
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatus_name(String status_name) {
-        this.status_name = status_name;
+    /**
+     * @param statusName the statusName to set
+     */
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
-    public String getPayment_method() {
-        return payment_method;
+    /**
+     * @return the paymentMethod
+     */
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPayment_method(String payment_method) {
-        this.payment_method = payment_method;
+    /**
+     * @param paymentMethod the paymentMethod to set
+     */
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Timestamp getCreatedAt() {
@@ -164,5 +189,9 @@ public class OrderDTO {
         this.formattedPrice = formattedPrice;
     }
     
+
+   
+
+   
     
 }

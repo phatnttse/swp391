@@ -15,6 +15,8 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import phatntt.dto.OrderDTO;
 import phatntt.util.DBConnect;
@@ -96,6 +98,92 @@ public class OrdersDAO {
             }
         }
 
+    }
+    
+    public List<OrderDTO> getAllOrders() throws SQLException, NamingException {
+        List<OrderDTO> orders = new ArrayList<>();
+        
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT o.*, os.name AS status_name " +
+                             "FROM `order` o " +
+                             "INNER JOIN `order_status` os ON o.status = os.status_id";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    OrderDTO order = new OrderDTO();
+                    order.setOrderId(rs.getInt("order_id"));
+                    order.setUserId(rs.getString("user_id"));
+                    order.setEmail(rs.getString("email"));
+                    order.setName(rs.getString("name"));
+                    order.setPhone(rs.getString("phone"));
+                    order.setAddress(rs.getString("shipping_address"));
+                    order.setNote(rs.getString("note"));
+                    order.setStatus(rs.getInt("status"));
+                    order.setPaymentMethod(rs.getString("payment_method"));
+                    order.setStatusName(rs.getString("status_name")); // Set trạng thái bằng tên
+
+                    orders.add(order);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return orders;
+    }
+    
+    public OrderDTO getOrderById(int orderId) throws SQLException, NamingException {
+        OrderDTO order = null;
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT o.*, os.name AS status_name " +
+                             "FROM `order` o " +
+                             "INNER JOIN `order_status` os ON o.status = os.status_id " +
+                             "WHERE o.order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, orderId);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    order = new OrderDTO();
+                    order.setOrderId(rs.getInt("order_id"));
+                    order.setUserId(rs.getString("user_id"));
+                    order.setEmail(rs.getString("email"));
+                    order.setName(rs.getString("name"));
+                    order.setPhone(rs.getString("phone"));
+                    order.setAddress(rs.getString("shipping_address"));
+                    order.setNote(rs.getString("note"));
+                    order.setStatus(rs.getInt("status"));
+                    order.setPaymentMethod(rs.getString("payment_method"));
+                    order.setStatusName(rs.getString("status_name")); 
+
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return order;
     }
 
     public List<OrderDTO> allOwnOrder(String user_id) throws SQLException, NamingException {

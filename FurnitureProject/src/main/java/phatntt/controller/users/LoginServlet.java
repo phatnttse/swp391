@@ -83,10 +83,18 @@ public class LoginServlet extends HttpServlet {
             UsersDAO dao = new UsersDAO();
             Key_Utils utils = Key_Utils.getInstance();
             UsersDTO user = dao.checkLogin(email);
-            if (user != null) {
+            if (user != null && user.getRole() == 0) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("USER_INFO", user);
                     url = "home";
+                } else {
+                    request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
+                }
+
+            } else if (user != null && user.getRole() == 1) {
+                if (utils.checkPassword(password, user.getPassword())) {
+                    session.setAttribute("STAFF_INFO", user);
+                    url = "orderManagement";
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }

@@ -85,7 +85,8 @@ public class OrderDetailManagementController extends HttpServlet {
             
             List<OrderStatusDTO> orderStatus = orderDetailDAO.getAllOrderStatus();
             
-            url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE);
+            url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE)
+                    +"?orderId=" + orderId;
             
             request.setAttribute("ORDER", order);
             request.setAttribute("ORDER_DETAILS", orderDetails);

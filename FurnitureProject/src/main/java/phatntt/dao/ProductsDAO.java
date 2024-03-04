@@ -383,43 +383,48 @@ public class ProductsDAO implements Serializable {
     }
 
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
-
         ProductsDTO result = null;
 
         try {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "Select * from product "
-                        + "Where product_id = ?";
+                String sql = "SELECT product.product_id, product.category_id, product.title, product.price, "
+                        + "product.quantity, product.discount, product.thumbnail, product.description, "
+                        + "product.purchases, product.created_at, category.name AS category_name "
+                        + "FROM product "
+                        + "LEFT JOIN category ON product.category_id = category.category_id "
+                        + "WHERE product.product_id = ?";
+
                 stm = con.prepareCall(sql);
                 stm.setInt(1, productId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    // mapping
-                    //5.1 get data from tu resultset                  
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    float price = rs.getFloat("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    String categoryName = rs.getString("category_name");
+
+                    // Format price
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+                    symbols.setGroupingSeparator('.');
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
                     String formattedPrice = decimalFormat.format(price);
 
                     result = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     result.setFormattedPrice(formattedPrice);
-                    //5.2 set data to DTO
+                    result.setCategoryName(categoryName);
                 }
             }
-
         } finally {
+            // Close resources
             if (rs != null) {
                 rs.close();
             }

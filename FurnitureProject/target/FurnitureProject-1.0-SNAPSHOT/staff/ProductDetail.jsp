@@ -186,75 +186,84 @@
                     </nav>
                     <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-                        <c:set var="productsdetail" value="${requestScope.PRODUCT}"/>
+    <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Quản lý Sản Phẩm</h1>
+    <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
-                            </div>
-                            <div class="card-body">
-                                <form action="orderDetailManagement" method="get">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã sản phẩm</th>
-                                                    <th>Loại</th>
-                                                    <th>Tên</th>
-                                                    <th>Giá</th>
-                                                    <th>Số Lượng</th>
-                                                    <th>Discount</th>                                              
-                                                    <th>Thumbnail</th> 
-                                                    <th>Description</th>
-                                                    <th>Lượt Mua</th>
-                                                    <th>Ngày Tạo</th>                                                 
-                                                    <th>Thao tác</th>
-                                                </tr>
-                                            </thead>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
+    </div>
+    <div class="card-body">
+        <form action="orderDetailManagement" method="get">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Loại</th>
+                            <th>Tên</th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Discount</th>
+                        </tr>
+                    </thead>
 
-                                            <tbody>
-                                                <c:forEach var="product" items="${productsdetail}">
-                                                    <tr>
-                                                        <td>#${product.productId}</td>
-                                                        <td>${product.categoryName}</td>
-                                                        <td>${product.title}</td>
-                                                        <td>${product.formattedPrice}đ</td>
-                                                        <td>${product.quantity}</td>
-                                                        <td>${product.discount}</td>                                            
-                                                        <td><img src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
-                                                        <td>${product.description}</td>
-                                                        <td>${product.purchases}</td>
-                                                        <td>${product.create_at}</td>
-                                                        <!-- Thao tác column -->
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <!-- Add Button -->
-                                                                <a href="addProduct" class="btn btn-outline-success">ADD</a>
+                    <tbody>
+                        <tr>
+                            <td>#${products.productId}</td>
+                            <td>${products.categoryName}</td>
+                            <td>${products.title}</td>
+                            <td>${products.formattedPrice}đ</td>
+                            <td>${products.quantity}</td>
+                            <td>${products.discount}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                                                                <!-- Edit Button -->
-                                                                <a href="editproductt?productId=${product.productId}" class="btn btn-outline-info">Edit</a>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Description</th>
+                            <th>Lượt Mua</th>
+                            <th>Ngày Tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="${products.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
+                            <td>${products.description}</td>
+                            <td>${products.purchases}</td>
+                            <td>${products.createdAt}</td>
+                            <!-- Thao tác column -->
+                            <td>
+                                <div class="btn-group">
+                                    <!-- Add Button -->
+                                    <a href="addProduct" class="btn btn-outline-success">ADD</a>
 
-                                                                <!-- Delete Button -->
-                                                                <a href="deleteProduct?id=${product.productId}" class="btn btn-outline-danger">Delete</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                                    <!-- Edit Button -->
+                                    <a href="editproductt?productId=${products.productId}" class="btn btn-outline-info">Edit</a>
 
-                    </div>
-                    <!-- /.container-fluid -->
+                                    <!-- Delete Button -->
+                                    <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+<!-- /.container-fluid -->
 
 
                 </div>

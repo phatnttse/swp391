@@ -224,11 +224,14 @@
 
                                                         <td>
                                                             <div class="btn-group">
+                                                                <!--ADD Button-->
+                                                                <a href="addProduct" class="btn btn-outline-success">ADD</a>
+
                                                                 <!-- Detail Button -->
                                                                 <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
 
                                                                 <!-- Delete Button -->
-                                                                <a href="deleteProduct?id=${product.productId}" class="btn btn-outline-info">Xóa</a>
+                                                                <a href="deleteproduct" class="btn btn-outline-danger">Xóa</a>
                                                             </div>
                                                         </td>
                                                     </tr>

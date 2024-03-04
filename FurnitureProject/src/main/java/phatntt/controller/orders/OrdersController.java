@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,11 +45,7 @@ public class OrdersController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        HttpSession session = request.getSession();
-//        List<CartDTO> products = (List<CartDTO>) session.getAttribute("CART");
-//        session.setAttribute("CART", products);
-//        session.setAttribute("CART_SIZE", products.size());
-//        response.sendRedirect("checkOutPage");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,15 +77,16 @@ public class OrdersController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        HttpSession session = request.getSession();
+        String paymentMethod = request.getParameter("paymentMethod");
         try {
-            HttpSession session = request.getSession();
+
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
             String email = request.getParameter("email");
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
             String billingAddress = request.getParameter("billingAddress");
             String note = request.getParameter("note");
-            String paymentMethod = request.getParameter("paymentMethod");
 
             List<CartDTO> orderDetails = (List<CartDTO>) session.getAttribute("ORDER_DETAILS");
 
@@ -102,11 +100,17 @@ public class OrdersController extends HttpServlet {
                 for (CartDTO orderDetail : orderDetails) {
                     orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
                 }
-                orderDAO.clearCartByUserId(user.getId());
-                session.setAttribute("CHECK_OUT_SUCCESS", order);
-                response.sendRedirect(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_SUCCESS_PAGE));
-                
+                if (paymentMethod.equals("Thu hộ (COD)")) {
+                    orderDAO.clearCartByUserId(user.getId());
+                    session.setAttribute("CHECK_OUT_SUCCESS", order);
+                    response.sendRedirect(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_SUCCESS_PAGE));
+                }else {
+                    request.setAttribute("ORDER_ID", orderId);
+                    RequestDispatcher rd = request.getRequestDispatcher(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_PAGE));
+            rd.forward(request, response);
+                }
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(OrdersController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

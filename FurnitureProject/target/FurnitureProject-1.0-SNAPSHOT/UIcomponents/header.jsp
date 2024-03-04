@@ -120,7 +120,7 @@
                             <div class="ul-control">
                                 <c:if test="${empty user}">
                                     <div class="header-account d-lg-block d-none">
-                                        <a href="/account" title="Tài khoản của bạn" rel="nofollow">
+                                        <a href="#" title="Tài khoản của bạn" rel="nofollow">
                                             <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/account.png?1708512217480"
                                                  alt="Lofi Furniture" width="25" height="25" class="icon">
                                             <span class="info">Tài khoản</span>

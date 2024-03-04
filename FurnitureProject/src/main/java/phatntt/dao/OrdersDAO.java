@@ -167,8 +167,8 @@ public class OrdersDAO {
                     order.setNote(rs.getString("note"));
                     order.setStatus(rs.getInt("status"));
                     order.setPaymentMethod(rs.getString("payment_method"));
+                    order.setCreatedAt(rs.getTimestamp("created_at"));
                     order.setStatusName(rs.getString("status_name")); 
-
                 }
             }
         } finally {

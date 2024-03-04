@@ -110,8 +110,9 @@ public class Constants {
         
         public static final String CART_PAGE = "cartPage";
         public static final String PRODUCTS_PAGE = "productsPage";
-        public static final String CHECK_OUT_PAGE = "checkOutPage";
+        public static final String CREATE_ORDER_PAGE = "createOrderPage";
         public static final String CHECK_OUT_SUCCESS_PAGE = "checkOutSuccessPage";
+        public static final String CHECK_OUT_PAGE = "checkOutPage";
     }
     
     public class Management {

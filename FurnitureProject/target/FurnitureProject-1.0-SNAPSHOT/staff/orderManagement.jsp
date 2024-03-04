@@ -166,7 +166,7 @@
                                         Settings
                                     </a>                                   
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="logOut">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -205,14 +205,15 @@
                                             <tbody>
                                                 <c:forEach var="order" items="${orders}">
                                                     <tr>
-                                                        <td>#${order.orderId}</td>
+                                                        <td>
+                                                            #${order.orderId}
+                                                        </td>
                                                         <td>${order.email}</td>
                                                         <td>${order.name}</td>
                                                         <td>${order.phone}</td>
                                                         <td style="color: red">${order.statusName}</td>
                                                         <td>
-                                                            <input type="hidden" name="orderId" value="${order.orderId}" />
-                                                            <button type="submit" class="btn btn-outline-info">Chi tiết</button>                                                           
+                                                            <a class="btn btn-outline-info" href="orderDetailManagement?orderId=${order.orderId}">Chi tiết</a>
                                                         </td>                                                                                  
                                                     </tr>  
                                                 </c:forEach>

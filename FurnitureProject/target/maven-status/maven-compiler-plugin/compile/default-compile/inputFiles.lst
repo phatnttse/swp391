@@ -8,6 +8,7 @@
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/util/Key_Utils.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/OrderDTO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/LoadProductCategoryController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/ProductDetailManagementController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/OrderDetailDTO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/ForgotPasswordController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/ProductManagementController.java

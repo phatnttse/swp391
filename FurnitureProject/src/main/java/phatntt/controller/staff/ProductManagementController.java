@@ -42,17 +42,7 @@ public class ProductManagementController extends HttpServlet {
      */
     
     
-    private void loadProducts(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            ProductsDAO productDAO = new ProductsDAO();
-            List<ProductsDTO> products = productDAO.getAllProducts();
-            request.setAttribute("PRODUCTS", products);
 
-        } catch (SQLException | NamingException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

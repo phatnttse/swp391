@@ -16,22 +16,6 @@
         <description>ServletContextListener</description>
         <listener-class>phatntt.listener.MyContextServletListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>java</servlet-name>
-        <servlet-class>ProductManagementController.java</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductManagementController</servlet-name>
-        <servlet-class>phatntt.controller.staff.ProductManagementController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>java</servlet-name>
-        <url-pattern>/productmanagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductManagementController</servlet-name>
-        <url-pattern>/productmanagementcontroller</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

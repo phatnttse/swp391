@@ -85,22 +85,21 @@ public class ProductsDAO implements Serializable {
     }
 
     public List<ProductsDTO> getAllProducts() throws SQLException, NamingException {
-
         List<ProductsDTO> result = new ArrayList<>();
 
         try {
             con = DBConnect.createConnection();
 
             if (con != null) {
+                String sql = "SELECT product.product_id, product.category_id, product.title, product.price, product.quantity, product.discount, product.thumbnail, product.description, product.purchases, product.created_at, category.name AS category_name "
+                        + "FROM product "
+                        + "LEFT JOIN category ON product.category_id = category.category_id";
 
-                String sql = "SELECT * FROM product";
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    //
-                    // mapping
-                    //5.1 get data from tu resultset
+                    // Mapping data from result set
                     int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
@@ -111,22 +110,24 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
+                    String categoryName = rs.getString("category_name");
 
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    // Format price
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+                    symbols.setGroupingSeparator('.');
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
                     String formattedPrice = decimalFormat.format(price);
 
+                    // Create ProductsDTO and set data
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(formattedPrice);
+                    p.setCategoryName(categoryName);
                     result.add(p);
-
-                    result.add(p);
-                    //5.2 set data to DTO
                 }
             }
 
         } finally {
+            // Close resources
             if (rs != null) {
                 rs.close();
             }
@@ -139,7 +140,6 @@ public class ProductsDAO implements Serializable {
         }
 
         return result;
-
     }
 
     private List<ProductsDTO> products;
@@ -336,20 +336,20 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
     public List<ProductsDTO> searchOutOfStockProducts() throws SQLException, NamingException {
-    List<ProductsDTO> result = new ArrayList<>();
-    
-    try {
-        con = DBConnect.createConnection();
+        List<ProductsDTO> result = new ArrayList<>();
 
-        if (con != null) {
-            String sql = "SELECT * FROM product WHERE quantity = 0";
-            stm = con.prepareStatement(sql);
-            rs = stm.executeQuery();
+        try {
+            con = DBConnect.createConnection();
 
-            while (rs.next()) {
-                int productId = rs.getInt("product_id");
+            if (con != null) {
+                String sql = "SELECT * FROM product WHERE quantity = 0";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
                     float price = rs.getInt("price");
@@ -365,10 +365,10 @@ public class ProductsDAO implements Serializable {
                         this.products = new ArrayList<>();
                     }
                     this.products.add(dto);
+                }
             }
-        }
-    } finally {
-        if (rs != null) {
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
             if (stm != null) {
@@ -377,10 +377,10 @@ public class ProductsDAO implements Serializable {
             if (con != null) {
                 con.close();
             }
-    }
+        }
 
-    return result;
-}
+        return result;
+    }
 
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
 
@@ -629,20 +629,19 @@ public class ProductsDAO implements Serializable {
         return count;
     }
 
-
     public List<ProductsDTO> getProductByPrice(double from, double to) {
         List<ProductsDTO> list = new ArrayList<>();
-        
+
         try {
-          con = DBConnect.createConnection();
-            if (con!= null) {
+            con = DBConnect.createConnection();
+            if (con != null) {
                 String sql = "SELECT * FROM product \n"
-                + "WHERE price between ? and ?";
+                        + "WHERE price between ? and ?";
                 stm = con.prepareCall(sql);
                 stm.setDouble(1, from);
                 stm.setDouble(2, to);
                 rs = stm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {
                     //
                     // mapping
                     //5.1 get data from tu resultset
@@ -673,7 +672,8 @@ public class ProductsDAO implements Serializable {
         }
         return list;
     }
-      public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
+
+    public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
         try {
             con = DBConnect.createConnection();
             if (con != null) {
@@ -705,7 +705,5 @@ public class ProductsDAO implements Serializable {
         }
         return false;
     }
-
-    
 
 }

@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 public class ProductsDTO implements Serializable{
     private int productId;
     private int categoryId;
+    private String categoryName;
     private String title;
     private String description;
     private int quantity;
@@ -193,6 +194,14 @@ public class ProductsDTO implements Serializable{
      */
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
    

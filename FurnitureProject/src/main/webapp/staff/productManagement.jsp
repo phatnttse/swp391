@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,12 +14,21 @@
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">   
+        <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css"> 
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Your existing style and script links -->
+
+        <!-- Bootstrap JS (Popper.js is required for dropdowns) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
         <title>product Page</title>
     </head>
     <body>
 
-            <body id="page-top">
+    <body id="page-top">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -178,14 +188,15 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
+
                         <c:set var="products" value="${requestScope.PRODUCTS}"/>
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Sản Phẩm</h1>
+                        <h1 class="h3 my-5 mb-4 text-gray-800">Quản lý Sản Phẩm</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng sản phẩm</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
                             </div>
                             <div class="card-body">
                                 <form action="orderDetailManagement" method="get">
@@ -196,47 +207,42 @@
                                                     <th>Mã sản phẩm</th>
                                                     <th>Loại</th>
                                                     <th>Tên</th>
-                                                    <th>Giá</th>                                                                                  
-                                                    <th>Số lượng</th>
-                                                    <th>Discount</th>
-                                                    <th>Thumbnail</th>
-                                                    <th>Nội dung</th>
-                                                    
-                                                   
+                                                    <th>Giá</th>
+                                                    <th>Thumbnail</th>                                                
+                                                    <th>Thao tác</th>
                                                 </tr>
                                             </thead>
-                                            
+
                                             <tbody>
                                                 <c:forEach var="product" items="${products}">
                                                     <tr>
                                                         <td>#${product.productId}</td>
+                                                        <td>${product.categoryName}</td>
                                                         <td>${product.title}</td>
-                                                        <td>${product.price}</td>
-                                                        <td>${product.quantity}</td>
-                                                        <td>${product.discount}</td>
-                                                        <td>${product.thumbnail}</td>
-                                                        <td>${product.description}</td>
-                                                        
-                                                        <!--<td style="color: red">${order.statusName}</td>-->
-                                                        <td>
-                                                            <input type="hidden" name="productId" value="${product.productId}" />
-                                                            <button type="submit" class="btn btn-outline-info">ADD</button>                                                       
-                                                            <button type="submit" class="btn btn-outline-info">Edit</button>                                                           
-                                                            <button type="submit" class="btn btn-outline-info">Delete</button>
-                                                        </td>                                                                                  
-                                                    </tr>  
-                                                </c:forEach>
+                                                        <td>${product.formattedPrice}đ</td>                                          
+                                                        <td><img src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
 
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <!-- Detail Button -->
+                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
+
+                                                                <!-- Delete Button -->
+                                                                <a href="deleteProduct?id=${product.productId}" class="btn btn-outline-info">Xóa</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
-                                    </div>                               
+                                    </div>
                                 </form>
-
                             </div>
                         </div>
 
                     </div>
                     <!-- /.container-fluid -->
+
 
                 </div>
                 <!-- End of Main Content -->
@@ -265,5 +271,5 @@
             }
         </script>
     </body>
-    </body>
+</body>
 </html>

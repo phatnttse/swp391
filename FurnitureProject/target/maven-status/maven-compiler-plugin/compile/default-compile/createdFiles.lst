@@ -37,6 +37,7 @@ phatntt/controller/users/LoginWithGoogleController.class
 phatntt/util/Constants$UsersFeatures.class
 phatntt/util/DBConnect.class
 phatntt/controller/email/ForgotPasswordController.class
+phatntt/controller/staff/ProductDetailManagementController.class
 phatntt/controller/products/AddProductsToCartController.class
 phatntt/util/Constants$DispatchFeatures.class
 phatntt/filter/DispatcherFilter.class

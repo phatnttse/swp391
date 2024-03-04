@@ -15,6 +15,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFil
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\listener\MyContextServletListener.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginWithGoogleController.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\orders\CheckOutController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\UpdateTotalPrice.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\ProductQuantity.java

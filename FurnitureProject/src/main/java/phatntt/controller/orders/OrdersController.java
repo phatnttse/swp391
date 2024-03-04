@@ -104,10 +104,10 @@ public class OrdersController extends HttpServlet {
                     orderDAO.clearCartByUserId(user.getId());
                     session.setAttribute("CHECK_OUT_SUCCESS", order);
                     response.sendRedirect(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_SUCCESS_PAGE));
-                }else {
+                } else {
                     request.setAttribute("ORDER_ID", orderId);
                     RequestDispatcher rd = request.getRequestDispatcher(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_PAGE));
-            rd.forward(request, response);
+                    rd.forward(request, response);
                 }
             }
 

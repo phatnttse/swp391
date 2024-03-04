@@ -372,14 +372,8 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  
 
 
-
-select * from product where category_id = '1';
-select * from category;
-select * from user;
-select * from role;
-select * from cart;
 INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
 VALUES ('123', 'staff@gmail.com', '$2a$10$wNGqMyi/jy8aURA1Bbm8.e6l90CY5A6FU0gmqKdLWC7BmWDYkoPpG', 'Staff', 'Staff', 'Staff', '1234567890', 'picture_url', 'Address', 1);
 
-delete from user where role_id = 1;
+
 

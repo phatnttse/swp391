@@ -26,7 +26,7 @@
             <ul class="navbar-nav bg-gradient-dark  sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -35,7 +35,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -79,13 +79,13 @@
 
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="#">
                         <span>Charts</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
                 </li>
@@ -165,7 +165,7 @@
                                         Settings
                                     </a>                                   
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="logOut">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -185,7 +185,7 @@
 
                             <div class="row">
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6"
 
                                     <!-- Circle Buttons -->
                                     <div class="card shadow mb-4">
@@ -224,6 +224,10 @@
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">Thanh Toán</span>
                                                 <input type="text" class="form-control" value="${order.paymentMethod}" disabled>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Ngày đặt hàng</span>
+                                                <input type="text" class="form-control" value="${order.createdAt}" disabled>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">Ghi chú</span>

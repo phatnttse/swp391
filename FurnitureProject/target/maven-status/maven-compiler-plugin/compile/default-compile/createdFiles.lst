@@ -14,6 +14,7 @@ phatntt\util\Constants$Management.class
 phatntt\controller\products\SearchProductsController.class
 phatntt\controller\HomePageServlet.class
 phatntt\util\Constants$VerifyEmailFeatures.class
+phatntt\util\Config.class
 phatntt\filter\DispatcherFilter.class
 phatntt\util\Constants$UsersFeatures.class
 phatntt\controller\users\LoginServlet.class
@@ -54,6 +55,7 @@ phatntt\cart\RemoveProductFromCart.class
 phatntt\util\Constants$OderFeatures.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\controller\staff\OrderManagementController.class
+phatntt\controller\orders\CheckOutController.class
 phatntt\dao\EmailDAO.class
 phatntt\util\Constants.class
 phatntt\controller\orders\ViewAllOrderController.class

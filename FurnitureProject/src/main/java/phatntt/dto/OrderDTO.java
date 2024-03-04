@@ -46,9 +46,9 @@ public class OrderDTO {
         this.formattedPrice = formattedPrice;
     }
 
-    public OrderDTO(int order_id, String user_id, String email,String name ,String phone, String address, String note, String statusName, String paymentMethod, Timestamp createdAt, float priceOfOrder) {
-        this.orderId = order_id;
-        this.userId = user_id;
+    public OrderDTO(int orderId, String userId, String email,String name ,String phone, String address, String note, String statusName, String paymentMethod, Timestamp createdAt, float priceOfOrder) {
+        this.orderId = orderId;
+        this.userId = userId;
         this.email = email;
         this.name = name;
         this.phone = phone;

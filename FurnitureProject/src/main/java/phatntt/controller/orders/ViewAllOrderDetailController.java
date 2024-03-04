@@ -6,17 +6,33 @@ package phatntt.controller.orders;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import phatntt.controller.products.ProductsController;
+import phatntt.dao.OrderDetailDAO;
+import phatntt.dao.OrdersDAO;
+import phatntt.dto.OrderDTO;
+import phatntt.dto.OrderDetailDTO;
+import phatntt.dto.UsersDTO;
+import phatntt.util.Constants;
 
 /**
  *
  * @author Dell
  */
-@WebServlet(name = "ViewAllOrderDetailController", urlPatterns = {"/ViewAllOrderDetailController"})
+@WebServlet(name = "ViewAllOrderDetailController", urlPatterns = {"/AllOrderDetail"})
 public class ViewAllOrderDetailController extends HttpServlet {
 
     /**
@@ -31,17 +47,23 @@ public class ViewAllOrderDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewAllOrderDetailController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewAllOrderDetailController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
+        String orderId = request.getParameter("orderId");
+        try {
+            OrderDetailDAO dao = new OrderDetailDAO();
+            List<OrderDetailDTO> orderDTOs = dao.getAllOrderDetail(Integer.parseInt(orderId));
+            request.setAttribute("ORDER_DETAIL", orderDTOs);
+            url = siteMaps.getProperty(Constants.OderFeatures.ORDER_DETAIL_PAGE);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

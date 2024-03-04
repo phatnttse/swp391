@@ -112,7 +112,7 @@ public class Constants {
         public static final String VIEW_ORDERDETAIL_PAGE = "orderDetailPage";
         public static final String PRODUCT_MANAGEMENT_PAGE = "productManagementPage";
         public static final String VIEW_PRODUCTDETAIL_PAGE = "productDetailPage";
-
+        public static final String ADD_PRODUCT_PAGE = "addProductPage";
         
     }
 }

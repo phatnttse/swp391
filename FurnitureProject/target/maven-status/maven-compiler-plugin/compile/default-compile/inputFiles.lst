@@ -19,6 +19,7 @@
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/ErrorDTO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/ProductsDTO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/admin/DeleteUsersController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/AddProductController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/CheckVerificationCode.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/LoginServlet.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/CategoryDAO.java

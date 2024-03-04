@@ -245,7 +245,7 @@
                             <td>
                                 <div class="btn-group">
                                     <!-- Add Button -->
-                                    <a href="addProduct" class="btn btn-outline-success">ADD</a>
+                                    <a href="addProductPage" class="btn btn-outline-success">ADD</a>
 
                                     <!-- Edit Button -->
                                     <a href="editproductt?productId=${products.productId}" class="btn btn-outline-info">Edit</a>

@@ -225,7 +225,7 @@
                                                         <td>
                                                             <div class="btn-group">
                                                                 <!--ADD Button-->
-                                                                <a href="addProduct" class="btn btn-outline-success">ADD</a>
+                                                                <a href="addProductPage" class="btn btn-outline-success">ADD</a>
 
                                                                 <!-- Detail Button -->
                                                                 <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>

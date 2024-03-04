@@ -1,3 +1,4 @@
+phatntt/controller/staff/AddProductController.class
 phatntt/dto/ErrorDTO.class
 phatntt/util/Constants$ForgotPasswordFeatures.class
 phatntt/controller/products/SearchProductsController.class

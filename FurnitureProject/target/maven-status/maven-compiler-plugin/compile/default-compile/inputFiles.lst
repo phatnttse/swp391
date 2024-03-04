@@ -13,9 +13,12 @@ D:\SWP391\FurnitureProject\src\main\java\phatntt\cart\UpdateTotalPrice.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\admin\DeleteUsersController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\category\CategoryController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\email\VerificationToResetPassController.java
+D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderManagementController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\users\LogOutServlet.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\users\ChangePasswordController.java
+D:\SWP391\FurnitureProject\src\main\java\phatntt\dto\OrderStatusDTO.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\dto\UsersDTO.java
+D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderDetailManagementController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\dao\CartDAO.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
@@ -25,6 +28,7 @@ D:\SWP391\FurnitureProject\src\main\java\phatntt\dto\CartDTO.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\products\ProductsController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\products\SearchProductsController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFilter.java
+D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\orders\ViewAllOrderDetailController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\dao\CategoryDAO.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\dao\ProductsDAO.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\users\LoginServlet.java
@@ -39,7 +43,6 @@ D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\orders\ViewAllOrderC
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductDetailController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\HomePageServlet.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\listener\MyContextServletListener.java
-D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\staff\StaffController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\controller\admin\UserAccountsController.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\filter\AuthorizationFilter.java
 D:\SWP391\FurnitureProject\src\main\java\phatntt\util\Key_Utils.java

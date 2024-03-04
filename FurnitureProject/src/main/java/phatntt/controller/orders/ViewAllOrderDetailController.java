@@ -21,8 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.controller.products.ProductsController;
+import phatntt.dao.OrderDetailDAO;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.OrderDTO;
+import phatntt.dto.OrderDetailDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
@@ -48,9 +50,13 @@ public class ViewAllOrderDetailController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
+        String orderId = request.getParameter("orderId");
         try {
-           
-
+            OrderDetailDAO dao = new OrderDetailDAO();
+            List<OrderDetailDTO> orderDTOs = dao.getAllOrderDetail(Integer.parseInt(orderId));
+            request.setAttribute("ORDER_DETAIL", orderDTOs);
+            url = siteMaps.getProperty(Constants.OderFeatures.ORDER_DETAIL_PAGE);
+            
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

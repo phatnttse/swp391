@@ -3,6 +3,7 @@ phatntt\dto\OrderDetailDTO.class
 phatntt\dto\UsersDTO.class
 phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
+phatntt\controller\orders\ViewAllOrderDetailController.class
 phatntt\controller\email\ConfirmVerificationResetPassController.class
 phatntt\dao\ProductsDAO.class
 phatntt\controller\products\LoadProductDetailController.class
@@ -54,11 +55,11 @@ phatntt\util\Constants$OderFeatures.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\controller\staff\OrderManagementController.class
 phatntt\dao\EmailDAO.class
-phatntt\controller\staff\StaffController.class
 phatntt\util\Constants.class
 phatntt\controller\orders\ViewAllOrderController.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class
+phatntt\dto\OrderStatusDTO.class
 phatntt\listener\MyContextServletListener.class
 phatntt\util\Constants$DispatchFeatures.class
 phatntt\dao\CategoryDAO.class

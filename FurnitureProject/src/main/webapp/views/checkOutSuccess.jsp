@@ -219,7 +219,7 @@
                                                 <div class="row">
                                                     <div class="col col--md-two">
                                                         <h2>Phương thức thanh toán</h2>
-                                                        <p>${order.payment_method}</p>
+                                                        <p>${order.paymentMethod}</p>
                                                     </div>
                                                     <div class="col col--md-two">
                                                         <h2>Phương thức vận chuyển</h2>

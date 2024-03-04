@@ -279,7 +279,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                     <span style="font-size:18px;color:#000000;"><span class="thong-tin-don-vi-tien-te">VNĐ</span></span>
                                                                 </p>
                                                                 <br>
-                                                                <a href="AllOrderDetail">Xem chi tiết đơn hàng của bạn</a>
+                                                                <a href="AllOrderDetail?orderId=${order.orderId}">Xem chi tiết đơn hàng của bạn</a>
                                                                 
 <!--                                                                <p style="font-size:28px;">
                                                                     <span style="font-size:18px;color:#333333;"><span class="thong-tin-so-luong-san-pham">Số lượng sản phẩm</span> : </span>

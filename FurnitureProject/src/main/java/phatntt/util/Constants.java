@@ -78,7 +78,7 @@ public class Constants {
     
     public class OderFeatures {
         public static final String ORDER_PAGE = "orderPage";
-        
+        public static final String ORDER_DETAIL_PAGE = "orderDetailPage";
     }
 
     public class UsersFeatures {

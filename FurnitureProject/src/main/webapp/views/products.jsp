@@ -354,8 +354,69 @@
         </div>  
 
         <div id="popup-cart-desktop" class="popup-cart"></div>
+        <div id="popup-view-product" class="popup-cart"></div>
 
         <script>
+            
+            
+            /**
+             * Xem nhanh sản phẩm bằng pop-up
+             * @param {type} productId
+             * @returns {undefined}
+             */
+            function viewFastProduct(productId){
+                 $.ajax({
+                    url: "/FurnitureProject/addProductsToCart",
+                    type: "GET",
+                    data: {
+                       productId: productId
+                    },
+                    success: function (response) {
+
+                            // Nếu không, hiển thị giỏ hàng
+                            const content = document.getElementById("popup-view-product");
+                            content.innerHTML = response;
+                            showCartModal();
+                    },
+                    error: function (xhr) {
+                        // Xử lý lỗi nếu cần
+                    }
+                });
+            }
+            
+            function showProductModal() {
+                const popupcart = document.querySelector('.popup-cart');
+                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
+                // Hiển thị giỏ hàng
+                popupcart.classList.add('active');
+                backdrop.classList.add('active');
+                // Khởi tạo bộ lắng nghe sự kiện cho nút đóng giỏ hàng
+                initializeCloseEvent();
+            }
+
+            function initializeCloseEventProduct() {
+                const iconClose = document.querySelector('.js-popup-close');
+                if (iconClose) {
+                    iconClose.addEventListener('click', hideCartModal);
+                }
+            }
+
+            function hideProductModal() {
+                const popupcart = document.querySelector('.popup-cart');
+                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
+                popupcart.classList.remove('active');
+                backdrop.classList.remove('active');
+            }
+            
+            /**
+             * Thêm sản phẩm vào giỏ hàng bằng pop-up
+             * @param {type} productId
+             * @param {type} title
+             * @param {type} thumbnail
+             * @param {type} price
+             * @returns {undefined}
+             */
+            
             function addProductToCart(productId, title, thumbnail, price) {
                 $.ajax({
                     url: "/FurnitureProject/addProductsToCart",
@@ -384,6 +445,10 @@
                     }
                 });
             }
+            
+            
+            
+            
             function showNotification(message) {
                 // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
                 alert(message);

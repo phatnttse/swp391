@@ -774,4 +774,27 @@ public class ProductsDAO implements Serializable {
             }
         }
     }
+    
+    public void deleteProduct(String productId) throws SQLException, NamingException {
+        con = DBConnect.createConnection();
+        try {
+            String sql = "DELETE FROM products WHERE product_id = ?";
+            stm = con.prepareStatement(sql);
+
+            stm.setString(1, productId);
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Product has been removed");
+            } else {
+                System.out.println("Delete failed!");
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

@@ -7,18 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">
-    <title>Product Detail</title>
-</head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">
+        <title>Product Detail</title>
+    </head>
     <body>
 
-            <body id="page-top">
+    <body id="page-top">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -177,40 +177,40 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
-            <!-- Main Content -->
-            <div class="container-fluid">
-                <c:if test="${not empty product}">
-                    <h1 class="h3 my-5 mb-4 text-gray-800">Chi tiết Sản Phẩm</h1>
+                    <!-- Main Content -->
+                    <div class="container-fluid">
+                        <c:if test="${not empty product}">
+                            <h1 class="h3 my-5 mb-4 text-gray-800">Chi tiết Sản Phẩm</h1>
 
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">${product.title}</h6>
-                        </div>
-                        <div class="card-body">
-                            <form action="EditProductServlet" method="post">
-                                <input type="hidden" name="productId" value="${product.productId}">
-                                <!-- Hiển thị thông tin chi tiết của sản phẩm -->
-                                <p>Mã sản phẩm: ${product.productId}</p>
-                                <p>Loại: ${product.categoryId}</p>
-                                <p>Giá: <input type="text" name="price" value="${product.formattedPrice}" /></p>
-                                <p>Số lượng: <input type="text" name="quantity" value="${product.quantity}" /></p>
-                                <p>Discount: <input type="text" name="discount" value="${product.discount}" /></p>
-                                <p>Thumbnail: <input type="text" name="thumbnail" value="${product.thumbnail}" /></p>
-                                <p>Nội dung: <textarea name="description">${product.description}</textarea></p>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">${product.title}</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="EditProductServlet" method="post">
+                                        <input type="hidden" name="productId" value="${product.productId}">
+                                        <!-- Hiển thị thông tin chi tiết của sản phẩm -->
+                                        <p>Mã sản phẩm: ${product.productId}</p>
+                                        <p>Loại: ${product.categoryId}</p>
+                                        <p>Giá: <input type="text" name="price" value="${product.formattedPrice}" /></p>
+                                        <p>Số lượng: <input type="text" name="quantity" value="${product.quantity}" /></p>
+                                        <p>Discount: <input type="text" name="discount" value="${product.discount}" /></p>
+                                        <p>Thumbnail: <input type="text" name="thumbnail" value="${product.thumbnail}" /></p>
+                                        <p>Nội dung: <textarea name="description">${product.description}</textarea></p>
 
-                                <!-- Nút chỉnh sửa sản phẩm -->
-                                <button type="submit" class="btn btn-outline-info">Chỉnh sửa</button>
-                            </form>
+                                        <!-- Nút chỉnh sửa sản phẩm -->
+                                        <button type="submit" class="btn btn-outline-info">Chỉnh sửa</button>
+                                    </form>
 
-                            <!-- Nút xóa sản phẩm -->
-                            <form action="DeleteProductServlet" method="post">
-                                <input type="hidden" name="productId" value="${product.productId}">
-                                <button type="submit" class="btn btn-outline-danger">Xóa</button>
-                            </form>
-                        </div>
+                                    <!-- Nút xóa sản phẩm -->
+                                    <form action="DeleteProductServlet" method="post">
+                                        <input type="hidden" name="productId" value="${product.productId}">
+                                        <button type="submit" class="btn btn-outline-danger">Xóa</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
-            </div>
 
                 </div>
                 <!-- End of Main Content -->

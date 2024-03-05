@@ -15,7 +15,6 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFil
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\listener\MyContextServletListener.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginWithGoogleController.java
-E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\orders\CheckOutController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\UpdateTotalPrice.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\ProductQuantity.java
@@ -23,6 +22,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\Upd
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\CheckVerificationCode.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\UsersDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\HomePageServlet.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\EWalletPayment.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\category\CategoryController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\RemoveProductFromCart.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\AddProductsToCartController.java
@@ -45,6 +45,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\Con
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LogOutServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\ProductsController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\OrdersDAO.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\CheckOutSuccessController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderStatusDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\CategoryDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\DeleteUsersController.java

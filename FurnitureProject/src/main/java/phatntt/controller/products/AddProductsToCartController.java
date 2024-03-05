@@ -76,7 +76,7 @@ public class AddProductsToCartController extends HttpServlet {
         int productId = Integer.parseInt(request.getParameter("productId"));
         String title = request.getParameter("title");
         String thumbnail = request.getParameter("thumbnail");
-        float price = Float.parseFloat(request.getParameter("price"));
+        int price = Integer.parseInt(request.getParameter("price"));
 
         try {
 

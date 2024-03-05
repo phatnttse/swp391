@@ -31,7 +31,7 @@ public class OrdersDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;
 
-    public int createOrder(String user_id, String email, String name, String phone, String shipping_address, String note, int status, String payment_method) throws SQLException, NamingException {
+    public int createOrder(String user_id, String email, String name, String phone, String shipping_address, String note, int status, String payment_method, boolean payment_status, int amount) throws SQLException, NamingException {
         int orderId = -1; // Initialize with an invalid ID
 
         try {
@@ -39,8 +39,8 @@ public class OrdersDAO {
             con = DBConnect.createConnection();
             if (con != null) {
                 // Prepare SQL statement
-                String sql = "INSERT INTO `order` (user_id, email, name, phone, shipping_address, note, status, payment_method) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO `order` (user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 // Set values for parameters
@@ -51,7 +51,10 @@ public class OrdersDAO {
                 stm.setString(5, shipping_address);
                 stm.setString(6, note);
                 stm.setInt(7, status);
-                stm.setString(8, payment_method);
+                stm.setBoolean(8, payment_status);
+                stm.setString(9, payment_method);
+                stm.setInt(10, amount);
+                
 
                 // Execute the query
                 int affectedRows = stm.executeUpdate();
@@ -99,16 +102,16 @@ public class OrdersDAO {
         }
 
     }
-    
+
     public List<OrderDTO> getAllOrders() throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
-        
+
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "SELECT o.*, os.name AS status_name " +
-                             "FROM `order` o " +
-                             "INNER JOIN `order_status` os ON o.status = os.status_id";
+                String sql = "SELECT o.*, os.name AS status_name "
+                        + "FROM `order` o "
+                        + "INNER JOIN `order_status` os ON o.status = os.status_id";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
 
@@ -122,8 +125,11 @@ public class OrdersDAO {
                     order.setAddress(rs.getString("shipping_address"));
                     order.setNote(rs.getString("note"));
                     order.setStatus(rs.getInt("status"));
+                    order.setPaymentStatus(rs.getBoolean("payment_status"));
                     order.setPaymentMethod(rs.getString("payment_method"));
-                    order.setStatusName(rs.getString("status_name")); // Set trạng thái bằng tên
+                    order.setAmount(rs.getInt("amount"));
+                    order.setStatusName(rs.getString("status_name"));
+                    order.setCreatedAt(rs.getTimestamp("created_at")); // Set trạng thái bằng tên
 
                     orders.add(order);
                 }
@@ -142,16 +148,16 @@ public class OrdersDAO {
 
         return orders;
     }
-    
+
     public OrderDTO getOrderById(int orderId) throws SQLException, NamingException {
         OrderDTO order = null;
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "SELECT o.*, os.name AS status_name " +
-                             "FROM `order` o " +
-                             "INNER JOIN `order_status` os ON o.status = os.status_id " +
-                             "WHERE o.order_id = ?";
+                String sql = "SELECT o.*, os.name AS status_name "
+                        + "FROM `order` o "
+                        + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                        + "WHERE o.order_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, orderId);
                 rs = stm.executeQuery();
@@ -166,9 +172,11 @@ public class OrdersDAO {
                     order.setAddress(rs.getString("shipping_address"));
                     order.setNote(rs.getString("note"));
                     order.setStatus(rs.getInt("status"));
+                    order.setPaymentStatus(rs.getBoolean("payment_status"));
                     order.setPaymentMethod(rs.getString("payment_method"));
+                    order.setAmount(rs.getInt("amount"));
+                    order.setStatusName(rs.getString("status_name"));
                     order.setCreatedAt(rs.getTimestamp("created_at"));
-                    order.setStatusName(rs.getString("status_name")); 
                 }
             }
         } finally {
@@ -217,14 +225,16 @@ public class OrdersDAO {
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     String statusName = rs.getString("status_name");
+                    boolean payment_status = rs.getBoolean("payment_status");
                     String payment_method = rs.getString("payment_method");
+                    int amount = rs.getInt("amount");
                     Timestamp created_at = rs.getTimestamp("created_at");
-                    float priceOfOrder = rs.getFloat("total_order_price");
+                    int priceOfOrder = rs.getInt("total_order_price");
                     DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
                     symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
                     DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
                     String formattedPrice = decimalFormat.format(priceOfOrder);
-                    OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_method, created_at, priceOfOrder, formattedPrice);
+                    OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_status, payment_method, amount, created_at);
                     odto.setFormattedPrice(formattedPrice);
                     list.add(odto);
 

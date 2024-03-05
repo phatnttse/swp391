@@ -94,81 +94,83 @@
                                     </div>
                                     <div class="clearfix"></div>
 
+                                    <form action="home" method="get" id="myForm">
+                                        <aside class="aside-item filter-price">
+                                            <div class="aside-title">Chọn mức giá 
+                                                <span class="nd-svg collapsible-plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
+                                                    <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <div class="aside-content filter-group">
+                                                <ul>
 
-                                    <aside class="aside-item filter-price">
-                                        <div class="aside-title">Chọn mức giá 
-                                            <span class="nd-svg collapsible-plus">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
-                                                <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div class="aside-content filter-group">
-                                            <ul>
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-duoi-500-000d">
-                                                            <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            Giá dưới 500.000đ
-                                                        </label>
-                                                    </span>
-                                                </li>
-
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-500-000d-1-000-000d">
-                                                            <input type="checkbox" id="filter-500-000d-1-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(>500000 AND <1000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            500.000đ - 1.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-duoi-500-000d">
+                                                                <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                Giá dưới 500.000đ
+                                                            </label>
+                                                        </span>
+                                                    </li>
 
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-1-000-000d-3-000-000d">
-                                                            <input type="checkbox" id="filter-1-000-000d-3-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="1.000.000đ - 3.000.000đ" value="(>1000000 AND <3000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            1.000.000đ - 3.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-500-000d-1-000-000d">
+                                                                <input onchange="toggleFilter(this);" type="checkbox" id="filter-500-000d-1-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(>500000 AND <1000000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                500.000đ - 1.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-3-000-000d-5-000-000d">
-                                                            <input type="checkbox" id="filter-3-000-000d-5-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="3.000.000đ - 5.000.000đ" value="(>3000000 AND <5000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            3.000.000đ - 5.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-5-000-000d-7-000-000d">
-                                                            <input type="checkbox" id="filter-5-000-000d-7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="5.000.000đ - 7.000.000đ" value="(>5000000 AND <7000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            5.000.000đ - 7.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-tren7-000-000d">
-                                                            <input type="checkbox" id="filter-tren7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Trên 7.000.000đ" value="(>7000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            Giá trên 7.000.000đ
-                                                        </label>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </aside>
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-1-000-000d-3-000-000d">
+                                                                <input type="checkbox" id="filter-1-000-000d-3-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="1.000.000đ - 3.000.000đ" value="(>1000000 AND <3000000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                1.000.000đ - 3.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
+
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-3-000-000d-5-000-000d">
+                                                                <input type="checkbox" id="filter-3-000-000d-5-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="3.000.000đ - 5.000.000đ" value="(>3000000 AND <5000000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                3.000.000đ - 5.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
+
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-5-000-000d-7-000-000d">
+                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="5.000.000đ - 7.000.000đ" value="(>5000000 AND <7000000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                5.000.000đ - 7.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-tren7-000-000d">
+                                                                <input type="checkbox" id="filter-tren7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Trên 7.000.000đ" value="(>7000000)" data-operator="OR">
+                                                                <i class="fa"></i>
+                                                                Giá trên 7.000.000đ
+                                                            </label>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </aside>
+                                    </form>
+
 
                                     <aside class="aside-item filter-type">
                                         <div class="aside-title">Loại sản phẩm 
@@ -358,32 +360,32 @@
 
         <script>
             
-            
+
             /**
              * Xem nhanh sản phẩm bằng pop-up
              * @param {type} productId
              * @returns {undefined}
              */
-            function viewFastProduct(productId){
-                 $.ajax({
+            function viewFastProduct(productId) {
+                $.ajax({
                     url: "/FurnitureProject/addProductsToCart",
                     type: "GET",
                     data: {
-                       productId: productId
+                        productId: productId
                     },
                     success: function (response) {
 
-                            // Nếu không, hiển thị giỏ hàng
-                            const content = document.getElementById("popup-view-product");
-                            content.innerHTML = response;
-                            showCartModal();
+                        // Nếu không, hiển thị giỏ hàng
+                        const content = document.getElementById("popup-view-product");
+                        content.innerHTML = response;
+                        showCartModal();
                     },
                     error: function (xhr) {
                         // Xử lý lỗi nếu cần
                     }
                 });
             }
-            
+
             function showProductModal() {
                 const popupcart = document.querySelector('.popup-cart');
                 const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
@@ -407,7 +409,7 @@
                 popupcart.classList.remove('active');
                 backdrop.classList.remove('active');
             }
-            
+
             /**
              * Thêm sản phẩm vào giỏ hàng bằng pop-up
              * @param {type} productId
@@ -416,7 +418,7 @@
              * @param {type} price
              * @returns {undefined}
              */
-            
+
             function addProductToCart(productId, title, thumbnail, price) {
                 $.ajax({
                     url: "/FurnitureProject/addProductsToCart",
@@ -445,10 +447,10 @@
                     }
                 });
             }
-            
-            
-            
-            
+
+
+
+
             function showNotification(message) {
                 // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
                 alert(message);
@@ -657,7 +659,7 @@
                                     '</div>' +
                                     '</div>' +
                                     '</div>' +
-                                    '</form>'+
+                                    '</form>' +
                                     '</div>';
 
                         }

@@ -267,8 +267,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                 <!-- ngIf: order.fulfillments.length > 0 -->
                                                                 <br>
                                                                 <br>
+
                                                                 <span style="color:red;">
-                                                                    <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b ng-bind="order.financial_status" class="ng-binding">${order.statusName}</b><br>
+                                                                    <span class="thong-tin-trang-thai-thanh-toan">Trạng thái thanh toán</span>: <b class="ng-binding">
+                                                                        <c:if test="${order.paymentStatus == true}">
+                                                                            Đã thanh toán
+                                                                        </c:if>
+                                                                        <c:if test="${order.paymentStatus == false}">
+                                                                            Chưa thanh toán
+                                                                        </c:if>
+                                                                    </b><br>
+                                                                </span>
+                                                                <span style="color:red;">
+                                                                    <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b class="ng-binding">${order.statusName}</b><br>
                                                                 </span>
                                                                 <p></p>
                                                             </div>
@@ -280,11 +291,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                 </p>
                                                                 <br>
                                                                 <a href="AllOrderDetail?orderId=${order.orderId}">Xem chi tiết đơn hàng của bạn</a>
-                                                                
-<!--                                                                <p style="font-size:28px;">
-                                                                    <span style="font-size:18px;color:#333333;"><span class="thong-tin-so-luong-san-pham">Số lượng sản phẩm</span> : </span>
-                                                                    <span style="font-size:28px;color:#FF0000;" class="ng-binding">1</span>
-                                                                </p>-->
+
+                                                                <!--                                                                <p style="font-size:28px;">
+                                                                                                                                    <span style="font-size:18px;color:#333333;"><span class="thong-tin-so-luong-san-pham">Số lượng sản phẩm</span> : </span>
+                                                                                                                                    <span style="font-size:28px;color:#FF0000;" class="ng-binding">1</span>
+                                                                                                                                </p>-->
                                                             </div>
                                                         </li>
                                                     </c:forEach>

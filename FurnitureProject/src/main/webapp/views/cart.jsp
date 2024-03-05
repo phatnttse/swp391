@@ -57,7 +57,7 @@
                                                                             <div class="grid__item one-half text-right cart_prices">
                                                                                 <span class="cart-price">
                                                                                     <script>
-                                                                                        var totalMoney = parseFloat('${product.price}');
+                                                                                        var totalMoney = parseInt('${product.price}');
                                                                                         var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                                         document.write(formattedTotalMoney);
                                                                                     </script>
@@ -92,7 +92,7 @@
                                                                             <div class="grid__item one-half text-right cart_prices">
                                                                                 <span class="cart-price">
                                                                                     <script>
-                                                                                        var totalMoney = parseFloat('${total_money}');
+                                                                                        var totalMoney = parseInt('${total_money}');
                                                                                         var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                                         document.write(formattedTotalMoney);
                                                                                     </script>
@@ -117,7 +117,7 @@
                                                                         <div id="totalPrice" class="text-right cart__totle">
                                                                             <span class="total-price">
                                                                                 <script>
-                                                                                    var totalMoney = parseFloat('${total_amount}');
+                                                                                    var totalMoney = parseInt('${total_amount}');
                                                                                     var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                                     document.write(formattedTotalMoney);
                                                                                 </script>

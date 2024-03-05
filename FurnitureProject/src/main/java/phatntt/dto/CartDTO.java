@@ -17,13 +17,13 @@ public class CartDTO implements Serializable{
     private String title;
     private String thumbnail;
     private int quantity;
-    private float price;
+    private int price;
    
 
     public CartDTO() {
     }
 
-    public CartDTO(int cartId, String userId, int productId, String title, String thumbnail, int quantity, float price) {
+    public CartDTO(int cartId, String userId, int productId, String title, String thumbnail, int quantity, int price) {
         this.cartId = cartId;
         this.userId = userId;
         this.productId = productId;
@@ -120,14 +120,14 @@ public class CartDTO implements Serializable{
     /**
      * @return the price
      */
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

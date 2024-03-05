@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
             if (user != null && user.getRole() == 0) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("USER_INFO", user);
-                    url = "home";
+                    url = siteMaps.getProperty(Constants.LoginFeatures.HOME);
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }
@@ -94,7 +94,7 @@ public class LoginServlet extends HttpServlet {
             } else if (user != null && user.getRole() == 1) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("STAFF_INFO", user);
-                    url = "orderManagement";
+                    url = siteMaps.getProperty(Constants.LoginFeatures.STAFF_PAGE);
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }

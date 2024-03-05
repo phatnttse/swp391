@@ -36,7 +36,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="staffPage">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -46,7 +46,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Menu
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -64,34 +64,8 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider">       
+               
 
             </ul>
             <!-- End of Sidebar -->
@@ -100,6 +74,7 @@
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
+  
                 <div id="content">
 
                     <!-- Topbar -->

@@ -49,7 +49,7 @@ public class ProductsDAO implements Serializable {
                     //5.1 get data from tu resultset
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -104,7 +104,7 @@ public class ProductsDAO implements Serializable {
                     int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -121,7 +121,7 @@ public class ProductsDAO implements Serializable {
                     p.setFormattedPrice(formattedPrice);
                     result.add(p);
 
-                    result.add(p);
+                    
                     //5.2 set data to DTO
                 }
             }
@@ -164,7 +164,7 @@ public class ProductsDAO implements Serializable {
                     int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -212,7 +212,7 @@ public class ProductsDAO implements Serializable {
                     //5.1 get data from tu resultset                  
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -253,7 +253,7 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "SELECT * FROM product WHERE category_id= 1  LIMIT 8";
+                String sql = "SELECT * FROM product WHERE category_id= 1";
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
 
@@ -263,7 +263,7 @@ public class ProductsDAO implements Serializable {
                     //5.1 get data from tu resultset
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -306,7 +306,7 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "SELECT * FROM product WHERE category_id= ?  LIMIT 8";
+                String sql = "SELECT * FROM product WHERE category_id= ?";
                 stm = con.prepareCall(sql);
                 stm.setInt(1, categoryId);
                 rs = stm.executeQuery();
@@ -317,7 +317,7 @@ public class ProductsDAO implements Serializable {
                     //5.1 get data from tu resultset
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -371,7 +371,7 @@ public class ProductsDAO implements Serializable {
                     int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -459,7 +459,7 @@ public class ProductsDAO implements Serializable {
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
                     int categoryId = rs.getInt("category_id");
-                    float price = rs.getInt("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");

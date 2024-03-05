@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">       
         <title>Chi tiết đơn hàng</title>
     </head>
-    <body>
     <body id="page-top">
 
         <!-- Page Wrapper -->
@@ -26,7 +25,7 @@
             <ul class="navbar-nav bg-gradient-dark  sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -35,7 +34,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="staffPage">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -45,12 +44,12 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Menu
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
+                    <a class="nav-link collapsed" href="">
                         <span>Sản Phẩm</span>
                     </a>                  
                 </li>
@@ -63,34 +62,8 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider">       
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
 
             </ul>
             <!-- End of Sidebar -->
@@ -187,7 +160,7 @@
 
                                 <div class="col-lg-6"
 
-                                    <!-- Circle Buttons -->
+                                     <!-- Circle Buttons -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
@@ -222,8 +195,21 @@
 
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Thanh Toán</span>
+                                                <span class="input-group-text">Phương thức thanh toán</span>
                                                 <input type="text" class="form-control" value="${order.paymentMethod}" disabled>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Trang thái thanh toán</span>
+                                                <input type="text" class="form-control" 
+                                                       
+                                                       <c:if test="${order.paymentStatus == true}">
+                                                           value="Đã thanh toán"
+                                                       </c:if>
+                                                       <c:if test="${order.paymentStatus == false}">
+                                                           value="Chưa thanh toán"
+                                                       </c:if>
+                                                       
+                                                       disabled>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">Ngày đặt hàng</span>

@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -85,10 +87,13 @@ public class LoadProductByPriceController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
         try {
+             CategoryDAO catedao = new CategoryDAO();
+            List<CategoryDTO> cdtos = catedao.getAllCategoryDTOs();
+            request.setAttribute("CATEGORY_LIST", cdtos);
             List<ProductsDTO> productsDTOs = new ArrayList<>();
             ProductsDAO dao = new ProductsDAO();
             if (price != null) {
-                double from = 0, to = 0;
+                int from = 0, to = 0;
                 for (int i = 0; i < price.length; i++) {
                     List<ProductsDTO> temp = new ArrayList<>();
                     if (price[i].equals("0")) {

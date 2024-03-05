@@ -439,7 +439,7 @@ public class ProductsDAO implements Serializable {
         return count;
     }
 
-    public List<ProductsDTO> getProductByPrice(double from, double to) {
+    public List<ProductsDTO> getProductByPrice(int from, int to) {
         List<ProductsDTO> list = new ArrayList<>();
         
         try {

@@ -107,20 +107,7 @@
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-
-                                    <form action="home" method="get" id="myForm">
-                                        <aside class="aside-item filter-price">
-                                            <div class="aside-title">Chọn mức giá 
-                                                <span class="nd-svg collapsible-plus">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
-                                                    <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <div class="aside-content filter-group">
-                                                <ul>
-
-
+                                                                      
                                     <aside class="aside-item filter-price">
                                         <div class="aside-title">Chọn mức giá 
                                             <span class="nd-svg collapsible-plus">
@@ -188,7 +175,7 @@
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-5-000-000d-7-000-000d">
-                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"   name="price" value="${4}">
+                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"  name="price" value="${4}">
                                                                 <i class="fa"></i>
                                                                 5.000.000đ - 7.000.000đ							
                                                             </label>
@@ -355,7 +342,7 @@
                                                             <h3 class="product-name"><a href="" title="${product.title}">${product.title}</a></h3>
                                                             <div class="price-box">
                                                                 <script>
-                                                                    var totalMoney = parseInt('${total_money}');
+                                                                    var totalMoney = parseFloat('${total_money}');
                                                                     var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                     document.write(formattedTotalMoney);
                                                                 </script>

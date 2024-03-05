@@ -1,7 +1,7 @@
 <%-- 
-    Document   : productManagement
-    Created on : Mar 4, 2024, 12:33:48 AM
-    Author     : mac
+    Document   : EditProduct
+    Created on : Mar 5, 2024, 2:35:00 PM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -191,12 +191,21 @@
 
     <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>
 
-    <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
+    <h1 class="h3 my-5 mb-4 text-gray-800">Edit Sản Phẩm</h1>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
+        <select class="form-control" id="category" name="category" style="margin-top: 10px">
+                                            <!-- Populate this dropdown with your available categories -->
+                                            <option value="1">Bồn Tắm</option>
+                                            <option value="2">Bồn Cầu</option>
+                                            <option value="3">Sen Tắm</option>
+                                            <option value="4">Tủ Chậu Lavabo</option>
+                                            <option value="5">Phụ Kiện</option>
+                                            <option value="6">Khác</option>
+                                        </select>
     </div>
     <div class="card-body">
         <form action="orderDetailManagement" method="get">
@@ -216,11 +225,11 @@
                     <tbody>
                         <tr>
                             <td>#${products.productId}</td>
-                            <td>${products.categoryName}</td>
-                            <td>${products.title}</td>
-                            <td>${products.formattedPrice}đ</td>
-                            <td>${products.quantity}</td>
-                            <td>${products.discount}</td>
+                            <td><input type="text" name="categoryName" value="${products.categoryName}" readonly="" /></td>
+                            <td><input type="text" name="categoryName" value="${products.title}" required=""/></td>
+                            <td><input type="text" name="categoryName" value="${products.formattedPrice}đ" readonly=""/></td>
+                            <td><input type="text" name="categoryName" value="${products.quantity}" readonly=""/></td>
+                            <td><input type="text" name="categoryName" value="${products.discount}" readonly="" /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -243,12 +252,9 @@
                             <td>${products.createdAt}</td>
                             <!-- Thao tác column -->
                             <td>
-                                <div class="btn-group">
-                                    <!-- Add Button -->
-                                    <a href="addProductPage" class="btn btn-outline-success">ADD</a>
-
+                                <div class="btn-group"> 
                                     <!-- Edit Button -->
-                                    <a href="editProductPage?productId=${products.productId}" class="btn btn-outline-info">Edit</a>
+                                    <a href="editproductcontroller" class="btn btn-outline-info">Confirm</a>
 
                                     <!-- Delete Button -->
                                     <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>

@@ -7,7 +7,10 @@ package phatntt.controller.category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -87,6 +90,9 @@ public class CategoryController extends HttpServlet {
             try {
                 categoryId = Integer.parseInt(categoryIdStr);
                 List<ProductsDTO> listProductsByCategoryId = productDAO.getProductByCategoryId(categoryId);
+                  DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
                 
                 StringBuilder out = new StringBuilder();
                 out.append("<div class=\"tab-1 tab-content current\">");
@@ -125,8 +131,8 @@ public class CategoryController extends HttpServlet {
                     out.append("                            <div class=\"product-info\">");
                     out.append("                                <h3 class=\"product-name\"><a href=\"/bon-tam-massage-dat-goc\" title=\"Bồn tắm Massage đặt góc\">" + product.getTitle() + "</a></h3>");
                     out.append("                                <div class=\"price-box\">");
-                    out.append("                                    <span class=\"price\">" + product.getFormattedPrice() + "₫</span>");
-                    out.append("                                    <span class=\"compare-price\">" + product.getFormattedPrice() + "₫</span>");
+                    out.append("                                    <span class=\"price\">" +  decimalFormat.format(product.getDiscountProduct())  + "₫</span>");
+                    out.append("                                    <span class=\"compare-price\">" + product.getFormattedPrice()+ "₫</span>");
                     out.append("                                </div>");
                     out.append("                            </div>");
                     out.append("                        </form>");

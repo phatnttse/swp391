@@ -14,12 +14,26 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/collection.css">
+        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
         <title>Sản phẩm</title>
         <style>
+            .custom-filter-button {
+                background-color: #fff;
+                color: #D94E28;
+                border: 2px solid #D94E28;
+                border-radius: 10px; /* Thêm bo góc 10px */
+                padding: 5px 10px; /* Thêm padding để nút trở nên rộng hơn và đẹp hơn */
+            }
+
+            .custom-filter-button:hover {
+                background-color: #D94E28;
+                color: #fff;
+            }
+
             .backdrop__body-backdrop___1rvky {
                 position: fixed;
                 opacity: 0;
@@ -106,10 +120,23 @@
                                             <div class="aside-content filter-group">
                                                 <ul>
 
+
+                                    <aside class="aside-item filter-price">
+                                        <div class="aside-title">Chọn mức giá 
+                                            <span class="nd-svg collapsible-plus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
+                                                <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="aside-content filter-group">
+                                            <form action="LoadProductByPriceController" method="POST" id="myForm">
+                                                <ul>
+
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-duoi-500-000d">
-                                                                <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
+                                                                <input type="checkbox" id="filter-duoi-500-000d"   name="price" value="${0}" >
                                                                 <i class="fa"></i>
                                                                 Giá dưới 500.000đ
                                                             </label>
@@ -120,7 +147,10 @@
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-500-000d-1-000-000d">
-                                                                <input onchange="toggleFilter(this);" type="checkbox" id="filter-500-000d-1-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(>500000 AND <1000000)" data-operator="OR">
+
+
+                                                                <input type="checkbox" id="filter-500-000d-1-000-000d"   name="price" value="${1}">
+
                                                                 <i class="fa"></i>
                                                                 500.000đ - 1.000.000đ							
                                                             </label>
@@ -131,7 +161,9 @@
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-1-000-000d-3-000-000d">
-                                                                <input type="checkbox" id="filter-1-000-000d-3-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="1.000.000đ - 3.000.000đ" value="(>1000000 AND <3000000)" data-operator="OR">
+
+                                                                <input type="checkbox" id="filter-1-000-000d-3-000-000d"  name="price" value="${2}" >
+
                                                                 <i class="fa"></i>
                                                                 1.000.000đ - 3.000.000đ							
                                                             </label>
@@ -141,17 +173,22 @@
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-3-000-000d-5-000-000d">
-                                                                <input type="checkbox" id="filter-3-000-000d-5-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="3.000.000đ - 5.000.000đ" value="(>3000000 AND <5000000)" data-operator="OR">
+                                                                <input type="checkbox" id="filter-3-000-000d-5-000-000d"   name="price" value="${3}" >
+
                                                                 <i class="fa"></i>
                                                                 3.000.000đ - 5.000.000đ							
                                                             </label>
                                                         </span>
                                                     </li>	
 
+
+                                                    
+
+
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-5-000-000d-7-000-000d">
-                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="5.000.000đ - 7.000.000đ" value="(>5000000 AND <7000000)" data-operator="OR">
+                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"   name="price" value="${4}">
                                                                 <i class="fa"></i>
                                                                 5.000.000đ - 7.000.000đ							
                                                             </label>
@@ -160,16 +197,18 @@
                                                     <li class="filter-item filter-item--check-box filter-item--green">
                                                         <span>
                                                             <label for="filter-tren7-000-000d">
-                                                                <input type="checkbox" id="filter-tren7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Trên 7.000.000đ" value="(>7000000)" data-operator="OR">
+                                                                <input type="checkbox" id="filter-tren7-000-000d" name="price" value="${5}">
                                                                 <i class="fa"></i>
                                                                 Giá trên 7.000.000đ
                                                             </label>
                                                         </span>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                        </aside>
-                                    </form>
+                                                <button type="submit" class="btn custom-filter-button">Lọc</button>
+
+                                            </form>
+                                        </div>
+                                    </aside>
 
 
                                     <aside class="aside-item filter-type">
@@ -274,6 +313,7 @@
                                     <c:set var="listProduct" value="${requestScope.PRODUCTS_LIST}"/>
                                     <c:if test="${not empty listProduct}">
                                         <c:forEach var="product" items="${listProduct}">
+                                            <c:set var="total_money" value="${product.price - (product.price * (product.discount)/100)}" />
 
                                             <div class="col-6 col-xl-4 col-lg-4 col-md-4">
                                                 <div class="item_product_main">
@@ -305,17 +345,27 @@
                                                                             </span>
                                                                         </button>
                                                                     </div>
-                                                                    <a title="Xem nhanh" href="" class="quick-view btn-views">
+                                                                    <button type="button" title="Xem nhanh" onclick="" class="quick-view btn-views">
                                                                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z"></path></svg>
-                                                                    </a>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="product-info">
                                                             <h3 class="product-name"><a href="" title="${product.title}">${product.title}</a></h3>
                                                             <div class="price-box">
-                                                                <span class="price">${product.formattedPrice}₫</span>
-                                                                <span class="compare-price">${product.formattedPrice}₫</span>
+                                                                <script>
+                                                                    var totalMoney = parseInt('${total_money}');
+                                                                    var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                    document.write(formattedTotalMoney);
+                                                                </script>
+                                                                <span class="compare-price">
+                                                                    <script>
+                                                                        var totalMoney = parseInt('${product.price}');
+                                                                        var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                        document.write(formattedTotalMoney);
+                                                                    </script>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </form>	
@@ -346,6 +396,8 @@
                             </div>
 
                         </div>
+
+
                     </div>
                 </div>
                 <div id="open-filters" class="open-filters d-lg-none d-xl-none">
@@ -357,6 +409,7 @@
 
         <div id="popup-cart-desktop" class="popup-cart"></div>
         <div id="popup-view-product" class="popup-cart"></div>
+
 
         <script>
             
@@ -396,12 +449,13 @@
                 initializeCloseEvent();
             }
 
-            function initializeCloseEventProduct() {
-                const iconClose = document.querySelector('.js-popup-close');
-                if (iconClose) {
-                    iconClose.addEventListener('click', hideCartModal);
-                }
+            function toggleFilter(checkbox) {
+                var value = checkbox.getAttribute("value");
+                // Gửi biểu mẫu tự động sau khi thay đổi ô checkbox
+                document.getElementById("myForm").submit();
             }
+
+
 
             function hideProductModal() {
                 const popupcart = document.querySelector('.popup-cart');
@@ -409,6 +463,7 @@
                 popupcart.classList.remove('active');
                 backdrop.classList.remove('active');
             }
+
 
             /**
              * Thêm sản phẩm vào giỏ hàng bằng pop-up
@@ -671,6 +726,11 @@
                         console.error("Lỗi khi phân tích cú pháp JSON: ", error);
                     }
                 });
+            }
+
+            function formatAndDisplayPrice(priceElementId, price) {
+                var formattedPrice = parseFloat(price).toLocaleString('vi-VN') + '₫';
+                document.getElementById(priceElementId).textContent = formattedPrice;
             }
         </script>
 

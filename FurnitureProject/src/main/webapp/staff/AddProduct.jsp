@@ -195,11 +195,11 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <form action="addproductcontroller" method="post">
+                                <form action="addproductcontroller" method="get">
                                     <div class="form-group">
                                         <label for="category">Loại sản phẩm:</label>
-                                        <select class="form-control" id="category" name="category">
-                                            <!-- Populate this dropdown with your available categories -->
+                                        <select class="form-control" id="categoryId" name="categoryId">
+<!--                                             Populate this dropdown with your available categories -->
                                             <option value="1">Bồn Tắm</option>
                                             <option value="2">Bồn Cầu</option>
                                             <option value="3">Sen Tắm</option>
@@ -207,6 +207,7 @@
                                             <option value="5">Phụ Kiện</option>
                                             <option value="6">Khác</option>
                                         </select>
+<!--<input type="hidden" class="form-control" id="title" name="categoryId" value="1" required>-->
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Tên sản phẩm:</label>

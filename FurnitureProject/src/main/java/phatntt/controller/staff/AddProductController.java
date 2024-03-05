@@ -26,14 +26,14 @@ import phatntt.dto.ProductsDTO;
 //ADD_PRODUCT_PAGE
 public class AddProductController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String PRODUCT_MANAGEMENT_PAGE = "productManagement.jsp";
+    private static final String ADD_PRODUCT_PAGE = "AddProduct.jsp";
+    private static final String PRODUCT_MANAGEMENT_PAGE = "staff/productManagement.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String url = ERROR;
+        
+            String url = ADD_PRODUCT_PAGE;
 
             try {
                 // Lấy thông tin sản phẩm từ form
@@ -44,7 +44,7 @@ public class AddProductController extends HttpServlet {
                 float price = Float.parseFloat(request.getParameter("price"));
                 String thumbnail = request.getParameter("thumbnail");
                 int discount = Integer.parseInt(request.getParameter("discount"));
-                int purchases = Integer.parseInt(request.getParameter("purchases"));
+//                int purchases = Integer.parseInt(request.getParameter("purchases"));
 
                 // Tạo một đối tượng ProductsDTO để lưu trữ thông tin sản phẩm
                 ProductsDTO product = new ProductsDTO();
@@ -55,7 +55,7 @@ public class AddProductController extends HttpServlet {
                 product.setPrice(price);
                 product.setThumbnail(thumbnail);
                 product.setDiscount(discount);
-                product.setPurchases(purchases);
+//                product.setPurchases(purchases);
                 // Bạn có thể muốn đặt thời gian tạo sản phẩm ở đây nếu cần thiết
 
                 // Gọi phương thức thêm sản phẩm từ ProductsDAO
@@ -64,7 +64,7 @@ public class AddProductController extends HttpServlet {
 
                 if (success) {
                     // Nếu thêm sản phẩm thành công, chuyển hướng đến trang productmanagement.jsp
-                    url = PRODUCT_MANAGEMENT_PAGE;
+                    url = "productManagement";
                 } else {
                     request.setAttribute("ERROR_MESSAGE", "Failed to add the product.");
                 }
@@ -77,7 +77,7 @@ public class AddProductController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

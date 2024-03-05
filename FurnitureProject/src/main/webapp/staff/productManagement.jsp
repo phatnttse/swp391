@@ -220,7 +220,7 @@
                                                         <td>${product.categoryName}</td>
                                                         <td>${product.title}</td>
                                                         <td>${product.formattedPrice}đ</td>                                          
-                                                        <td><img src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
+                                                        <td><img height="80px" width="80px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
                                                         <td>
                                                             <div class="btn-group">

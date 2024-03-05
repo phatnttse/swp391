@@ -25,6 +25,16 @@ public class ProductsDTO implements Serializable{
     private int purchases;
     private Timestamp createdAt;
     
+    private float discountProduct;
+
+    public float getDiscountProduct() {
+        return (price - (price*discount/100));
+    }
+
+    public void setDiscountProduct(float discountProduct) {
+        this.discountProduct = discountProduct;
+    }
+    
     public ProductsDTO() {
     }
 

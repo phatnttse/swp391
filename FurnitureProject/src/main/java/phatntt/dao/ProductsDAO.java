@@ -121,7 +121,6 @@ public class ProductsDAO implements Serializable {
                     p.setFormattedPrice(formattedPrice);
                     result.add(p);
 
-                    result.add(p);
                     //5.2 set data to DTO
                 }
             }
@@ -466,13 +465,8 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
 
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
                     list.add(p);
                     //5.2 set data to DTO
                 }
@@ -483,4 +477,5 @@ public class ProductsDAO implements Serializable {
         }
         return list;
     }
+    
 }

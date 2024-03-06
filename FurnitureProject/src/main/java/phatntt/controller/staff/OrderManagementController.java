@@ -49,7 +49,16 @@ public class OrderManagementController extends HttpServlet {
         try {
             OrdersDAO orderDAO = new OrdersDAO();
             List<OrderDTO> orders = orderDAO.getAllOrders();
+            List<OrderDTO> ordersByDay = orderDAO.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
+            List<OrderDTO> ordersByMonth = orderDAO.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
+            List<OrderDTO> cancelledOrders = orderDAO.getOrdersByCondition("WHERE o.status = 5"); 
+
+
             request.setAttribute("ORDERS", orders);
+            request.setAttribute("ORDERS_CURRENT", orders.size());
+            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
+            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
+            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
 
         } catch (SQLException ex) {
             Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,7 +6,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Created on : Mar 6, 2024, 10:52:00 PM
     Author     : Admin
 */
+.backdrop__body-backdrop___1rvky {
+    position: fixed;
+    opacity: 0;
+    width: 100%;
+    left: 0;
+    top: 0 !important;
+    right: 0;
+    bottom: 0;
+    background-color: #363636;
+    z-index: 9;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out
+}
 
+@media (max-width: 991px) {
+    .backdrop__body-backdrop___1rvky {
+        z-index:9
+    }
+}
+
+.backdrop__body-backdrop___1rvky.active {
+    visibility: visible;
+    opacity: 0.5
+}
 
 body {
     font-size: 14px;
@@ -857,7 +881,7 @@ button.close {
     scroll-snap-align: start start
 }
 
-.swiper-container-horizontal.swiper-container-css-mode>.swiper-wrapper {      
+.swiper-container-horizontal.swiper-container-css-mode>.swiper-wrapper {
     scroll-snap-type: x mandatory
 }
 

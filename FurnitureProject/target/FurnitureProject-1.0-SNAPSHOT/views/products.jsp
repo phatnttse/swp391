@@ -7,13 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html lang="vi">
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/collection.css">
+        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/collectionall.css">
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
@@ -21,53 +19,13 @@
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <title>Sản phẩm</title>
-        <style>
-            .custom-filter-button {
-                background-color: #fff;
-                color: #D94E28;
-                border: 2px solid #D94E28;
-                border-radius: 10px; /* Thêm bo góc 10px */
-                padding: 5px 10px; /* Thêm padding để nút trở nên rộng hơn và đẹp hơn */
-            }
-
-            .custom-filter-button:hover {
-                background-color: #D94E28;
-                color: #fff;
-            }
-
-            .backdrop__body-backdrop___1rvky {
-                position: fixed;
-                opacity: 0;
-                width: 100%;
-                left: 0;
-                top: 0 !important;
-                right: 0;
-                bottom: 0;
-                background-color: #363636;
-                z-index: 9;
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out
-            }
-
-            @media (max-width: 991px) {
-                .backdrop__body-backdrop___1rvky {
-                    z-index:9
-                }
-            }
-
-            .backdrop__body-backdrop___1rvky.active {
-                visibility: visible;
-                opacity: 0.5
-            }
-        </style>
+      
     </head>
     <body>
         <c:set var="listProductByCategory" value="${requestScope.CATEGORY_LIST}"/>
-
-        <div class="backdrop__body-backdrop___1rvky"></div>
         <%@include file="../UIcomponents/header.jsp"%>
         <%@include file="../UIcomponents/breadcrumb.jsp"%>
+        <div class="backdrop__body-backdrop___1rvky"></div>
         <div class="layout-collection">
             <div class="container">
                 <div class="row">
@@ -79,13 +37,11 @@
                             <nav class="nav-category">
                                 <ul class="nav navbar-pills">
                                     <c:if test="${not empty listProductByCategory}">
-
                                         <c:forEach var="category" items="${listProductByCategory}">
                                             <li class="nav-item  relative">
                                                 <a class="nav-link pr-5"  href="/FurnitureProject/product-category?categoryId=${category.categoryId}" title="Đèn chùm">${category.name}</a>
                                             </li>
                                         </c:forEach>
-
                                     </c:if>
                                 </ul>
                             </nav>
@@ -94,19 +50,7 @@
                         <div class="aside-filter clearfix">
                             <div class="aside-hidden-mobile">
                                 <div class="filter-container">
-
-                                    <div class="filter-containers">	
-                                        <div class="filter-container__selected-filter" style="display: none;">
-                                            <div class="filter-container__selected-filter-header clearfix">
-                                                <span class="filter-container__selected-filter-header-title">Bạn chọn</span>
-                                                <a href="" class="filter-container__clear-all" title="Bỏ hết">Bỏ hết</a>
-                                            </div>
-                                            <div class="filter-container__selected-filter-list clearfix">
-                                                <ul>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="clearfix"></div>
 
                                     <aside class="aside-item filter-price">
@@ -334,13 +278,7 @@
                                                                     var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                     document.write(formattedTotalMoney);
                                                                 </script>
-                                                                <span class="compare-price">
-                                                                    <script>
-                                                                        var comparePrice = parseInt('${product.price}');
-                                                                        var formattedComparePrice = comparePrice.toLocaleString('vi-VN') + '₫';
-                                                                        document.write(formattedComparePrice);
-                                                                    </script>
-                                                                </span>
+                                                                <span class="compare-price">${product.formattedPrice}₫</span>
                                                             </div>
                                                         </div>
                                                     </form>	
@@ -365,14 +303,12 @@
 
                                         <li class="page-item hidden-xs"><a class="page-link">
                                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-right fa-w-6"><path fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z" class=""></path></svg>
-                                            </a></li>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
                 <div id="open-filters" class="open-filters d-lg-none d-xl-none">
@@ -385,314 +321,13 @@
         intent="WELCOME"
         chat-title="Lofi_Furniture_Support"
         agent-id="cf3b1e72-2c0d-43b8-b9d4-e26ce22ec3bd"
-        language-code="en"
-    ></df-messenger>
+        language-code="en">            
+    </df-messenger>
 
     <div id="popup-cart-desktop" class="popup-cart"></div>
     <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-
-    <script>
-
-        function viewFastProduct(productId) {
-            $.ajax({
-                url: "/FurnitureProject/ViewPopupProductController",
-                type: "post",
-                data: {
-                    productId: productId
-                },
-                success: function (response) {
-
-                    // Nếu không, hiển thị giỏ hàng
-                    const content = document.getElementById("quick-view-product");
-                    content.innerHTML = response;
-                    showProductModal();
-                },
-                error: function (xhr) {
-                    // Xử lý lỗi nếu cần
-                }
-            });
-        }
-
-        function showProductModal() {
-            const quickViewProduct = document.getElementById('quick-view-product');
-            const backdrop = document.querySelector('.quickview-product');
-            // Hiển thị modal sản phẩm
-            quickViewProduct.classList.add('active');
-            backdrop.style.display = 'block';
-            // Khởi tạo bộ lắng nghe sự kiện cho nút đóng modal sản phẩm
-            initializeCloseEventProduct();
-        }
-
-        function initializeCloseEventProduct() {
-            const iconClose = document.querySelector('.js-popup-close-product');
-            if (iconClose) {
-                iconClose.addEventListener('click', hideProductModal);
-            }
-        }
-
-        function hideProductModal() {
-            const quickViewProduct = document.getElementById('quick-view-product');
-            const backdrop = document.querySelector('.quickview-product');
-            quickViewProduct.classList.remove('active');
-            backdrop.style.display = 'none';
-        }
-
-        function addProductToCart(productId, title, thumbnail, price, inputQuantity) {
-            if (document.getElementById("quantity-detail") !== null && document.getElementById("quantity-detail") !== undefined) {
-                // Lấy giá trị từ "quantity-detail" nếu tồn tại
-                inputQuantity = document.getElementById("quantity-detail").value;
-            }
-            $.ajax({
-                url: "/FurnitureProject/addProductsToCart",
-                type: "post",
-                data: {
-                    productId: productId,
-                    title: title,
-                    thumbnail: thumbnail,
-                    price: price,
-                    quantity: inputQuantity
-                },
-                success: function (response) {
-                    // Kiểm tra phản hồi từ server
-                    if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
-                        // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
-                        window.location.href = "/FurnitureProject/loginPage";
-                        alert("Để thực hiện, bạn cần phải đăng nhập!");
-                    } else {
-                        // Nếu không, hiển thị giỏ hàng
-                        const content = document.getElementById("popup-cart-desktop");
-                        content.innerHTML = response;
-                        hideProductModal();
-                        showCartModal();
-                        inputQuantity = document.getElementById("quantity-detail").value = 1;
-
-                    }
-                },
-                error: function (xhr) {
-                    // Xử lý lỗi nếu cần
-                }
-            });
-        }
-
-        function showCartModal() {
-            const popupcart = document.querySelector('.popup-cart');
-            const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
-            // Hiển thị giỏ hàng
-            popupcart.classList.add('active');
-            backdrop.classList.add('active');
-            // Khởi tạo bộ lắng nghe sự kiện cho nút đóng giỏ hàng
-            initializeCloseEvent();
-        }
-
-        function initializeCloseEvent() {
-            const iconClose = document.querySelector('.js-popup-close');
-            if (iconClose) {
-                iconClose.addEventListener('click', hideCartModal);
-            }
-        }
-
-        function hideCartModal() {
-            const popupcart = document.querySelector('.popup-cart');
-            const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
-            popupcart.classList.remove('active');
-            backdrop.classList.remove('active');
-        }
-
-        function addProductQuantity(userId, productId) {
-            $.ajax({
-                url: "/FurnitureProject/productQuantity",
-                type: "post",
-                data: {
-                    userId: userId,
-                    productId: productId
-                },
-                success: function (response) {
-                    // Parse JSON response từ servlet
-                    var products = JSON.parse(response);
-                    var totalPrice = 0;
-                    var newHTML = '';
-                    // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
-                    if (products.length === 0) {
-                        hideCartModal();
-                    } else {
-                        // Tạo HTML mới cho giỏ hàng
-                        newHTML +=
-                                '<div id="cart-popup-container" class="cartPopupContainer">' +
-                                '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
-                                '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
-                                '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
-                                ;
-                        // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
-                        products.forEach(function (product) {
-                            if (product.quantity > 0) {
-                                newHTML += '<div class="ajaxcart__row">';
-                                newHTML += '<div class="ajaxcart__product cart_product">';
-                                newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
-                                newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
-                                newHTML += '</a>';
-                                newHTML += '<div class="grid__item cart_info">';
-                                newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
-                                newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
-                                newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half cart_select">';
-                                newHTML += '<div class="ajaxcart__qty input-group-btn">';
-                                newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
-                                newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
-                                newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                            }
-                        });
-                        products.forEach(function (product) {
-                            totalPrice += product.price * product.quantity;
-                        });
-                        newHTML += '</div>' +
-                                '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
-                                '<div class="row">' +
-                                '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
-                                '<div class="ajaxcart__subtotal">' +
-                                '<div class="cart__subtotal">' +
-                                '<div class="cart__col-6">Tổng tiền:</div>' +
-                                '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="cart__btn-proceed-checkout-dt">' +
-                                '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</form>' +
-                                '</div>';
-
-                    }
-
-                    // Thay đổi nội dung của phần tử giỏ hàng
-                    $("#cart-popup-container").html(newHTML);
-                },
-                error: function (xhr) {
-                    console.error("Lỗi khi phân tích cú pháp JSON: ", error);
-                }
-            });
-        }
-
-        // Hàm để định dạng số tiền
-        function formatCurrency(amount) {
-            return amount.toLocaleString('vi-VN') + '₫';
-        }
-
-
-        function reduceProductQuantity(userId, productId) {
-            $.ajax({
-                url: "/FurnitureProject/productQuantity",
-                type: "get",
-                data: {
-                    userId: userId,
-                    productId: productId
-                },
-                success: function (response) {
-                    // Parse JSON response từ servlet
-                    var products = JSON.parse(response);
-                    var totalPrice = 0;
-                    var newHTML = '';
-                    // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
-                    if (products.length === 0) {
-                        hideCartModal();
-                    } else {
-                        // Tạo HTML mới cho giỏ hàng
-                        newHTML +=
-                                '<div id="cart-popup-container" class="cartPopupContainer">' +
-                                '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
-                                '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
-                                '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
-                                ;
-                        // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
-                        products.forEach(function (product) {
-                            if (product.quantity > 0) {
-                                newHTML += '<div class="ajaxcart__row">';
-                                newHTML += '<div class="ajaxcart__product cart_product">';
-                                newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
-                                newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
-                                newHTML += '</a>';
-                                newHTML += '<div class="grid__item cart_info">';
-                                newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
-                                newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
-                                newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half cart_select">';
-                                newHTML += '<div class="ajaxcart__qty input-group-btn">';
-                                newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
-                                newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
-                                newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '<div class="grid">';
-                                newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                                newHTML += '</div>';
-                            }
-                        });
-                        products.forEach(function (product) {
-                            totalPrice += product.price * product.quantity;
-                        });
-                        newHTML += '</div>' +
-                                '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
-                                '<div class="row">' +
-                                '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
-                                '<div class="ajaxcart__subtotal">' +
-                                '<div class="cart__subtotal">' +
-                                '<div class="cart__col-6">Tổng tiền:</div>' +
-                                '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="cart__btn-proceed-checkout-dt">' +
-                                '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</form>' +
-                                '</div>';
-                    }
-
-                    // Thay đổi nội dung của phần tử giỏ hàng
-                    $("#cart-popup-container").html(newHTML);
-                },
-                error: function (xhr) {
-                    console.error("Lỗi khi phân tích cú pháp JSON: ", error);
-                }
-            });
-        }
-
-    </script>
+    <script src="assets/js/jquery.js"></script>
 
 
     <%@include file="../UIcomponents/footer.jsp" %>

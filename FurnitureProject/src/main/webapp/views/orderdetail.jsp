@@ -15,33 +15,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
-        <style>
-            .backdrop__body-backdrop___1rvky {
-                position: fixed;
-                opacity: 0;
-                width: 100%;
-                left: 0;
-                top: 0 !important;
-                right: 0;
-                bottom: 0;
-                background-color: #363636;
-                z-index: 9;
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out
-            }
-
-            @media (max-width: 991px) {
-                .backdrop__body-backdrop___1rvky {
-                    z-index:9
-                }
-            }
-
-            .backdrop__body-backdrop___1rvky.active {
-                visibility: visible;
-                opacity: 0.5
-            }
-        </style>
     </head>
     <body>
         <div class="backdrop__body-backdrop___1rvky"></div>
@@ -49,9 +22,6 @@
         <%@include file="../UIcomponents/breadcrumb.jsp"%>
         <c:set var="listOrderDetail" value="${requestScope.ORDER_DETAIL}"/>
         <c:set var="order" value="${requestScope.ORDER}"/>
-
-
-
 
                 <section class="h-100 gradient-custom">
                     <div class="container py-5 h-100">
@@ -162,20 +132,8 @@
                     </div>
                 </section>
 
-
-
-
         <%@include file="../UIcomponents/footer.jsp" %>
-        <script>
-            function formatCurrency(amount) {
-                return amount.toLocaleString('vi-VN') + '₫';
-            }
-
-            function formatAndDisplayPrice(priceElementId, price) {
-                var formattedPrice = parseFloat(price).toLocaleString('vi-VN') + '₫';
-                document.getElementById(priceElementId).textContent = formattedPrice;
-            }
-
-        </script>
+        
+        <script></script>
     </body>
 </html>

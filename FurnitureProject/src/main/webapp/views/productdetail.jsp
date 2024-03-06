@@ -380,5 +380,6 @@
             </section>
         </c:if>
         <%@include file="../UIcomponents/footer.jsp" %>
+        <script src="assets/js/jquery.js"></script>
     </body>
 </html>

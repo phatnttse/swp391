@@ -176,7 +176,7 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" value="Thu hộ (COD)" class="input-radio">
+                                                            <input name="paymentMethod" type="radio" value="Thu hộ (COD)" class="input-radio" required> 
                                                         </div>
                                                         <label for="" class="radio__label">
                                                             <span class="radio__label__primary">Thu hộ (COD)</span>
@@ -184,6 +184,8 @@
                                                                 <span class="radio__label__icon">
                                                                     <i class="payment-icon payment-icon--4"></i>
                                                                 </span>
+                                                                <img height="80px" width="80px" src="https://www.coolmate.me/images/COD.svg"
+                                                                     alt="VNPAY">
                                                             </span>
                                                         </label>
                                                     </div>
@@ -192,14 +194,16 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" value="vnPay" class="input-radio">
+                                                            <input name="paymentMethod" type="radio" value="vnPay" class="input-radio" required>
                                                         </div>
                                                         <label for="" class="radio__label">
-                                                            <span class="radio__label__primary">vnPay</span>
+                                                            <span class="radio__label__primary">VNPAY</span>
                                                             <span class="radio__label__accessory">
                                                                 <span class="radio__label__icon">
                                                                     <i class="payment-icon payment-icon--3"></i>
                                                                 </span>
+                                                                <img height="80px" width="80px" src="https://s-vnba-cdn.aicms.vn/vnba-media/23/8/16/vnpay-logo_64dc3da9d7a11.jpg"
+                                                                     alt="VNPAY">
                                                             </span>
                                                         </label>
                                                     </div>
@@ -306,7 +310,7 @@
                                                     <th class="total-line__name">
                                                         Phí vận chuyển
                                                     </th>
-                                                    <td class="total-line__price">-
+                                                    <td class="total-line__price">0
                                                     </td>
                                                 </tr>
 

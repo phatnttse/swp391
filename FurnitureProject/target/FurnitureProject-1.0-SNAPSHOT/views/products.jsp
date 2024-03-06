@@ -269,13 +269,13 @@
                                                     Mặc định 
                                                 </span>
                                                 <ul class="content_ul">                    
-                                                    <li><a href="" onclick="">Mặc định</a></li>								
-                                                    <li><a href="" onclick="">A → Z</a></li>
-                                                    <li><a href="" onclick="">Z → A</a></li>
-                                                    <li><a href="" onclick="">Giá tăng dần</a></li>
-                                                    <li><a href="" onclick="">Giá giảm dần</a></li>
-                                                    <li><a href="" onclick="">Hàng mới nhất</a></li>
-                                                    <li><a href="" onclick="">Hàng cũ nhất</a></li>
+                                                    <li><a href="SortProductController?sortType=default" >Mặc định</a></li>								
+                                                    <li><a href="SortProductController?sortType=AtoZ" >A → Z</a></li>
+                                                    <li><a href="SortProductController?sortType=ZtoA" >Z → A</a></li>
+                                                    <li><a href="SortProductController?sortType=IncreasePrice" >Giá tăng dần</a></li>
+                                                    <li><a href="SortProductController?sortType=DecreasePrice" >Giá giảm dần</a></li>
+                                                    <li><a href="SortProductController?sortType=Newest" >Hàng mới nhất</a></li>
+                                                    <li><a href="SortProductController?sortType=Oldest" >Hàng cũ nhất</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

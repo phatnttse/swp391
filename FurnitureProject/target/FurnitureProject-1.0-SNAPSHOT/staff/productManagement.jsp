@@ -8,25 +8,42 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css"> 
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* ... (previous styles) ... */
 
-        <!-- Your existing style and script links -->
+.filter-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
 
-        <!-- Bootstrap JS (Popper.js is required for dropdowns) -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+.filter-label {
+    margin-right: 10px;
+}
 
-        <title>product Page</title>
-    </head>
+.filter-select {
+    margin-right: 10px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.filter-btn {
+    margin-left: 10px;
+}
+
+
+        /* ... (remaining styles) ... */
+    </style>
+
+    <title>Product Page</title>
+</head>
     <body>
 
     <body id="page-top">
@@ -194,30 +211,52 @@
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Quản lý Sản Phẩm</h1>
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <!-- Chia cột: Chữ "Bảng Sản Phẩm" nằm bên trái -->
-            <div class="row">
-                <div class="col">
-                    <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
-                </div>
-                <!-- Chia cột: Phần lọc nằm sát bên phải -->
-                <div class="col">
-                    <form action="productManagement" method="get" class="form-inline float-right">
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="filterSelect" class="mr-2">Lọc:</label>
-                            <select class="form-control" id="filterSelect" name="filter">
-                                <option value="productId">Mã Sản Phẩm</option>
-                                <option value="category">Loại</option>
-                                <option value="price">Giá</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-2">Lọc</button>
-                    </form>
-                </div>
-            </div>
+  <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
+                            </div>
+<div class="col">
+    <form action="productManagement" method="get" class="form-inline float-right mt-3">
+        <div class="form-group mx-2">
+            <label for="combinedFilter" class="mr-2">Chọn:</label>
+            <select class="form-control filter-select" id="combinedFilter" name="combinedFilter">
+                <option value="productId">Mã Sản Phẩm</option>
+                <option value="price">Giá</option>
+                <option value="category">Loại</option>
+            </select>
         </div>
+        <div id="filterOptions" class="form-group mx-2">
+            <!-- Options for Mã Sản Phẩm -->
+            <select class="form-control filter-select" id="productIdFilter" name="productIdFilter">
+                <option value="asc">Tăng Dần</option>
+                <option value="desc">Giảm Dần</option>
+            </select>
+
+            <!-- Options for Giá -->
+            <select class="form-control filter-select" id="priceFilter" name="priceFilter">
+                <option value="asc">Tăng Dần</option>
+                <option value="desc">Giảm Dần</option>
+            </select>
+
+            <!-- Options for Loại -->
+            <select class="form-control filter-select" id="categoryFilter" name="categoryFilter">
+                <option value="Bồn tắm">Bồn tắm</option>
+                <option value="Bồn cầu">Bồn cầu</option>
+                <option value="Sen tắm">Sen tắm</option>
+                <option value="Tủ chậu Lavabo">Tủ chậu Lavabo</option>
+                <option value="Vòi Lavabo">Vòi Lavabo</option>
+                <option value="Phụ kiện">Phụ kiện</option>
+                <!-- Add other categories as needed -->
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Lọc</button>
+    </form>
+</div>
+                        </div>
+                    </div>
                             <div class="card-body">
                                 <form action="productManagement" method="get">
                                     <div class="table-responsive">
@@ -285,14 +324,23 @@
 
         </div>
         <!-- End of Page Wrapper -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Initially hide all filter options
+        $("#filterOptions select").hide();
 
+        // Show filter options based on selected filter type
+        $("#combinedFilter").change(function () {
+            // Hide all options
+            $("#filterOptions select").hide();
 
-        <script>
-            function toggleSubMenu(menuId) {
-                var subMenu = document.getElementById(menuId);
-                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
-            }
-        </script>
+            // Show options for the selected filter
+            var selectedFilter = $(this).val();
+            $("#" + selectedFilter + "Filter").show();
+        });
+    });
+</script>
+
     </body>
 </body>
 </html>

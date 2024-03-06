@@ -7,8 +7,12 @@ package phatntt.controller.staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.ProductsDTO;
+import phatntt.util.Constants;
 
 /**
  *
@@ -31,66 +36,49 @@ public class EditProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            String url = ERROR;
-
-            try {
-                // Lấy thông tin sản phẩm từ form
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                String title = request.getParameter("title");
-                String description = request.getParameter("description");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                float price = Float.parseFloat(request.getParameter("price"));
-                String thumbnail = request.getParameter("thumbnail");
-                int discount = Integer.parseInt(request.getParameter("discount"));
-                int purchases = Integer.parseInt(request.getParameter("purchases"));
-
-                // Tạo một đối tượng ProductsDTO để lưu trữ thông tin sản phẩm
-                ProductsDTO product = new ProductsDTO();
-                product.setProductId(productId); // Set the product ID for updating
-                product.setCategoryId(categoryId);
-                product.setTitle(title);
-                product.setDescription(description);
-                product.setQuantity(quantity);
-                product.setPrice(price);
-                product.setThumbnail(thumbnail);
-                product.setDiscount(discount);
-                product.setPurchases(purchases);
-
-                // Gọi phương thức cập nhật sản phẩm từ ProductsDAO
-                ProductsDAO dao = new ProductsDAO();
-                boolean success = dao.updateProduct(product);
-
-                if (success) {
-                    // Nếu cập nhật sản phẩm thành công, chuyển hướng đến trang productmanagement.jsp
-                    url = PRODUCT_MANAGEMENT_PAGE;
-                } else {
-                    request.setAttribute("ERROR_MESSAGE", "Failed to update the product.");
-                    url = EDIT_PRODUCT_PAGE; // Redirect back to the edit page with an error message
-                }
-            } catch (SQLException | NamingException | NumberFormatException e) {
-                // Xử lý ngoại lệ
-                log("Error in EditProductController: " + e.getMessage());
-                request.setAttribute("ERROR_MESSAGE", "Error processing the request.");
-                url = EDIT_PRODUCT_PAGE; // Redirect back to the edit page with an error message
-            } finally {
-                // Chuyển hướng đến trang kết quả (có thể là trang admin.jsp hoặc trang lỗi)
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            }
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProductDetailManagementController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProductDetailManagementController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // You may want to implement logic for retrieving the product details for editing
-        // and then forward to the editproduct.jsp page with the product details pre-filled.
-        // Example: request.setAttribute("product", productDetails);
-        // Then forward to the editproduct.jsp page.
-        processRequest(request, response);
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
+        
+        try {
+            int productId = Integer.parseInt(request.getParameter("productId"));
+            ProductsDAO productDAO = new ProductsDAO();
+            
+            ProductsDTO product = productDAO.getProductById(productId);
+           
+            url = siteMaps.getProperty(Constants.Management.EDIT_PRODUCT_PAGE)
+                    +"?productId=" + productId;
+            
+           request.setAttribute("EDITPRODUCT", product);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

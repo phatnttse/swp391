@@ -189,84 +189,84 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>
+    <c:set var="products" value="${requestScope.EDITPRODUCT}"/>
 
     <h1 class="h3 my-5 mb-4 text-gray-800">Edit Sản Phẩm</h1>
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
-        <select class="form-control" id="category" name="category" style="margin-top: 10px">
-                                            <!-- Populate this dropdown with your available categories -->
-                                            <option value="1">Bồn Tắm</option>
-                                            <option value="2">Bồn Cầu</option>
-                                            <option value="3">Sen Tắm</option>
-                                            <option value="4">Tủ Chậu Lavabo</option>
-                                            <option value="5">Phụ Kiện</option>
-                                            <option value="6">Khác</option>
-                                        </select>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
+            <select class="form-control" id="category" name="category" style="margin-top: 10px">
+                <!-- Populate this dropdown with your available categories -->
+                <option value="1">Bồn Tắm</option>
+                <option value="2">Bồn Cầu</option>
+                <option value="3">Sen Tắm</option>
+                <option value="4">Tủ Chậu Lavabo</option>
+                <option value="5">Phụ Kiện</option>
+                <option value="6">Khác</option>
+            </select>
+        </div>
+        <div class="card-body">
+            <!-- Form sửa thông tin sản phẩm -->
+            <form action="editproductcontroller" method="post">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Mã sản phẩm</th>
+                                <th>Loại</th>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                                <th>Số Lượng</th>
+                                <th>Discount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>#${products.productId}</td>
+                                <td><input type="text" name="categoryName" value="${products.categoryName}" readonly="" /></td>
+                                <td><input type="text" name="title" value="${products.title}" required=""/></td>
+                                <td><input type="text" name="formattedPrice" value="${products.formattedPrice}đ" readonly=""/></td>
+                                <td><input type="text" name="quantity" value="${products.quantity}" readonly=""/></td>
+                                <td><input type="text" name="discount" value="${products.discount}" readonly="" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Thumbnail</th>
+                                <th>Description</th>
+                                <th>Lượt Mua</th>
+                                <th>Ngày Tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="${products.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
+                                <td>${products.description}</td>
+                                <td>${products.purchases}</td>
+                                <td>${products.createdAt}</td>
+                                <!-- Thao tác column -->
+                                <td>
+                                    <div class="btn-group">
+                                        <!-- Nút Confirm để lưu thông tin -->
+                                        <button type="submit" class="btn btn-outline-info">Confirm</button>
+                                        <!-- Delete Button -->
+                                        <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-        <form action="orderDetailManagement" method="get">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Loại</th>
-                            <th>Tên</th>
-                            <th>Giá</th>
-                            <th>Số Lượng</th>
-                            <th>Discount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>#${products.productId}</td>
-                            <td><input type="text" name="categoryName" value="${products.categoryName}" readonly="" /></td>
-                            <td><input type="text" name="categoryName" value="${products.title}" required=""/></td>
-                            <td><input type="text" name="categoryName" value="${products.formattedPrice}đ" readonly=""/></td>
-                            <td><input type="text" name="categoryName" value="${products.quantity}" readonly=""/></td>
-                            <td><input type="text" name="categoryName" value="${products.discount}" readonly="" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Thumbnail</th>
-                            <th>Description</th>
-                            <th>Lượt Mua</th>
-                            <th>Ngày Tạo</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><img src="${products.thumbnail}" alt="Thumbnail" class="img-thumbnail" /></td>
-                            <td>${products.description}</td>
-                            <td>${products.purchases}</td>
-                            <td>${products.createdAt}</td>
-                            <!-- Thao tác column -->
-                            <td>
-                                <div class="btn-group"> 
-                                    <!-- Edit Button -->
-                                    <a href="editproductcontroller" class="btn btn-outline-info">Confirm</a>
-
-                                    <!-- Delete Button -->
-                                    <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </form>
-    </div>
-</div>
 
 </div>
 <!-- /.container-fluid -->

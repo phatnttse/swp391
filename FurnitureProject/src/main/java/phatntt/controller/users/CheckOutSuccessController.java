@@ -63,9 +63,7 @@ public class CheckOutSuccessController extends HttpServlet {
                 String billingAddress = (String) session.getAttribute("ORDER_ADDRESS");
                 String note = (String) session.getAttribute("NOTE");
                 int amount = (int) session.getAttribute("AMOUNT");
-                int amount2 = Integer.parseInt(request.getParameter("vnp_Amount"));
-                System.out.println(amount2);
-
+                
                 List<CartDTO> orderDetails = (List<CartDTO>) session.getAttribute("ORDER_DETAILS");
 
                 OrdersDAO orderDAO = new OrdersDAO();

@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
             if (user != null && user.getRole() == 0) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("USER_INFO", user);
-                    url = siteMaps.getProperty(Constants.LoginFeatures.HOME);
+                    url = Constants.LoginFeatures.HOME;
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }

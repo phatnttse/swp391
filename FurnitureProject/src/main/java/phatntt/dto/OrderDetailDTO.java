@@ -16,14 +16,14 @@ public class OrderDetailDTO {
     private int order_id;
     private int product_id;
     private String title;
-    private float price;
+    private int price;
     private int quantity;
     private String thumbnail;
-    private float total_money;
+    private int total_money;
     private String name;
     private Timestamp createAt;
 
-    public OrderDetailDTO(int id, int order_id, int product_id, String title, float price, int quantity, String thumbnail, float total_money, String name, Timestamp createAt) {
+    public OrderDetailDTO(int id, int order_id, int product_id, String title, int price, int quantity, String thumbnail, int total_money, String name, Timestamp createAt) {
         this.id = id;
         this.order_id = order_id;
         this.product_id = product_id;
@@ -71,11 +71,11 @@ public class OrderDetailDTO {
         this.title = title;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -95,11 +95,11 @@ public class OrderDetailDTO {
         this.thumbnail = thumbnail;
     }
 
-    public float getTotal_money() {
+    public int getTotal_money() {
         return total_money;
     }
 
-    public void setTotal_money(float total_money) {
+    public void setTotal_money(int total_money) {
         this.total_money = total_money;
     }
 

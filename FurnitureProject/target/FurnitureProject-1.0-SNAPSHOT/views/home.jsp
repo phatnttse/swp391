@@ -70,54 +70,16 @@
 
 
         </div>
-
     <df-messenger
         intent="WELCOME"
         chat-title="Lofi_Furniture_Support"
         agent-id="cf3b1e72-2c0d-43b8-b9d4-e26ce22ec3bd"
         language-code="en"
         ></df-messenger>
+
+
     <script>
 
-        /**
-         * view Product
-         * @param {type} categoryId
-         * @returns {undefined}
-         */
-
-        function addProductToCart(productId) {
-            $.ajax({
-                url: "/FurnitureProject/addProductsToCart",
-                type: "GET",
-                data: {
-                    productId: productId,
-
-                },
-                success: function (response) {
-                    // Kiểm tra phản hồi từ server
-                    if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
-                        // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
-                        window.location.href = "/FurnitureProject/loginPage";
-                        showNotification("Để thực hiện, bạn cần phải đăng nhập!");
-                    } else {
-                        // Nếu không, hiển thị giỏ hàng
-                        const content = document.getElementById("popup-cart-desktop");
-                        content.innerHTML = response;
-                        showCartModal();
-                    }
-                },
-                error: function (xhr) {
-                    // Xử lý lỗi nếu cần
-                }
-            });
-        }
-
-
-        /**
-         * 
-         * @param {type} categoryId
-         * @returns {undefined}
-         */
         function loadProductsByCategory(categoryId) {
             $.ajax({
                 type: "POST",
@@ -132,7 +94,10 @@
                 }
             });
         }
-        function addProductToCart(productId, title, thumbnail, price) {
+        function addProductToCart(productId, title, thumbnail, price, inputQuantity) {
+            if (document.getElementById("quantity-detail") !== null && document.getElementById("quantity-detail") !== undefined) {
+                inputQuantity = document.getElementById("quantity-detail").value;
+            }
             $.ajax({
                 url: "/FurnitureProject/addProductsToCart",
                 type: "post",
@@ -140,19 +105,22 @@
                     productId: productId,
                     title: title,
                     thumbnail: thumbnail,
-                    price: price
+                    price: price,
+                    quantity: inputQuantity
                 },
                 success: function (response) {
                     // Kiểm tra phản hồi từ server
                     if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
                         // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
                         window.location.href = "/FurnitureProject/loginPage";
-                        showNotification("Để thực hiện, bạn cần phải đăng nhập!");
+                        alert("Để thực hiện, bạn cần phải đăng nhập!");
                     } else {
                         // Nếu không, hiển thị giỏ hàng
                         const content = document.getElementById("popup-cart-desktop");
                         content.innerHTML = response;
+                        hideProductModal();
                         showCartModal();
+                        inputQuantity = document.getElementById("quantity-detail").value = 1;
                     }
                 },
                 error: function (xhr) {
@@ -160,11 +128,7 @@
                 }
             });
         }
-        function showNotification(message) {
-            // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
-            alert(message);
-        }
-
+      
         function showCartModal() {
             const popupcart = document.querySelector('.popup-cart');
             const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
@@ -181,6 +145,12 @@
             if (iconClose) {
                 iconClose.addEventListener('click', hideCartModal);
             }
+        }
+        function hideProductModal() {
+            const quickViewProduct = document.getElementById('quick-view-product');
+            const backdrop = document.querySelector('.quickview-product');
+            quickViewProduct.classList.remove('active');
+            backdrop.style.display = 'none';
         }
 
         function hideCartModal() {
@@ -272,7 +242,6 @@
                                 '</div>' +
                                 '</form>' +
                                 '</div>';
-
                     }
 
                     // Thay đổi nội dung của phần tử giỏ hàng
@@ -372,7 +341,6 @@
                                 '</div>' +
                                 '</form>' +
                                 '</div>';
-
                     }
 
                     // Thay đổi nội dung của phần tử giỏ hàng

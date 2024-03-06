@@ -10,16 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import phatntt.dto.OrderDTO;
 import phatntt.util.DBConnect;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -229,13 +225,9 @@ public class OrdersDAO {
                     String payment_method = rs.getString("payment_method");
                     int amount = rs.getInt("amount");
                     Timestamp created_at = rs.getTimestamp("created_at");
-                    int priceOfOrder = rs.getInt("total_order_price");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(priceOfOrder);
+                    int priceOfOrder = rs.getInt("total_order_price");                   
                     OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_status, payment_method, amount, created_at);
-                    odto.setFormattedPrice(formattedPrice);
+                    odto.setFormattedPrice(Key_Utils.getInstance().formattedPrice(priceOfOrder));
                     list.add(odto);
 
                 }

@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class ProductsDTO implements Serializable{
+    
     private int productId;
     private int categoryId;
     private String title;
@@ -23,15 +24,14 @@ public class ProductsDTO implements Serializable{
     private String thumbnail;
     private int discount;
     private int purchases;
-    private Timestamp createdAt;
-    
-    private float discountProduct;
+    private Timestamp createdAt;   
+    private int discountProduct;
 
-    public float getDiscountProduct() {
+    public int getDiscountProduct() {
         return (price - (price*discount/100));
     }
 
-    public void setDiscountProduct(float discountProduct) {
+    public void setDiscountProduct(int discountProduct) {
         this.discountProduct = discountProduct;
     }
     

@@ -31,7 +31,7 @@ public class OrderDetailDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;
 
-    public void addOrderDetail(int orderId, int productId, String title, float price, int quantity, String thumbnail, float totalMoney) throws SQLException, NamingException {
+    public void addOrderDetail(int orderId, int productId, String title, int price, int quantity, String thumbnail, int totalMoney) throws SQLException, NamingException {
 
         try {
             con = DBConnect.createConnection();
@@ -42,10 +42,10 @@ public class OrderDetailDAO {
                 stm.setInt(1, orderId);
                 stm.setInt(2, productId);
                 stm.setString(3, title);
-                stm.setFloat(4, price);
+                stm.setInt(4, price);
                 stm.setInt(5, quantity);
                 stm.setString(6, thumbnail);
-                stm.setFloat(7, totalMoney);
+                stm.setInt(7, totalMoney);
                 stm.executeUpdate();
 
             }
@@ -77,7 +77,7 @@ public class OrderDetailDAO {
                     orderDetail.setOrder_id(rs.getInt("order_id"));
                     orderDetail.setProduct_id(rs.getInt("product_id"));
                     orderDetail.setTitle(rs.getString("title"));
-                    orderDetail.setPrice(rs.getFloat("price"));
+                    orderDetail.setPrice(rs.getInt("price"));
                     orderDetail.setQuantity(rs.getInt("quantity"));
                     orderDetail.setThumbnail(rs.getString("thumbnail"));
                     orderDetail.setTotal_money(rs.getInt("total_money"));
@@ -193,10 +193,10 @@ public class OrderDetailDAO {
                     int id = rs.getInt("id");
                     int product_id = rs.getInt("product_id");
                     String title = rs.getString("title");
-                    float price = rs.getFloat("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     String thumbnail = rs.getString("thumbnail");
-                    float totalMoney = rs.getFloat("total_money");
+                    int totalMoney = rs.getInt("total_money");
                     Timestamp createAt = rs.getTimestamp("order_created_at");
                     String name = rs.getString("order_status_name");
                   

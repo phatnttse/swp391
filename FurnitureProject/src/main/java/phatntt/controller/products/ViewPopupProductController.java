@@ -7,6 +7,9 @@ package phatntt.controller.products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.ProductsDTO;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -63,75 +67,7 @@ public class ViewPopupProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productId = request.getParameter("productId");
-        try {
-            // Lấy thông tin sản phẩm từ cơ sở dữ liệu
-            ProductsDAO productDAO = new ProductsDAO();
-            ProductsDTO product = productDAO.getProductById(Integer.parseInt(productId));
-
-            // Đặt thông tin sản phẩm vào request attribute
-            request.setAttribute("POPUP_PRODUCT", product);
-
-            // Construct the HTML response
-            String htmlResponse = "<div class='quickview-overlay fancybox-overlay fancybox-overlay-fixed'></div>"
-                    + "<div class='quick-view-product'>"
-                    + "<div class='block-quickview primary_block details-product'>"
-                    + "<div class='row'>"
-                    + "<div class='product-left-column product-images col-xs-12 col-sm-4 col-md-4 col-lg-5 col-xl-6'>"
-                    + "<div class='image-block large-image col_large_default'>"
-                    + "<span class='view_full_size'>"
-                    + "<a class='img-product' title='' href=''>"
-                    + "<img src='" + product.getThumbnail() + "' id='product-featured-image-quickview' "
-                    + "class='img-responsive product-featured-image-quickview'>"
-                    + "</a>"
-                    + "</span>"
-                    + "</div>"
-                    + "</div>"
-                    + "<div class='product-center-column product-info product-item col-xs-12 col-sm-6 col-md-8 col-lg-7 col-xl-6 details-pro style_product style_border' "
-                    + "id='product-" + product.getProductId() + "'>"
-                    + "<div class='head-qv group-status'>"
-                    + "<h3 class='qwp-name title-product'><a class='text2line' href='' "
-                    + "title='" + product.getTitle() + "'>" + product.getDescription() + "</a></h3>"
-                    + "<div class='vend-qv group-status'>"
-                    + "<div class='left_vend'>"
-                    + "<div class='first_status '>Thương hiệu:"
-                    + "<span class='vendor_ status_name'>" + "</span>"
-                    + "</div>"
-                    + "<span class='line_tt'>|</span>"
-                    + "<div class='top_sku first_status'>Mã sản phẩm:"
-                    + "<span class='sku_ status_name'>" + product.getProductId() + "</span>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "<div class='quickview-info'>"
-                    + "<span class='prices price-box'>"
-                    + "<span class='price product-price sale-price'>" + product.getPrice() + "</span>"
-                    + "</span>"
-                    + "</div>"
-                    + // Continue adding your existing HTML code
-                    "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "<a title='Close' class='quickview-close close-window' href=''>"
-                    + "<svg viewBox='0 0 320 512' class='svg-inline--fa fa-times fa-w-10'>"
-                    + "<path fill='currentColor' "
-                    + "d='M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z'>"
-                    + "</path>"
-                    + "</svg>"
-                    + "</a>"
-                    + "</div>";
-
-            // Send the HTML response to the client
-            try (PrintWriter out = response.getWriter()) {
-                out.println(htmlResponse);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LoadProductDetailController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(LoadProductDetailController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -149,11 +85,9 @@ public class ViewPopupProductController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String productId = request.getParameter("productId");
         try {
-            // Lấy thông tin sản phẩm từ cơ sở dữ liệu
             ProductsDAO productDAO = new ProductsDAO();
             ProductsDTO product = productDAO.getProductById(Integer.parseInt(productId));
-
-            // Construct the HTML response
+                    
             String htmlResponse = "<div class=\"quickview-overlay fancybox-overlay fancybox-overlay-fixed\"></div>"
                     + "<div class='quick-view-product'>"
                     + "<div class='block-quickview primary_block details-product'>"
@@ -187,45 +121,42 @@ public class ViewPopupProductController extends HttpServlet {
                     + "</div>"
                     + "<div class='quickview-info'>"
                     + "<span class='prices price-box'>"
-                    + "<span class='price product-price sale-price'>" + product.getFormattedPrice() + "</span>"
+                    + "<span class='price product-price sale-price'>" + Key_Utils.getInstance().formattedPrice(product.getDiscountProduct()) + "</span>"
                     + "</span>"
                     + "</div>"
-                    + "<form action=\"cart\" method=\"post\" class=\"quick_option variants form-ajaxtocart form-product\">\n"
+                    + "<form action=\"\" method=\"post\" class=\"quick_option variants form-ajaxtocart form-product\">\n"
                     + "\n"
                     + "                                <div class=\"form_product_content\">\n"
                     + "                                    <div class=\"count_btn_style quantity_wanted_p\">\n"
                     + "                                        <div class=\"soluong1 clearfix\">\n"
                     + "                                            <span class=\"soluong_h\">Số lượng:</span>\n"
                     + "                                            <div class=\"input_number_product\">\n"
-                    + "                                                <a class=\"btn_num num_1 button button_qty\"\n"
-                    + "                                                   onclick=\"var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if (!isNaN(qtyqv) & amp; & amp; qtyqv > 1) result.value--; return false;\">-</a>\n"
-                    + "                                                <input type=\"text\" id=\"quantity-detail\" name=\"quantity\" value=\"1\"\n"
-                    + "                                                       maxlength=\"2\" class=\"form-control prd_quantity\"\n"
-                    + "                                                       onkeypress=\"if (isNaN(this.value + String.fromCharCode(event.keyCode)))\n"
-                    + "                                                                   return false;\"\n"
-                    + "                                                       onchange=\"if (this.value == 0)\n"
-                    + "                                                                   this.value = 1;\">\n"
-                    + "                                                <a class=\"btn_num num_2 button button_qty\"\n"
-                    + "                                                   onclick=\"var result = document.getElementById('quantity-detail');\n"
-                    + "                                                           var qtyqv = result.value;\n"
-                    + "                                                           if (!isNaN(qtyqv))\n"
-                    + "                                                               result.value++;\n"
-                    + "                                                           return false;\">+</a>\n"
+                    + "                                               <a class=\"btn_num num_1 button button_qty\"\n"
+                    + "   onclick=\"var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if (!isNaN(qtyqv) && qtyqv > 1) result.value--; return false;\">\n"
+                    + "   -\n"
+                    + "</a>\n"
+                    + "<input type=\"text\" id=\"quantity-detail\" name=\"quantity\" value=\"1\" maxlength=\"2\" class=\"form-control prd_quantity\"\n"
+                    + "       onkeypress=\"if (isNaN(this.value + String.fromCharCode(event.keyCode))) return false;\"\n"
+                    + "       onchange=\"if (this.value == 0) this.value = 1;\">\n"
+                    + "<a class=\"btn_num num_2 button button_qty\"\n"
+                    + "   onclick=\"var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if (!isNaN(qtyqv)) result.value++; return false;\">\n"
+                    + "   +\n"
+                    + "</a>\n"
                     + "                                            </div>\n"
                     + "                                        </div>\n"
                     + "                                        <div class=\"button_actions clearfix\">\n"
-                    + "                                            <button type=\"submit\"\n"
+                    + "                                            <button onclick=\"addProductToCart("+product.getProductId()+", '"+product.getTitle()+"', '"+product.getThumbnail()+"', "+product.getDiscountProduct()+", 1)\" type=\"button\"\n"
                     + "                                                    class=\"btn_cool btn btn_base fix_add_to_cart ajax_addtocart btn_add_cart btn-cart add_to_cart add_to_cart_detail\">\n"
                     + "                                                <span class=\"btn-content text_1\">Thêm vào giỏ hàng</span>\n"
                     + "                                            </button>\n"
                     + "                                        </div>\n"
                     + "                                    </div>\n"
-                    + "                                </div>                         \n"
+                    + "                                </div>\n"
                     + "                            </form>"
                     + "</div>"
                     + "</div>"
                     + "</div>"
-                    + "<a title='Close' class='quickview-close close-window' href=''>"
+                    + "<a title='Close' class='quickview-close close-window js-popup-close-product'>"
                     + "<svg viewBox='0 0 320 512' class='svg-inline--fa fa-times fa-w-10'>"
                     + "<path fill='currentColor' "
                     + "d='M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z'>"

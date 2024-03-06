@@ -6,21 +6,18 @@ package phatntt.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import phatntt.dto.CartDTO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateTotalPrice", urlPatterns = {"/updateTotalPrice"})
-public class UpdateTotalPrice extends HttpServlet {
+@WebServlet(name = "UpdateQuantityInCart", urlPatterns = {"/UpdateQuantityInCart"})
+public class UpdateQuantityInCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +31,17 @@ public class UpdateTotalPrice extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            // Tính toán tổng tiền từ giỏ hàng của người dùng
-            HttpSession session = request.getSession();
-            List<CartDTO> cart = (List<CartDTO>) session.getAttribute("CART");
-            float totalPrice = 50000;
-            if (cart != null) {
-                for (CartDTO item : cart) {
-                    float price = item.getPrice();
-                    totalPrice += price * item.getQuantity();
-                }
-            }
-
-            // Gửi tổng tiền về phía máy khách dưới dạng văn bản đơn giản
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(String.valueOf(totalPrice));
-        } catch (Exception ex) {
-            // Xử lý lỗi nếu cần
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateQuantityInCart</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateQuantityInCart at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

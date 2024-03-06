@@ -10,9 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/productHome.css" />
+        <link rel="stylesheet" href="assets/css/productshome.css" />
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <script src="assets/js/product.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
         <title>JSP Page</title>
     </head>
     <body>
@@ -23,7 +24,7 @@
                 <div class="e-tabs not-dqtab ajax-tab-1">
                     <div class="content">
                         <div class="block-title">
-                            <h2><a href="/collections/all">Sản phẩm</a></h2>
+                            <h2><a href="products">Sản phẩm</a></h2>
                             <ul class="tabs tabs-title tab-desktop ajax clearfix">
 
                                 <li class="tab-link has-content current" data-tab="tab-1" data-url="/bon-tam">
@@ -63,7 +64,6 @@
                                         <c:forEach var="product" items="${listProductByCategory}" varStatus="loopStatus">
                                             <div class="swiper-slide swiper-slide-active" style="width: 300px; margin-right: 20px;">
                                                 <div class="item_product_main">
-                                                    <c:set var="total_money" value="${product.price - (product.price * (product.discount)/100)}" />
 
                                                     <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                         <div class="product-thumbnail">
@@ -83,7 +83,7 @@
 
                                                                         <input type="hidden" name="" value="">
 
-                                                                        <button type="button" class="btn-cart add_to_cart " title="Thêm vào giỏ hàng" onclick="addProductToCart(${product.productId}, '${product.title}', '${product.thumbnail}', ${product.price})">
+                                                                        <button type="button" class="btn-cart add_to_cart " title="Thêm vào giỏ hàng" onclick="addProductToCart(${product.productId}, '${product.title}', '${product.thumbnail}', ${product.discountProduct}, 1)">
                                                                             <span class="icon icon-cart">
                                                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
                                                                                         fill:none;
@@ -105,16 +105,16 @@
                                                             <h3 class="product-name"><a href="" title="${product.title}">${product.title}</a></h3>
                                                             <div class="price-box">
                                                                 <script>
-                                                                    var totalMoney = parseFloat('${total_money}');
+                                                                    var totalMoney = parseFloat('${product.discountProduct}');
                                                                     var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                     document.write(formattedTotalMoney);
                                                                 </script>
-                                                                
+
                                                                 <span class="compare-price">
                                                                     <script>
-                                                                         var totalMoney = parseFloat('${product.price}');
-                                                                         var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
-                                                                         document.write(formattedTotalMoney);
+                                                                        var totalMoney = parseFloat('${product.price}');
+                                                                        var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                        document.write(formattedTotalMoney);
                                                                     </script>
                                                                 </span>
 
@@ -169,17 +169,11 @@
                     </div>
                 </div>
         </section>
-        <div id="quick-view-product" class="quickview-product" style="display: none;">
-
-        </div>
+        <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
         <script>
 
-            /**
-             * Xem nhanh sản phẩm bằng pop-up
-             * @param {type} productId
-             * @returns {undefined}
-             */
+
             function viewFastProduct(productId) {
                 $.ajax({
                     url: "/FurnitureProject/ViewPopupProductController",
@@ -218,12 +212,28 @@
 
             function hideProductModal() {
                 const quickViewProduct = document.getElementById('quick-view-product');
-                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
+                const backdrop = document.querySelector('.quickview-product');
                 quickViewProduct.classList.remove('active');
-                backdrop.classList.remove('active');
+                backdrop.style.display = 'none';
             }
 
+            document.addEventListener("DOMContentLoaded", function () {
+                // Lấy danh sách tất cả các tab
+                var tabs = document.querySelectorAll('.tab-link');
 
+                // Lặp qua từng tab và thêm sự kiện click cho mỗi tab
+                tabs.forEach(function (tab) {
+                    tab.addEventListener('click', function () {
+                        // Xóa lớp "current" khỏi tất cả các tab
+                        tabs.forEach(function (tabItem) {
+                            tabItem.classList.remove('current');
+                        });
+
+                        // Thêm lớp "current" cho tab được nhấp vào
+                        tab.classList.add('current');
+                    });
+                });
+            });
 
         </script>
 

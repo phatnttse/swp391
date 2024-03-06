@@ -87,7 +87,7 @@ public class LoadProductByPriceController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
         try {
-             CategoryDAO catedao = new CategoryDAO();
+            CategoryDAO catedao = new CategoryDAO();
             List<CategoryDTO> cdtos = catedao.getAllCategoryDTOs();
             request.setAttribute("CATEGORY_LIST", cdtos);
             List<ProductsDTO> productsDTOs = new ArrayList<>();

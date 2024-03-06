@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import phatntt.controller.HomePageServlet;
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.ProductsDTO;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -90,9 +91,7 @@ public class CategoryController extends HttpServlet {
             try {
                 categoryId = Integer.parseInt(categoryIdStr);
                 List<ProductsDTO> listProductsByCategoryId = productDAO.getProductByCategoryId(categoryId);
-                  DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                
                 
                 StringBuilder out = new StringBuilder();
                 out.append("<div class=\"tab-1 tab-content current\">");
@@ -105,7 +104,7 @@ public class CategoryController extends HttpServlet {
                     out.append("                    <div class=\"item_product_main\"\">");
                     out.append("                        <form action=\"cart\" method=\"post\" class=\"variants product-action\" enctype=\"multipart/form-data\">");
                     out.append("                            <div class=\"product-thumbnail\">");
-                    out.append("                                <a class=\"image_thumb\" href=\"/bon-tam-massage-dat-goc\" title=\"Bồn tắm Massage đặt góc\">");
+                    out.append("                                <a class=\"image_thumb\" href=\"LoadProductDetailController?productId="+product.getProductId()+"\" title=\""+product.getTitle()+"\">");
                     out.append("                                    <img class=\"lazyload loaded\" width=\"480\" height=\"480\" src=\"" + product.getThumbnail() + "\" alt=\"" + product.getTitle() + "\">");
                     out.append("                                </a>");
                     out.append("                                <span class=\"smart\">-" + product.getDiscount() + "%</span>");
@@ -114,15 +113,14 @@ public class CategoryController extends HttpServlet {
                     out.append("                                </a>");
                     out.append("                                <div class=\"action\">");
                     out.append("                                    <div class=\"actions-secondary\">");
-                    out.append("                                        <div class=\"actions-primary\">");
-                    out.append("                                            <input type=\"hidden\" name=\"\" value=\"\">");
-                    out.append("                                            <button  type=\"button\" class=\"btn-cart add_to_cart \" title=\"Thêm vào giỏ hàng\" onclick=\"addProductToCart("+product.getProductId()+", '"+product.getTitle()+"', '"+product.getThumbnail()+"', "+product.getPrice()+")\">");
+                    out.append("                                        <div class=\"actions-primary\">");                                                           
+                    out.append("                                            <button  type=\"button\" class=\"btn-cart add_to_cart \" title=\"Thêm vào giỏ hàng\" onclick=\"addProductToCart("+product.getProductId()+", '"+product.getTitle()+"', '"+product.getThumbnail()+"', "+product.getDiscountProduct()+")\">");
                     out.append("                                                <span class=\"icon icon-cart\">");
                     out.append("                                                    <svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title></title><g><polyline class=\"cls-1\" points=\"15 31 5 31 6 9 26 9 26.14 12\"></polyline><path class=\"cls-1\" d=\"M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6\"></path><circle class=\"cls-1\" cx=\"23\" cy=\"23\" r=\"8\"></circle><line class=\"cls-1\" x1=\"23\" x2=\"23\" y1=\"19\" y2=\"27\"></line><line class=\"cls-1\" x1=\"27\" x2=\"19\" y1=\"23\" y2=\"23\"></line></g></svg>");
                     out.append("                                                </span>");
                     out.append("                                            </button>");
                     out.append("                                        </div>");
-                    out.append("                                        <a title=\"Xem nhanh\" href=\"\" class=\"quick-view btn-views\">");
+                    out.append("                                        <a title=\"Xem nhanh\" onclick=\"viewFastProduct("+product.getProductId()+")\" class=\"quick-view btn-views\">");
                     out.append("                                            <svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"><path d=\"M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z\"></path></svg>");
                     out.append("                                        </a>");
                     out.append("                                    </div>");
@@ -131,8 +129,8 @@ public class CategoryController extends HttpServlet {
                     out.append("                            <div class=\"product-info\">");
                     out.append("                                <h3 class=\"product-name\"><a href=\"/bon-tam-massage-dat-goc\" title=\"Bồn tắm Massage đặt góc\">" + product.getTitle() + "</a></h3>");
                     out.append("                                <div class=\"price-box\">");
-                    out.append("                                    <span class=\"price\">" +  decimalFormat.format(product.getDiscountProduct())  + "₫</span>");
-                    out.append("                                    <span class=\"compare-price\">" + product.getFormattedPrice()+ "₫</span>");
+                    out.append("                                    <span class=\"price\">" +  Key_Utils.getInstance().formattedPrice(product.getDiscountProduct())  + "₫</span>");
+                    out.append("                                    <span class=\"compare-price\">" +Key_Utils.getInstance().formattedPrice(product.getPrice()) + "₫</span>");
                     out.append("                                </div>");
                     out.append("                            </div>");
                     out.append("                        </form>");

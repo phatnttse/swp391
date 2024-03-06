@@ -41,7 +41,7 @@ public class CartDAO {
                 if (rs.next()) {
                     // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
                     int currentQuantity = rs.getInt("quantity");
-                    int newQuantity = currentQuantity + 1;
+                    int newQuantity = currentQuantity + quantity;
 
                     // Cập nhật số lượng sản phẩm trong giỏ hàng
                     String updateQuantitySQL = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";

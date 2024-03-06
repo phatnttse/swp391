@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import phatntt.dao.CartDAO;
 import phatntt.dto.CartDTO;
 import phatntt.dto.UsersDTO;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -77,21 +78,22 @@ public class AddProductsToCartController extends HttpServlet {
         String title = request.getParameter("title");
         String thumbnail = request.getParameter("thumbnail");
         int price = Integer.parseInt(request.getParameter("price"));
+        int quantity = 1;   
+        String quantityStr = request.getParameter("quantity");
+        if (quantityStr != null){
+            quantity = Integer.parseInt(quantityStr);
+        }
 
         try {
 
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
-            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-            symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-            DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-           
-
+                      
             CartDAO cartDAO = new CartDAO();
-            boolean result = cartDAO.addProductToCart(user.getId(), productId, title, thumbnail, 1, price);
+            boolean result = cartDAO.addProductToCart(user.getId(), productId, title, thumbnail, quantity, price);
             List<CartDTO> carts = null;
             int totalProductsInCart = 0;
-            float totalMoney = 0;
+            int totalMoney = 0;
             if (result) {
                 CartDTO product = cartDAO.getProductFromCart(productId);
                 carts = cartDAO.getCartByUserId(user.getId());
@@ -135,7 +137,7 @@ public class AddProductsToCartController extends HttpServlet {
                             + "                        <div class=\"grid\">\n"
                             + "                            <div class=\"grid__item one-half text-right cart_prices\">\n"
                             + "                                <span class=\"cart-price\">\n"
-                            + "                          <span class=\"cart-price\">" + decimalFormat.format(cart.getPrice()) + "₫</span>\n"
+                            + "                          <span class=\"cart-price\">" + Key_Utils.getInstance().formattedPrice(cart.getPrice()) + "₫</span>\n"
                             + "                                </span>"
                             + "                            </div>\n"
                             + "                        </div>\n"
@@ -151,7 +153,7 @@ public class AddProductsToCartController extends HttpServlet {
                             + "                        <div class=\"grid\">\n"
                             + "                            <div class=\"grid__item one-half text-right cart_prices\">\n"
                             + "                                <span class=\"cart-price\">\n"
-                            + "                                     <span class=\"cart-price\">" + decimalFormat.format(cart.getPrice() * cart.getQuantity()) + "₫</span>\n"
+                            + "                                     <span class=\"cart-price\">" + Key_Utils.getInstance().formattedPrice(cart.getPrice() * cart.getQuantity()) + "₫</span>\n"
                             + "                                </span>"
                             + "                            </div>\n"
                             + "                        </div>\n"
@@ -167,7 +169,7 @@ public class AddProductsToCartController extends HttpServlet {
                         + "                    <div class=\"ajaxcart__subtotal\">\n"
                         + "                        <div class=\"cart__subtotal\">\n"
                         + "                            <div class=\"cart__col-6\">Tổng tiền:</div>\n"
-                        + "                            <div class=\"text-right cart__totle\"><span class=\"total-price\">" + decimalFormat.format(totalMoney)+ "₫</span></div>\n"
+                        + "                            <div class=\"text-right cart__totle\"><span class=\"total-price\">" + Key_Utils.getInstance().formattedPrice(totalMoney)+ "₫</span></div>\n"
                         + "                        </div>\n"
                         + "                    </div>\n"
                         + "                    <div class=\"cart__btn-proceed-checkout-dt\">\n"

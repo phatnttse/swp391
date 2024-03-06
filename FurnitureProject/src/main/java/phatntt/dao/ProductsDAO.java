@@ -11,14 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import javax.naming.NamingException;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.DBConnect;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -44,9 +42,7 @@ public class ProductsDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    //
-                    // mapping
-                    //5.1 get data from tu resultset
+
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
@@ -56,15 +52,10 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+                   
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    //5.2 set data to DTO
                 }
             }
 
@@ -98,9 +89,7 @@ public class ProductsDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    //
-                    // mapping
-                    //5.1 get data from tu resultset
+
                     int productId = rs.getInt("product_id");
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
@@ -111,17 +100,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+               
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
 
-                    //5.2 set data to DTO
                 }
             }
 
@@ -141,13 +124,9 @@ public class ProductsDAO implements Serializable {
 
     }
 
-    private List<ProductsDTO> products;
 
-    public List<ProductsDTO> getProducts() {
-        return products;
-    }
-
-    public void searchProductsByName(String searchValue) throws SQLException, NamingException {
+    public List<ProductsDTO> searchProductsByName(String searchValue) throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
 
         try {
             con = DBConnect.createConnection();
@@ -171,11 +150,10 @@ public class ProductsDAO implements Serializable {
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
-                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    if (this.products == null) {
-                        this.products = new ArrayList<>();
-                    }
-                    this.products.add(dto);
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);                 
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
+                    result.add(p);
+                    
                 }
             }
 
@@ -190,6 +168,7 @@ public class ProductsDAO implements Serializable {
                 con.close();
             }
         }
+        return result;
     }
 
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
@@ -206,9 +185,7 @@ public class ProductsDAO implements Serializable {
                 stm.setInt(1, productId);
                 rs = stm.executeQuery();
 
-                while (rs.next()) {
-                    // mapping
-                    //5.1 get data from tu resultset                  
+                while (rs.next()) {                 
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
@@ -218,14 +195,10 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+                    
                     result = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    result.setFormattedPrice(formattedPrice);
-                    //5.2 set data to DTO
+                    result.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
+                 
                 }
             }
 
@@ -257,9 +230,7 @@ public class ProductsDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    //
-                    // mapping
-                    //5.1 get data from tu resultset
+
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
@@ -269,15 +240,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+                    
                     ProductsDTO p = new ProductsDTO(productId, 1, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    //5.2 set data to DTO
+                    
                 }
             }
 
@@ -311,9 +278,6 @@ public class ProductsDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    //
-                    // mapping
-                    //5.1 get data from tu resultset
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
@@ -323,15 +287,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+                    
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    //5.2 set data to DTO
+                   
                 }
             }
 
@@ -377,16 +337,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
-                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
-                    String formattedPrice = decimalFormat.format(price);
-
+               
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    p.setFormattedPrice(formattedPrice);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    //5.2 set data to DTO
+                    
                 }
             }
 

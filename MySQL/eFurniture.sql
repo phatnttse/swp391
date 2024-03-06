@@ -94,7 +94,7 @@ INSERT INTO `order_status` (`name`) VALUES
     ('Đang xử lý'),
     ('Đã gửi cho đơn vị vận chuyển'),
     ('Đang giao hàng'),
-    ('Đã giao hàng'),
+    ('Giao hàng thành công'),
     ('Đã hủy');
 
 

@@ -5,7 +5,6 @@
 package phatntt.controller.staff;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -19,10 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phatntt.dao.OrderDetailDAO;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.OrderDTO;
-import phatntt.dto.OrderDetailDTO;
 import phatntt.util.Constants;
 
 /**

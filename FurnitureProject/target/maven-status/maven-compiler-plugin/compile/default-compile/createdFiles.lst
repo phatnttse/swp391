@@ -1,6 +1,7 @@
 phatntt\controller\email\ForgotPasswordController.class
 phatntt\dto\OrderDetailDTO.class
 phatntt\dto\UsersDTO.class
+phatntt\controller\products\LoadProductByPriceController.class
 phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
 phatntt\controller\orders\ViewAllOrderDetailController.class
@@ -20,6 +21,7 @@ phatntt\util\Constants$UsersFeatures.class
 phatntt\controller\users\LoginServlet.class
 phatntt\filter\AuthorizationFilter.class
 phatntt\util\Constants$LoginFeatures.class
+phatntt\cart\UpdateQuantityInCart.class
 phatntt\controller\email\VerificationToResetPassController.class
 phatntt\util\Constants$ForgotPasswordFeatures.class
 phatntt\controller\products\AddProductsToCartController.class
@@ -37,7 +39,6 @@ phatntt\controller\admin\UserAccountsController.class
 phatntt\controller\products\ProductsController.class
 phatntt\controller\users\LoginWithGoogleController.class
 phatntt\cart\CartController.class
-phatntt\cart\UpdateTotalPrice.class
 phatntt\controller\users\EWalletPayment.class
 phatntt\dto\ProductsDTO.class
 phatntt\controller\staff\OrderDetailManagementController.class
@@ -46,6 +47,7 @@ phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\users\LogOutServlet.class
+phatntt\controller\products\ViewPopupProductController.class
 phatntt\controller\users\CheckOutSuccessController.class
 phatntt\dto\CartDTO.class
 phatntt\dto\EmailDTO.class

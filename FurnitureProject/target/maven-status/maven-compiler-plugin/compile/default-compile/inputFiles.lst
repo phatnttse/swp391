@@ -1,4 +1,3 @@
-
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\SearchProductsController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\CreateNewPasswordController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductDetailController.java
@@ -16,7 +15,6 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFil
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\listener\MyContextServletListener.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginWithGoogleController.java
-E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\UpdateTotalPrice.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\ProductQuantity.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UpdateUsersController.java
@@ -25,6 +23,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\UsersDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\HomePageServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\EWalletPayment.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\category\CategoryController.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\ViewPopupProductController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\RemoveProductFromCart.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\AddProductsToCartController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderManagementController.java
@@ -33,10 +32,12 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\CartDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\ChangePasswordController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\RegisterAccountServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\orders\ViewAllOrderDetailController.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\UpdateQuantityInCart.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UserAccountsController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderDetailManagementController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\AccountInfoController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\ProductsDAO.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductByPriceController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductCategoryController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\ErrorDTO.java

@@ -121,7 +121,7 @@ public class ViewPopupProductController extends HttpServlet {
                     + "</div>"
                     + "<div class='quickview-info'>"
                     + "<span class='prices price-box'>"
-                    + "<span class='price product-price sale-price'>" + Key_Utils.getInstance().formattedPrice(product.getDiscountProduct()) + "</span>"
+                    + "<span class='price product-price sale-price'>" + Key_Utils.getInstance().formattedPrice(product.getDiscountProduct()) + "₫</span>"
                     + "</span>"
                     + "</div>"
                     + "<form action=\"\" method=\"post\" class=\"quick_option variants form-ajaxtocart form-product\">\n"

@@ -171,71 +171,7 @@
         </section>
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-        <script>
-
-
-            function viewFastProduct(productId) {
-                $.ajax({
-                    url: "/FurnitureProject/ViewPopupProductController",
-                    type: "POST",
-                    data: {
-                        productId: productId
-                    },
-                    success: function (response) {
-                        // Hiển thị nội dung sản phẩm
-                        const content = document.getElementById("quick-view-product");
-                        content.innerHTML = response;
-                        showProductModal();
-                    },
-                    error: function (xhr) {
-                        // Xử lý lỗi nếu cần
-                    }
-                });
-            }
-
-            function showProductModal() {
-                const quickViewProduct = document.getElementById('quick-view-product');
-                const backdrop = document.querySelector('.quickview-product');
-                // Hiển thị modal sản phẩm
-                quickViewProduct.classList.add('active');
-                backdrop.style.display = 'block';
-                // Khởi tạo bộ lắng nghe sự kiện cho nút đóng modal sản phẩm
-                initializeCloseEventProduct();
-            }
-
-            function initializeCloseEventProduct() {
-                const iconClose = document.querySelector('.js-popup-close-product');
-                if (iconClose) {
-                    iconClose.addEventListener('click', hideProductModal);
-                }
-            }
-
-            function hideProductModal() {
-                const quickViewProduct = document.getElementById('quick-view-product');
-                const backdrop = document.querySelector('.quickview-product');
-                quickViewProduct.classList.remove('active');
-                backdrop.style.display = 'none';
-            }
-
-            document.addEventListener("DOMContentLoaded", function () {
-                // Lấy danh sách tất cả các tab
-                var tabs = document.querySelectorAll('.tab-link');
-
-                // Lặp qua từng tab và thêm sự kiện click cho mỗi tab
-                tabs.forEach(function (tab) {
-                    tab.addEventListener('click', function () {
-                        // Xóa lớp "current" khỏi tất cả các tab
-                        tabs.forEach(function (tabItem) {
-                            tabItem.classList.remove('current');
-                        });
-
-                        // Thêm lớp "current" cho tab được nhấp vào
-                        tab.classList.add('current');
-                    });
-                });
-            });
-
-        </script>
+        <script src="assets/js/jquery.js"></script>
 
     </body>
 </html>

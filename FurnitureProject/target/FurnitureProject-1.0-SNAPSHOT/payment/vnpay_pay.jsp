@@ -18,42 +18,43 @@
             body, html {
                 margin: 0;
                 padding: 0;
+                height: 100%;
+                line-height: 1.6; 
             }
-
-            /* Container styles */
             .container {
                 max-width: 800px;
                 margin: 0 auto;
                 padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
             }
-
-            /* Header styles */
             .header {
                 text-align: center;
-                margin-bottom: 20px;
+                margin-bottom: 20px;            
             }
-
             .header h3 {
                 margin: 0;
                 font-size: 24px;
+                
             }
-
-            /* Form styles */
             .form-group {
                 margin-bottom: 20px;
             }
-
-
-
-            /* Footer styles */
             .footer {
                 text-align: center;
                 margin-top: 20px;
             }
-
             .footer p {
                 margin: 0;
             }
+            .btn-outline-info {
+                display: block;
+                margin: 0 auto;
+            }
+
         </style>
     </head>
     <body>
@@ -67,9 +68,7 @@
             <div class="table-responsive">
                 <form action="/FurnitureProject/eWalletPayment" id="frmCreateOrder" method="post">        
                     <div class="form-group">
-                        <label style="font-size: 20px;" for="amount">Số tiền:</label>
-                        <!--                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000000" min="1" name="amount" type="number" 
-                                                       value="${sessionScope.AMOUNT}" readonly />-->
+                        <label style="font-size: 20px; margin-right: 10px" for="amount">Số tiền:</label>                      
                         <span style="font-size: 20px; color: #2a9dcc"  >${sessionScope.AMOUNT}₫</span>
                         <input type="hidden" name="amount" value="${sessionScope.AMOUNT}" />
                     </div>
@@ -98,7 +97,7 @@
                         <label for="language">Tiếng anh</label><br>
 
                     </div>
-                    <button type="submit" class="btn btn-info">Thanh toán</button>
+                    <button type="submit" class="btn btn-outline-info">Thanh toán</button>
                 </form>
             </div>
             <p>

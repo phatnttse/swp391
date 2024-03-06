@@ -50,7 +50,6 @@ public class OrdersDAO {
                 stm.setBoolean(8, payment_status);
                 stm.setString(9, payment_method);
                 stm.setInt(10, amount);
-                
 
                 // Execute the query
                 int affectedRows = stm.executeUpdate();
@@ -225,7 +224,7 @@ public class OrdersDAO {
                     String payment_method = rs.getString("payment_method");
                     int amount = rs.getInt("amount");
                     Timestamp created_at = rs.getTimestamp("created_at");
-                    int priceOfOrder = rs.getInt("total_order_price");                   
+                    int priceOfOrder = rs.getInt("total_order_price");
                     OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_status, payment_method, amount, created_at);
                     odto.setFormattedPrice(Key_Utils.getInstance().formattedPrice(priceOfOrder));
                     list.add(odto);
@@ -247,4 +246,38 @@ public class OrdersDAO {
         }
         return list;
     }
+
+    public List<OrderDTO> getOrdersByCondition(String condition) throws SQLException, NamingException {
+        List<OrderDTO> orders = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT o.*, os.name AS status_name "
+                        + "FROM `order` o "
+                        + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                        + condition;
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    OrderDTO order = new OrderDTO();
+                    orders.add(order);
+                }
+            }
+        } finally {
+             if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return orders;
+    }
+
 }

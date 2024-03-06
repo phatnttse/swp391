@@ -170,58 +170,53 @@
                                                 <code>Đơn hàng (#${order.orderId})</code>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Person</span>
-                                                <input type="text" class="form-control" value="${order.email}" disabled>
-                                                <input type="text" class="form-control" value="${order.name}" disabled>
+                                                <span class="input-group-text font-weight-bold">Person</span>
+                                                <span class="form-control">${order.email}</span>
+                                                <span class="form-control">${order.name}</span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">SĐT</span>
-                                                <input type="text" class="form-control" value="${order.phone}" disabled>
+                                                <span class="input-group-text font-weight-bold">SĐT</span>
+                                                <span class="form-control">${order.phone}</span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Địa chỉ giao hàng</span>
-                                                <input type="text" class="form-control" value="${order.address}" disabled>
+                                                <span class="input-group-text font-weight-bold">Địa chỉ giao hàng</span>
+                                                <span class="form-control">${order.address}</span>
                                             </div>
                                             <div class="input-group mb-3">
-
                                                 <div class="input-group mb-3">
-                                                    <label class="input-group-text" for="orderStatusSelect">Trạng thái</label>
+                                                    <label class="input-group-text font-weight-bold" for="orderStatusSelect">Trạng thái</label>
                                                     <select class="form-select" id="orderStatusSelect" name="orderStatus">
                                                         <c:forEach var="status" items="${order_status}">
                                                             <option value="${status.statusId}" ${status.name eq order.statusName ? 'selected' : ''}>${status.name}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Phương thức thanh toán</span>
-                                                <input type="text" class="form-control" value="${order.paymentMethod}" disabled>
+                                                <span class="input-group-text font-weight-bold">Phương thức thanh toán</span>
+                                                <span class="form-control">${order.paymentMethod}</span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Trang thái thanh toán</span>
-                                                <input type="text" class="form-control" 
-                                                       
-                                                       <c:if test="${order.paymentStatus == true}">
-                                                           value="Đã thanh toán"
-                                                       </c:if>
-                                                       <c:if test="${order.paymentStatus == false}">
-                                                           value="Chưa thanh toán"
-                                                       </c:if>
-                                                       
-                                                       disabled>
+                                                <span class="input-group-text font-weight-bold">Trang thái thanh toán</span>
+                                                <span class="form-control">
+                                                    <c:if test="${order.paymentStatus == true}">
+                                                        Đã thanh toán
+                                                    </c:if>
+                                                    <c:if test="${order.paymentStatus == false}">
+                                                        Chưa thanh toán
+                                                    </c:if>
+                                                </span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Ngày đặt hàng</span>
-                                                <input type="text" class="form-control" value="${order.createdAt}" disabled>
+                                                <span class="input-group-text font-weight-bold">Ngày đặt hàng</span>
+                                                <span class="form-control">${order.createdAt}</span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">Ghi chú</span>
-                                                <input type="text" class="form-control" value="${order.note}"} disabled>
+                                                <span class="input-group-text font-weight-bold">Ghi chú</span>
+                                                <textarea class="form-control">${order.note}</textarea>                                             
                                             </div>
-
-
                                         </div>
+
                                     </div>
 
 
@@ -276,7 +271,7 @@
                                         <div class="card-body">
                                             <input type="hidden" name="orderId" value="${order.orderId}"/>
                                             <button type="submit" class="btn btn-google btn-block">Lưu</button>
-                                            <a href="orderManagement" class="btn btn-facebook btn-block"><i
+                                            <a href="/FurnitureProject/orderManagementPage" class="btn btn-facebook btn-block"><i
                                                     class="fab fa-facebook-f fa-fw"></i>Quay Lại</a>
 
                                         </div>

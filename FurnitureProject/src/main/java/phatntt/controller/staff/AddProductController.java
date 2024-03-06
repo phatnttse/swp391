@@ -5,16 +5,19 @@
 
 package phatntt.controller.staff;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.ProductsDTO;
 
@@ -23,7 +26,9 @@ import phatntt.dto.ProductsDTO;
  * @author mac
  */
 @WebServlet(name="AddProductController", urlPatterns={"/addproductcontroller"})
-//ADD_PRODUCT_PAGE
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,    // 2 MB
+                maxFileSize = 1024 * 1024 * 10,          // 10 MB
+                maxRequestSize = 1024 * 1024 * 50)       // 50 MB
 public class AddProductController extends HttpServlet {
 
     private static final String ADD_PRODUCT_PAGE = "AddProduct.jsp";
@@ -55,8 +60,22 @@ public class AddProductController extends HttpServlet {
                 product.setPrice(price);
                 product.setThumbnail(thumbnail);
                 product.setDiscount(discount);
-//                product.setPurchases(purchases);
-                // Bạn có thể muốn đặt thời gian tạo sản phẩm ở đây nếu cần thiết
+// Handling file upload for thumbnail
+            Part filePart = request.getPart("thumbnail");
+            String fileName = getSubmittedFileName(filePart);
+
+            // Save the uploaded file to a specific directory on your server
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String filePath = uploadPath + File.separator + fileName;
+            filePart.write(filePath);
+
+            // Set the thumbnail property of the ProductsDTO
+            product.setThumbnail(filePath);
 
                 // Gọi phương thức thêm sản phẩm từ ProductsDAO
                 ProductsDAO dao = new ProductsDAO();
@@ -79,6 +98,16 @@ public class AddProductController extends HttpServlet {
             }
         
     }
+    private String getSubmittedFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1);
+            }
+        }
+        return null;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

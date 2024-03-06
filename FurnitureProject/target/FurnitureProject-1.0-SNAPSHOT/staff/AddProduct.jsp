@@ -5,7 +5,8 @@
 --%>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -195,19 +196,19 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <form action="addproductcontroller" method="get">
+                                <form action="addproductcontroller" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="category">Loại sản phẩm:</label>
                                         <select class="form-control" id="categoryId" name="categoryId">
-<!--                                             Populate this dropdown with your available categories -->
+                                            <!--                                             Populate this dropdown with your available categories -->
                                             <option value="1">Bồn Tắm</option>
                                             <option value="2">Bồn Cầu</option>
                                             <option value="3">Sen Tắm</option>
                                             <option value="4">Tủ Chậu Lavabo</option>
                                             <option value="5">Phụ Kiện</option>
-                                            <option value="6">Khác</option>
+                                            
                                         </select>
-<!--<input type="hidden" class="form-control" id="title" name="categoryId" value="1" required>-->
+                                        <!--<input type="hidden" class="form-control" id="title" name="categoryId" value="1" required>-->
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Tên sản phẩm:</label>
@@ -226,9 +227,11 @@
                                         <input type="number" class="form-control" id="discount" name="discount" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="thumbnail">Link ảnh thumbnail:</label>
-                                        <input type="text" class="form-control" id="thumbnail" name="thumbnail" required>
+                                        <label for="thumbnail">Upload thumbnail:</label>
+                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" required>
                                     </div>
+
+
                                     <div class="form-group">
                                         <label for="description">Mô tả:</label>
                                         <textarea class="form-control" id="description" name="description" rows="3" required></textarea>

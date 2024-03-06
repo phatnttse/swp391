@@ -1,54 +1,55 @@
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\ProductsDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginServlet.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\products\ProductsController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\ConfirmVerificationResetPassController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\listener\MyContextServletListener.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\filter\AuthorizationFilter.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductCategoryController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderManagementController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\cart\RemoveProductFromCart.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\OrdersDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\OrderDetailManagementController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\DeleteUsersController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\ErrorDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\filter\DispatcherFilter.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\EmailDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\VerificationToResetPassController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\ProductsDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UserAccountsController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\products\AddProductsToCartController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\AddProductController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LogOutServlet.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LoginWithGoogleController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\products\SearchProductsController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\cart\ProductQuantity.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\cart\CartController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\cart\UpdateTotalPrice.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\CategoryDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\UsersDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\ForgotPasswordController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\AccountInfoController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\CategoryDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\util\DBConnect.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\OrderDetailDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\CartDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\UsersDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\util\Constants.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\RegisterAccountServlet.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\ProductDetailManagementController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\orders\OrdersController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\HomePageServlet.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\CartDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\category\CategoryController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\users\ChangePasswordController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\UserVerifyServlet.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderDetailDTO.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\util\Key_Utils.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\ViewProductsController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UpdateUsersController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\CheckVerificationCode.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\email\CreateNewPasswordController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\ProductManagementController.java
-E:\K? 5\SWP391\EF\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductDetailController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/OrdersDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/EmailDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/UsersDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/orders/OrdersController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/OrderDetailManagementController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/LoginWithGoogleController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/admin/ViewProductsController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/util/Key_Utils.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/OrderDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/LoadProductCategoryController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/ProductDetailManagementController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/OrderDetailDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/ForgotPasswordController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/ProductManagementController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/CategoryDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/HomePageServlet.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/util/DBConnect.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/ProductsController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/ErrorDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/ProductsDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/admin/DeleteUsersController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/AddProductController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/EditProductController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/CheckVerificationCode.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/LoginServlet.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/CategoryDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/util/Constants.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/cart/RemoveProductFromCart.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/OrderDetailDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/UsersDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/VerificationToResetPassController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/AddProductsToCartController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/EmailDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/admin/UserAccountsController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/ProductsDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/ChangePasswordController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/SearchProductsController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/cart/UpdateTotalPrice.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/LogOutServlet.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/category/CategoryController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/cart/CartController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/ConfirmVerificationResetPassController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/listener/MyContextServletListener.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/UserVerifyServlet.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/cart/ProductQuantity.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/filter/DispatcherFilter.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/LoadProductDetailController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/RegisterAccountServlet.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/filter/AuthorizationFilter.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/CartDAO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/OrderManagementController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/CartDTO.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/AccountInfoController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/email/CreateNewPasswordController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/admin/UpdateUsersController.java

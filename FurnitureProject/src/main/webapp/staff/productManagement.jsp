@@ -4,7 +4,8 @@
     Author     : mac
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -193,13 +194,32 @@
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Quản lý Sản Phẩm</h1>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
-                            </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <!-- Chia cột: Chữ "Bảng Sản Phẩm" nằm bên trái -->
+            <div class="row">
+                <div class="col">
+                    <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
+                </div>
+                <!-- Chia cột: Phần lọc nằm sát bên phải -->
+                <div class="col">
+                    <form action="productManagement" method="get" class="form-inline float-right">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="filterSelect" class="mr-2">Lọc:</label>
+                            <select class="form-control" id="filterSelect" name="filter">
+                                <option value="productId">Mã Sản Phẩm</option>
+                                <option value="category">Loại</option>
+                                <option value="price">Giá</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Lọc</button>
+                    </form>
+                </div>
+            </div>
+        </div>
                             <div class="card-body">
-                                <form action="orderDetailManagement" method="get">
+                                <form action="productManagement" method="get">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -220,7 +240,7 @@
                                                         <td>${product.categoryName}</td>
                                                         <td>${product.title}</td>
                                                         <td>${product.formattedPrice}đ</td>                                          
-                                                        <td><img height="80px" width="80px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                        <td><img height="100px" width="100px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
                                                         <td>
                                                             <div class="btn-group">

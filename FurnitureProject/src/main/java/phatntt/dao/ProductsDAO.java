@@ -5,6 +5,7 @@
  */
 package phatntt.dao;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -677,46 +678,45 @@ public class ProductsDAO implements Serializable {
         }
         return list;
     }
-    
+
     public boolean updateProduct(ProductsDTO product) throws SQLException, NamingException {
-    try {
-        con = DBConnect.createConnection();
-        if (con != null) {
-            String sql = "UPDATE products "
-                    + "SET categoryId = ?, title = ?, description = ?, quantity = ?, "
-                    + "price = ?, thumbnail = ?, discount = ?, purchases = ? "
-                    + "WHERE productId = ?";
-            stm = con.prepareStatement(sql);
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "UPDATE products "
+                        + "SET categoryId = ?, title = ?, description = ?, quantity = ?, "
+                        + "price = ?, thumbnail = ?, discount = ?, purchases = ? "
+                        + "WHERE productId = ?";
+                stm = con.prepareStatement(sql);
 
-            stm.setInt(1, product.getCategoryId());
-            stm.setString(2, product.getTitle());
-            stm.setString(3, product.getDescription());
-            stm.setInt(4, product.getQuantity());
-            stm.setFloat(5, product.getPrice());
-            stm.setString(6, product.getThumbnail());
-            stm.setInt(7, product.getDiscount());
-            stm.setInt(8, product.getPurchases());
-            stm.setInt(9, product.getProductId());
+                stm.setInt(1, product.getCategoryId());
+                stm.setString(2, product.getTitle());
+                stm.setString(3, product.getDescription());
+                stm.setInt(4, product.getQuantity());
+                stm.setFloat(5, product.getPrice());
+                stm.setString(6, product.getThumbnail());
+                stm.setInt(7, product.getDiscount());
+                stm.setInt(8, product.getPurchases());
+                stm.setInt(9, product.getProductId());
 
-            int rowsAffected = stm.executeUpdate();
-            return rowsAffected > 0;
+                int rowsAffected = stm.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } finally {
+            // Close resources
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
-    } finally {
-        // Close resources
-        if (stm != null) {
-            stm.close();
-        }
-        if (con != null) {
-            con.close();
-        }
+        return false;
     }
-    return false;
-}
-
 
     public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
         boolean result = false;
-        
+
         try {
             con = DBConnect.createConnection();
             if (con != null) {
@@ -729,9 +729,12 @@ public class ProductsDAO implements Serializable {
                 stm.setString(3, product.getDescription());
                 stm.setInt(4, product.getQuantity());
                 stm.setFloat(5, product.getPrice());
-                stm.setString(6, product.getThumbnail());
-                stm.setInt(7, product.getDiscount());
 
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(product.getThumbnail());
+                stm.setString(6, relativeFilePath);
+
+                stm.setInt(7, product.getDiscount());
 
                 int rowsAffected = stm.executeUpdate();
                 if (rowsAffected > 0) {
@@ -748,6 +751,11 @@ public class ProductsDAO implements Serializable {
             }
         }
         return result;
+    }
+
+// Helper method to extract filename from the full path
+    private String getSubmittedFileName(String fullPath) {
+        return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
     }
 
 }

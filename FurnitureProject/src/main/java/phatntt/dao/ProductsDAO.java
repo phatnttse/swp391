@@ -174,196 +174,7 @@ public class ProductsDAO implements Serializable {
         }
         return result;
     }
-
-    public List<ProductsDTO> searchProductsByPrice(float minPrice, float maxPrice) throws SQLException, NamingException {
-        List<ProductsDTO> result = new ArrayList<>();
-
-        try {
-            con = DBConnect.createConnection();
-
-            if (con != null) {
-                String sql = "SELECT * FROM product WHERE price >= ? AND price <=?";
-                stm = con.prepareCall(sql);
-                stm.setFloat(1, minPrice);
-                stm.setFloat(2, maxPrice);
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int productId = rs.getInt("product_id");
-                    int categoryId = rs.getInt("category_id");
-                    String title = rs.getString("title");
-                    float price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    if (this.products == null) {
-                        this.products = new ArrayList<>();
-                    }
-                    this.products.add(dto);
-                }
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-
-        return result;
-    }
-
-    public List<ProductsDTO> searchProductsByQuantity(int minQuantity, int maxQuantity) throws SQLException, NamingException {
-        List<ProductsDTO> result = new ArrayList<>();
-
-        try {
-            con = DBConnect.createConnection();
-
-            if (con != null) {
-                String sql = "SELECT * FROM product WHERE quantity >= ? AND quantity <= ?";
-                stm = con.prepareCall(sql);
-                stm.setInt(1, minQuantity);
-                stm.setInt(2, maxQuantity);
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int productId = rs.getInt("product_id");
-                    int categoryId = rs.getInt("category_id");
-                    String title = rs.getString("title");
-                    float price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    if (this.products == null) {
-                        this.products = new ArrayList<>();
-                    }
-                    this.products.add(dto);
-                }
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-
-        return result;
-    }
-
-    public List<ProductsDTO> searchProductsByPurchases(int minPurchases, int maxPurchases) throws SQLException, NamingException {
-        List<ProductsDTO> result = new ArrayList<>();
-
-        try {
-            con = DBConnect.createConnection();
-
-            if (con != null) {
-                String sql = "SELECT * FROM product WHERE purchases >= ? AND purchases <= ?";
-                stm = con.prepareCall(sql);
-                stm.setInt(1, minPurchases);
-                stm.setInt(2, maxPurchases);
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int productId = rs.getInt("product_id");
-                    int categoryId = rs.getInt("category_id");
-                    String title = rs.getString("title");
-                    float price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    if (this.products == null) {
-                        this.products = new ArrayList<>();
-                    }
-                    this.products.add(dto);
-                }
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-
-        return result;
-    }
-
-    public List<ProductsDTO> searchOutOfStockProducts() throws SQLException, NamingException {
-        List<ProductsDTO> result = new ArrayList<>();
-
-        try {
-            con = DBConnect.createConnection();
-
-            if (con != null) {
-                String sql = "SELECT * FROM product WHERE quantity = 0";
-                stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int productId = rs.getInt("product_id");
-                    int categoryId = rs.getInt("category_id");
-                    String title = rs.getString("title");
-                    float price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    ProductsDTO dto = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
-                    if (this.products == null) {
-                        this.products = new ArrayList<>();
-                    }
-                    this.products.add(dto);
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-
-        return result;
-    }
-
+   
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
         ProductsDTO result = null;
 
@@ -385,7 +196,7 @@ public class ProductsDAO implements Serializable {
                 while (rs.next()) {
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
-                    float price = rs.getFloat("price");
+                    int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
                     int discount = rs.getInt("discount");
                     String thumbnail = rs.getString("thumbnail");
@@ -797,33 +608,9 @@ public class ProductsDAO implements Serializable {
                 con.close();
             }
         }
+        return result;
     }
     
-    public void deleteProduct(String productId) throws SQLException, NamingException {
-        con = DBConnect.createConnection();
-        try {
-            String sql = "DELETE FROM products WHERE product_id = ?";
-            stm = con.prepareStatement(sql);
-
-            stm.setString(1, productId);
-            int rowsAffected = stm.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Product has been removed");
-            } else {
-                System.out.println("Delete failed!");
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    
-       return result;
-    }
-
     public List<ProductsDTO> sortProductByPriceAscending() throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
@@ -998,6 +785,61 @@ public class ProductsDAO implements Serializable {
             if (con != null) {
 
                 String sql = "SELECT * FROM product ORDER BY `created_at` ASC";
+                stm = con.prepareCall(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    //
+                    // mapping
+                    //5.1 get data from tu resultset
+                    int productId = rs.getInt("product_id");
+                    int categoryId = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    String description = rs.getString("description");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+                    symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+                    String formattedPrice = decimalFormat.format(price);
+
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    p.setFormattedPrice(formattedPrice);
+                    result.add(p);
+
+                    //5.2 set data to DTO
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return result;
+    }
+    
+    public List<ProductsDTO> sortProductByNameAscending() throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+
+            if (con != null) {
+
+                String sql = "SELECT * FROM product ORDER BY `title` ASC";
                 stm = con.prepareCall(sql);
                 rs = stm.executeQuery();
 

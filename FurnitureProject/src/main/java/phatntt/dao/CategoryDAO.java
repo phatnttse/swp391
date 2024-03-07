@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import javax.naming.NamingException;
 import phatntt.dto.CategoryDTO;
 import phatntt.util.DBConnect;
@@ -66,7 +67,7 @@ public class CategoryDAO {
         return result;
 
     }
-    
+
     public List<CategoryDTO> getAllCategoryDTOs() throws SQLException, NamingException {
 
         List<CategoryDTO> result = new ArrayList<>();
@@ -156,4 +157,36 @@ public class CategoryDAO {
         return result;
 
     }
+
+    public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "INSERT INTO category (category_id, name, thumbnail)"
+                        + "VALUES (?, ?, ?)";
+                stm = con.prepareStatement(sql);
+
+                stm.setInt(1, category.getCategoryId());
+                stm.setString(2, category.getName());
+                stm.setString(3, category.getThumbnail());
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
 }

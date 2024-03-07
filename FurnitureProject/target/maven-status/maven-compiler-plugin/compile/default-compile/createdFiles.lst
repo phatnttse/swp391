@@ -68,3 +68,4 @@ phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\controller\email\CreateNewPasswordController.class
 phatntt\dao\OrdersDAO.class
+phatntt\controller\staff\AddCategoryController.class

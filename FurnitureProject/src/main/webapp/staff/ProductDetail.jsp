@@ -195,7 +195,7 @@
 
                         <!-- DataTales Example -->
 
-                        <form action="editproductcontroller" method="POST">
+                        <form action="editproductcontroller" method="get">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
@@ -217,7 +217,9 @@
 
                                                 <tbody>
                                                     <tr>
-                                                        <td>${products.productId}</td>
+                                                        <td>
+                                                            <input type="text" name="productId" value="${products.productId}" readonly="">
+                                                        </td>
                                                         <td>
                                                             <input type="text" name="categoryId" value="${products.categoryId}">
                                                         </td>

@@ -13,23 +13,33 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class ProductsDTO implements Serializable{
+    
     private int productId;
     private int categoryId;
     private String categoryName;
     private String title;
     private String description;
     private int quantity;
-    private float price;
+    private int price;
     private String formattedPrice;
     private String thumbnail;
     private int discount;
     private int purchases;
-    private Timestamp createdAt;
+    private Timestamp createdAt;   
+    private int discountProduct;
+
+    public int getDiscountProduct() {
+        return (price - (price*discount/100));
+    }
+
+    public void setDiscountProduct(int discountProduct) {
+        this.discountProduct = discountProduct;
+    }
     
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, float price, String thumbnail, int discount, int purchases, Timestamp createdAt) {
+    public ProductsDTO(int productId, int categoryId, String title, String description, int quantity, int price, String thumbnail, int discount, int purchases, Timestamp createdAt) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.title = title;
@@ -41,6 +51,8 @@ public class ProductsDTO implements Serializable{
         this.purchases = purchases;
         this.createdAt = createdAt;
     }
+    
+    
 
     /**
      * @return the productId
@@ -115,14 +127,14 @@ public class ProductsDTO implements Serializable{
     /**
      * @return the price
      */
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

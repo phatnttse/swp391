@@ -8,12 +8,14 @@ package phatntt.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import org.mindrot.jbcrypt.BCrypt;
 import phatntt.dto.UsersDTO;
-
 
 /**
  *
@@ -34,6 +36,13 @@ public class Key_Utils {
 
     private Key_Utils() {
         // Private constructor để ngăn chặn việc tạo mới đối tượng từ bên ngoài lớp
+    }
+
+    public String formattedPrice(int price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Sử dụng Locale.US để đảm bảo sử dụng dấu chấm thập phân
+        symbols.setGroupingSeparator('.'); // Sét dấu chấm thập phân
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng với 2 số sau dấu thập phân và dấu chấm thập phân
+        return decimalFormat.format(price);
     }
 
     public String hashPassword(String password) {

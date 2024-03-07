@@ -22,6 +22,8 @@ public class Constants {
         public static final String PRODUCTS_PAGE = "productsPage";
         public static final String HOME_PAGE = "homePage";
         public static final String ADMIN_PAGE = "adminPage";
+        public static final String HOME = "home";
+        public static final String STAFF_PAGE = "staffPage";
     }
 
     public class LoginWithGoogleFeatures {
@@ -42,6 +44,7 @@ public class Constants {
     public class LogoutFeatures {
 
         public static final String LOGIN_PAGE = "loginPage";
+
     }
 
     public class SignUpFeatures {
@@ -73,6 +76,13 @@ public class Constants {
         public static final String ADMIN_PAGE = "adminPage";
         public static final String USERACCOUNT_PAGE = "viewUsersPage";
         public static final String VIEW_PRODUCTS_PAGE = "viewProductsPage";
+
+    }
+
+    public class OderFeatures {
+
+        public static final String ORDER_PAGE = "orderPage";
+        public static final String ORDER_DETAIL_PAGE = "orderDetailPage";
     }
 
     public class UsersFeatures {
@@ -104,18 +114,24 @@ public class Constants {
 
         public static final String CART_PAGE = "cartPage";
         public static final String PRODUCTS_PAGE = "productsPage";
-        public static final String CHECK_OUT_PAGE = "checkOutPage";
-        public static final String CHECK_OUT_SUCCESS_PAGE = "checkOutSuccessPage";
+        public static final String CREATE_ORDER_PAGE = "createOrderPage";
+        public static final String ORDER_SUCCESS_PAGE = "orderSuccessPage";
+        public static final String VNPAY_PAGE = "vnpayPage";
+        public static final String CHECKOUT_SUCCESS_PAGE = "checkOutSuccessPage";
+
     }
 
     public class Management {
 
         public static final String ORDER_MANAGEMENT_PAGE = "orderManagementPage";
         public static final String VIEW_ORDERDETAIL_PAGE = "orderDetailPage";
+
         public static final String PRODUCT_MANAGEMENT_PAGE = "productManagementPage";
+
+        public static final String VIEW_ORDER_DETAIL_MANAGEMENT_PAGE = "orderManagementDetailPage";
+
         public static final String VIEW_PRODUCTDETAIL_PAGE = "productDetailPage";
         public static final String ADD_PRODUCT_PAGE = "addProductPage";
-        public static final String EDIT_PRODUCT_PAGE = "editProductPage";
 
     }
 }

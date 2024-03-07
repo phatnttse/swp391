@@ -7,52 +7,25 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html lang="vi">
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/collection.css">
+        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/collectionall.css">
+        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <link rel="stylesheet" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968"> 
         <link rel="preload" as="style" type="text/css" href="//bizweb.dktcdn.net/100/494/385/themes/919262/assets/bootstrap-4-3-min.css?1703641115968">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <title>Sản phẩm</title>
-        <style>
-            .backdrop__body-backdrop___1rvky {
-                position: fixed;
-                opacity: 0;
-                width: 100%;
-                left: 0;
-                top: 0 !important;
-                right: 0;
-                bottom: 0;
-                background-color: #363636;
-                z-index: 9;
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out
-            }
-
-            @media (max-width: 991px) {
-                .backdrop__body-backdrop___1rvky {
-                    z-index:9
-                }
-            }
-
-            .backdrop__body-backdrop___1rvky.active {
-                visibility: visible;
-                opacity: 0.5
-            }
-        </style>
+      
     </head>
     <body>
         <c:set var="listProductByCategory" value="${requestScope.CATEGORY_LIST}"/>
-
-        <div class="backdrop__body-backdrop___1rvky"></div>
         <%@include file="../UIcomponents/header.jsp"%>
         <%@include file="../UIcomponents/breadcrumb.jsp"%>
+        <div class="backdrop__body-backdrop___1rvky"></div>
         <div class="layout-collection">
             <div class="container">
                 <div class="row">
@@ -64,13 +37,11 @@
                             <nav class="nav-category">
                                 <ul class="nav navbar-pills">
                                     <c:if test="${not empty listProductByCategory}">
-
                                         <c:forEach var="category" items="${listProductByCategory}">
                                             <li class="nav-item  relative">
                                                 <a class="nav-link pr-5"  href="/FurnitureProject/product-category?categoryId=${category.categoryId}" title="Đèn chùm">${category.name}</a>
                                             </li>
                                         </c:forEach>
-
                                     </c:if>
                                 </ul>
                             </nav>
@@ -79,21 +50,8 @@
                         <div class="aside-filter clearfix">
                             <div class="aside-hidden-mobile">
                                 <div class="filter-container">
-
-                                    <div class="filter-containers">	
-                                        <div class="filter-container__selected-filter" style="display: none;">
-                                            <div class="filter-container__selected-filter-header clearfix">
-                                                <span class="filter-container__selected-filter-header-title">Bạn chọn</span>
-                                                <a href="" class="filter-container__clear-all" title="Bỏ hết">Bỏ hết</a>
-                                            </div>
-                                            <div class="filter-container__selected-filter-list clearfix">
-                                                <ul>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="clearfix"></div>
-
 
                                     <aside class="aside-item filter-price">
                                         <div class="aside-title">Chọn mức giá 
@@ -104,71 +62,75 @@
                                             </span>
                                         </div>
                                         <div class="aside-content filter-group">
-                                            <ul>
+                                            <form action="LoadProductByPriceController" method="POST" id="myForm">
+                                                <ul>
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-duoi-500-000d">
-                                                            <input type="checkbox" id="filter-duoi-500-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Dưới 500.000đ" value="(<500000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            Giá dưới 500.000đ
-                                                        </label>
-                                                    </span>
-                                                </li>
-
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-500-000d-1-000-000d">
-                                                            <input type="checkbox" id="filter-500-000d-1-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(>500000 AND <1000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            500.000đ - 1.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-duoi-500-000d">
+                                                                <input type="checkbox" id="filter-duoi-500-000d"   name="price" value="${0}" >
+                                                                <i class="fa"></i>
+                                                                Giá dưới 500.000đ
+                                                            </label>
+                                                        </span>
+                                                    </li>
 
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-1-000-000d-3-000-000d">
-                                                            <input type="checkbox" id="filter-1-000-000d-3-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="1.000.000đ - 3.000.000đ" value="(>1000000 AND <3000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            1.000.000đ - 3.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-500-000d-1-000-000d">
+                                                                <input type="checkbox" id="filter-500-000d-1-000-000d"   name="price" value="${1}">
+                                                                <i class="fa"></i>
+                                                                500.000đ - 1.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-3-000-000d-5-000-000d">
-                                                            <input type="checkbox" id="filter-3-000-000d-5-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="3.000.000đ - 5.000.000đ" value="(>3000000 AND <5000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            3.000.000đ - 5.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-1-000-000d-3-000-000d">
+                                                                <input type="checkbox" id="filter-1-000-000d-3-000-000d"  name="price" value="${2}" >
+                                                                <i class="fa"></i>
+                                                                1.000.000đ - 3.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
 
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-5-000-000d-7-000-000d">
-                                                            <input type="checkbox" id="filter-5-000-000d-7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="5.000.000đ - 7.000.000đ" value="(>5000000 AND <7000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            5.000.000đ - 7.000.000đ							
-                                                        </label>
-                                                    </span>
-                                                </li>	
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <span>
-                                                        <label for="filter-tren7-000-000d">
-                                                            <input type="checkbox" id="filter-tren7-000-000d"  data-group="Khoảng giá" data-field="price_min" data-text="Trên 7.000.000đ" value="(>7000000)" data-operator="OR">
-                                                            <i class="fa"></i>
-                                                            Giá trên 7.000.000đ
-                                                        </label>
-                                                    </span>
-                                                </li>
-                                            </ul>
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-3-000-000d-5-000-000d">
+                                                                <input type="checkbox" id="filter-3-000-000d-5-000-000d"   name="price" value="${3}" >
+                                                                <i class="fa"></i>
+                                                                3.000.000đ - 5.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
+
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-5-000-000d-7-000-000d">
+                                                                <input type="checkbox" id="filter-5-000-000d-7-000-000d"  name="price" value="${4}">
+                                                                <i class="fa"></i>
+                                                                5.000.000đ - 7.000.000đ							
+                                                            </label>
+                                                        </span>
+                                                    </li>	
+                                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                                        <span>
+                                                            <label for="filter-tren7-000-000d">
+                                                                <input type="checkbox" id="filter-tren7-000-000d" name="price" value="${5}">
+                                                                <i class="fa"></i>
+                                                                Giá trên 7.000.000đ
+                                                            </label>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                                <button type="submit" class="btn custom-filter-button">Lọc</button>
+
+                                            </form>
                                         </div>
                                     </aside>
+
 
                                     <aside class="aside-item filter-type">
                                         <div class="aside-title">Loại sản phẩm 
@@ -251,13 +213,13 @@
                                                     Mặc định 
                                                 </span>
                                                 <ul class="content_ul">                    
-                                                    <li><a href="" onclick="">Mặc định</a></li>								
-                                                    <li><a href="" onclick="">A → Z</a></li>
-                                                    <li><a href="" onclick="">Z → A</a></li>
-                                                    <li><a href="" onclick="">Giá tăng dần</a></li>
-                                                    <li><a href="" onclick="">Giá giảm dần</a></li>
-                                                    <li><a href="" onclick="">Hàng mới nhất</a></li>
-                                                    <li><a href="" onclick="">Hàng cũ nhất</a></li>
+                                                    <li><a href="SortProductController?sortType=default" >Mặc định</a></li>								
+                                                    <li><a href="SortProductController?sortType=AtoZ" >A → Z</a></li>
+                                                    <li><a href="SortProductController?sortType=ZtoA" >Z → A</a></li>
+                                                    <li><a href="SortProductController?sortType=IncreasePrice" >Giá tăng dần</a></li>
+                                                    <li><a href="SortProductController?sortType=DecreasePrice" >Giá giảm dần</a></li>
+                                                    <li><a href="SortProductController?sortType=Newest" >Hàng mới nhất</a></li>
+                                                    <li><a href="SortProductController?sortType=Oldest" >Hàng cũ nhất</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -271,8 +233,7 @@
                                 <div class="row">
                                     <c:set var="listProduct" value="${requestScope.PRODUCTS_LIST}"/>
                                     <c:if test="${not empty listProduct}">
-                                        <c:forEach var="product" items="${listProduct}">
-
+                                        <c:forEach var="product" items="${listProduct}">                                    
                                             <div class="col-6 col-xl-4 col-lg-4 col-md-4">
                                                 <div class="item_product_main">
                                                     <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
@@ -291,7 +252,7 @@
                                                                 <div class="actions-secondary">
                                                                     <div class="actions-primary">
 
-                                                                        <button type="button" onclick="addProductToCart(${product.productId}, '${product.title}', '${product.thumbnail}', ${product.price})" class="btn-cart add_to_cart " title="Thêm vào giỏ hàng">
+                                                                        <button type="button" onclick="addProductToCart(${product.productId}, '${product.title}', '${product.thumbnail}', ${product.discountProduct}, 1)" class="btn-cart add_to_cart " title="Thêm vào giỏ hàng">
                                                                             <span class="icon icon-cart">
                                                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
                                                                                         fill:none;
@@ -303,16 +264,20 @@
                                                                             </span>
                                                                         </button>
                                                                     </div>
-                                                                    <a title="Xem nhanh" href="" class="quick-view btn-views">
+                                                                    <button type="button" title="Xem nhanh" onclick="viewFastProduct(${product.productId})" class="quick-view btn-views">
                                                                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z"></path></svg>
-                                                                    </a>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="product-info">
                                                             <h3 class="product-name"><a href="" title="${product.title}">${product.title}</a></h3>
                                                             <div class="price-box">
-                                                                <span class="price">${product.formattedPrice}₫</span>
+                                                                <script>
+                                                                    var totalMoney = parseInt('${product.discountProduct}');
+                                                                    var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                    document.write(formattedTotalMoney);
+                                                                </script>
                                                                 <span class="compare-price">${product.formattedPrice}₫</span>
                                                             </div>
                                                         </div>
@@ -336,13 +301,13 @@
 
                                         <li class="page-item"><a class="page-link" onclick="" href="">3</a></li>
 
-                                        <li class="page-item hidden-xs"><a class="page-link" onclick=" href ="">
+                                        <li class="page-item hidden-xs"><a class="page-link">
                                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-right fa-w-6"><path fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z" class=""></path></svg>
-                                            </a></li>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -351,263 +316,20 @@
                     <span>Lọc</span>
                 </div>
             </div>
-        </div>  
+        </div>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="Lofi_Furniture_Support"
+        agent-id="cf3b1e72-2c0d-43b8-b9d4-e26ce22ec3bd"
+        language-code="en">            
+    </df-messenger>
 
-        <div id="popup-cart-desktop" class="popup-cart"></div>
+    <div id="popup-cart-desktop" class="popup-cart"></div>
+    <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-        <script>
-            function addProductToCart(productId, title, thumbnail, price) {
-                $.ajax({
-                    url: "/FurnitureProject/addProductsToCart",
-                    type: "post",
-                    data: {
-                        productId: productId,
-                        title: title,
-                        thumbnail: thumbnail,
-                        price: price
-                    },
-                    success: function (response) {
-                        // Kiểm tra phản hồi từ server
-                        if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
-                            // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
-                            window.location.href = "/FurnitureProject/loginPage";
-                            showNotification("Để thực hiện, bạn cần phải đăng nhập!");
-                        } else {
-                            // Nếu không, hiển thị giỏ hàng
-                            const content = document.getElementById("popup-cart-desktop");
-                            content.innerHTML = response;
-                            showCartModal();
-                        }
-                    },
-                    error: function (xhr) {
-                        // Xử lý lỗi nếu cần
-                    }
-                });
-            }
-            function showNotification(message) {
-                // Hiển thị thông báo cho người dùng, ví dụ: sử dụng alert hoặc thêm thông báo vào DOM
-                alert(message);
-            }
-            function showCartModal() {
-                const popupcart = document.querySelector('.popup-cart');
-                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
-                // Hiển thị giỏ hàng
-                popupcart.classList.add('active');
-                backdrop.classList.add('active');
-                // Khởi tạo bộ lắng nghe sự kiện cho nút đóng giỏ hàng
-                initializeCloseEvent();
-            }
-
-            function initializeCloseEvent() {
-                const iconClose = document.querySelector('.js-popup-close');
-                if (iconClose) {
-                    iconClose.addEventListener('click', hideCartModal);
-                }
-            }
-
-            function hideCartModal() {
-                const popupcart = document.querySelector('.popup-cart');
-                const backdrop = document.querySelector('.backdrop__body-backdrop___1rvky');
-                popupcart.classList.remove('active');
-                backdrop.classList.remove('active');
-            }
-
-            function addProductQuantity(userId, productId) {
-                $.ajax({
-                    url: "/FurnitureProject/productQuantity",
-                    type: "post",
-                    data: {
-                        userId: userId,
-                        productId: productId
-                    },
-                    success: function (response) {
-                        // Parse JSON response từ servlet
-                        var products = JSON.parse(response);
-                        var totalPrice = 0;
-                        var newHTML = '';
-                        // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
-                        if (products.length === 0) {
-                            hideCartModal();
-                        } else {
-                            // Tạo HTML mới cho giỏ hàng
-                            newHTML +=
-                                    '<div id="cart-popup-container" class="cartPopupContainer">' +
-                                    '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
-                                    '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
-                                    '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
-                                    ;
-                            // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
-                            products.forEach(function (product) {
-                                if (product.quantity > 0) {
-                                    newHTML += '<div class="ajaxcart__row">';
-                                    newHTML += '<div class="ajaxcart__product cart_product">';
-                                    newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
-                                    newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
-                                    newHTML += '</a>';
-                                    newHTML += '<div class="grid__item cart_info">';
-                                    newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
-                                    newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
-                                    newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                    newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half cart_select">';
-                                    newHTML += '<div class="ajaxcart__qty input-group-btn">';
-                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
-                                    newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
-                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                    newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                }
-                            });
-                            products.forEach(function (product) {
-                                totalPrice += product.price * product.quantity;
-                            });
-                            newHTML += '</div>' +
-                                    '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
-                                    '<div class="row">' +
-                                    '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
-                                    '<div class="ajaxcart__subtotal">' +
-                                    '<div class="cart__subtotal">' +
-                                    '<div class="cart__col-6">Tổng tiền:</div>' +
-                                    '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="cart__btn-proceed-checkout-dt">' +
-                                    '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</form>' +
-                                    '</div>';
-
-                        }
-
-                        // Thay đổi nội dung của phần tử giỏ hàng
-                        $("#cart-popup-container").html(newHTML);
-                    },
-                    error: function (xhr) {
-                        console.error("Lỗi khi phân tích cú pháp JSON: ", error);
-                    }
-                });
-            }
-
-            // Hàm để định dạng số tiền
-            function formatCurrency(amount) {
-                return amount.toLocaleString('vi-VN') + '₫';
-            }
+    <script src="assets/js/jquery.js"></script>
 
 
-            function reduceProductQuantity(userId, productId) {
-                $.ajax({
-                    url: "/FurnitureProject/productQuantity",
-                    type: "get",
-                    data: {
-                        userId: userId,
-                        productId: productId
-                    },
-                    success: function (response) {
-                        // Parse JSON response từ servlet
-                        var products = JSON.parse(response);
-                        var totalPrice = 0;
-                        var newHTML = '';
-                        // Kiểm tra nếu không còn sản phẩm trong giỏ hàng
-                        if (products.length === 0) {
-                            hideCartModal();
-                        } else {
-                            // Tạo HTML mới cho giỏ hàng
-                            newHTML +=
-                                    '<div id="cart-popup-container" class="cartPopupContainer">' +
-                                    '<form action="cart" method="post" class="cart ajaxcart cartpopup">' +
-                                    '<div class="cart-header-info"><div>Thông tin sản phẩm</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div></div>' +
-                                    '<div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer cart_body items">'
-                                    ;
-                            // Duyệt qua danh sách sản phẩm và tạo HTML cho mỗi sản phẩm
-                            products.forEach(function (product) {
-                                if (product.quantity > 0) {
-                                    newHTML += '<div class="ajaxcart__row">';
-                                    newHTML += '<div class="ajaxcart__product cart_product">';
-                                    newHTML += '<a href="" class="ajaxcart__product-image cart_image" title="' + product.title + '">';
-                                    newHTML += '<img width="80" height="80" src="' + product.thumbnail + '" alt="' + product.title + '">';
-                                    newHTML += '</a>';
-                                    newHTML += '<div class="grid__item cart_info">';
-                                    newHTML += '<div class="ajaxcart__product-name-wrapper cart_name">';
-                                    newHTML += '<a href="" class="ajaxcart__product-name h4" title="' + product.title + '">' + product.title + '</a>';
-                                    newHTML += '<a class="cart__btn-remove remove-item-cart ajaxifyCart--remove" href="">Xóa</a>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                    newHTML += '<span class="cart-price">' + formatCurrency(product.price) + '</span>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half cart_select">';
-                                    newHTML += '<div class="ajaxcart__qty input-group-btn">';
-                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count" onclick="reduceProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">-</button>';
-                                    newHTML += '<input id="quantity_' + product.productId + '" type="text" name="" value="' + product.quantity + '" class="ajaxcart__qty-num number-sidebar" maxlength="3" value="1" min="0" pattern="[0-9]*">';
-                                    newHTML += '<button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count" onclick="addProductQuantity(\'' + product.userId + '\', ' + product.productId + ')">+</button>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '<div class="grid">';
-                                    newHTML += '<div class="grid__item one-half text-right cart_prices">';
-                                    newHTML += '<span class="cart-price" data-quantity="' + product.quantity + '">' + formatCurrency(product.price * product.quantity) + '</span>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                    newHTML += '</div>';
-                                }
-                            });
-                            products.forEach(function (product) {
-                                totalPrice += product.price * product.quantity;
-                            });
-                            newHTML += '</div>' +
-                                    '<div class="ajaxcart__footer ajaxcart__footer--fixed cart-footer">' +
-                                    '<div class="row">' +
-                                    '<div class="col-lg-4 col-12 offset-md-8 offset-lg-8 offset-xl-8">' +
-                                    '<div class="ajaxcart__subtotal">' +
-                                    '<div class="cart__subtotal">' +
-                                    '<div class="cart__col-6">Tổng tiền:</div>' +
-                                    '<div class="text-right cart__totle"><span class="total-price">' + formatCurrency(totalPrice) + '</span></div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="cart__btn-proceed-checkout-dt">' +
-                                    '<button onclick="" type="submit" class="button btn btn-default cart__btn-proceed-checkout" title="Thanh toán">Thanh toán</button>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</form>'+
-                                    '</div>';
-
-                        }
-
-                        // Thay đổi nội dung của phần tử giỏ hàng
-                        $("#cart-popup-container").html(newHTML);
-                    },
-                    error: function (xhr) {
-                        console.error("Lỗi khi phân tích cú pháp JSON: ", error);
-                    }
-                });
-            }
-        </script>
-
-
-        <%@include file="../UIcomponents/footer.jsp" %>
-    </body>
+    <%@include file="../UIcomponents/footer.jsp" %>
+</body>
 </html>

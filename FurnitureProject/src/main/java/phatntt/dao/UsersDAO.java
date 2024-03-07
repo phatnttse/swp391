@@ -42,8 +42,6 @@ public class UsersDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 if (rs.next()) {
-                    // mapping
-                    //5.1 get data from tu resultset
                     String id = rs.getString("user_id");
                     email = rs.getString("email");
                     String password = rs.getString("password");
@@ -91,8 +89,7 @@ public class UsersDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 if (rs.next()) {
-                    // mapping
-                    //5.1 get data from tu resultset
+
                     String id = rs.getString("user_id");
                     email = rs.getString("email");
                     String password = rs.getString("password");
@@ -131,10 +128,8 @@ public class UsersDAO implements Serializable {
 
         boolean result = false;
         try {
-            //1. Create connection
             con = DBConnect.createConnection();
             if (con != null) {
-                //2. create sql string
                 String sql = "Insert Into user(user_id, email, password , name, given_name, family_name, role_id) "
                         + "Values(?, ?, ?, ?, ?, ?, ?)";
                 stm = con.prepareStatement(sql);
@@ -166,7 +161,6 @@ public class UsersDAO implements Serializable {
 
         boolean result = false;
         try {
-            //1. Create connection
             con = DBConnect.createConnection();
             if (con != null) {
 
@@ -197,58 +191,6 @@ public class UsersDAO implements Serializable {
         }
         return result;
     }
-
-//    public void linkSystemAccount(String email, String googleId) throws SQLException, NamingException {
-//
-//        try {
-//            con = DBConnect.createConnection();
-//            if (con != null) {
-//                String sql = "UPDATE user "
-//                        + "SET google_id = ? "
-//                        + "WHERE email = ?";
-//                stm = con.prepareStatement(sql);
-//                stm.setString(1, googleId);
-//                stm.setString(2, email);
-//                stm.executeUpdate();
-//
-//            }
-//
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//
-//    }
-//
-//    public void linkGoogleAccount(String email, String password) throws SQLException, NamingException {
-//
-//        try {
-//            con = DBConnect.createConnection();
-//            if (con != null) {
-//                String sql = "UPDATE user "
-//                        + "SET password = ? "
-//                        + "WHERE email = ?";
-//                stm = con.prepareStatement(sql);
-//                stm.setString(1, password);
-//                stm.setString(2, email);
-//                stm.executeUpdate();
-//
-//            }
-//
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//
-//    }
 
     public List<UsersDTO> getAllUsers() throws SQLException, NamingException {
 

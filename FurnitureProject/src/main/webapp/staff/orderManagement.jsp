@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1HW5FWsRV0FlOjw44WtG1iaNy6Zix0M9TO5qsyv6Lvmgvr+UO3Hre76pl3AdDCSPZkW4YYj6Pkpx6A93JmI1NA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -24,7 +24,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-dark  sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gray-900  sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -36,7 +36,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="staffPage">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -46,7 +46,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Menu
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -64,34 +64,8 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider">       
+               
 
             </ul>
             <!-- End of Sidebar -->
@@ -100,6 +74,7 @@
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
+  
                 <div id="content">
 
                     <!-- Topbar -->
@@ -166,7 +141,7 @@
                                         Settings
                                     </a>                                   
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="logOut">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -178,6 +153,81 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
+                         <!-- Content Row -->
+                    <div class="row my-5">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Số đơn hiện tại</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Đơn hàng trong ngày</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Đơn hàng trong tháng</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Đơn hàng đã huỷ</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1>
@@ -205,14 +255,15 @@
                                             <tbody>
                                                 <c:forEach var="order" items="${orders}">
                                                     <tr>
-                                                        <td>#${order.orderId}</td>
+                                                        <td>
+                                                            #${order.orderId}
+                                                        </td>
                                                         <td>${order.email}</td>
                                                         <td>${order.name}</td>
                                                         <td>${order.phone}</td>
                                                         <td style="color: red">${order.statusName}</td>
                                                         <td>
-                                                            <input type="hidden" name="orderId" value="${order.orderId}" />
-                                                            <button type="submit" class="btn btn-outline-info">Chi tiết</button>                                                           
+                                                            <a class="btn btn-outline-info" href="orderDetailManagement?orderId=${order.orderId}">Chi tiết</a>
                                                         </td>                                                                                  
                                                     </tr>  
                                                 </c:forEach>

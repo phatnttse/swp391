@@ -27,7 +27,7 @@ CREATE TABLE `product` (
     `product_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `category_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `price` DECIMAL NOT NULL,
+    `price` INT NOT NULL,
     `quantity` INT NOT NULL, 
     `discount` INT,
     `thumbnail` VARCHAR(255) NOT NULL,
@@ -51,7 +51,9 @@ CREATE TABLE `order` (
     `shipping_address` VARCHAR(255) NOT NULL,
     `note` LONGTEXT,
     `status` INT NOT NULL,
+    `payment_status` BOOLEAN NOT NULL,
     `payment_method` VARCHAR(50) NOT NULL,
+    `amount` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -65,7 +67,7 @@ CREATE TABLE `order_detail` (
     `order_id` INT NOT NULL,
     `product_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `price` FLOAT NOT NULL,
+    `price` INT NOT NULL,
     `quantity` INT NOT NULL,
     `thumbnail` VARCHAR(255) NOT NULL,
     `total_money` INT NOT NULL
@@ -78,7 +80,7 @@ CREATE TABLE `cart` (
     `title` VARCHAR(255) NOT NULL,
     `thumbnail` VARCHAR(255) NOT NULL,
     `quantity` INT NOT NULL,
-    `price` FLOAT NOT NULL
+    `price` INT NOT NULL
 );
 
 
@@ -92,7 +94,7 @@ INSERT INTO `order_status` (`name`) VALUES
     ('Đang xử lý'),
     ('Đã gửi cho đơn vị vận chuyển'),
     ('Đang giao hàng'),
-    ('Đã giao hàng'),
+    ('Giao hàng thành công'),
     ('Đã hủy');
 
 
@@ -371,15 +373,8 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  (2,"Admin");
  
 
-
-
-select * from product where category_id = '1';
-select * from category;
-select * from user;
-select * from role;
-select * from cart;
 INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
 VALUES ('123', 'staff@gmail.com', '$2a$10$wNGqMyi/jy8aURA1Bbm8.e6l90CY5A6FU0gmqKdLWC7BmWDYkoPpG', 'Staff', 'Staff', 'Staff', '1234567890', 'picture_url', 'Address', 1);
 
-delete from user where role_id = 1;
+
 

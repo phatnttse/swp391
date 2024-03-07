@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">       
         <title>Chi tiết đơn hàng</title>
     </head>
-    <body>
     <body id="page-top">
 
         <!-- Page Wrapper -->
@@ -35,7 +34,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="staffPage">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -45,12 +44,12 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Menu
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
+                    <a class="nav-link collapsed" href="">
                         <span>Sản Phẩm</span>
                     </a>                  
                 </li>
@@ -63,34 +62,8 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider">       
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
 
             </ul>
             <!-- End of Sidebar -->
@@ -165,7 +138,7 @@
                                         Settings
                                     </a>                                   
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="logOut">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -177,117 +150,138 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <c:set var="order" value="${requestScope.ORDER}"/>
-                        <c:set var="order_details" value="${requestScope.ORDER_DETAILS}"/>
-                        <h1 class="h3 my-4 mb-4 text-gray-800">Chi tiết đơn hàng</h1>
+                        <form action="orderDetailManagement" method="post">
+                            <c:set var="order" value="${requestScope.ORDER}"/>
+                            <c:set var="order_details" value="${requestScope.ORDER_DETAILS}"/>
+                            <c:set var="order_status" value="${requestScope.ORDER_STATUS}"/>
+                            <h1 class="h3 my-4 mb-4 text-gray-800">Chi tiết đơn hàng</h1>
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-lg-6">
+                                <div class="col-lg-6"
 
-                                <!-- Circle Buttons -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
+                                     <!-- Circle Buttons -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
+                                        </div>
+                                        <div class="card-body">                                   
+                                            <div class="mb-2">
+                                                <code>Đơn hàng (#${order.orderId})</code>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Person</span>
+                                                <span class="form-control">${order.email}</span>
+                                                <span class="form-control">${order.name}</span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">SĐT</span>
+                                                <span class="form-control">${order.phone}</span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Địa chỉ giao hàng</span>
+                                                <span class="form-control">${order.address}</span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group mb-3">
+                                                    <label class="input-group-text font-weight-bold" for="orderStatusSelect">Trạng thái</label>
+                                                    <select class="form-select" id="orderStatusSelect" name="orderStatus">
+                                                        <c:forEach var="status" items="${order_status}">
+                                                            <option value="${status.statusId}" ${status.name eq order.statusName ? 'selected' : ''}>${status.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Phương thức thanh toán</span>
+                                                <span class="form-control">${order.paymentMethod}</span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Trang thái thanh toán</span>
+                                                <span class="form-control">
+                                                    <c:if test="${order.paymentStatus == true}">
+                                                        Đã thanh toán
+                                                    </c:if>
+                                                    <c:if test="${order.paymentStatus == false}">
+                                                        Chưa thanh toán
+                                                    </c:if>
+                                                </span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Ngày đặt hàng</span>
+                                                <span class="form-control">${order.createdAt}</span>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Ghi chú</span>
+                                                <textarea class="form-control">${order.note}</textarea>                                             
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="card-body">                                   
-                                        <div class="mb-2">
-                                            <code>Đơn hàng (#${order.orderId})</code>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Person</span>
-                                            <input type="text" class="form-control" value="${order.email}">
-                                            <input type="text" class="form-control" value="${order.name}">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">SĐT</span>
-                                            <input type="text" class="form-control" value="${order.phone}">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Địa chỉ giao hàng</span>
-                                            <input type="text" class="form-control" value="${order.address}">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Trang thái</span>
-                                            
-                                            <input class="form-control" list="status" name="status" id="status" value="${order.statusName}">
-                                            <datalist id="status">
-                                                <option value="Edge">
-                                                <option value="Firefox">
-                                                <option value="Chrome">
-                                                <option value="Opera">
-                                                <option value="Safari">
-                                            </datalist>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Thanh Toán</span>
-                                            <input type="text" class="form-control" value="${order.paymentMethod}">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Ghi chú</span>
-                                            <input type="text" class="form-control" value="${order.note}"}>
-                                        </div>
 
 
-                                    </div>
+
                                 </div>
 
+                                <div class="col-lg-6">
 
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="container mt-3">                                                     
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Hình Ảnh</th>
+                                                            <th>Tên Sản Phẩm</th>
+                                                            <th>Giá</th>
+                                                            <th>Số lượng</th>                                                                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="detail" items="${order_details}">
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="${detail.thumbnail}" class="rounded" width="80px" height="80px" alt="${detail.title}"/>                                                              
+                                                                </td>
+                                                                <td>${detail.title}</td>
+                                                                <td>
+                                                                    <script>
+                                                                        var price = parseFloat('${detail.price}');
+                                                                        var formattedPrice = price.toLocaleString('vi-VN') + '₫';
+                                                                        document.write(formattedPrice);
+                                                                    </script>
+
+                                                                </td>
+                                                                <td class="text-center">${detail.quantity}</td>
+                                                            </tr>  
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" my-2 card shadow mb-4">
+
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Cập nhật</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <input type="hidden" name="orderId" value="${order.orderId}"/>
+                                            <button type="submit" class="btn btn-google btn-block">Lưu</button>
+                                            <a href="orderManagement" class="btn btn-facebook btn-block"><i
+                                                    class="fab fa-facebook-f fa-fw"></i>Quay Lại</a>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
 
                             </div>
-
-                            <div class="col-lg-6">
-
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Person</span>
-                                            <input type="text" class="form-control">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Default</span>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Default</span>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Default</span>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Default</span>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Default</span>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" my-2 card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Cập nhật</h6>
-                                    </div>
-                                    <div class="card-body">
-
-                                        <a href="#" class="btn btn-google btn-block"><i class="fab fa-google fa-fw"></i>
-                                            Lưu</a>
-                                        <a href="orderManagement" class="btn btn-facebook btn-block"><i
-                                                class="fab fa-facebook-f fa-fw"></i>Quay Lại</a>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                        </div>
+                        </form>
 
 
 

@@ -4,6 +4,7 @@
  */
 package phatntt.dto;
 
+
 import java.sql.Timestamp;
 
 /**
@@ -21,10 +22,29 @@ public class OrderDTO {
     private String note;
     private int status;
     private String statusName;
+    private boolean paymentStatus;
     private String paymentMethod;
+    private int amount;
     private Timestamp createdAt;
+    private String formattedPrice;
 
     public OrderDTO() {
+    }
+
+    public OrderDTO(int orderId, String userId, String email, String name, String phone, String address, String note, int status, String statusName, boolean paymentStatus, String paymentMethod, int amount, Timestamp createdAt) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.note = note;
+        this.status = status;
+        this.statusName = statusName;
+        this.paymentStatus = paymentStatus;
+        this.paymentMethod = paymentMethod;
+        this.amount = amount;
+        this.createdAt = createdAt;
     }
 
     /**
@@ -154,6 +174,20 @@ public class OrderDTO {
     }
 
     /**
+     * @return the paymentStatus
+     */
+    public boolean isPaymentStatus() {
+        return paymentStatus;
+    }
+
+    /**
+     * @param paymentStatus the paymentStatus to set
+     */
+    public void setPaymentStatus(boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    /**
      * @return the paymentMethod
      */
     public String getPaymentMethod() {
@@ -165,6 +199,20 @@ public class OrderDTO {
      */
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    /**
+     * @return the amount
+     */
+    public int getAmount() {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     /**
@@ -181,8 +229,19 @@ public class OrderDTO {
         this.createdAt = createdAt;
     }
 
-   
+    /**
+     * @return the formattedPrice
+     */
+    public String getFormattedPrice() {
+        return formattedPrice;
+    }
 
-   
+    /**
+     * @param formattedPrice the formattedPrice to set
+     */
+    public void setFormattedPrice(String formattedPrice) {
+        this.formattedPrice = formattedPrice;
+    }
+
     
 }

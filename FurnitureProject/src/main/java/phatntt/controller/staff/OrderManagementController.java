@@ -5,7 +5,6 @@
 package phatntt.controller.staff;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -19,10 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phatntt.dao.OrderDetailDAO;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.OrderDTO;
-import phatntt.dto.OrderDetailDTO;
 import phatntt.util.Constants;
 
 /**
@@ -52,7 +49,16 @@ public class OrderManagementController extends HttpServlet {
         try {
             OrdersDAO orderDAO = new OrdersDAO();
             List<OrderDTO> orders = orderDAO.getAllOrders();
+            List<OrderDTO> ordersByDay = orderDAO.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
+            List<OrderDTO> ordersByMonth = orderDAO.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
+            List<OrderDTO> cancelledOrders = orderDAO.getOrdersByCondition("WHERE o.status = 5"); 
+
+
             request.setAttribute("ORDERS", orders);
+            request.setAttribute("ORDERS_CURRENT", orders.size());
+            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
+            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
+            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
 
         } catch (SQLException ex) {
             Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);

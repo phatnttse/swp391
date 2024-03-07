@@ -23,6 +23,9 @@
         <c:set var="introduceURI" value="/FurnitureProject/views/introduce.jsp"/>
         <c:set var="contactURI" value="/FurnitureProject/views/contact.jsp"/>
         <c:set var="cartURI" value="/FurnitureProject/views/cart.jsp"/>
+        <c:set var="orderURI" value="/FurnitureProject/views/order.jsp"/>
+        <c:set var="productDetailURI" value="/FurnitureProject/views/productdetail.jsp"/>
+        <c:set var="orderDetailURI" value="/FurnitureProject/views/orderdetail.jsp"/>
         
 
         <section class="bread-crumb" style="background-image: url('//bizweb.dktcdn.net/100/499/932/themes/926650/assets/breadcrumb-bg.jpg?1708512217480')"> 
@@ -56,6 +59,18 @@
             </c:if>
             <c:if test="${uri eq contactURI}">
                 <div class="title-breadcrumb">Liên Hệ
+                </div>                  
+            </c:if>
+            <c:if test="${uri eq orderURI}">
+                <div class="title-breadcrumb">Đơn Hàng
+                </div>                  
+            </c:if>
+            <c:if test="${uri eq productDetailURI}">
+                <div class="title-breadcrumb">Chi tiết sản phẩm
+                </div>                  
+            </c:if>
+            <c:if test="${uri eq orderDetailURI}">
+                <div class="title-breadcrumb">Chi tiết đơn hàng
                 </div>                  
             </c:if>
 
@@ -112,6 +127,21 @@
                     <c:if test="${uri eq contactURI}">                               
                         <strong>
                             <span>Liên Hệ</span>
+                        </strong>
+                    </c:if>
+                    <c:if test="${uri eq orderURI}">                               
+                        <strong>
+                            <span>Đơn Hàng</span>
+                        </strong>
+                    </c:if>
+                    <c:if test="${uri eq productDetailURI}">                               
+                        <strong>
+                            <span>Chi Tiết Sản Phẩm</span>
+                        </strong>
+                    </c:if>
+                         <c:if test="${uri eq orderDetailURI}">                               
+                        <strong>
+                            <span>Chi Tiết Đơn Hàng</span>
                         </strong>
                     </c:if>
 

@@ -36,7 +36,8 @@ public class AddProductController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF8");
+        request.setCharacterEncoding("UTF-8");
         
             String url = ADD_PRODUCT_PAGE;
 
@@ -60,7 +61,7 @@ public class AddProductController extends HttpServlet {
                 product.setPrice(price);
                 product.setThumbnail(thumbnail);
                 product.setDiscount(discount);
-// Handling file upload for thumbnail
+            // Handling file upload for thumbnail
             Part filePart = request.getPart("thumbnail");
             String fileName = getSubmittedFileName(filePart);
 

@@ -7,7 +7,6 @@ package phatntt.controller.staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,86 +29,57 @@ import phatntt.util.Constants;
 @WebServlet(name = "EditProductController", urlPatterns = {"/editproductcontroller"})
 public class EditProductController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private static final String ERROR = "error.jsp";
+    private static final String PRODUCT_MANAGEMENT_PAGE = "productManagement.jsp";
+    private static final String EDIT_PRODUCT_PAGE = "editproduct.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProductDetailManagementController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProductDetailManagementController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.Management.VIEW_PRODUCTDETAIL_PAGE);
-
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        String title = request.getParameter("title");
-//        float formattedPrice = Float.parseFloat(request.getParameter("formattedPrice"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        int discount = Integer.parseInt(request.getParameter("discount"));
-        String thumbnail = request.getParameter("thumbnail");
-        String description = request.getParameter("description");
-        int purchases = Integer.parseInt(request.getParameter("purchases"));
+        String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
+        
         try {
-//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
-
+            int productId = Integer.parseInt(request.getParameter("productId"));
             ProductsDAO productDAO = new ProductsDAO();
-
-            ProductsDTO product = new ProductsDTO();
-            product.setProductId(productId);
-            product.setCategoryId(categoryId);
-            product.setTitle(title);
-            product.setQuantity(quantity);
-            product.setDiscount(discount);
-            product.setThumbnail(thumbnail);
-            product.setDescription(description);
-            product.setPurchases(purchases);
-
-            boolean success = productDAO.updateProductWithoutPrice(product);
-            if (success) {
-                url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
-            }
-
+            
+            ProductsDTO product = productDAO.getProductById(productId);
+           
+            url = siteMaps.getProperty(Constants.Management.EDIT_PRODUCT_PAGE)
+                    +"?productId=" + productId;
+            
+           request.setAttribute("EDITPRODUCT", product);
+            
+            
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
     }
+    
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

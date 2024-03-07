@@ -54,6 +54,7 @@ phatntt\controller\users\ChangePasswordController.class
 phatntt\dto\OrderDTO.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
+phatntt\controller\staff\DeleteProductsController.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\controller\staff\OrderManagementController.class
 phatntt\dao\EmailDAO.class

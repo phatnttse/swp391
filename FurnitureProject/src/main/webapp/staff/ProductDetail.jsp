@@ -187,85 +187,85 @@
                     </nav>
                     <!-- End of Topbar -->
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
 
-    <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>
+                        <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>
 
-    <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
+                        <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
-    </div>
-    <div class="card-body">
-        <form action="orderDetailManagement" method="get">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Loại</th>
-                            <th>Tên</th>
-                            <th>Giá</th>
-                            <th>Số Lượng</th>
-                            <th>Discount</th>
-                        </tr>
-                    </thead>
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="orderDetailManagement" method="get">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã sản phẩm</th>
+                                                    <th>Loại</th>
+                                                    <th>Tên</th>
+                                                    <th>Giá</th>
+                                                    <th>Số Lượng</th>
+                                                    <th>Discount</th>
+                                                </tr>
+                                            </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>#${products.productId}</td>
-                            <td>${products.categoryName}</td>
-                            <td>${products.title}</td>
-                            <td>${products.formattedPrice}đ</td>
-                            <td>${products.quantity}</td>
-                            <td>${products.discount}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>#${products.productId}</td>
+                                                    <td>${products.categoryName}</td>
+                                                    <td>${products.title}</td>
+                                                    <td>${products.formattedPrice}đ</td>
+                                                    <td>${products.quantity}</td>
+                                                    <td>${products.discount}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Thumbnail</th>
-                            <th>Description</th>
-                            <th>Lượt Mua</th>
-                            <th>Ngày Tạo</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><img height="100px" width="100px" src="${products.thumbnail}"  alt="Thumbnail" class="img-thumbnail rounded" /></td>
-                            <!--<td><img height="100px" width="100px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>-->
-                            <td>${products.description}</td>
-                            <td>${products.purchases}</td>
-                            <td>${products.createdAt}</td>
-                            <!-- Thao tác column -->
-                            <td>
-                                <div class="btn-group">
-                                    <!-- Add Button -->
-                                    <a href="addProductPage" class="btn btn-outline-success">ADD</a>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Thumbnail</th>
+                                                    <th>Description</th>
+                                                    <th>Lượt Mua</th>
+                                                    <th>Ngày Tạo</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><img height="100px" width="100px" src="${products.thumbnail}"  alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                    <!--<td><img height="100px" width="100px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>-->
+                                                    <td>${products.description}</td>
+                                                    <td>${products.purchases}</td>
+                                                    <td>${products.createdAt}</td>
+                                                    <!-- Thao tác column -->
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <!-- Add Button -->
+                                                            <a href="addProductPage" class="btn btn-outline-success">ADD</a>
 
-                                    <!-- Edit Button -->
-                                    <a href="editProductPage?productId=${products.productId}" class="btn btn-outline-info">Edit</a>
+                                                            <!-- Edit Button -->
+                                                            <a href="editProductPage?productId=${products.productId}" class="btn btn-outline-info">Edit</a>
 
-                                    <!-- Delete Button -->
-                                    <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </form>
-    </div>
-</div>
+                                                            <!-- Delete Button -->
+                                                            <a href="deleteProduct?id=${products.productId}" class="btn btn-outline-danger">Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
-</div>
-<!-- /.container-fluid -->
+                    </div>
+                    <!-- /.container-fluid -->
 
 
                 </div>

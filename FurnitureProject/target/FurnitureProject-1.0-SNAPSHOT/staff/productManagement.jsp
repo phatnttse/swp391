@@ -260,6 +260,7 @@
                         <div class="card-body">
                             <form action="productManagement" method="get">
                                 <div class="table-responsive">
+                                    <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -290,10 +291,7 @@
                                                             <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
 
                                                             <!-- Delete Button -->
-<!--                                                            <a href="productManagementPage?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>-->
-                                                            <<form action="DeleteProductsController">
-                                                                <button  type="submit" class="btn btn-primary">Xóa</button>
-                                                            </form>>
+                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>                                                         
                                                         </div>
                                                     </td>
                                                 </tr>

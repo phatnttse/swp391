@@ -753,18 +753,21 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public void deleteProduct(ProductsDTO product) throws SQLException, NamingException {
-        con = DBConnect.createConnection();
-        try {
-            String sql = "DELETE FROM efurniture.product WHERE product_id =?";
-            stm = con.prepareStatement(sql);
+    public boolean deleteProduct(int productId) throws SQLException, NamingException {
 
-            stm.setInt(1, product.getProductId());
-            int rowsAffected = stm.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Product has been deleted!");
-            } else {
-                System.out.println("Delete failed!");
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "DELETE FROM product WHERE product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productId);
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
             }
         } finally {
             if (stm != null) {
@@ -774,15 +777,12 @@ public class ProductsDAO implements Serializable {
                 con.close();
             }
         }
+        return result;
     }
 
 // Helper method to extract filename from the full path
     private String getSubmittedFileName(String fullPath) {
         return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
-    }
-
-    public void deleteProduct(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

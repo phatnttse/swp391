@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,22 +71,25 @@ public class DeleteProductsController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
 
-        if (productIdStr != null && !productIdStr.isEmpty()) {
-            try {
-                int productId = Integer.parseInt(productIdStr);
-                ProductsDAO productsDAO = new ProductsDAO();
-                productsDAO.deleteProduct(productId);
-                System.out.println("Delete successful!");
-                url += "?productId=" + productId;
-            } catch (NumberFormatException e) {
-                System.out.println("Product ID is not valid!");
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            int productId = Integer.parseInt(productIdStr);
+            ProductsDAO productsDAO = new ProductsDAO();
+            boolean result = productsDAO.deleteProduct(productId);
+
+            if (result) {
+                url = "productManagement";
+                request.setAttribute("DELETE_SUCCESS", "Xóa sản phẩm thành công");
             }
-        } else {
-            System.out.println("Delete failed! Product ID is empty.");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Product ID is not valid!");
+        } catch (Exception e) {
+
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
-        response.sendRedirect(url);
+
     }
 
     /**

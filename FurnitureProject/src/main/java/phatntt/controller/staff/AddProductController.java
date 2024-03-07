@@ -47,7 +47,7 @@ public class AddProductController extends HttpServlet {
                 String title = request.getParameter("title");
                 String description = request.getParameter("description");
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-                float price = Float.parseFloat(request.getParameter("price"));
+                int price = Integer.parseInt(request.getParameter("price"));
                 String thumbnail = request.getParameter("thumbnail");
                 int discount = Integer.parseInt(request.getParameter("discount"));
 //                int purchases = Integer.parseInt(request.getParameter("purchases"));

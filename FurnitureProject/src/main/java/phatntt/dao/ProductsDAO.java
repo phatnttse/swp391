@@ -753,6 +753,33 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
+    public boolean deleteProduct(int productId) throws SQLException, NamingException {
+
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "DELETE FROM product WHERE product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productId);
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
 // Helper method to extract filename from the full path
     private String getSubmittedFileName(String fullPath) {
         return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);

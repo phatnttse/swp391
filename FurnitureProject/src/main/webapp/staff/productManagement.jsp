@@ -91,8 +91,7 @@
                 </a>
             </li>
 
-                                                                <!-- Detail Button -->
-                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Edit</a>
+                                                                
             <!-- Divider -->
             <hr class="sidebar-divider">
 

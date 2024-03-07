@@ -79,7 +79,6 @@
                                             <div class="order-summary__section order-summary__section--product-list order-summary__section--is-scrollable order-summary--collapse-element">
                                                 <table class="product-table">
                                                     <c:forEach var="product" items="${order_details}">
-                                                        <c:set var="total_money" value="${product.price * product.quantity}" />
                                                         <c:set var="total_amount" value="${total_amount + product.price * product.quantity}" />
                                                         <tbody>
 
@@ -123,7 +122,7 @@
                                                         <tr class="total-line total-line--subtotal">
                                                             <th class="total-line__name">Tạm tính</th>
                                                             <td class="total-line__price"><script>
-                                                                var totalMoney = parseInt('${total_money}');
+                                                                var totalMoney = parseInt('${total_amount}');
                                                                 var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                 document.write(formattedTotalMoney);
                                                                 </script>

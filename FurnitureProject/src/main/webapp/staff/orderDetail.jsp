@@ -271,7 +271,7 @@
                                         <div class="card-body">
                                             <input type="hidden" name="orderId" value="${order.orderId}"/>
                                             <button type="submit" class="btn btn-google btn-block">Lưu</button>
-                                            <a href="/FurnitureProject/orderManagementPage" class="btn btn-facebook btn-block"><i
+                                            <a href="orderManagement" class="btn btn-facebook btn-block"><i
                                                     class="fab fa-facebook-f fa-fw"></i>Quay Lại</a>
 
                                         </div>

@@ -16,19 +16,18 @@
         <description>ServletContextListener</description>
         <listener-class>phatntt.listener.MyContextServletListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>ProductDetailController</servlet-name>
-        <servlet-class>phatntt.controller.staff.ProductDetailController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProductDetailController</servlet-name>
-        <url-pattern>/ProductDetailController</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <jsp-config>
+    <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+</jsp-config>
+
     <error-page>
         <error-code>404</error-code>
         <location>/fileNotFound.html</location>

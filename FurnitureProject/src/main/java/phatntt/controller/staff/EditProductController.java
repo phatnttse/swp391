@@ -7,8 +7,13 @@ package phatntt.controller.staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.ProductsDAO;
 import phatntt.dto.ProductsDTO;
+import phatntt.util.Constants;
 
 /**
  *
@@ -24,74 +30,86 @@ import phatntt.dto.ProductsDTO;
 @WebServlet(name = "EditProductController", urlPatterns = {"/editproductcontroller"})
 public class EditProductController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String PRODUCT_MANAGEMENT_PAGE = "productManagement.jsp";
-    private static final String EDIT_PRODUCT_PAGE = "editproduct.jsp";
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            String url = ERROR;
+        request.setCharacterEncoding("UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.VIEW_PRODUCTDETAIL_PAGE);
 
-            try {
-                // Lấy thông tin sản phẩm từ form
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                String title = request.getParameter("title");
-                String description = request.getParameter("description");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                float price = Float.parseFloat(request.getParameter("price"));
-                String thumbnail = request.getParameter("thumbnail");
-                int discount = Integer.parseInt(request.getParameter("discount"));
-                int purchases = Integer.parseInt(request.getParameter("purchases"));
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String title = request.getParameter("title");
+//        float formattedPrice = Float.parseFloat(request.getParameter("formattedPrice"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int discount = Integer.parseInt(request.getParameter("discount"));
+        String thumbnail = request.getParameter("thumbnail");
+        String description = request.getParameter("description");
+        int purchases = Integer.parseInt(request.getParameter("purchases"));
+        try {
+//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
 
-                // Tạo một đối tượng ProductsDTO để lưu trữ thông tin sản phẩm
-                ProductsDTO product = new ProductsDTO();
-                product.setProductId(productId); // Set the product ID for updating
-                product.setCategoryId(categoryId);
-                product.setTitle(title);
-                product.setDescription(description);
-                product.setQuantity(quantity);
-                product.setPrice(price);
-                product.setThumbnail(thumbnail);
-                product.setDiscount(discount);
-                product.setPurchases(purchases);
+            ProductsDAO productDAO = new ProductsDAO();
 
-                // Gọi phương thức cập nhật sản phẩm từ ProductsDAO
-                ProductsDAO dao = new ProductsDAO();
-                boolean success = dao.updateProduct(product);
+            ProductsDTO product = new ProductsDTO();
+            product.setProductId(productId);
+            product.setCategoryId(categoryId);
+            product.setTitle(title);
+            product.setQuantity(quantity);
+            product.setDiscount(discount);
+            product.setThumbnail(thumbnail);
+            product.setDescription(description);
+            product.setPurchases(purchases);
 
-                if (success) {
-                    // Nếu cập nhật sản phẩm thành công, chuyển hướng đến trang productmanagement.jsp
-                    url = PRODUCT_MANAGEMENT_PAGE;
-                } else {
-                    request.setAttribute("ERROR_MESSAGE", "Failed to update the product.");
-                    url = EDIT_PRODUCT_PAGE; // Redirect back to the edit page with an error message
-                }
-            } catch (SQLException | NamingException | NumberFormatException e) {
-                // Xử lý ngoại lệ
-                log("Error in EditProductController: " + e.getMessage());
-                request.setAttribute("ERROR_MESSAGE", "Error processing the request.");
-                url = EDIT_PRODUCT_PAGE; // Redirect back to the edit page with an error message
-            } finally {
-                // Chuyển hướng đến trang kết quả (có thể là trang admin.jsp hoặc trang lỗi)
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
+            boolean success = productDAO.updateProductWithoutPrice(product);
+            if (success) {
+                url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
             }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // You may want to implement logic for retrieving the product details for editing
-        // and then forward to the editproduct.jsp page with the product details pre-filled.
-        // Example: request.setAttribute("product", productDetails);
-        // Then forward to the editproduct.jsp page.
         processRequest(request, response);
+
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

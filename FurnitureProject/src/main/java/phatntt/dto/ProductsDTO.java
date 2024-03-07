@@ -41,6 +41,8 @@ public class ProductsDTO implements Serializable{
         this.purchases = purchases;
         this.createdAt = createdAt;
     }
+    
+    
 
     /**
      * @return the productId

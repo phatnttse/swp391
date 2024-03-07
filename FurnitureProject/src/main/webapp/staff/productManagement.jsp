@@ -248,7 +248,7 @@
                                                                 <a href="addProductPage" class="btn btn-outline-success">ADD</a>
 
                                                                 <!-- Detail Button -->
-                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
+                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Edit</a>
 
                                                                 <!-- Delete Button -->
                                                                 <a href="deleteproduct" class="btn btn-outline-danger">Xóa</a>

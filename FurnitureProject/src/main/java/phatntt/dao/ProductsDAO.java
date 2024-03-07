@@ -679,28 +679,27 @@ public class ProductsDAO implements Serializable {
         return list;
     }
 
-    public boolean updateProduct(ProductsDTO product) throws SQLException, NamingException {
+    public boolean updateProductWithoutPrice(ProductsDTO product) throws SQLException, NamingException {
+         boolean check = false;
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "UPDATE products "
-                        + "SET categoryId = ?, title = ?, description = ?, quantity = ?, "
-                        + "price = ?, thumbnail = ?, discount = ?, purchases = ? "
-                        + "WHERE productId = ?";
+                String sql = "UPDATE product "
+                        + "SET category_id = ?, title = ?, description = ?, quantity = ?, "
+                        + " thumbnail = ?, discount = ?, purchases = ? "
+                        + "WHERE product_id = ?";
                 stm = con.prepareStatement(sql);
 
                 stm.setInt(1, product.getCategoryId());
                 stm.setString(2, product.getTitle());
                 stm.setString(3, product.getDescription());
                 stm.setInt(4, product.getQuantity());
-                stm.setFloat(5, product.getPrice());
-                stm.setString(6, product.getThumbnail());
-                stm.setInt(7, product.getDiscount());
-                stm.setInt(8, product.getPurchases());
-                stm.setInt(9, product.getProductId());
+                stm.setString(5, product.getThumbnail());
+                stm.setInt(6, product.getDiscount());
+                stm.setInt(7, product.getPurchases());
+                stm.setInt(8, product.getProductId());
 
-                int rowsAffected = stm.executeUpdate();
-                return rowsAffected > 0;
+                 check = stm.executeUpdate()>0?true:false;
             }
         } finally {
             // Close resources
@@ -711,7 +710,7 @@ public class ProductsDAO implements Serializable {
                 con.close();
             }
         }
-        return false;
+        return check;
     }
 
     public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {

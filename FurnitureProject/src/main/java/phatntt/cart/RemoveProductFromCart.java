@@ -84,6 +84,7 @@ public class RemoveProductFromCart extends HttpServlet {
         UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
         CartDAO dao = new CartDAO();
         dao.removeProductFromCart(user.getId(), productId);
+        
         } catch (SQLException ex) {
             Logger.getLogger(RemoveProductFromCart.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

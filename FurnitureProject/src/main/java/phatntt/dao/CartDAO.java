@@ -24,7 +24,7 @@ public class CartDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;
 
-    public boolean addProductToCart(String userId, int productId, String title, String thumbnail, int quantity, float price) throws SQLException, NamingException {
+    public boolean addProductToCart(String userId, int productId, String title, String thumbnail, int quantity, int price) throws SQLException, NamingException {
         boolean result = false;
 
         try {
@@ -41,7 +41,7 @@ public class CartDAO {
                 if (rs.next()) {
                     // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
                     int currentQuantity = rs.getInt("quantity");
-                    int newQuantity = currentQuantity + 1;
+                    int newQuantity = currentQuantity + quantity;
 
                     // Cập nhật số lượng sản phẩm trong giỏ hàng
                     String updateQuantitySQL = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
@@ -63,7 +63,7 @@ public class CartDAO {
                     stm.setString(3, title);
                     stm.setString(4, thumbnail);
                     stm.setInt(5, quantity);
-                    stm.setFloat(6, price);
+                    stm.setInt(6, price);
                     int affectedRows = stm.executeUpdate();
 
                     if (affectedRows > 0) {
@@ -163,7 +163,7 @@ public class CartDAO {
                     String title = rs.getString("title");
                     String thumbnail = rs.getString("thumbnail");
                     int quantity = rs.getInt("quantity");
-                    float price = rs.getFloat("price");
+                    int price = rs.getInt("price");
 
                     CartDTO cart = new CartDTO(quantity, userId, productId, title, thumbnail, quantity, price);
                     result.add(cart);
@@ -202,7 +202,7 @@ public class CartDAO {
                     String title = rs.getString("title");
                     String thumbnail = rs.getString("thumbnail");
                     int quantity = rs.getInt("quantity");
-                    float price = rs.getFloat("price");
+                    int price = rs.getInt("price");
 
                     CartDTO cart = new CartDTO(cartId, userId, productId, title, thumbnail, quantity, price);
                     cartList.add(cart);
@@ -240,7 +240,7 @@ public class CartDAO {
                     String title = rs.getString("title");
                     String thumbnail = rs.getString("thumbnail");
                     int quantity = rs.getInt("quantity");
-                    float price = rs.getFloat("price");
+                    int price = rs.getInt("price");
 
                    result = new CartDTO(cartId, userId, productId, title, thumbnail, quantity, price);
                     

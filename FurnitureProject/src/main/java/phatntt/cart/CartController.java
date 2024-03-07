@@ -103,7 +103,7 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_PAGE);
+        String url = siteMaps.getProperty(Constants.ShoppingFeatures.CREATE_ORDER_PAGE);
         try {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");

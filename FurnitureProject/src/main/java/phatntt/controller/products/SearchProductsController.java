@@ -76,11 +76,9 @@ public class SearchProductsController extends HttpServlet {
         
         String searchValue = request.getParameter("search");
         
-
         try {
             ProductsDAO dao = new ProductsDAO();
-            dao.searchProductsByName(searchValue);
-            List<ProductsDTO> products = dao.getProducts();
+            List<ProductsDTO> products = dao.searchProductsByName(searchValue);
             int foundResults = products.size();
             request.setAttribute("FOUND_RESULT", foundResults);
             request.setAttribute("SEARCH_RESULT", products);

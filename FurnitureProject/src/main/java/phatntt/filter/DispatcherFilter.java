@@ -139,6 +139,7 @@ public class DispatcherFilter implements Filter {
                 ps.close();
                 response.getOutputStream().close();
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
         } else {
             try {
@@ -147,6 +148,7 @@ public class DispatcherFilter implements Filter {
                 ps.close();
                 response.getOutputStream().close();
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
     }

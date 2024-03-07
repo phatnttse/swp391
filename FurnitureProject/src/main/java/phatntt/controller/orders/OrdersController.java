@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,11 +45,7 @@ public class OrdersController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        HttpSession session = request.getSession();
-//        List<CartDTO> products = (List<CartDTO>) session.getAttribute("CART");
-//        session.setAttribute("CART", products);
-//        session.setAttribute("CART_SIZE", products.size());
-//        response.sendRedirect("checkOutPage");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,37 +77,56 @@ public class OrdersController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        HttpSession session = request.getSession();
+        String url = siteMaps.getProperty(Constants.ShoppingFeatures.CREATE_ORDER_PAGE);
+        String paymentMethod = request.getParameter("paymentMethod");
         try {
-            HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
             String email = request.getParameter("email");
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
             String billingAddress = request.getParameter("billingAddress");
             String note = request.getParameter("note");
-            String paymentMethod = request.getParameter("paymentMethod");
-
+            int amount = Integer.parseInt(request.getParameter("amount"));
+           
+            
             List<CartDTO> orderDetails = (List<CartDTO>) session.getAttribute("ORDER_DETAILS");
 
             OrdersDAO orderDAO = new OrdersDAO();
-            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            int orderId = orderDAO.createOrder(user.getId(), email, name, phone, billingAddress, note, 1, paymentMethod);
-            OrderDTO order = orderDAO.getOrderById(orderId);
 
-            // Thêm order_details, tạo trigger giảm số lg sp trong kho khi tạo order.
-            if (orderId > 0) {
-                for (CartDTO orderDetail : orderDetails) {
-                    orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
-                }
-                orderDAO.clearCartByUserId(user.getId());
-                session.setAttribute("CHECK_OUT_SUCCESS", order);
-                response.sendRedirect(siteMaps.getProperty(Constants.ShoppingFeatures.CHECK_OUT_SUCCESS_PAGE));
+            if (paymentMethod.equals("Thu hộ (COD)")) {
                 
+                int orderId = orderDAO.createOrder(user.getId(), email, name, phone, billingAddress, note, 1, paymentMethod, false, amount);
+                if (orderId > 0) {
+                    OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+                    OrderDTO order = orderDAO.getOrderById(orderId);
+
+                    for (CartDTO orderDetail : orderDetails) {
+                        orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
+                    }
+
+                    orderDAO.clearCartByUserId(user.getId());
+                    session.setAttribute("ORDER_SUCCESS", order);
+                    url = siteMaps.getProperty(Constants.ShoppingFeatures.ORDER_SUCCESS_PAGE);
+                }
+
+            } else {
+                session.setAttribute("ORDER_EMAIL", email);
+                session.setAttribute("ORDER_NAME", name);
+                session.setAttribute("ORDER_PHONE", phone);
+                session.setAttribute("ORDER_ADDRESS", billingAddress);
+                session.setAttribute("NOTE", note);
+                session.setAttribute("AMOUNT", amount);
+                
+                url = siteMaps.getProperty(Constants.ShoppingFeatures.VNPAY_PAGE);
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(OrdersController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(OrdersController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            response.sendRedirect(url);
         }
     }
 

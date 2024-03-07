@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
@@ -27,8 +29,8 @@
 
         <title>product Page</title>
     </head>
-    <body>
 
+    <body>
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -187,6 +189,8 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
+
+                    <!-- Main Content -->
                     <div class="container-fluid">
 
                         <c:set var="products" value="${requestScope.PRODUCTDETAIL}"/>

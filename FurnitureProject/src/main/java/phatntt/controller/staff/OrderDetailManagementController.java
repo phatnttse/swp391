@@ -75,7 +75,7 @@ public class OrderDetailManagementController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE);
         try {
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            String orderId = request.getParameter("orderId");
             OrdersDAO ordersDAO = new OrdersDAO();
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
             
@@ -118,12 +118,13 @@ public class OrderDetailManagementController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE);
         
-        int orderStatus =  Integer.parseInt(request.getParameter("orderStatus"));           
-        int orderId = Integer.parseInt(request.getParameter("orderId"));
+        int orderStatus =  Integer.parseInt(request.getParameter("orderStatus"));
+        boolean paymentStatus = Boolean.parseBoolean(request.getParameter("paymentStatus"));
+        String orderId = request.getParameter("orderId");
         
         try {
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            boolean result = orderDetailDAO.updateOrderStatus(orderId, orderStatus);
+            boolean result = orderDetailDAO.updateOrderStatus(orderId, orderStatus, paymentStatus);
             if (result){
                 url = "orderManagement";
             }

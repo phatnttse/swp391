@@ -289,8 +289,8 @@ public class CartDAO {
         return totalQuantity;
     }
 
-    public void removeProductFromCart(String userId, int productId) throws SQLException, NamingException {
-//        boolean result = false;
+    public boolean removeProductFromCart(String userId, int productId) throws SQLException, NamingException {
+        boolean result = false;
         try {
             con = DBConnect.createConnection();
             if (con != null) {
@@ -299,14 +299,13 @@ public class CartDAO {
                 stm.setString(1, userId);
                 stm.setInt(2, productId);
                 stm.executeUpdate();
-//                int rowsAffected = stm.executeUpdate();
-//                if (rowsAffected > 0) {
-//                    // Nếu có ít nhất một hàng bị ảnh hưởng bởi truy vấn xóa, trả về true
-//                    result = true;
-//                }
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
             }
         } finally {
-            // Đóng kết nối và các tài nguyên
+           
             if (stm != null) {
                 stm.close();
             }
@@ -314,7 +313,7 @@ public class CartDAO {
                 con.close();
             }
         }
-//        return result;
+        return result;
     }
 
 }

@@ -10,12 +10,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1HW5FWsRV0FlOjw44WtG1iaNy6Zix0M9TO5qsyv6Lvmgvr+UO3Hre76pl3AdDCSPZkW4YYj6Pkpx6A93JmI1NA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
         <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">     
         <title>Trang Quản Lý</title>
+        <style>
+            a {
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body id="page-top">
@@ -28,9 +33,7 @@
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
+
                     <div class="sidebar-brand-text mx-3">Lofi Furniture</div>
                 </a>
 
@@ -53,19 +56,31 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="">
                         <span>Sản Phẩm</span>
+                        <i id="arrow-icon" class="fas fa-chevron-right" style="color: white;margin-left: 100px"></i>
                     </a>                  
                 </li>
 
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="orderManagement">                  
+                    <a class="nav-link collapsed" onclick="toggleSubMenu('sub-order')">                  
                         <span>Đơn Hàng</span>
+                        <i id="arrow-icon-sub-order" class="fas fa-chevron-right" style="color: white;margin-left: 100px"></i>
                     </a>
                 </li>
 
+                <li id="sub-order" class="nav-item" style="display: none">
+                    <a class="nav-link collapsed" href="orderManagement">                  
+                        <span>Tất Cả Đơn Hàng</span>
+                    </a>
+                    <a class="nav-link collapsed" href="orderManagement">                  
+                        <span>Đơn Hàng Đã Huỷ</span>
+                    </a>
+                </li>
+
+
                 <!-- Divider -->
                 <hr class="sidebar-divider">       
-               
+
 
             </ul>
             <!-- End of Sidebar -->
@@ -74,7 +89,7 @@
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
-  
+
                 <div id="content">
 
                     <!-- Topbar -->
@@ -125,9 +140,9 @@
 
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#">
+                                <a class="nav-link dropdown-toggle" href="#" onclick="toggleSubMenu('sub-menu')">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Phatntt</span>
-                                    <img onclick="toggleSubMenu('sub-menu')" class="img-profile rounded-circle"
+                                    <img class="img-profile rounded-circle"
                                          src="assets/img/users/avatar.jpg">
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -135,11 +150,7 @@
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>                                   
+                                    </a>                                                                    
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="logOut">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -153,81 +164,81 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                         <!-- Content Row -->
-                    <div class="row my-5">
+                        <!-- Content Row -->
+                        <div class="row my-5">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Số đơn hiện tại</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Số đơn hiện tại</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Đơn hàng trong ngày</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Đơn hàng trong tháng</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pending Requests Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Đơn hàng đã huỷ</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Đơn hàng trong ngày</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Đơn hàng trong tháng</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Đơn hàng đã huỷ</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1>
@@ -251,7 +262,7 @@
                                                     <th>Xem chi tiết</th>
                                                 </tr>
                                             </thead>
-                                            
+
                                             <tbody>
                                                 <c:forEach var="order" items="${orders}">
                                                     <tr>
@@ -300,11 +311,23 @@
 
 
         <script>
+
             function toggleSubMenu(menuId) {
                 var subMenu = document.getElementById(menuId);
-                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+                var arrowIcon = document.getElementById('arrow-icon-' + menuId);
+                if (subMenu.style.display === 'none') {
+                    subMenu.style.display = 'block';
+                    arrowIcon.classList.remove('fa-chevron-right');
+                    arrowIcon.classList.add('fa-chevron-down');
+                } else {
+                    subMenu.style.display = 'none';
+                    arrowIcon.classList.remove('fa-chevron-down');
+                    arrowIcon.classList.add('fa-chevron-right');
+                }
             }
         </script>
-    </body>
+
+    </script>
+</body>
 
 </html>

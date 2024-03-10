@@ -16,6 +16,7 @@ public class ErrorDTO {
     private String passwordRegexError;
     private String confirmNotMatch;
     private String oldPassNotMatch;
+    private String oldPassIncorrect;
 
     public ErrorDTO() {
     }
@@ -103,6 +104,21 @@ public class ErrorDTO {
     public void setOldPassNotMatch(String oldPassNotMatch) {
         this.oldPassNotMatch = oldPassNotMatch;
     }
+
+    /**
+     * @return the oldPassIncorrect
+     */
+    public String getOldPassIncorrect() {
+        return oldPassIncorrect;
+    }
+
+    /**
+     * @param oldPassIncorrect the oldPassIncorrect to set
+     */
+    public void setOldPassIncorrect(String oldPassIncorrect) {
+        this.oldPassIncorrect = oldPassIncorrect;
+    }
+    
     
     
 }

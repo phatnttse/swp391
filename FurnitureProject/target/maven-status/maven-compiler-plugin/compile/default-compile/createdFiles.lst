@@ -54,6 +54,7 @@ phatntt\dto\CartDTO.class
 phatntt\dto\EmailDTO.class
 phatntt\dto\ErrorDTO.class
 phatntt\controller\users\ChangePasswordController.class
+phatntt\dao\EmailDAO$2.class
 phatntt\dto\OrderDTO.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class

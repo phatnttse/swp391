@@ -39,7 +39,7 @@
     </df-messenger>
 
 
-    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/ajax.js"></script>
 
 </body>
 </html>

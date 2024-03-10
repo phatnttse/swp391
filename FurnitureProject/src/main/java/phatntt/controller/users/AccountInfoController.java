@@ -5,11 +5,9 @@
  */
 package phatntt.controller.users;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -22,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import phatntt.dao.UsersDAO;
 import phatntt.dto.ErrorDTO;
 import phatntt.dto.UsersDTO;
@@ -74,13 +71,7 @@ public class AccountInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-
-        RequestDispatcher rd = request.getRequestDispatcher(siteMaps.getProperty(Constants.DispatchFeatures.ACCOUNT_INFO_PAGE));
-        rd.forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
@@ -94,62 +85,51 @@ public class AccountInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.DispatchFeatures.ACCOUNT_INFO_PAGE);
 
         try {
-            String id = request.getParameter("hdId");          
-            String name = request.getParameter("txtName");
-            String phone = request.getParameter("txtPhone");
-            String address = request.getParameter("txtAddress");
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
 
             ErrorDTO errors = new ErrorDTO();
             boolean foundErr = false;
 
             HttpSession session = request.getSession();
-            UsersDTO u = (UsersDTO) session.getAttribute("USER_INFO");
-            String avatar = u.getPicture();
-            Part part = request.getPart("avatar");
-            if (part.getSize() > 0) {
-                String absolutePath = "E:\\Vit\\SWP391\\swp391\\FurnitureProject\\src\\main\\webapp\\assets\\img\\users";
-                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-
-                if (!Files.exists(Paths.get(absolutePath))) {
-                    Files.createDirectories(Paths.get(absolutePath));
-                }
-
-                part.write(absolutePath + File.separator + fileName);
-                avatar = fileName;
-            }
-           
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
             if (name.trim().length() < 2 || name.trim().length() > 50) {
                 foundErr = true;
                 errors.setGivenNameLengthError(
                         siteMaps.getProperty(Constants.ValidateFeatures.GIVENNAME_LENGTH_ERR_MSG));
             }
-            if (phone.trim().length() != 10) {
+            if (!phone.trim().matches(siteMaps.getProperty(Constants.ValidateFeatures.PHONE_REGEX))) {
                 foundErr = true;
                 errors.setPhoneRegexError(
                         siteMaps.getProperty(Constants.ValidateFeatures.PHONE_LENGTH_ERR_MSG));
             }
             if (foundErr) {
-                request.setAttribute("UPDATE_ACCOUNT_INFO_ERR", errors);
-                doGet(request, response);
+                request.setAttribute("EDIT_PROFILE_ERR", errors);
             } else {
                 UsersDAO dao = new UsersDAO();
-                boolean result = dao.updateAccountInfo(id, name, phone, address, avatar);
+                boolean result = dao.editProfile(user.getId(), name, phone, address);
                 if (result) {
-                    UsersDTO newUser = dao.getUserById(id);
+                    UsersDTO newUser = dao.getUserById(user.getId());
                     session.setAttribute("USER_INFO", newUser);
-                    doGet(request, response);
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

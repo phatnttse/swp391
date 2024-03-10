@@ -5,15 +5,16 @@
 package phatntt.dto;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  *
  * @author Admin
  */
-public class OrderDTO {
+public class OrderDTO implements Serializable{
     
-    private int orderId;
+    private String orderId;
     private String userId;
     private String email;
     private String name;
@@ -31,7 +32,7 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(int orderId, String userId, String email, String name, String phone, String address, String note, int status, String statusName, boolean paymentStatus, String paymentMethod, int amount, Timestamp createdAt) {
+    public OrderDTO(String orderId, String userId, String email, String name, String phone, String address, String note, int status, String statusName, boolean paymentStatus, String paymentMethod, int amount, Timestamp createdAt) {
         this.orderId = orderId;
         this.userId = userId;
         this.email = email;
@@ -50,14 +51,14 @@ public class OrderDTO {
     /**
      * @return the orderId
      */
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
     /**
      * @param orderId the orderId to set
      */
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

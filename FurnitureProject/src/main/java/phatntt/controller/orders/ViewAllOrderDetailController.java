@@ -53,10 +53,10 @@ public class ViewAllOrderDetailController extends HttpServlet {
         String orderId = request.getParameter("orderId");
         try {
             OrderDetailDAO dao = new OrderDetailDAO();
-            List<OrderDetailDTO> orderDTOs = dao.getAllOrderDetail(Integer.parseInt(orderId));
+            List<OrderDetailDTO> orderDTOs = dao.getAllOrderDetail(orderId);
 
             OrdersDAO odao = new OrdersDAO();
-            OrderDTO order = odao.getOrderById(Integer.parseInt(orderId));
+            OrderDTO order = odao.getOrderById(orderId);
             
             request.setAttribute("ORDER", order);
             request.setAttribute("ORDER_DETAIL", orderDTOs);

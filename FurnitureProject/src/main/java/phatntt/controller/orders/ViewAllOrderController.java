@@ -5,7 +5,6 @@
 package phatntt.controller.orders;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -22,9 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.controller.products.ProductsController;
 import phatntt.dao.OrdersDAO;
-import phatntt.dao.ProductsDAO;
 import phatntt.dto.OrderDTO;
-import phatntt.dto.ProductsDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
@@ -32,7 +29,7 @@ import phatntt.util.Constants;
  *
  * @author Dell
  */
-@WebServlet(name = "ViewAllOrderController", urlPatterns = {"/ViewAllOrder"})
+@WebServlet(name = "ViewAllOrderController", urlPatterns = {"/allOrder"})
 public class ViewAllOrderController extends HttpServlet {
 
     /**
@@ -52,16 +49,12 @@ public class ViewAllOrderController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
-            List<OrderDTO> orderDTOs = null;
-            if (user != null) {
-                OrdersDAO dao = new OrdersDAO();
-                orderDTOs = dao.allOwnOrder(user.getId());
-                if (orderDTOs != null) {
-                    session.setAttribute("ALL_ORDER", orderDTOs);
-                    url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
-                }
-            } else {
-                session.setAttribute("ALL_ORDER", orderDTOs);
+            OrdersDAO dao = new OrdersDAO();
+            
+            List<OrderDTO> orders = dao.allOwnOrder(user.getId());
+            
+            if (orders != null) {
+                request.setAttribute("ALL_ORDER", orders);
                 url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
             }
 

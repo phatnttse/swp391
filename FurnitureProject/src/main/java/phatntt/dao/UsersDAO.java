@@ -511,7 +511,7 @@ public class UsersDAO implements Serializable {
             if (con != null) {
                 String sql = "UPDATE user "
                         + "SET password = ? "
-                        + "WHERE user_id = ?";
+                        + "WHERE user_id = ? AND google_id IS NULL";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, password);
                 stm.setString(2, userId);
@@ -566,7 +566,7 @@ public class UsersDAO implements Serializable {
         return result;
     }
 
-    public boolean updateAccountInfo(String userId, String fullname, String phone, String address, String avatar) throws SQLException, NamingException {
+    public boolean editProfile(String userId, String name, String phone, String address) throws SQLException, NamingException {
 
         boolean result = false;
 
@@ -574,14 +574,13 @@ public class UsersDAO implements Serializable {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "UPDATE user "
-                        + "SET name = ?, phone = ?, address = ?, picture = ? "
+                        + "SET name = ?, phone = ?, address = ?"
                         + "WHERE user_id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, fullname);
+                stm.setString(1, name);
                 stm.setString(2, phone);
                 stm.setString(3, address);
-                stm.setString(4, avatar);
-                stm.setString(5, userId);
+                stm.setString(4, userId);
 
                 int affectedRows = stm.executeUpdate();
                 if (affectedRows > 0) {

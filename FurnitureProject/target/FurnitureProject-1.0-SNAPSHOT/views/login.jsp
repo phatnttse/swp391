@@ -66,7 +66,7 @@
                                             <p class="a-center">Hoặc đăng nhập bằng
                                             </p>                                                                                
                                             <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:6969/FurnitureProject/loginWithGoogle&response_type=code
-                                               &client_id=989469650876-pv3l59tm6f8ovljdpb0t7inem5qfsejl.apps.googleusercontent.com&approval_prompt=force"><img width="129px" height="37px" src="assets/img/gp-btn.svg" alt=""></a>
+                                               &client_id=989469650876-pv3l59tm6f8ovljdpb0t7inem5qfsejl.apps.googleusercontent.com&approval_prompt=force"><img width="160px" height="37px" src="assets/img/gp-btn.svg" alt=""></a>
                                         </div>
                                     </div>
                                 </div>

@@ -171,7 +171,7 @@
         </section>
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/ajax.js"></script>
 
     </body>
 </html>

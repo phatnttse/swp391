@@ -4,9 +4,11 @@
  */
 package phatntt.cart;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dao.CartDAO;
+import phatntt.dto.CartDTO;
 import phatntt.dto.UsersDTO;
 
 /**
@@ -64,7 +67,32 @@ public class RemoveProductFromCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        int productId = Integer.parseInt(request.getParameter("productId"));
+
+        try {
+            HttpSession session = request.getSession();
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+
+            CartDAO cartDAO = new CartDAO();
+            boolean result = cartDAO.removeProductFromCart(user.getId(), productId);
+            if (result) {
+                List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
+                Gson gson = new Gson();
+                String json = gson.toJson(products);              
+                out.println(json);     
+            }
+            out.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
+        } catch (NamingException ex) {
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
+        }
     }
 
     /**
@@ -78,18 +106,7 @@ public class RemoveProductFromCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try  {
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        HttpSession session = request.getSession();
-        UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
-        CartDAO dao = new CartDAO();
-        dao.removeProductFromCart(user.getId(), productId);
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(RemoveProductFromCart.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(RemoveProductFromCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

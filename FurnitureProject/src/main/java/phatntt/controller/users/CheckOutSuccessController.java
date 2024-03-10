@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.dao.OrderDetailDAO;
+import phatntt.dao.EmailDAO;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.CartDTO;
 import phatntt.dto.OrderDTO;
@@ -47,6 +47,7 @@ public class CheckOutSuccessController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String vnp_ResponseCode = request.getParameter("vnp_ResponseCode"); // Mã phản hồi từ vnPay
         String vnp_TransactionNo = request.getParameter("vnp_TransactionNo"); // Mã giao dịch tại vnPay
+        String orderId = request.getParameter("vnp_TxnRef");
         HttpSession session = request.getSession();
         UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
@@ -63,30 +64,35 @@ public class CheckOutSuccessController extends HttpServlet {
                 String billingAddress = (String) session.getAttribute("ORDER_ADDRESS");
                 String note = (String) session.getAttribute("NOTE");
                 int amount = (int) session.getAttribute("AMOUNT");
-                
+
                 List<CartDTO> orderDetails = (List<CartDTO>) session.getAttribute("ORDER_DETAILS");
 
                 OrdersDAO orderDAO = new OrdersDAO();
-                int orderId = orderDAO.createOrder(user.getId(), email, name, phone, billingAddress, note, 1, "VNPAY", true, amount);
+                boolean result = orderDAO.createOrder(orderId,user.getId(), email, name, phone, billingAddress, note, 1, "VNPAY", true, amount);
 
-                if (orderId > 0) {
-                    OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-
+                if (result) {
+                  
                     OrderDTO order = orderDAO.getOrderById(orderId);
 
                     for (CartDTO orderDetail : orderDetails) {
-                        orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
+                        orderDAO.addOrderDetail(orderId, orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
                     }
 
                     orderDAO.clearCartByUserId(user.getId());
-                    session.setAttribute("ORDER_SUCCESS", order);                                
+                    session.setAttribute("ORDER_SUCCESS", order);
+                    
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.CHECKOUT_SUCCESS_PAGE);
+                    
+//                    EmailDAO emailDAO = new EmailDAO();
+//                    emailDAO.sendEmailTksForOrdering(email);
+                    
                     session.removeAttribute("ORDER_EMAIL");
                     session.removeAttribute("ORDER_NAME");
                     session.removeAttribute("ORDER_PHONE");
                     session.removeAttribute("ORDER_ADDRESS");
                     session.removeAttribute("NOTE");
-                    session.removeAttribute("AMOUNT");                
+                    session.removeAttribute("AMOUNT");
+                   
                 }
 
             } else {

@@ -31,7 +31,7 @@ public class EmailDAO implements Serializable {
         return String.format("%06d", code);
     }
 
-    public boolean sendEmail(EmailDTO email) {
+    public boolean sendEmailVerify(EmailDTO email) {
         boolean result = false;
         // Email configuration
         final String fromEmail = "furnitureproject1910@gmail.com"; //  email 
@@ -140,6 +140,97 @@ public class EmailDAO implements Serializable {
             throw new RuntimeException(e);
         }
         return result;
+    }
+    
+    public void sendEmailTksForOrdering(String email) {
+        // Email configuration
+        final String fromEmail = "furnitureproject1910@gmail.com"; //  email 
+        final String password = "bbzx alxk ebrg jchn"; //  mật khẩu 
+        final String toEmail = email;
+        // SMTP server properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        // Session
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(fromEmail, password);
+                    }
+                });
+
+        // Message      
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(fromEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject("Thanks For Ordering");
+            
+            // Content
+            String htmlContent = "<!DOCTYPE html>"
+                                + "<html lang=\"en\">"
+                                + "<head>"
+                                + "<meta charset=\"UTF-8\">"
+                                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+                                + "<title>Thank You for Ordering</title>"
+                                + "<style>"
+                                + "body {"
+                                + "font-family: Arial, sans-serif;"
+                                + "}"
+                                + ".container {"
+                                + "width: 80%;"
+                                + "margin: auto;"
+                                + "}"
+                                + ".card {"
+                                + "background-color: #fff;"
+                                + "border-radius: 8px;"
+                                + "box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+                                + "margin-top: 50px;"
+                                + "}"
+                                + ".card-header {"
+                                + "background-color: #28a745;"
+                                + "color: #fff;"
+                                + "padding: 10px;"
+                                + "border-top-left-radius: 8px;"
+                                + "border-top-right-radius: 8px;"
+                                + "}"
+                                + ".card-body {"
+                                + "padding: 20px;"
+                                + "}"
+                                + "</style>"
+                                + "</head>"
+                                + "<body>"
+                                + "<div class=\"container\">"
+                                + "<div class=\"card\">"
+                                + "<div class=\"card-header\">"
+                                + "<h2 style=\"text-align: center;\">Thank You for Ordering</h2>"
+                                + "</div>"
+                                + "<div class=\"card-body\">"
+                                + "<p>Dear Customer,</p>"
+                                + "<p>We would like to extend our sincere gratitude for placing your order with us. Your business is greatly appreciated.</p>"
+                                + "<p>If you have any questions or concerns regarding your order, feel free to contact us.</p>"
+                                + "<p>Thank you again for choosing us. We look forward to serving you again in the future.</p>"
+                                + "<p>Sincerely,</p>"
+                                + "<p>The Furniture Project Team</p>"
+                                + "</div>"
+                                + "</div>"
+                                + "</div>"
+                                + "</body>"
+                                + "</html>";
+            
+            message.setContent(htmlContent, "text/html");
+
+            // Send the email
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

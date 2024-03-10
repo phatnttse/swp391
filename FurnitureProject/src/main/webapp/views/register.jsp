@@ -69,10 +69,10 @@
                                                                     <input type="password" class="form-control form-control-lg" value="" name="password" id="password" placeholder="Mật khẩu" required>
                                                                 </fieldset>
                                                                 <c:if test="${error != null}">
-                                                                <p style="color: red;font-size: 14px">${error.passwordRegexError}</p>
-                                                            </c:if>
+                                                                    <p style="color: red;font-size: 14px">${error.passwordRegexError}</p>
+                                                                </c:if>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <fieldset class="form-group">
                                                                     <input type="password" class="form-control form-control-lg" value="" name="confirm_password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
@@ -90,7 +90,7 @@
                                                 <div class="block social-login--facebooks margin-top-15">
                                                     <p class="a-center">Hoặc đăng nhập bằng</p>                                                                                                          
                                                     <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:6969/FurnitureProject/loginWithGoogle&response_type=code
-                                                       &client_id=989469650876-pv3l59tm6f8ovljdpb0t7inem5qfsejl.apps.googleusercontent.com&approval_prompt=force"><img width="129px" height="37px" src="assets/img/gp-btn.svg" alt=""></a>
+                                                       &client_id=989469650876-pv3l59tm6f8ovljdpb0t7inem5qfsejl.apps.googleusercontent.com&approval_prompt=force"><img width="160px" height="37px" src="assets/img/gp-btn.svg" alt=""></a>
                                                 </div>
                                             </div>
                                         </div>

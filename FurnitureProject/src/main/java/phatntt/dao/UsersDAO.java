@@ -54,7 +54,7 @@ public class UsersDAO implements Serializable {
                     String google_id = rs.getString("google_id");
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    result = new UsersDTO(id, email, password, name, given_name, family_name, picture, phone, address, google_id, role, createdAt);                   
+                    result = new UsersDTO(id, email, password, name, given_name, family_name, picture, phone, address, google_id, role, createdAt);
                 }
             }
 
@@ -84,7 +84,7 @@ public class UsersDAO implements Serializable {
                 String sql = "Select * from user where email = ? and google_id = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
-                 stm.setString(2, googleId);
+                stm.setString(2, googleId);
 
                 rs = stm.executeQuery();
 
@@ -103,7 +103,7 @@ public class UsersDAO implements Serializable {
                     int role = rs.getInt("role_id");
                     Timestamp createdAt = rs.getTimestamp("created_at");
                     result = new UsersDTO(id, email, password, name, given_name, family_name, picture, phone, address, googleId, role, createdAt);
-                    
+
                 }
 
             }
@@ -139,7 +139,7 @@ public class UsersDAO implements Serializable {
                 stm.setString(4, givenName + " " + familyName);
                 stm.setString(5, givenName);
                 stm.setString(6, familyName);
-                stm.setInt(7, roleId);              
+                stm.setInt(7, roleId);
                 int affectedRows = stm.executeUpdate();
                 //4.Excute Query
                 if (affectedRows > 0) {
@@ -174,7 +174,7 @@ public class UsersDAO implements Serializable {
                 stm.setString(5, user.getFamily_name());
                 stm.setString(6, user.getPicture());
                 stm.setString(7, user.getId());
-                stm.setInt(8, user.getRole());                
+                stm.setInt(8, user.getRole());
                 int affectedRows = stm.executeUpdate();
 
                 if (affectedRows > 0) {
@@ -314,6 +314,52 @@ public class UsersDAO implements Serializable {
         return result;
     }
 
+    public List<UsersDTO> getAllUsersWithNameOfRole() throws SQLException, NamingException {
+
+        List<UsersDTO> result = new ArrayList<>();
+
+        try {
+
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT u.*, r.name AS role_name\n"
+                        + "FROM user u\n"
+                        + "INNER JOIN role r ON u.role_id = r.role_id;";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String id = rs.getString("user_id");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String given_name = rs.getString("given_name");
+                    String family_name = rs.getString("family_name");
+                    String phone = rs.getString("phone");
+                    String picture = rs.getString("picture");
+                    String address = rs.getString("address");
+                    String google_id = rs.getString("google_id");
+                    int role = rs.getInt("role_id");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    String roleName = rs.getString("role_name");
+                    UsersDTO u = new UsersDTO(id, email, password, name, given_name, family_name, picture, phone, address, google_id, role, createdAt, roleName);
+                    result.add(u);
+                }
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+            if (rs != null){
+                rs.close();
+            }
+        }
+        return result;
+    }
+
     public UsersDTO getUserById(String id) throws SQLException, NamingException {
 
         UsersDTO result = null;
@@ -395,6 +441,7 @@ public class UsersDAO implements Serializable {
         }
         return result;
     }
+
     public UsersDTO getUserByGoogleId(String googleId) throws SQLException, NamingException {
 
         UsersDTO result = null;

@@ -75,6 +75,7 @@ public class SortProductController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_PAGE);
+        String span = null;
         try {
             ProductsDAO dao = new ProductsDAO();
             List<ProductsDTO> dTOs = new ArrayList<>();
@@ -82,32 +83,38 @@ public class SortProductController extends HttpServlet {
                 case "AtoZ":
                     dTOs = dao.sortProductByNameAscending();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                    span = "A → Z";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "ZtoA":
                     dTOs = dao.sortProductByNameDescending();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                     span = "Z → A";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "IncreasePrice":
                     dTOs = dao.sortProductByPriceAscending();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                     span = "Giá tăng dần";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "DecreasePrice":
                     dTOs = dao.sortProductByPriceDescending();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                     span = "Giá giảm dần";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "Newest":
                     dTOs = dao.sortProductByNewCreateAt();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                     span = "Hàng mới nhất";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "Oldest":
                     dTOs = dao.sortProductByOldCreateAt();
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
+                     span = "Hàng cũ nhất";
+                    request.setAttribute("SPAN", span);
                     break;
                 default:
                     // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác

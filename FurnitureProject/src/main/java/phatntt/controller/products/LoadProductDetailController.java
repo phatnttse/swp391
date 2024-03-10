@@ -7,6 +7,7 @@ package phatntt.controller.products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,6 +61,10 @@ public class LoadProductDetailController extends HttpServlet {
             //set url
             url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_DETAIL)
                     + "?productId=" + productId;
+            
+            //sản phẩm cùng loại
+            List<ProductsDTO> dtos = productDAO.getProductSameCategory(Integer.parseInt(productId));
+            request.setAttribute("SAME_CATEGORY", dtos);
 
         } catch (SQLException ex) {
             Logger.getLogger(LoadProductDetailController.class.getName()).log(Level.SEVERE, null, ex);

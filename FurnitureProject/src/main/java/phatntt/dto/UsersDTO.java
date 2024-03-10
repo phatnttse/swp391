@@ -26,9 +26,30 @@ public class UsersDTO {
     private String google_id;
     private int role;
     private Timestamp createdAt;
-       
+    private String roleName;
+    
+    
+    
     public UsersDTO() {
     }
+
+    public UsersDTO(String id, String email, String password, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt, String roleName) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.given_name = given_name;
+        this.family_name = family_name;
+        this.picture = picture;
+        this.phone = phone;
+        this.address = address;
+        this.google_id = google_id;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.roleName = roleName;
+    }
+    
+    
 
     public UsersDTO(String id, String email, String password, String name, String given_name, String family_name, String picture, String phone, String address, String google_id, int role, Timestamp createdAt) {
         this.id = id;
@@ -58,6 +79,16 @@ public class UsersDTO {
         this.role = role;
         this.createdAt = createdAt;
     }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+    
+    
 
     /**
      * @return the id

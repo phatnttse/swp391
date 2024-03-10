@@ -28,7 +28,7 @@ import phatntt.util.Constants;
  *
  * @author Admin
  */
-@WebServlet(name = "UserAccountsController", urlPatterns = {"/userAccounts"})
+@WebServlet(name = "UserAccountsController", urlPatterns = {"/UserAccountsController"})
 public class UserAccountsController extends HttpServlet {
 
     /**
@@ -43,17 +43,25 @@ public class UserAccountsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+          ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.LoginFeatures.HOME);
+        
+        try  {
+            UsersDAO dao = new UsersDAO();
+            List<UsersDTO> listAccount = dao.getAllCustomers();
+            request.setAttribute("LIST_CUSTOMERS", listAccount);
+            
+            List<UsersDTO> dTOs = dao.getAllUsersWithNameOfRole();
+            request.setAttribute("LIST_USER_ROLE", dTOs);
+            url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
             
     }
@@ -71,24 +79,7 @@ public class UserAccountsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.AdminFeatures.ADMIN_PAGE);
-        
-        try  {
-            UsersDAO dao = new UsersDAO();
-            List<UsersDTO> listAccount = dao.getAllCustomers();
-            request.setAttribute("LIST_CUSTOMERS", listAccount);
-            url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UserAccountsController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(UserAccountsController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

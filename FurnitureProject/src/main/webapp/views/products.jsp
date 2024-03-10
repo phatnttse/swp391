@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <title>Sản phẩm</title>
-      
+
     </head>
     <body>
         <c:set var="listProductByCategory" value="${requestScope.CATEGORY_LIST}"/>
@@ -50,7 +50,7 @@
                         <div class="aside-filter clearfix">
                             <div class="aside-hidden-mobile">
                                 <div class="filter-container">
-                                  
+
                                     <div class="clearfix"></div>
 
                                     <aside class="aside-item filter-price">
@@ -210,7 +210,7 @@
                                         <ul class="ul_col">
                                             <li>
                                                 <span>
-                                                    Mặc định 
+                                                    ${empty requestScope.SPAN ? 'Mặc định' : requestScope.SPAN}
                                                 </span>
                                                 <ul class="content_ul">                    
                                                     <li><a href="SortProductController?sortType=default" >Mặc định</a></li>								
@@ -328,6 +328,7 @@
     <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
     <script src="assets/js/jquery.js"></script>
+
 
 
     <%@include file="../UIcomponents/footer.jsp" %>

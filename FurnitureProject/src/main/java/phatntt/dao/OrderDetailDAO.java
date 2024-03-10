@@ -4,19 +4,15 @@
  */
 package phatntt.dao;
 
-import java.sql.Array;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import javax.naming.NamingException;
-import phatntt.dto.OrderDTO;
 import phatntt.dto.OrderDetailDTO;
 import phatntt.dto.OrderStatusDTO;
 import phatntt.util.DBConnect;
@@ -31,36 +27,9 @@ public class OrderDetailDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;
 
-    public void addOrderDetail(int orderId, int productId, String title, int price, int quantity, String thumbnail, int totalMoney) throws SQLException, NamingException {
+    
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "INSERT INTO order_detail (order_id, product_id, title, price, quantity, thumbnail, total_money) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, orderId);
-                stm.setInt(2, productId);
-                stm.setString(3, title);
-                stm.setInt(4, price);
-                stm.setInt(5, quantity);
-                stm.setString(6, thumbnail);
-                stm.setInt(7, totalMoney);
-                stm.executeUpdate();
-
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-
-    }
-
-    public List<OrderDetailDTO> getOrderDetailsByOrderId(int orderId) throws SQLException, NamingException {
+    public List<OrderDetailDTO> getOrderDetailsByOrderId(String orderId) throws SQLException, NamingException {
         List<OrderDetailDTO> orderDetails = new ArrayList<>();
 
         try {
@@ -68,13 +37,13 @@ public class OrderDetailDAO {
             if (con != null) {
                 String sql = "SELECT * FROM order_detail WHERE order_id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, orderId);
+                stm.setString(1, orderId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     OrderDetailDTO orderDetail = new OrderDetailDTO();
                     orderDetail.setId(rs.getInt("id"));
-                    orderDetail.setOrder_id(rs.getInt("order_id"));
+                    orderDetail.setOrder_id(rs.getString("order_id")); // Set order_id as String
                     orderDetail.setProduct_id(rs.getInt("product_id"));
                     orderDetail.setTitle(rs.getString("title"));
                     orderDetail.setPrice(rs.getInt("price"));
@@ -131,7 +100,7 @@ public class OrderDetailDAO {
         return orderStatusList;
     }
 
-    public boolean updateOrderStatus(int orderId, int statusId) throws SQLException, NamingException {
+    public boolean updateOrderStatus(String orderId, int statusId, boolean paymentStatus) throws SQLException, NamingException {
 
         boolean result = false;
 
@@ -139,10 +108,11 @@ public class OrderDetailDAO {
             con = DBConnect.createConnection();
             if (con != null) {
 
-                String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+                String sql = "UPDATE `order` SET status = ? , payment_status = ? WHERE order_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusId);
-                stm.setInt(2, orderId);
+                stm.setBoolean(2, paymentStatus);
+                 stm.setString(3, orderId);
                 int affectedRows = stm.executeUpdate();
 
                 if (affectedRows > 0) {
@@ -163,7 +133,7 @@ public class OrderDetailDAO {
         return result;
     }
 
-    public List<OrderDetailDTO> getAllOrderDetail(int orderId)
+    public List<OrderDetailDTO> getAllOrderDetail(String orderId)
             throws SQLException, NamingException {
         List<OrderDetailDTO> list = new ArrayList<>();
         try {
@@ -180,7 +150,7 @@ public class OrderDetailDAO {
                         + "WHERE \n"
                         + "    od.order_id = ? ";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, orderId);
+                stm.setString(1, orderId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
@@ -221,5 +191,6 @@ public class OrderDetailDAO {
         }
         return list;
     }
+
 
 }

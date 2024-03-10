@@ -56,7 +56,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <ul class="ul-control">                      
                             <li>
-                                <a href="ViewAllOrder" title="Kiểm tra đơn hàng"><img
+                                <a href="allOrder" title="Kiểm tra đơn hàng"><img
                                         src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/box.png?1708512217480"
                                         class="img-fluid" alt="Lofi Furniture"> Kiểm tra đơn hàng</a>
                             </li>
@@ -133,13 +133,13 @@
                                 </c:if>
                                 <c:if test="${not empty user}">
                                     <div class="header-account d-lg-block d-none">
-                                        <a href="#" title="Tài khoản của bạn" rel="nofollow">
+                                        <a href="accountInfoPage" title="Tài khoản của bạn" rel="nofollow">
                                             <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/account.png?1708512217480"
                                                  alt="Lofi Furniture" width="25" height="25" class="icon">
                                             <span class="info">${user.name}</span>
                                         </a>
                                         <div class="drop-account">                                          
-                                            <a href="accountInfo">Tài khoản</a>
+                                            <a href="accountInfoPage">Tài khoản</a>
                                             <c:if test="${user.role == 2}">
                                                 <li><a href="adminPage">Quản lý</a></li>
                                             </c:if>

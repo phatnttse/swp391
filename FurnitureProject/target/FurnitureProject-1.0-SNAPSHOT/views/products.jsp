@@ -19,6 +19,34 @@
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <title>Sản phẩm</title>
+        <style>
+            .custom-filter-button {
+                color: #fff;
+                background-color: #d94e28;
+                border-color: #d94e28;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                border-radius: 0.25rem;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+                    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            .custom-filter-button:hover {
+                background-color: #138496; 
+                border-color: #117a8b; 
+            }
+
+            .custom-filter-button:focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); 
+            }
+
+            .custom-filter-button:disabled {
+                background-color: #6c757d; 
+                border-color: #6c757d; 
+            }
+
+        </style>
 
     </head>
     <body>
@@ -126,7 +154,6 @@
                                                     </li>
                                                 </ul>
                                                 <button type="submit" class="btn custom-filter-button">Lọc</button>
-
                                             </form>
                                         </div>
                                     </aside>
@@ -210,7 +237,7 @@
                                         <ul class="ul_col">
                                             <li>
                                                 <span>
-                                                    ${empty requestScope.SPAN ? 'Mặc định' : requestScope.SPAN}
+                                                    Mặc định 
                                                 </span>
                                                 <ul class="content_ul">                    
                                                     <li><a href="SortProductController?sortType=default" >Mặc định</a></li>								
@@ -327,8 +354,7 @@
     <div id="popup-cart-desktop" class="popup-cart"></div>
     <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-    <script src="assets/js/jquery.js"></script>
-
+    <script src="assets/js/ajax.js"></script>
 
 
     <%@include file="../UIcomponents/footer.jsp" %>

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import phatntt.dto.OrderDTO;
+import phatntt.dto.RequestCancellationDTO;
 import phatntt.util.DBConnect;
 import phatntt.util.Key_Utils;
 
@@ -27,40 +28,36 @@ public class OrdersDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;
 
-    public int createOrder(String user_id, String email, String name, String phone, String shipping_address, String note, int status, String payment_method, boolean payment_status, int amount) throws SQLException, NamingException {
-        int orderId = -1; // Initialize with an invalid ID
-
+    public boolean createOrder(String orderId, String user_id, String email, String name, String phone, String shipping_address, String note, int status, String payment_method, boolean payment_status, int amount) throws SQLException, NamingException {
+        boolean result = false;
         try {
             // Create connection
             con = DBConnect.createConnection();
             if (con != null) {
                 // Prepare SQL statement
-                String sql = "INSERT INTO `order` (user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                String sql = "INSERT INTO `order` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                stm = con.prepareStatement(sql);
 
                 // Set values for parameters
-                stm.setString(1, user_id);
-                stm.setString(2, email);
-                stm.setString(3, name);
-                stm.setString(4, phone);
-                stm.setString(5, shipping_address);
-                stm.setString(6, note);
-                stm.setInt(7, status);
-                stm.setBoolean(8, payment_status);
-                stm.setString(9, payment_method);
-                stm.setInt(10, amount);
+                stm.setString(1, orderId);
+                stm.setString(2, user_id);
+                stm.setString(3, email);
+                stm.setString(4, name);
+                stm.setString(5, phone);
+                stm.setString(6, shipping_address);
+                stm.setString(7, note);
+                stm.setInt(8, status);
+                stm.setBoolean(9, payment_status);
+                stm.setString(10, payment_method);
+                stm.setInt(11, amount);
 
                 // Execute the query
                 int affectedRows = stm.executeUpdate();
 
                 // Check if the query was successful
                 if (affectedRows > 0) {
-                    // Retrieve the generated keys (order ID)
-                    ResultSet generatedKeys = stm.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        orderId = generatedKeys.getInt(1); // Retrieve the generated order ID
-                    }
+                    result = true;
                 }
             }
         } finally {
@@ -73,7 +70,61 @@ public class OrdersDAO {
             }
         }
 
-        return orderId; // Return the ID of the inserted order
+        return result;
+    }
+
+    public void addOrderDetail(String orderId, int productId, String title, int price, int quantity, String thumbnail, int totalMoney) throws SQLException, NamingException {
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "INSERT INTO order_detail (order_id, product_id, title, price, quantity, thumbnail, total_money) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                stm.setInt(2, productId);
+                stm.setString(3, title);
+                stm.setInt(4, price);
+                stm.setInt(5, quantity);
+                stm.setString(6, thumbnail);
+                stm.setInt(7, totalMoney);
+                stm.executeUpdate();
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+    }
+
+    public boolean cancelOrder(String orderId) throws SQLException, NamingException {
+        boolean result = false;
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, 5);
+                stm.setString(2, orderId);
+                int affectedRows = stm.executeUpdate();
+                if (affectedRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 
     public void clearCartByUserId(String userId) throws SQLException, NamingException {
@@ -112,7 +163,7 @@ public class OrdersDAO {
 
                 while (rs.next()) {
                     OrderDTO order = new OrderDTO();
-                    order.setOrderId(rs.getInt("order_id"));
+                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
                     order.setUserId(rs.getString("user_id"));
                     order.setEmail(rs.getString("email"));
                     order.setName(rs.getString("name"));
@@ -130,6 +181,7 @@ public class OrdersDAO {
                 }
             }
         } finally {
+            // Close resources
             if (rs != null) {
                 rs.close();
             }
@@ -144,7 +196,7 @@ public class OrdersDAO {
         return orders;
     }
 
-    public OrderDTO getOrderById(int orderId) throws SQLException, NamingException {
+    public OrderDTO getOrderById(String orderId) throws SQLException, NamingException {
         OrderDTO order = null;
         try {
             con = DBConnect.createConnection();
@@ -154,12 +206,12 @@ public class OrdersDAO {
                         + "INNER JOIN `order_status` os ON o.status = os.status_id "
                         + "WHERE o.order_id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, orderId);
+                stm.setString(1, orderId);
                 rs = stm.executeQuery();
 
                 if (rs.next()) {
                     order = new OrderDTO();
-                    order.setOrderId(rs.getInt("order_id"));
+                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
                     order.setUserId(rs.getString("user_id"));
                     order.setEmail(rs.getString("email"));
                     order.setName(rs.getString("name"));
@@ -175,6 +227,7 @@ public class OrdersDAO {
                 }
             }
         } finally {
+            // Close resources
             if (rs != null) {
                 rs.close();
             }
@@ -212,7 +265,7 @@ public class OrdersDAO {
                 stm.setString(1, user_id);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    int order_id = rs.getInt("order_id");
+                    String order_id = rs.getString("order_id"); // Use String for order_id
                     String email = rs.getString("email");
                     String name = rs.getString("name");
                     String phone = rs.getString("phone");
@@ -228,7 +281,6 @@ public class OrdersDAO {
                     OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_status, payment_method, amount, created_at);
                     odto.setFormattedPrice(Key_Utils.getInstance().formattedPrice(priceOfOrder));
                     list.add(odto);
-
                 }
             }
         } catch (Exception e) {
@@ -262,11 +314,12 @@ public class OrdersDAO {
 
                 while (rs.next()) {
                     OrderDTO order = new OrderDTO();
+                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
                     orders.add(order);
                 }
             }
         } finally {
-             if (rs != null) {
+            if (rs != null) {
                 rs.close();
             }
             if (stm != null) {
@@ -278,6 +331,97 @@ public class OrdersDAO {
         }
 
         return orders;
+    }
+
+    public boolean RequestCancellation(String userId, String orderId, String reason)
+            throws SQLException, NamingException {
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                // Start a transaction
+                con.setAutoCommit(false);
+
+                // Insert a new request_cancellation record
+                String insertRequestSql = "INSERT INTO request_cancellation (user_id, order_id, reason, request_status) VALUES (?, ?, ?, ?)";
+                stm = con.prepareStatement(insertRequestSql);
+                stm.setString(1, userId);
+                stm.setString(2, orderId);
+                stm.setString(3, reason);
+                stm.setBoolean(4, false);
+                int rowsAffected = stm.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    // Update the order status to 'Pending Cancellation Confirmation'
+                    String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ? ";
+                   stm = con.prepareStatement(updateOrderSql);
+                    stm.setInt(1, 6);
+                    stm.setString(2, orderId);
+                    int updatedRows = stm.executeUpdate();
+
+                    if (updatedRows > 0) {
+                        result = true;
+                    }
+                }
+
+                // Commit the transaction
+                con.commit();
+            }
+        } catch (SQLException ex) {
+            // Rollback the transaction in case of an exception
+            if (con != null) {
+                con.rollback();
+            }
+            throw ex;
+        } finally {
+            // Reset auto-commit mode and close resources
+            if (con != null) {
+                con.setAutoCommit(true);
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+
+        return result;
+    }
+
+    public RequestCancellationDTO getRequestCancellationByOrderId(String orderId)
+            throws SQLException, NamingException {
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellation WHERE order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String userId = rs.getString("user_id");
+                    String reason = rs.getString("reason");
+                    boolean requestStatus = rs.getBoolean("request_status");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    return new RequestCancellationDTO(id, userId, orderId, reason, requestStatus, createdAt);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return null;
     }
 
 }

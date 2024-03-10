@@ -45,44 +45,42 @@ public class ChangePasswordController extends HttpServlet {
         
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.DispatchFeatures.ACCOUNT_INFO_PAGE);
+        String url = siteMaps.getProperty(Constants.UsersFeatures.CHANGE_PASSWORD_PAGE);
         
         String oldPass = request.getParameter("oldPass");
         String newPass = request.getParameter("newPass");
         String confirmNewPass = request.getParameter("confirmNewPass");
-        String id = request.getParameter("hdId");
+              
         
-        
-         ErrorDTO errors = new ErrorDTO();
+        ErrorDTO errors = new ErrorDTO();
         boolean foundErr = false;
         
         UsersDAO dao = new UsersDAO();
-        Key_Utils utils = Key_Utils.getInstance();
         
         try  {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO)session.getAttribute("USER_INFO");
-            if (!utils.checkPassword(oldPass, user.getPassword().trim()) && !oldPass.trim().equals(user.getPassword().trim())){
-                errors.setOldPassNotMatch(siteMaps.getProperty(Constants.UsersFeatures.OLD_PASS_ERR_MESSAGE));
+            if (!Key_Utils.getInstance().checkPassword(oldPass, user.getPassword().trim()) && !oldPass.trim().equals(user.getPassword().trim())){
+                errors.setOldPassIncorrect(siteMaps.getProperty(Constants.ValidateFeatures.OLD_PASS_ERR_MESSAGE));
                 foundErr = true;
             }
             if (!newPass.matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))){
                 errors.setPasswordRegexError(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
                 foundErr = true;
-            }else if(!confirmNewPass.trim().equals(newPass)){
+            }
+            if(!confirmNewPass.trim().equals(newPass)){
                 errors.setConfirmNotMatch(siteMaps.getProperty(Constants.ValidateFeatures.CONFIRM_NOTMATCH_ERR_MSG));
                 foundErr = true;
             }
             if (foundErr){
                 request.setAttribute("CHANGE_PASS_ERROR", errors);
             }else {                
-                String newPassHashed = utils.hashPassword(newPass);
-                boolean result = dao.changePassword(id, newPassHashed);
+                String newPassHashed = Key_Utils.getInstance().hashPassword(newPass);
+                boolean result = dao.changePassword(user.getId(), newPassHashed);
                 if (result){
                     url = siteMaps.getProperty(Constants.UsersFeatures.LOGIN_PAGE);
                 }
-            }
-                               
+            }                              
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {

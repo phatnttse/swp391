@@ -26,7 +26,9 @@
         <c:set var="orderURI" value="/FurnitureProject/views/order.jsp"/>
         <c:set var="productDetailURI" value="/FurnitureProject/views/productdetail.jsp"/>
         <c:set var="orderDetailURI" value="/FurnitureProject/views/orderdetail.jsp"/>
-        
+        <c:set var="editProfileURI" value="/FurnitureProject/views/editProfile.jsp"/>
+        <c:set var="changePasswordURI" value="/FurnitureProject/views/changePassword.jsp"/>
+
 
         <section class="bread-crumb" style="background-image: url('//bizweb.dktcdn.net/100/499/932/themes/926650/assets/breadcrumb-bg.jpg?1708512217480')"> 
             <c:if test="${uri eq loginURI}">
@@ -42,7 +44,7 @@
                 </div>                                              
             </c:if>
             <c:if test="${uri eq productsURI}">
-                <div class="title-breadcrumb">Tất cả sản phẩm
+                <div class="title-breadcrumb">Sản phẩm
                 </div>                                 
             </c:if>
             <c:if test="${uri eq searchProductsURI}">
@@ -73,6 +75,14 @@
                 <div class="title-breadcrumb">Chi tiết đơn hàng
                 </div>                  
             </c:if>
+            <c:if test="${uri eq editProfileURI}">
+                <div class="title-breadcrumb">Chỉnh sửa hồ sơ
+                </div>                  
+            </c:if>
+             <c:if test="${uri eq changePasswordURI}">
+                <div class="title-breadcrumb">Đổi mật khẩu
+                </div>                  
+            </c:if>
 
             <ul class="breadcrumb">
                 <li class="home">
@@ -100,7 +110,7 @@
                     </c:if>
                     <c:if test="${uri eq productsURI}">                          
                         <strong>
-                            <span>Tất cả sản phẩm</span>
+                            <span>Sản phẩm</span>
                         </strong>
                     </c:if>
 
@@ -139,9 +149,19 @@
                             <span>Chi Tiết Sản Phẩm</span>
                         </strong>
                     </c:if>
-                         <c:if test="${uri eq orderDetailURI}">                               
+                    <c:if test="${uri eq orderDetailURI}">                               
                         <strong>
                             <span>Chi Tiết Đơn Hàng</span>
+                        </strong>
+                    </c:if>
+                    <c:if test="${uri eq editProfileURI}">                               
+                        <strong>
+                            <span>Chỉnh sửa hồ sơ</span>
+                        </strong>
+                    </c:if>
+                    <c:if test="${uri eq changePasswordURI}">                               
+                        <strong>
+                            <span>Đổi mật khẩu</span>
                         </strong>
                     </c:if>
 

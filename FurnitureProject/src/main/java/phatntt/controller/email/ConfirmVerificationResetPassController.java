@@ -73,7 +73,7 @@ public class ConfirmVerificationResetPassController extends HttpServlet {
         EmailDAO dao = new EmailDAO();
         String code = dao.getRandom();
         EmailDTO dto = new EmailDTO(email, code);
-        boolean result = dao.sendEmail(dto);
+        boolean result = dao.sendEmailVerify(dto);
 
         if (result) {
             HttpSession session = request.getSession();
@@ -103,7 +103,7 @@ public class ConfirmVerificationResetPassController extends HttpServlet {
         EmailDAO dao = new EmailDAO();
         String code = dao.getRandom();
         EmailDTO dto = new EmailDTO(email, code);
-        boolean result = dao.sendEmail(dto);
+        boolean result = dao.sendEmailVerify(dto);
 
         if (result) {
             HttpSession session = request.getSession();

@@ -7,7 +7,6 @@ package phatntt.controller.orders;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,20 +19,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.controller.products.ProductsController;
-import phatntt.dao.OrderDetailDAO;
 import phatntt.dao.OrdersDAO;
-import phatntt.dto.OrderDTO;
-import phatntt.dto.OrderDetailDTO;
+import phatntt.dto.RequestCancellationDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 /**
  *
- * @author Dell
+ * @author Admin
  */
-@WebServlet(name = "ViewAllOrderDetailController", urlPatterns = {"/AllOrderDetail"})
-public class ViewAllOrderDetailController extends HttpServlet {
+@WebServlet(name = "CancelOrderController", urlPatterns = {"/cancelOrder"})
+public class CancelOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,28 +43,17 @@ public class ViewAllOrderDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
-        String orderId = request.getParameter("orderId");
-        try {
-            OrderDetailDAO dao = new OrderDetailDAO();
-            List<OrderDetailDTO> orderDTOs = dao.getAllOrderDetail(orderId);
-
-            OrdersDAO odao = new OrdersDAO();
-            OrderDTO order = odao.getOrderById(orderId);
-            
-            request.setAttribute("ORDER", order);
-            request.setAttribute("ORDER_DETAIL", orderDTOs);
-            url = siteMaps.getProperty(Constants.OderFeatures.ORDER_DETAIL_PAGE);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CancelOrderController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CancelOrderController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -85,6 +70,7 @@ public class ViewAllOrderDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -98,7 +84,31 @@ public class ViewAllOrderDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);
+        try {
+            HttpSession session = request.getSession();
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+
+            String orderId = request.getParameter("orderId");
+            String reason = request.getParameter("reason");
+            
+            OrdersDAO dao = new OrdersDAO();
+            boolean result = dao.RequestCancellation(user.getId(), orderId, reason);
+            if (result) {            
+                url = "allOrder";                       
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+             RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     /**

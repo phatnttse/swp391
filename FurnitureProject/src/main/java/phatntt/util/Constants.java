@@ -56,11 +56,13 @@ public class Constants {
     public class ValidateFeatures {
 
         public static final String PASSWORD_REGEX = "passwordRegex";
+        public static final String PHONE_REGEX = "phoneRegex";
         public static final String PASSWORD_REGEX_ERR_MSG = "passwordRegexErrMsg";
         public static final String CONFIRM_NOTMATCH_ERR_MSG = "confirmNotMatchErrMsg";
         public static final String GIVENNAME_LENGTH_ERR_MSG = "givenNameLengthErrMsg";
         public static final String FAMILYNAME_LENGTH_ERR_MSG = "familyNameLengthErrMsg";
         public static final String PHONE_LENGTH_ERR_MSG = "phoneRegexErrMsg";
+        public static final String OLD_PASS_ERR_MESSAGE = "oldPasswordIncorrect";
     }
 
     public class VerifyEmailFeatures {
@@ -87,8 +89,9 @@ public class Constants {
 
     public class UsersFeatures {
 
-        public static final String OLD_PASS_ERR_MESSAGE = "oldPasswordIncorrect";
         public static final String LOGIN_PAGE = "loginPage";
+        public static final String EDIT_PROFILE_PAGE = "editProfilePage";
+        public static final String CHANGE_PASSWORD_PAGE = "changePasswordPage";
     }
 
     public class ProductsFeatures {

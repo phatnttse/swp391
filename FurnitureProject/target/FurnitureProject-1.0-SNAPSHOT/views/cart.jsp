@@ -48,7 +48,7 @@
                                                                            class="ajaxcart__product-name h4"
                                                                            title="${product.title}">${product.title}</a>
                                                                         <a class="cart__btn-remove remove-item-cart ajaxifyCart--remove"
-                                                                           href="">Xóa</a>
+                                                                           onclick="removeProductFromCart('${product.userId}', ${product.productId})">Xóa</a>
 
                                                                     </div>
                                                                     <div class="grid">
@@ -152,7 +152,7 @@
                 </div>
             </div>
         </section>
-        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/ajax.js"></script>                                                                           
         <%@include file="../UIcomponents/footer.jsp" %>
     </body>
 </html>

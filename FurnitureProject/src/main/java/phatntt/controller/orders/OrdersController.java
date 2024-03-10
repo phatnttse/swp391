@@ -11,7 +11,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,12 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import phatntt.dao.OrderDetailDAO;
+import phatntt.dao.EmailDAO;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.CartDTO;
 import phatntt.dto.OrderDTO;
 import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -93,21 +93,24 @@ public class OrdersController extends HttpServlet {
             List<CartDTO> orderDetails = (List<CartDTO>) session.getAttribute("ORDER_DETAILS");
 
             OrdersDAO orderDAO = new OrdersDAO();
+           
 
             if (paymentMethod.equals("Thu hộ (COD)")) {
+                String orderId = Key_Utils.getInstance().getRandomNumber(8);
                 
-                int orderId = orderDAO.createOrder(user.getId(), email, name, phone, billingAddress, note, 1, paymentMethod, false, amount);
-                if (orderId > 0) {
-                    OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+                boolean result = orderDAO.createOrder(orderId,user.getId(), email, name, phone, billingAddress, note, 1, paymentMethod, false, amount);
+                if (result) {
                     OrderDTO order = orderDAO.getOrderById(orderId);
 
                     for (CartDTO orderDetail : orderDetails) {
-                        orderDetailDAO.addOrderDetail(order.getOrderId(), orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
+                        orderDAO.addOrderDetail(orderId, orderDetail.getProductId(), orderDetail.getTitle(), orderDetail.getPrice(), orderDetail.getQuantity(), orderDetail.getThumbnail(), orderDetail.getPrice() * orderDetail.getQuantity());
                     }
 
                     orderDAO.clearCartByUserId(user.getId());
-                    session.setAttribute("ORDER_SUCCESS", order);
+                    session.setAttribute("ORDER_SUCCESS", order);                  
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.ORDER_SUCCESS_PAGE);
+//                    EmailDAO emailDAO = new EmailDAO();
+//                    emailDAO.sendEmailTksForOrdering(email);
                 }
 
             } else {

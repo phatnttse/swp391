@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class OrderDetailDTO {
 
     private int id;
-    private int order_id;
+    private String order_id;
     private int product_id;
     private String title;
     private int price;
@@ -23,7 +23,7 @@ public class OrderDetailDTO {
     private String name;
     private Timestamp createAt;
 
-    public OrderDetailDTO(int id, int order_id, int product_id, String title, int price, int quantity, String thumbnail, int total_money, String name, Timestamp createAt) {
+    public OrderDetailDTO(int id, String order_id, int product_id, String title, int price, int quantity, String thumbnail, int total_money, String name, Timestamp createAt) {
         this.id = id;
         this.order_id = order_id;
         this.product_id = product_id;
@@ -47,11 +47,11 @@ public class OrderDetailDTO {
         this.id = id;
     }
 
-    public int getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 

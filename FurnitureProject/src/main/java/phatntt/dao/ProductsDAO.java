@@ -55,7 +55,7 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                   
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
@@ -103,7 +103,7 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-               
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
@@ -126,7 +126,6 @@ public class ProductsDAO implements Serializable {
         return result;
 
     }
-
 
     public List<ProductsDTO> searchProductsByName(String searchValue) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
@@ -153,10 +152,10 @@ public class ProductsDAO implements Serializable {
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
-                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);                 
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -188,7 +187,7 @@ public class ProductsDAO implements Serializable {
                 stm.setInt(1, productId);
                 rs = stm.executeQuery();
 
-                while (rs.next()) {                 
+                while (rs.next()) {
                     int categoryId = rs.getInt("category_id");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
@@ -198,10 +197,10 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     result = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     result.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
-                 
+
                 }
             }
 
@@ -243,11 +242,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     ProductsDTO p = new ProductsDTO(productId, 1, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -290,11 +289,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                   
+
                 }
             }
 
@@ -340,11 +339,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-               
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -399,17 +398,17 @@ public class ProductsDAO implements Serializable {
 
     public List<ProductsDTO> getProductByPrice(int from, int to) {
         List<ProductsDTO> list = new ArrayList<>();
-        
+
         try {
-          con = DBConnect.createConnection();
-            if (con!= null) {
+            con = DBConnect.createConnection();
+            if (con != null) {
                 String sql = "SELECT * FROM product \n"
-                + "WHERE price between ? and ?";
+                        + "WHERE price between ? and ?";
                 stm = con.prepareCall(sql);
                 stm.setDouble(1, from);
                 stm.setDouble(2, to);
                 rs = stm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {
                     //
                     // mapping
                     //5.1 get data from tu resultset
@@ -436,8 +435,8 @@ public class ProductsDAO implements Serializable {
         }
         return list;
     }
-    
-     public List<ProductsDTO> sortProductByNameAscending() throws SQLException, NamingException {
+
+    public List<ProductsDTO> sortProductByNameAscending() throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         try {
@@ -766,5 +765,48 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
+    public List<ProductsDTO> getProductSameCategory(int productId) throws SQLException, NamingException {
+        List<ProductsDTO> result = new ArrayList<>();
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+
+                String sql = "SELECT p.* FROM product p\n"
+                        + "INNER JOIN category c ON p.category_id = c.category_id\n"
+                        + "WHERE p.product_id <> ? AND c.category_id = (SELECT category_id FROM product WHERE product_id = ?)\n"
+                        + "ORDER BY RAND()\n"
+                        + "LIMIT 3;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productId);
+                stm.setInt(2, productId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String title = rs.getString("title");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    int discount = rs.getInt("discount");
+                    String thumbnail = rs.getString("thumbnail");
+                    int purchases = rs.getInt("purchases");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+
+                    ProductsDTO p = new ProductsDTO(title, quantity, price, thumbnail, discount, purchases, createdAt);
+                    p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
+                    result.add(p);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

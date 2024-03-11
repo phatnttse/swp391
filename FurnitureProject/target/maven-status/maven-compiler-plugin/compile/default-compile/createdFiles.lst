@@ -29,6 +29,7 @@ phatntt\controller\products\AddProductsToCartController.class
 phatntt\controller\email\UserVerifyServlet.class
 phatntt\util\Constants$SignUpFeatures.class
 phatntt\cart\ProductQuantity.class
+phatntt\dto\RequestCancellationDTO$RequestCancellationDTOBuilder.class
 phatntt\controller\category\CategoryController.class
 phatntt\dao\CartDAO.class
 phatntt\util\Constants$AdminFeatures.class
@@ -44,6 +45,7 @@ phatntt\controller\users\EWalletPayment.class
 phatntt\dto\ProductsDTO.class
 phatntt\controller\staff\OrderDetailManagementController.class
 phatntt\dao\OrderDetailDAO.class
+phatntt\dto\RequestCancellationDTO.class
 phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
 phatntt\controller\products\LoadProductCategoryController.class
@@ -58,8 +60,10 @@ phatntt\dao\EmailDAO$2.class
 phatntt\dto\OrderDTO.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
+phatntt\controller\staff\RequestCancelOrderManager.class
 phatntt\util\Constants$OderFeatures.class
 phatntt\controller\admin\UpdateUsersController.class
+phatntt\controller\orders\CancelOrderController.class
 phatntt\controller\staff\OrderManagementController.class
 phatntt\dao\EmailDAO.class
 phatntt\util\Constants.class

@@ -66,6 +66,13 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version> <!-- Use the appropriate version -->
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <type>jar</type>
+        </dependency>
+
          
     </dependencies>
 
@@ -78,6 +85,13 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version> 
+                        </path>
+                    </annotationProcessorPaths>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -85,9 +99,9 @@
             </plugin>
             
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.3.0</version> <!-- Sử dụng phiên bản mới nhất -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.0</version> <!-- Sử dụng phiên bản mới nhất -->
             </plugin>
             
             <plugin>

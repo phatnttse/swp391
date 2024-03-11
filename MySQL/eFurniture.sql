@@ -135,6 +135,35 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+
+CREATE TRIGGER TR_RequestCancellation_Delete
+AFTER INSERT ON request_cancellation 
+FOR EACH ROW 
+BEGIN
+    DECLARE order_status_id INT;
+
+    -- Lấy trạng thái của đơn hàng mới được thêm vào
+    SELECT `status` INTO order_status_id
+    FROM `order` 
+    WHERE `order_id` = NEW.order_id;
+
+    -- Kiểm tra nếu đơn hàng có trạng thái là Đang chờ xác nhận huỷ
+    IF order_status_id = 6 THEN
+        -- Xoá đơn hàng từ bảng `order`
+        DELETE FROM `order`
+        WHERE `order_id` = NEW.order_id;
+        
+        -- Xoá các chi tiết đơn hàng từ bảng `order_detail`
+        DELETE FROM `order_detail`
+        WHERE `order_id` = NEW.order_id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+
 ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
 
 ALTER TABLE `order` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
@@ -154,6 +183,11 @@ ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 ALTER TABLE `payment` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
 
 ALTER TABLE `order` ADD FOREIGN KEY (`status`) REFERENCES `order_status` (`status_id`);
+
+ALTER TABLE `request_cancellation` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+ALTER TABLE `request_cancellation` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+
 
 INSERT INTO category (category_id, name, thumbnail) VALUES
   (1, 'Bồn tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-tam.jpg?v=1699504371993'),

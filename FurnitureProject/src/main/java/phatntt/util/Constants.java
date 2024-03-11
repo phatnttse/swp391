@@ -128,5 +128,6 @@ public class Constants {
 
         public static final String ORDER_MANAGEMENT_PAGE = "orderManagementPage";
         public static final String VIEW_ORDERDETAIL_PAGE = "orderManagementDetailPage";
+        public static final String REQUEST_TO_CANCEL_ORDER_PAGE = "requestToCancelOrderPage";
     }
 }

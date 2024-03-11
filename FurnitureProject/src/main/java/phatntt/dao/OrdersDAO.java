@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public class OrdersDAO {
                 }
             }
         } finally {
-            // Close resources
+
             if (stm != null) {
                 stm.close();
             }
@@ -355,7 +354,7 @@ public class OrdersDAO {
                 if (rowsAffected > 0) {
                     // Update the order status to 'Pending Cancellation Confirmation'
                     String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ? ";
-                   stm = con.prepareStatement(updateOrderSql);
+                    stm = con.prepareStatement(updateOrderSql);
                     stm.setInt(1, 6);
                     stm.setString(2, orderId);
                     int updatedRows = stm.executeUpdate();
@@ -400,13 +399,14 @@ public class OrdersDAO {
                 rs = stm.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id");
-                    String userId = rs.getString("user_id");
-                    String reason = rs.getString("reason");
-                    boolean requestStatus = rs.getBoolean("request_status");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    return new RequestCancellationDTO(id, userId, orderId, reason, requestStatus, createdAt);
+                    return RequestCancellationDTO.builder()
+                            .id(rs.getInt("id"))
+                            .userId(rs.getString("user_id"))
+                            .orderId(orderId)
+                            .reason(rs.getString("reason"))
+                            .requestStatus(rs.getBoolean("request_status"))
+                            .createdAt(rs.getTimestamp("created_at"))
+                            .build();
                 }
             }
         } finally {
@@ -422,6 +422,52 @@ public class OrdersDAO {
         }
 
         return null;
+    }
+
+    public List<RequestCancellationDTO> getAllRequestCancellations() throws SQLException, NamingException {
+        List<RequestCancellationDTO> requestList = new ArrayList<>();
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "SELECT rc.id, rc.user_id, u.name, u.email, u.phone, rc.order_id, rc.reason, rc.request_status, rc.created_at "
+                        + "FROM request_cancellation rc "
+                        + "JOIN user u ON rc.user_id = u.user_id";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    RequestCancellationDTO request = RequestCancellationDTO.builder()
+                            .id(rs.getInt("id"))
+                            .userId(rs.getString("user_id"))
+                            .name(rs.getString("name"))
+                            .email(rs.getString("email"))
+                            .phone(rs.getString("phone"))
+                            .orderId(rs.getString("order_id"))
+                            .reason(rs.getString("reason"))
+                            .requestStatus(rs.getBoolean("request_status"))
+                            .createdAt(rs.getTimestamp("created_at"))
+                            .build();
+
+                    requestList.add(request);
+                }
+                
+                
+
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return requestList;
     }
 
 }

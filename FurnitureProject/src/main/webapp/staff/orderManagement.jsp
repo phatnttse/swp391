@@ -72,7 +72,7 @@
                     <a class="nav-link collapsed" href="orderManagement">                  
                         <span>Tất Cả Đơn Hàng</span>
                     </a>
-                    <a class="nav-link collapsed" href="orderManagement">                  
+                    <a class="nav-link collapsed" href="requestCancelOrderManager">                  
                         <span>Đơn Hàng Đã Huỷ</span>
                     </a>
                 </li>

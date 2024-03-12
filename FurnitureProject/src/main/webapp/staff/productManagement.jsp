@@ -89,9 +89,11 @@
                 <a class="nav-link collapsed" href="orderManagement">                  
                     <span>Đơn Hàng</span>
                 </a>
+                
             </li>
+                                                     
 
-                                                                
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -195,6 +197,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
                                 </div>
                                 <div class="col">
+                                    
                                     <form action="productManagement" method="get" class="form-inline float-right mt-3">
                                         <div class="form-group mx-2">
                                             <label for="combinedFilter" class="mr-2">Chọn:</label>
@@ -204,6 +207,7 @@
                                                 <option value="category">Loại</option>
                                             </select>
                                         </div>
+                                        
                                         <div id="filterOptions" class="form-group mx-2">
                                             <!-- Options for Mã Sản Phẩm -->
                                             <select class="form-control filter-select" id="productIdFilter" name="productIdFilter">
@@ -229,7 +233,9 @@
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-2">Lọc</button>
+                                        
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -239,6 +245,7 @@
                                     <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
+                                            <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 90%; margin-bottom: 10px; margin-top: -16px">ADD Product</a>
                                             <tr>
                                                 <th>Mã sản phẩm</th>
                                                 <th>Loại</th>
@@ -261,14 +268,16 @@
 
                                                     <td>
                                                         <div class="btn-group">
+
                                                             <!--ADD Button-->
                                                             <a href="addProductPage" class="btn btn-outline-success">Thêm</a>
 
                                                             <!-- Detail Button -->
                                                             <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Chi Tiết</a>
 
+
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>                                                         
+                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>
                                                     </td>
                                                 </tr>

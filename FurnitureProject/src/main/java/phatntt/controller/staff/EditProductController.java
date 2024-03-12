@@ -59,14 +59,14 @@ public class EditProductController extends HttpServlet {
             int productId = Integer.parseInt(request.getParameter("productId"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String title = request.getParameter("title");
-//        float formattedPrice = Float.parseFloat(request.getParameter("formattedPrice"));
+//            int formattedPrice = Integer.parseInt(request.getParameter("formattedPrice"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int discount = Integer.parseInt(request.getParameter("discount"));
             String thumbnail = request.getParameter("thumbnail");
             String description = request.getParameter("description");
             int purchases = Integer.parseInt(request.getParameter("purchases"));
             ProductsDAO productDAO = new ProductsDAO();
-             ProductsDTO product = new ProductsDTO();
+            ProductsDTO product = new ProductsDTO();
             product.setProductId(productId);
             product.setCategoryId(categoryId);
             product.setTitle(title);
@@ -75,14 +75,14 @@ public class EditProductController extends HttpServlet {
             product.setThumbnail(thumbnail);
             product.setDescription(description);
             product.setPurchases(purchases);
-           
-//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
 
-             boolean success = productDAO.updateProductWithoutPrice(product);
+//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
+            boolean success = productDAO.updateProductWithoutPrice(product);
             if (success) {
                 url = "productdetailmanagement"
-                    +"?productId=" + productId;
-            }
+                        + "?productId=" + productId;
+                request.setAttribute("UPDATE_SUCCESS", "Cập nhật sản phẩm thành công");
+            } 
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -92,20 +92,17 @@ public class EditProductController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
-        }
-
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }
-
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
+}

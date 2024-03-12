@@ -18,25 +18,25 @@
     <style>
         /* ... (previous styles) ... */
 
-        .filter-section {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
+.filter-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
 
-        .filter-label {
-            margin-right: 10px;
-        }
+.filter-label {
+    margin-right: 10px;
+}
 
-        .filter-select {
-            margin-right: 10px;
-            padding: 8px;
-            border-radius: 5px;
-        }
+.filter-select {
+    margin-right: 10px;
+    padding: 8px;
+    border-radius: 5px;
+}
 
-        .filter-btn {
-            margin-left: 10px;
-        }
+.filter-btn {
+    margin-left: 10px;
+}
 
 
         /* ... (remaining styles) ... */
@@ -95,32 +95,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#">                     
-                    <span>Pages</span>
-                </a>                 
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
         </ul>
         <!-- End of Sidebar -->
@@ -283,13 +258,14 @@
                                                     <td>${product.formattedPrice}đ</td>                                          
                                                     <td><img height="100px" width="100px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
+
                                                     <td>
                                                         <div class="btn-group">
                                                             <!--ADD Button-->
-                                                            <a href="addProductPage" class="btn btn-outline-success">ADD</a>
+                                                            <a href="addProductPage" class="btn btn-outline-success">Thêm</a>
 
                                                             <!-- Detail Button -->
-                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
+                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Chi Tiết</a>
 
                                                             <!-- Delete Button -->
                                                             <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>                                                         

@@ -55,12 +55,20 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="categoryManagement">
+                        <span>Danh Mục</span>
+                    </a>                  
+                </li>
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Interface
                 </div>
-
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="categoryManagement">
+                        <span>Danh Mục</span>
+                    </a>                  
+                </li>
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="productManagement">
@@ -75,36 +83,7 @@
                     </a>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
+                
             </ul>
             <!-- End of Sidebar -->
 

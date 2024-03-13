@@ -4,6 +4,7 @@
  */
 package phatntt.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -112,7 +113,7 @@ public class CategoryDAO {
         return result;
 
     }
-   
+
     public List<CategoryDTO> countProduct() throws SQLException, NamingException {
 
         List<CategoryDTO> result = new ArrayList<>();
@@ -160,17 +161,15 @@ public class CategoryDAO {
 
     }
     
-    public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
+   public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
     CategoryDTO result = null;
 
     try {
         con = DBConnect.createConnection();
 
         if (con != null) {
-            String sql = "SELECT category_id, name, thumbnail "
-                    + "FROM category "
-                    + "WHERE category_id = ?";
-            
+            String sql = "SELECT category_id, name, thumbnail FROM category WHERE category_id = ?";
+
             stm = con.prepareStatement(sql);
             stm.setInt(1, categoryId);
             rs = stm.executeQuery();
@@ -178,40 +177,48 @@ public class CategoryDAO {
             while (rs.next()) {
                 String name = rs.getString("name");
                 String thumbnail = rs.getString("thumbnail");
-
                 result = new CategoryDTO(categoryId, name, thumbnail);
             }
         }
     } finally {
         // Close resources
-        if (rs != null) {
-            rs.close();
-        }
-        if (stm != null) {
-            stm.close();
-        }
-        if (con != null) {
-            con.close();
-        }
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+    e.printStackTrace(); // Log the exception
+}
     }
 
     return result;
 }
 
-    
+    // Helper method to extract filename from the full path
+    private String getSubmittedFileName(String fullPath) {
+        return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
+    }
     public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean result = false;
 
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "INSERT INTO category (category_id, name, thumbnail)"
-                        + "VALUES (?, ?, ?)";
+                String sql = "INSERT INTO category ( name, thumbnail)"
+                        + "VALUES (?, ?)";
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, category.getCategoryId());
-                stm.setString(2, category.getName());
-                stm.setString(3, category.getThumbnail());
+                
+                stm.setString(1, category.getName());
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
+                stm.setString(2, relativeFilePath);
 
                 int rowsAffected = stm.executeUpdate();
                 if (rowsAffected > 0) {
@@ -230,22 +237,22 @@ public class CategoryDAO {
         return result;
     }
     
-    public boolean updateCategories(CategoryDTO category) throws SQLException, NamingException {
+    public boolean updateCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean check = false;
-        Connection con = null;
-        PreparedStatement stm = null;
-
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "UPDATE category SET name = ?, thumbnail = ? WHERE category_id = ?";
+                String sql = "UPDATE category "
+                        + "SET category_id = ?, thumbnail = ? "
+                        + "WHERE category_id = ?";
                 stm = con.prepareStatement(sql);
 
-                stm.setString(1, category.getName());
-                stm.setString(2, category.getThumbnail());
-                stm.setInt(3, category.getCategoryId());
-
-                check = stm.executeUpdate() > 0;
+                stm.setInt(1, category.getCategoryId());
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
+                stm.setString(2, relativeFilePath);
+                
+                check = stm.executeUpdate() > 0 ? true : false;
             }
         } finally {
             // Close resources
@@ -258,5 +265,4 @@ public class CategoryDAO {
         }
         return check;
     }
-
 }

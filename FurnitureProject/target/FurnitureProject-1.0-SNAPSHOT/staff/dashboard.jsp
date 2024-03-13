@@ -45,10 +45,14 @@
                 <div class="sidebar-heading">
                     Menu
                 </div>
-
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="categoryManagement">
+                        <span>Danh Mục</span>
+                    </a>                  
+                </li>
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
+                    <a class="nav-link collapsed" href="productManagement">
                         <span>Sản Phẩm</span>
                     </a>                  
                 </li>

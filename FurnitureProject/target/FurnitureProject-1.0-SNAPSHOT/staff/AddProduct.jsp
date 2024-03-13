@@ -196,7 +196,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <form action="addproductcontroller" method="post" enctype="multipart/form-data">
+                                <form action="productManagement" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="category">Loại sản phẩm:</label>
                                         <select class="form-control" id="categoryId" name="categoryId">
@@ -229,6 +229,8 @@
                                     <div class="form-group">
                                         <label for="thumbnail">Upload thumbnail:</label>
                                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" required>
+                                        <!--<input type="file" class="form-control-file" id="thumbnail" name="thumbnail" />-->
+
                                     </div>
 
 
@@ -236,7 +238,7 @@
                                         <label for="description">Mô tả:</label>
                                         <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                                     </div>
-                                    <button  type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+                                    <button  type="submit" value="Upload" class="btn btn-primary">Thêm Sản Phẩm</button>
                                 </form>
                             </div>
                         </div>

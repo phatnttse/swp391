@@ -58,17 +58,19 @@ public class EditProductController extends HttpServlet {
         try {
             int productId = Integer.parseInt(request.getParameter("productId"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            String categoryName = request.getParameter("categoryName");  // Retrieve categoryName
             String title = request.getParameter("title");
-//            int formattedPrice = Integer.parseInt(request.getParameter("formattedPrice"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int discount = Integer.parseInt(request.getParameter("discount"));
             String thumbnail = request.getParameter("thumbnail");
             String description = request.getParameter("description");
             int purchases = Integer.parseInt(request.getParameter("purchases"));
+
             ProductsDAO productDAO = new ProductsDAO();
             ProductsDTO product = new ProductsDTO();
             product.setProductId(productId);
             product.setCategoryId(categoryId);
+            product.setCategoryName(categoryName);  // Set categoryName
             product.setTitle(title);
             product.setQuantity(quantity);
             product.setDiscount(discount);
@@ -76,13 +78,11 @@ public class EditProductController extends HttpServlet {
             product.setDescription(description);
             product.setPurchases(purchases);
 
-//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
             boolean success = productDAO.updateProductWithoutPrice(product);
             if (success) {
-                url = "productdetailmanagement"
-                        + "?productId=" + productId;
+                url = "productdetailmanagement" + "?productId=" + productId;
                 request.setAttribute("UPDATE_SUCCESS", "Cập nhật sản phẩm thành công");
-            } 
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();

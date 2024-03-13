@@ -1,14 +1,16 @@
 <%-- 
-    Document   : AddCategory.jsp
-    Created on : Mar 13, 2024, 11:29:47 PM
+    Document   : categoryManagement
+    Created on : Mar 13, 2024, 11:28:55 PM
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Add these lines at the beginning of your JSP -->
+<%@ page import="phatntt.dto.CategoryDTO" %>
+<c:set var="category" value="${requestScope.CATEGORYDETAIL}" />
 <!DOCTYPE html>
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,8 +22,10 @@
 
     </style>
 
-    <title>Add Category Page</title>
+    <title>Category Detail Page</title>
 </head>
+
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -52,11 +56,11 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="categoryManagement">
-                        <span>Danh Mục</span>
-                    </a>                  
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="categoryManagement">
+                    <span>Danh Mục</span>
+                </a>                  
+            </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
@@ -69,9 +73,9 @@
                 <a class="nav-link collapsed" href="orderManagement">                  
                     <span>Đơn Hàng</span>
                 </a>
-                
+
             </li>
-                                                     
+
 
 
             <!-- Divider -->
@@ -162,73 +166,68 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                         <!-- Content Row -->
-                 
-                        
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Thêm Danh Mục</h1>
+                    <!-- DataTales Example -->
+                    <c:if test="${not empty requestScope.UPDATE_SUCCESS}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>${requestScope.UPDATE_SUCCESS}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </c:if>
 
-                        <!-- DataTales Example -->
+                    <form action="EditCategoryManagement" method="get" enctype="multipart/form-data" style="margin-top: 7px">
                         <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục Chi Tiết</h6>
+                            </div>
                             <div class="card-body">
-                                <form action="AddCategoryController" method="post" enctype="multipart/form-data">
-                                    
-                                    <div class="form-group">
-                                        <label for="title">Tên danh mục:</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Loại</th>
+                                                <th>Thumbnail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" name="categoryId" value="${category.categoryId}" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" value="${category.name}">
+                                                </td>
+                                                <td>
+                                                    <img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" />
+                                                    <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-primary">Sửa</button>
                                     </div>
-                            
-                                    <div class="form-group">
-                                        <label for="thumbnail">Upload thumbnail:</label>
-                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" required>
-                                        <!--<input type="file" class="form-control-file" id="thumbnail" name="thumbnail" />-->
-                                    </div>
-                                    
-                                    <button  type="submit" class="btn btn-primary">Thêm Danh Phẩm</button>
-                                </form>
+                                </div>
                             </div>
                         </div>
+                    </form>
 
-                    </div>
-                    <!-- /.container-fluid -->
+                </div>
+                <!-- End of Main Content -->
 
+                <!-- Footer (previous code) -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Initially hide all filter options
-            $("#filterOptions select").hide();
-
-            // Show filter options based on selected filter type
-            $("#combinedFilter").change(function () {
-                // Hide all options
-                $("#filterOptions select").hide();
-
-                // Show options for the selected filter
-                var selectedFilter = $(this).val();
-                $("#" + selectedFilter + "Filter").show();
-            });
-        });
-    </script>
-
-</body>
+    </body>
 </html>

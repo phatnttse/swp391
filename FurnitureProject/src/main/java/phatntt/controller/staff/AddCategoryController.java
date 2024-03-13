@@ -4,6 +4,7 @@
  */
 package phatntt.controller.staff;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -13,10 +14,12 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import phatntt.dao.CategoryDAO;
 import phatntt.dto.CategoryDTO;
 
@@ -25,42 +28,53 @@ import phatntt.dto.CategoryDTO;
  * @author Phong
  */
 @WebServlet(name = "AddCategoryController", urlPatterns = {"/AddCategoryController"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,    // 2 MB
+                maxFileSize = 1024 * 1024 * 10,          // 10 MB
+                maxRequestSize = 1024 * 1024 * 50)       // 50 MB
 public class AddCategoryController extends HttpServlet {
+    
+    private static final String ADD_CATEGORY_PAGE = "AddCategory.jsp";
+    
 
-    private static final String PRODUCT_MANAGEMENT_PAGE = "staff/productManagement.jsp";
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
-     * @throws javax.naming.NamingException
-     */
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, NamingException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        String url = PRODUCT_MANAGEMENT_PAGE;
+        String url = ADD_CATEGORY_PAGE;
 
         try {
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            // Lấy thông tin sản phẩm từ form
             String name = request.getParameter("name");
             String thumbnail = request.getParameter("thumbnail");
-
+// Tạo một đối tượng ProductsDTO để lưu trữ thông tin sản phẩm
             CategoryDTO category = new CategoryDTO();
-            category.setCategoryId(categoryId);
+            
             category.setName(name);
             category.setThumbnail(thumbnail);
+            
+// Handling file upload for thumbnail
+            Part filePart = request.getPart("thumbnail");
+            String fileName = getSubmittedFileName(filePart);
 
+            // Save the uploaded file to a specific directory on your server
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String filePath = uploadPath + File.separator + fileName;
+            filePart.write(filePath);
+
+            // Set the thumbnail property of the ProductsDTO
+            category.setThumbnail(filePath);
+            
             CategoryDAO dao = new CategoryDAO();
             boolean success = dao.addCategory(category);
             if (success) {
-                url = "PRODUCT_MANAGEMENT_PAGE";
+                url = "categoryManagement";
             } else {
                 request.setAttribute("ERROR_MESSAGE", "Failed to add the product.");
             }
@@ -72,18 +86,16 @@ public class AddCategoryController extends HttpServlet {
             rd.forward(request, response);
         }
 
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddCategoryController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddCategoryController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+     
+    }
+    private String getSubmittedFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1);
+            }
         }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,11 +110,7 @@ public class AddCategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | NamingException ex) {
-            Logger.getLogger(AddCategoryController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
     }
 
     /**
@@ -116,11 +124,8 @@ public class AddCategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | NamingException ex) {
-            Logger.getLogger(AddCategoryController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
+    
     }
 
     /**

@@ -60,7 +60,11 @@
                 <div class="sidebar-heading">
                     Interface
                 </div>
-
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="categoryManagement">
+                        <span>Danh Mục</span>
+                    </a>                  
+                </li>
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="productManagement">
@@ -75,35 +79,7 @@
                     </a>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Addons
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">                     
-                        <span>Pages</span>
-                    </a>                 
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <span>Charts</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+                
 
             </ul>
             <!-- End of Sidebar -->
@@ -188,7 +164,6 @@
                     </nav>
                     <!-- End of Topbar -->
 
-
                     <!-- Begin Page Content -->
 
                     <!-- Main Content -->
@@ -208,63 +183,106 @@
                             </div>
                         </c:if>
 
-                        <form action="editproductcontroller" method="get" class="needs-validation" novalidate>
+                        <form action="editproductcontroller" method="get">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
                                 </div>
                                 <div class="card-body">
+                                    <!--                                    <form action="orderDetailManagement" method="get">-->
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <div class="form-group">
-                                                <label for="title">Mã sản phẩm</label>
-                                                <input type="text" class="form-control" name="productId" value="${products.productId}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Mã Loại</label>
-                                                <input type="text" style="margin-bottom: 4px" class="form-control" name="categoryId" value="${products.categoryId}">
-                                                <input type="text" class="form-control" name="categoryName" value="${products.categoryName}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Tên</label>
-                                                <input type="text" class="form-control" name="title" value="${products.title}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Giá</label>
-                                                <input type="text" class="form-control" name="formattedPrice" value="${products.formattedPrice}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Số lượng</label>
-                                                <input type="text" class="form-control" name="quantity" value="${products.quantity}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Giảm giá</label>
-                                                <input type="text" class="form-control" name="discount" value="${products.discount}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Hình ảnh</label>
-                                                <input type="text" class="form-control" name="thumbnail" value="${products.thumbnail}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Mô tả</label>
-                                                <textarea class="form-control" name="description">${products.description}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Lượt Mua</label>
-                                                <input type="text" class="form-control" name="purchases" value="${products.purchases}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title">Ngày Tạo</label>
-                                                <input type="text" class="form-control" name="createdAt" value="${products.createdAt}">
-                                            </div>
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã sản phẩm</th>
+                                                    <th>Mã Loại</th>
+                                                    <th>Tên</th>
+                                                </tr>
+                                            </thead>
 
-                                            <div class="btn-group">
-                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                            </div>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="productId" value="${products.productId}" readonly="">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="categoryId" value="${products.categoryId}">
+                                                        <input type="text" class="form-control" name="categoryName" value="${products.categoryName}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="title" value="${products.title}">
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
                                         </table>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Giá</th>
+                                                    <th>Số Lượng</th>
+                                                    <th>Giảm giá</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="price" value="${products.price}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="quantity" value="${products.quantity}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="discount" value="${products.discount}">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hình ảnh</th>
+                                                    <th>Lượt Mua</th>
+                                                    <th>Ngày Tạo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="${category.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" class="form-control" name="purchases" value="${products.purchases}" readonly="">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"class="form-control" name="createdAt" value="${products.createdAt}">
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mô tả</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <td>
+                                                <textarea class="form-control" name="description">${products.description}</textarea>
+                                            </td>
+                                            </tbody>
+                                        </table>
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                        </div>
+                                        <!--                                    </form>-->
                                     </div>
                                 </div>
-                            </div>
                         </form>
 
                     </div>

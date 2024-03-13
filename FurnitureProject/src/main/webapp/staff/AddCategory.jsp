@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AddCatergory
-    Created on : Mar 13, 2024, 1:12:25 PM
-    Author     : mac
+    Document   : AddCategory.jsp
+    Created on : Mar 13, 2024, 11:29:47 PM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -53,7 +53,7 @@
                 Interface
             </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="categorymanagement">
+                    <a class="nav-link collapsed" href="categoryManagement">
                         <span>Danh Mục</span>
                     </a>                  
                 </li>
@@ -173,7 +173,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <form action="categoryManagement" method="post" enctype="multipart/form-data">
+                                <form action="AddCategoryController" method="post" enctype="multipart/form-data">
                                     
                                     <div class="form-group">
                                         <label for="title">Tên danh mục:</label>
@@ -186,7 +186,7 @@
                                         <!--<input type="file" class="form-control-file" id="thumbnail" name="thumbnail" />-->
                                     </div>
                                     
-                                    <button  type="submit" value="Upload" class="btn btn-primary">Thêm Danh Phẩm</button>
+                                    <button  type="submit" class="btn btn-primary">Thêm Danh Phẩm</button>
                                 </form>
                             </div>
                         </div>

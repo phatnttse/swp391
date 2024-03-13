@@ -193,9 +193,7 @@
                                             <tbody>
                                                 <c:forEach var="category" items="${categorys}">
                                                     <tr>
-                                                        <td>
-                                                            #${category.categoryId}
-                                                        </td>
+                                                        <td>#${category.categoryId}</td>
                                                         <td>${category.name}</td>
                                                         <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
@@ -204,11 +202,11 @@
                                                         <div class="btn-group">
 
                                                             <!-- Detail Button -->
-                                                            <a href="EditCategoryController?productId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
+                                                            <a href="CategoryDetailManagementController?categoryId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
 
 
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${category.categoryId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
+                                                            <a href="#" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>                                                                                  
                                                     </tr>  
                                                 </c:forEach>
@@ -243,22 +241,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Initially hide all filter options
-            $("#filterOptions select").hide();
-
-            // Show filter options based on selected filter type
-            $("#combinedFilter").change(function () {
-                // Hide all options
-                $("#filterOptions select").hide();
-
-                // Show options for the selected filter
-                var selectedFilter = $(this).val();
-                $("#" + selectedFilter + "Filter").show();
-            });
-        });
-    </script>
+    
 
 </body>
 </html>

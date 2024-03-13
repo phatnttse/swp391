@@ -4,6 +4,7 @@
  */
 package phatntt.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -160,37 +161,28 @@ public class CategoryDAO {
 
     }
     
-    public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
-        CategoryDTO result = null;
+   public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
+    CategoryDTO result = null;
 
-        try {
-            con = DBConnect.createConnection();
+    try {
+        con = DBConnect.createConnection();
 
-            if (con != null) {
-                 String sql = "SELECT category_id, name AS category_name, thumbnail "
-                    + "FROM category "
-                    + "WHERE category_id = ?";
+        if (con != null) {
+            String sql = "SELECT category_id, name, thumbnail FROM category WHERE category_id = ?";
 
-                stm = con.prepareCall(sql);
-                stm.setInt(1, categoryId);
-                rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, categoryId);
+            rs = stm.executeQuery();
 
-                while (rs.next()) {
-                    String categoryName = rs.getString("category_name");
-                    String title = rs.getString("title");
-                    int price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    result = new CategoryDTO(categoryId, title, thumbnail);
-                }
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String thumbnail = rs.getString("thumbnail");
+                result = new CategoryDTO(categoryId, name, thumbnail);
             }
-        } finally {
-            // Close resources
+        }
+    } finally {
+        // Close resources
+        try {
             if (rs != null) {
                 rs.close();
             }
@@ -200,24 +192,33 @@ public class CategoryDAO {
             if (con != null) {
                 con.close();
             }
-        }
-
-        return result;
+        } catch (SQLException e) {
+    e.printStackTrace(); // Log the exception
+}
     }
-    
+
+    return result;
+}
+
+    // Helper method to extract filename from the full path
+    private String getSubmittedFileName(String fullPath) {
+        return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
+    }
     public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean result = false;
 
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "INSERT INTO category (category_id, name, thumbnail)"
-                        + "VALUES (?, ?, ?)";
+                String sql = "INSERT INTO category ( name, thumbnail)"
+                        + "VALUES (?, ?)";
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, category.getCategoryId());
-                stm.setString(2, category.getName());
-                stm.setString(3, category.getThumbnail());
+                
+                stm.setString(1, category.getName());
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
+                stm.setString(2, relativeFilePath);
 
                 int rowsAffected = stm.executeUpdate();
                 if (rowsAffected > 0) {
@@ -247,7 +248,9 @@ public class CategoryDAO {
                 stm = con.prepareStatement(sql);
 
                 stm.setInt(1, category.getCategoryId());
-                stm.setString(2, category.getThumbnail());
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
+                stm.setString(2, relativeFilePath);
                 
                 check = stm.executeUpdate() > 0 ? true : false;
             }

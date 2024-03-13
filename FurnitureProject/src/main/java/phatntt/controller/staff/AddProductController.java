@@ -32,7 +32,7 @@ import phatntt.dto.ProductsDTO;
 public class AddProductController extends HttpServlet {
 
     private static final String ADD_PRODUCT_PAGE = "AddProduct.jsp";
-    private static final String PRODUCT_MANAGEMENT_PAGE = "staff/productManagement.jsp";
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

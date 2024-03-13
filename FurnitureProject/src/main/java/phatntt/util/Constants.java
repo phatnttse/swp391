@@ -136,6 +136,7 @@ public class Constants {
         public static final String CATEGORY_MANAGEMENT_PAGE = "categoryManagementPage";
         public static final String ADD_CATEGORY_PAGE = "addCategoryPage";
         public static final String EDIT_CATEGORY_PAGE = "editCategoryPage";
-
+        public static final String VIEW_CATEGORYDETAIL_PAGE = "categoryDetailPage";
+        
     }
 }

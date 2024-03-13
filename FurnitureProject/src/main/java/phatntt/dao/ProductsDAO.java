@@ -106,7 +106,7 @@ public class ProductsDAO implements Serializable {
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
                
-                    ProductsDTO p = new ProductsDTO(productId, categoryId, categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    ProductsDTO p = new ProductsDTO(productId, categoryId,categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
 

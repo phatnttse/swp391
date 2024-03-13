@@ -18,25 +18,25 @@
     <style>
         /* ... (previous styles) ... */
 
-.filter-section {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-ưw
-.filter-label {
-    margin-right: 10px;
-}
+        .filter-section {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
 
-.filter-select {
-    margin-right: 10px;
-    padding: 8px;
-    border-radius: 5px;
-}
+        .filter-label {
+            margin-right: 10px;
+        }
 
-.filter-btn {
-    margin-left: 10px;
-}
+        .filter-select {
+            margin-right: 10px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .filter-btn {
+            margin-left: 10px;
+        }
 
 
         /* ... (remaining styles) ... */
@@ -44,7 +44,7 @@
 
     <title>Product Page</title>
 </head>
-
+<body>
 
 <body id="page-top">
 
@@ -76,11 +76,7 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="categoryManagement">
-                        <span>Danh Mục</span>
-                    </a>                  
-                </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
@@ -93,15 +89,39 @@
                 <a class="nav-link collapsed" href="orderManagement">                  
                     <span>Đơn Hàng</span>
                 </a>
-                
             </li>
-                                                     
 
-
+                                                                <!-- Detail Button -->
+                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Edit</a>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#">                     
+                    <span>Pages</span>
+                </a>                 
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
         </ul>
         <!-- End of Sidebar -->
@@ -201,7 +221,6 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
                                 </div>
                                 <div class="col">
-                                    
                                     <form action="productManagement" method="get" class="form-inline float-right mt-3">
                                         <div class="form-group mx-2">
                                             <label for="combinedFilter" class="mr-2">Chọn:</label>
@@ -211,7 +230,6 @@
                                                 <option value="category">Loại</option>
                                             </select>
                                         </div>
-                                        
                                         <div id="filterOptions" class="form-group mx-2">
                                             <!-- Options for Mã Sản Phẩm -->
                                             <select class="form-control filter-select" id="productIdFilter" name="productIdFilter">
@@ -237,9 +255,7 @@
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-2">Lọc</button>
-                                        
                                     </form>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -249,7 +265,6 @@
                                     <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                            <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 93%; margin-bottom: 10px; margin-top: -16px">Thêm</a>
                                             <tr>
                                                 <th>Mã sản phẩm</th>
                                                 <th>Loại</th>
@@ -269,16 +284,16 @@
                                                     <td>${product.formattedPrice}đ</td>                                          
                                                     <td><img height="100px" width="100px" src="${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
-
                                                     <td>
                                                         <div class="btn-group">
+                                                            <!--ADD Button-->
+                                                            <a href="addProductPage" class="btn btn-outline-success">ADD</a>
 
                                                             <!-- Detail Button -->
-                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Chi Tiết</a>
-
+                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
 
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px">Xóa</a>                                                         
+                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>                                                         
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -329,5 +344,6 @@
         });
     </script>
 
+</body>
 </body>
 </html>

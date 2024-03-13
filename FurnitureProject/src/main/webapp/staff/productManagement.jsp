@@ -79,6 +79,11 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="categoryManagement">
+                    <span>Danh Mục</span>
+                </a>                  
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
                     <span>Sản Phẩm</span>
                 </a>                  
@@ -90,9 +95,6 @@
                     <span>Đơn Hàng</span>
                 </a>
             </li>
-
-                                                                <!-- Detail Button -->
-                                                                <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Edit</a>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -260,6 +262,7 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 94%">Thêm</a>
                             <form action="productManagement" method="get">
                                 <div class="table-responsive">
                                     <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
@@ -286,14 +289,11 @@
 
                                                     <td>
                                                         <div class="btn-group">
-                                                            <!--ADD Button-->
-                                                            <a href="addProductPage" class="btn btn-outline-success">ADD</a>
-
                                                             <!-- Detail Button -->
-                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Detail</a>
+                                                            <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Chi tiết</a>
 
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger">Xóa</a>                                                         
+                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px">Xóa</a>                                                         
                                                         </div>
                                                     </td>
                                                 </tr>

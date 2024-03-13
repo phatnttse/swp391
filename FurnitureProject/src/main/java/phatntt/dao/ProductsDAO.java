@@ -56,7 +56,7 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                   
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
@@ -105,8 +105,8 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-               
-                    ProductsDTO p = new ProductsDTO(productId, categoryId,categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
 
@@ -128,9 +128,6 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
-    
-
 
     public List<ProductsDTO> searchProductsByName(String searchValue) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
@@ -157,10 +154,10 @@ public class ProductsDAO implements Serializable {
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
-                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);                 
+                    ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -177,7 +174,7 @@ public class ProductsDAO implements Serializable {
         }
         return result;
     }
-   
+
     public ProductsDTO getProductById(int productId) throws SQLException, NamingException {
         ProductsDTO result = null;
 
@@ -207,10 +204,9 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     result = new ProductsDTO(productId, categoryId, categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     result.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
-                 
 
                 }
             }
@@ -253,11 +249,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     ProductsDTO p = new ProductsDTO(productId, 1, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -300,11 +296,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                   
+
                 }
             }
 
@@ -350,11 +346,11 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-               
+
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                     result.add(p);
-                    
+
                 }
             }
 
@@ -407,7 +403,6 @@ public class ProductsDAO implements Serializable {
         return count;
     }
 
-
     public List<ProductsDTO> getProductByPrice(int from, int to) {
 
         List<ProductsDTO> list = new ArrayList<>();
@@ -416,16 +411,14 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "SELECT * FROM product \n"
-                + "WHERE price between ? and ?";
-
+                        + "WHERE price between ? and ?";
 
                 stm = con.prepareCall(sql);
                 stm.setDouble(1, from);
                 stm.setDouble(2, to);
                 rs = stm.executeQuery();
 
-
-                while (rs.next()) {                    
+                while (rs.next()) {
 
                     int productId = rs.getInt("product_id");
                     String title = rs.getString("title");
@@ -437,7 +430,6 @@ public class ProductsDAO implements Serializable {
                     String description = rs.getString("description");
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-
 
                     ProductsDTO p = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     p.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
@@ -452,15 +444,14 @@ public class ProductsDAO implements Serializable {
         return list;
     }
 
-
     public boolean updateProductWithoutPrice(ProductsDTO product) throws SQLException, NamingException {
-         boolean check = false;
+        boolean check = false;
         try {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "UPDATE product "
                         + "SET category_id = ?, title = ?,  description = ?, quantity = ?, "
-                        + " thumbnail = ?, discount = ?, purchases = ? "
+                        + " thumbnail = ?, discount = ?, purchases = ?, price = ? "
                         + "WHERE product_id = ?";
                 stm = con.prepareStatement(sql);
 
@@ -471,9 +462,10 @@ public class ProductsDAO implements Serializable {
                 stm.setString(5, product.getThumbnail());
                 stm.setInt(6, product.getDiscount());
                 stm.setInt(7, product.getPurchases());
-                stm.setInt(8, product.getProductId());
+                stm.setInt(8, product.getPrice());
+                stm.setInt(9, product.getProductId());
 
-                 check = stm.executeUpdate()>0?true:false;
+                check = stm.executeUpdate() > 0 ? true : false;
             }
         } finally {
             // Close resources
@@ -486,8 +478,6 @@ public class ProductsDAO implements Serializable {
         }
         return check;
     }
-
-
 
     public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
         boolean result = false;
@@ -614,7 +604,7 @@ public class ProductsDAO implements Serializable {
         }
         return result;
     }
-    
+
     public List<ProductsDTO> sortProductByPriceAscending() throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
@@ -834,7 +824,7 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
     public List<ProductsDTO> sortProductByNameAscending() throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
@@ -889,5 +879,5 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
-    
+
 }

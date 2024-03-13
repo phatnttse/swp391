@@ -128,6 +128,8 @@ public class ProductsDAO implements Serializable {
 
         return result;
     }
+    
+    
 
 
     public List<ProductsDTO> searchProductsByName(String searchValue) throws SQLException, NamingException {

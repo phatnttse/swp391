@@ -1,5 +1,6 @@
 phatntt/controller/staff/AddProductController.class
 phatntt/dto/ErrorDTO.class
+phatntt/controller/staff/CategoryManagement.class
 phatntt/util/Constants$ForgotPasswordFeatures.class
 phatntt/util/Config.class
 phatntt/controller/products/SearchProductsController.class
@@ -45,6 +46,7 @@ phatntt/controller/email/ForgotPasswordController.class
 phatntt/controller/staff/ProductDetailManagementController.class
 phatntt/controller/products/AddProductsToCartController.class
 phatntt/util/Constants$DispatchFeatures.class
+phatntt/controller/staff/AddCategoryController.class
 phatntt/filter/DispatcherFilter.class
 phatntt/cart/UpdateQuantityInCart.class
 phatntt/controller/users/EWalletPayment.class
@@ -78,4 +80,3 @@ phatntt/controller/users/LoginServlet.class
 phatntt/controller/orders/ViewAllOrderController.class
 phatntt/dao/OrderDetailDAO.class
 phatntt/dao/OrdersDAO.class
-phatntt/controller/staff/ProductDetailController.class

@@ -1,7 +1,7 @@
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/OrdersDAO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/EmailDAO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dto/UsersDTO.java
-/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/ProductDetailController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/CategoryManagement.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/orders/OrdersController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/OrderDetailManagementController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/DeleteProductsController.java
@@ -43,6 +43,7 @@
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/orders/ViewAllOrderController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/dao/ProductsDAO.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/ChangePasswordController.java
+/Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/staff/AddCategoryController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/SearchProductsController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/products/SortProductController.java
 /Users/mac/Documents/GitHub/swp391/FurnitureProject/src/main/java/phatntt/controller/users/LogOutServlet.java

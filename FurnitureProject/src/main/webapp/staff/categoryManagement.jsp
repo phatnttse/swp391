@@ -53,11 +53,11 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="categorymanagement">
-                        <span>Danh Mục</span>
-                    </a>                  
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="categorymanagement">
+                    <span>Danh Mục</span>
+                </a>                  
+            </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
@@ -70,9 +70,9 @@
                 <a class="nav-link collapsed" href="orderManagement">                  
                     <span>Đơn Hàng</span>
                 </a>
-                
+
             </li>
-                                                     
+
 
 
             <!-- Divider -->
@@ -163,43 +163,43 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                         <!-- Content Row -->
-                 
-                        <c:set var="categorys" value="${requestScope.CATEGORYS}"/>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Content Row -->
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
+                    <c:set var="categorys" value="${requestScope.CATEGORYS}"/>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục</h6>
-                            </div>
-                            <div class="card-body">
-                                <form action="categoryManagement" method="get">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
+                    <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="categoryManagement" method="get">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã loại</th>
+                                                <th>Tên</th>
+                                                <th>Thumbnail</th>
+                                                <th>Thao tác</th>      
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <c:forEach var="category" items="${categorys}">
                                                 <tr>
-                                                    <th>Mã loại</th>
-                                                    <th>Tên</th>
-                                                    <th>Thumbnail</th>
-                                                    <th>Thao tác</th>      
-                                                </tr>
-                                            </thead>
-                                            
-                                            <tbody>
-                                                <c:forEach var="category" items="${categorys}">
-                                                    <tr>
-                                                        <td>
-                                                            #${category.categoryId}
-                                                        </td>
-                                                        <td>${category.name}</td>
-                                                        <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                    <td>
+                                                        #${category.categoryId}
+                                                    </td>
+                                                    <td>${category.name}</td>
+                                                    <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
-               
-                                                        <td>
+
+                                                    <td>
                                                         <div class="btn-group">
 
                                                             <!--ADD Button-->
@@ -212,19 +212,19 @@
                                                             <!-- Delete Button -->
                                                             <a href="DeleteProductsController?productId=${category.categoryId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>                                                                                  
-                                                    </tr>  
-                                                </c:forEach>
+                                                </tr>  
+                                            </c:forEach>
 
-                                            </tbody>
-                                        </table>
-                                    </div>                               
-                                </form>
+                                        </tbody>
+                                    </table>
+                                </div>                               
+                            </form>
 
-                            </div>
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- /.container-fluid -->
 
 
             </div>

@@ -189,4 +189,32 @@ public class CategoryDAO {
         return result;
     }
 
+    public boolean deleteCategory(int categoryId) throws SQLException, NamingException {
+
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "DELETE FROM category WHERE category_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
 }

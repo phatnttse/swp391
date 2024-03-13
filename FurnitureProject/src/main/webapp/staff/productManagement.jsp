@@ -23,7 +23,7 @@
     align-items: center;
     margin-top: 10px;
 }
-
+ưw
 .filter-label {
     margin-right: 10px;
 }
@@ -44,7 +44,7 @@
 
     <title>Product Page</title>
 </head>
-<body>
+
 
 <body id="page-top">
 
@@ -76,7 +76,11 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="categoryManagement">
+                        <span>Danh Mục</span>
+                    </a>                  
+                </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
@@ -325,6 +329,5 @@
         });
     </script>
 
-</body>
 </body>
 </html>

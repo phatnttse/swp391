@@ -249,7 +249,7 @@
                                     <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                            <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 90%; margin-bottom: 10px; margin-top: -16px">ADD Product</a>
+                                            <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 93%; margin-bottom: 10px; margin-top: -16px">Thêm</a>
                                             <tr>
                                                 <th>Mã sản phẩm</th>
                                                 <th>Loại</th>
@@ -273,15 +273,12 @@
                                                     <td>
                                                         <div class="btn-group">
 
-                                                            <!--ADD Button-->
-                                                            <a href="addProductPage" class="btn btn-outline-success">Thêm</a>
-
                                                             <!-- Detail Button -->
                                                             <a href="productdetailmanagement?productId=${product.productId}" class="btn btn-outline-info">Chi Tiết</a>
 
 
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
+                                                            <a href="DeleteProductsController?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px">Xóa</a>                                                         
                                                         </div>
                                                     </td>
                                                 </tr>

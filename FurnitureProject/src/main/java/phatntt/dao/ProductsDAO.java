@@ -198,6 +198,7 @@ public class ProductsDAO implements Serializable {
 
                 while (rs.next()) {
                     int categoryId = rs.getInt("category_id");
+                    String categoryName = rs.getString("category_name");
                     String title = rs.getString("title");
                     int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
@@ -207,7 +208,7 @@ public class ProductsDAO implements Serializable {
                     int purchases = rs.getInt("purchases");
                     Timestamp createdAt = rs.getTimestamp("created_at");
                     
-                    result = new ProductsDTO(productId, categoryId, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
+                    result = new ProductsDTO(productId, categoryId, categoryName, title, description, quantity, price, thumbnail, discount, purchases, createdAt);
                     result.setFormattedPrice(Key_Utils.getInstance().formattedPrice(price));
                  
 
@@ -458,7 +459,7 @@ public class ProductsDAO implements Serializable {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "UPDATE product "
-                        + "SET category_id = ?, title = ?, description = ?, quantity = ?, "
+                        + "SET category_id = ?, title = ?,  description = ?, quantity = ?, "
                         + " thumbnail = ?, discount = ?, purchases = ? "
                         + "WHERE product_id = ?";
                 stm = con.prepareStatement(sql);

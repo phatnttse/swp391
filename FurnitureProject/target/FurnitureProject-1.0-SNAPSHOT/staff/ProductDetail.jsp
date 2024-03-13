@@ -216,71 +216,51 @@
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã sản phẩm</th>
-                                                    <th>Mã Loại</th>
-                                                    <th>Tên</th>
-                                                    <th>Giá</th>
-                                                    <th>Số Lượng</th>
-                                                    <th>Giảm giá</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="productId" value="${products.productId}" readonly="">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="categoryId" value="${products.categoryId}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="title" value="${products.title}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="formattedPrice" value="${products.formattedPrice}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="quantity" value="${products.quantity}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="discount" value="${products.discount}">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                            <div class="form-group">
+                                                <label for="title">Mã sản phẩm</label>
+                                                <input type="text" class="form-control" name="productId" value="${products.productId}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Mã Loại</label>
+                                                <input type="text" style="margin-bottom: 4px" class="form-control" name="categoryId" value="${products.categoryId}">
+                                                <input type="text" class="form-control" name="categoryName" value="${products.categoryName}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Tên</label>
+                                                <input type="text" class="form-control" name="title" value="${products.title}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Giá</label>
+                                                <input type="text" class="form-control" name="formattedPrice" value="${products.formattedPrice}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Số lượng</label>
+                                                <input type="text" class="form-control" name="quantity" value="${products.quantity}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Giảm giá</label>
+                                                <input type="text" class="form-control" name="discount" value="${products.discount}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Hình ảnh</label>
+                                                <input type="text" class="form-control" name="thumbnail" value="${products.thumbnail}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Mô tả</label>
+                                                <textarea class="form-control" name="description">${products.description}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Lượt Mua</label>
+                                                <input type="text" class="form-control" name="purchases" value="${products.purchases}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="title">Ngày Tạo</label>
+                                                <input type="text" class="form-control" name="createdAt" value="${products.createdAt}">
+                                            </div>
 
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Hình ảnh</th>
-                                                    <th>Mô tả</th>
-                                                    <th>Lượt Mua</th>
-                                                    <th>Ngày Tạo</th>
-                                                    <th>Thao tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="thumbnail" value="${products.thumbnail}">
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control" name="description">${products.description}</textarea>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="purchases" value="${products.purchases}" readonly="">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="createdAt" value="${products.createdAt}">
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </div>
                                         </table>
                                     </div>
                                 </div>

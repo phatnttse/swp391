@@ -213,7 +213,6 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
                                 </div>
                                 <div class="card-body">
-                                    <!--                                    <form action="orderDetailManagement" method="get">-->
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -227,19 +226,20 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" class="form-control" name="categoryId" value="${categorys.categoryId}" readonly="">
+                                                        <input type="text" class="form-control" name="categoryId" value="${category.categoryId}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="categoryName" value="${categorys.categoryName}">
+                                                        <input type="text" class="form-control" name="name" value="${category.name}">
                                                     </td>
                                                     <td>
-                                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" >
+                                                        <img src="${category.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
                                                     </td>
 
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+
                                         <div class="btn-group">
                                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                                         </div>

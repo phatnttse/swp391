@@ -268,7 +268,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Hình ảnh</th>
-                                                    <th>Mô tả</th>
                                                     <th>Lượt Mua</th>
                                                     <th>Ngày Tạo</th>
                                                 </tr>
@@ -276,11 +275,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" >
+                                                        <img src="${category.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                        <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
                                                     </td>
-                                                    <td>
-                                                        <textarea class="form-control" name="description">${products.description}</textarea>
-                                                    </td>
+
                                                     <td>
                                                         <input type="text" class="form-control" name="purchases" value="${products.purchases}" readonly="">
                                                     </td>
@@ -289,6 +287,18 @@
                                                     </td>
 
                                                 </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mô tả</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <td>
+                                                <textarea class="form-control" name="description">${products.description}</textarea>
+                                            </td>
                                             </tbody>
                                         </table>
                                         <div class="btn-group">

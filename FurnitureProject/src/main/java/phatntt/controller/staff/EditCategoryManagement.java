@@ -6,11 +6,23 @@ package phatntt.controller.staff;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
+import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
+import phatntt.dto.ProductsDTO;
+import phatntt.util.Constants;
 
 /**
  *
@@ -56,9 +68,33 @@ public class EditCategoryManagement extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException {
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGEMENT_PAGE);
+        
+        try {
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            CategoryDAO categoryDAO = new CategoryDAO();
+            
+            CategoryDTO category = categoryDAO.getCategoryById(categoryId);
+           
+            url = siteMaps.getProperty(Constants.Management.EDIT_CATEGORY_PAGE)
+                    +"?categoryId=" + categoryId;
+            
+           request.setAttribute("EDITCATEGORY", category);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
+        
+    } 
 
     /**
      * Handles the HTTP <code>POST</code> method.

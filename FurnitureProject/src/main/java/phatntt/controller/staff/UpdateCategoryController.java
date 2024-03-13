@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -67,28 +69,31 @@ public class UpdateCategoryController extends HttpServlet {
             throws ServletException, IOException {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGEMENT_PAGE);
+        String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGEMENT_PAGE);
 
         try {
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String thumbnail = request.getParameter("thumbnail");
-            ProductsDAO productDAO = new ProductsDAO();
-            ProductsDTO product = new ProductsDTO();
-            product.setCategoryId(categoryId);
-            product.setThumbnail(thumbnail);
+            String name = request.getParameter("name"); // Assuming you have a parameter for category name
 
-//            Long createdAt = Long.parseLong(request.getParameter("createdAt"));
-            boolean success = productDAO.updateProductWithoutPrice(product);
+            CategoryDAO categoryDAO = new CategoryDAO();
+            CategoryDTO category = new CategoryDTO();
+
+            category.setCategoryId(categoryId);
+            category.setThumbnail(thumbnail);
+            category.setName(name);
+
+            // Corrected the method invocation on categoryDAO instance
+            boolean success = categoryDAO.updateCategories(category);
+
             if (success) {
-                url = "EditCategoryManagement"
-                        + "?categoryId=" + categoryId;
-                request.setAttribute("UPDATE_SUCCESS", "Cập nhật sản phẩm thành công");
+                url = "EditCategoryManagement" + "?categoryId=" + categoryId;
+                request.setAttribute("UPDATE_SUCCESS", "Cập nhật danh mục thành công");
             }
 
-        } catch (SQLException ex) {
+        } catch (SQLException | NamingException ex) {
             ex.printStackTrace();
-        } catch (NamingException ex) {
-            ex.printStackTrace();
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

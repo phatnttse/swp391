@@ -273,7 +273,7 @@
                                                 <th>Loại</th>
                                                 <th>Tên</th>
                                                 <th>Giá</th>
-                                                <th>Thumbnail</th>                                                
+                                                <th>Hình ảnh</th>                                                
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>

@@ -112,7 +112,7 @@ public class CategoryDAO {
         return result;
 
     }
-
+   
     public List<CategoryDTO> countProduct() throws SQLException, NamingException {
 
         List<CategoryDTO> result = new ArrayList<>();
@@ -161,49 +161,43 @@ public class CategoryDAO {
     }
     
     public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
-        CategoryDTO result = null;
+    CategoryDTO result = null;
 
-        try {
-            con = DBConnect.createConnection();
+    try {
+        con = DBConnect.createConnection();
 
-            if (con != null) {
-                 String sql = "SELECT category_id, name AS category_name, thumbnail "
+        if (con != null) {
+            String sql = "SELECT category_id, name, thumbnail "
                     + "FROM category "
                     + "WHERE category_id = ?";
+            
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, categoryId);
+            rs = stm.executeQuery();
 
-                stm = con.prepareCall(sql);
-                stm.setInt(1, categoryId);
-                rs = stm.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String thumbnail = rs.getString("thumbnail");
 
-                while (rs.next()) {
-                    String categoryName = rs.getString("category_name");
-                    String title = rs.getString("title");
-                    int price = rs.getInt("price");
-                    int quantity = rs.getInt("quantity");
-                    int discount = rs.getInt("discount");
-                    String thumbnail = rs.getString("thumbnail");
-                    String description = rs.getString("description");
-                    int purchases = rs.getInt("purchases");
-                    Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    result = new CategoryDTO(categoryId, title, thumbnail);
-                }
-            }
-        } finally {
-            // Close resources
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+                result = new CategoryDTO(categoryId, name, thumbnail);
             }
         }
-
-        return result;
+    } finally {
+        // Close resources
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
     }
+
+    return result;
+}
+
     
     public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean result = false;
@@ -236,20 +230,22 @@ public class CategoryDAO {
         return result;
     }
     
-    public boolean updateCategory(CategoryDTO category) throws SQLException, NamingException {
+    public boolean updateCategories(CategoryDTO category) throws SQLException, NamingException {
         boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "UPDATE category "
-                        + "SET category_id = ?, thumbnail = ? "
-                        + "WHERE category_id = ?";
+                String sql = "UPDATE category SET name = ?, thumbnail = ? WHERE category_id = ?";
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, category.getCategoryId());
+                stm.setString(1, category.getName());
                 stm.setString(2, category.getThumbnail());
-                
-                check = stm.executeUpdate() > 0 ? true : false;
+                stm.setInt(3, category.getCategoryId());
+
+                check = stm.executeUpdate() > 0;
             }
         } finally {
             // Close resources
@@ -262,4 +258,5 @@ public class CategoryDAO {
         }
         return check;
     }
+
 }

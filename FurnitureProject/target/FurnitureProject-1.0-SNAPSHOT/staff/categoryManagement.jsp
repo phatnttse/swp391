@@ -204,7 +204,7 @@
                                                         <div class="btn-group">
 
                                                             <!-- Detail Button -->
-                                                            <a href="EditCategoryController?productId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
+                                                            <a href="editCategoryPage"${category.categoryId}" class="btn btn-outline-info">Sửa</a>
 
 
                                                             <!-- Delete Button -->

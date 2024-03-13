@@ -25,7 +25,7 @@ import phatntt.dto.ProductsDTO;
         maxRequestSize = 1024 * 1024 * 50)               // 50 MB
 public class AddProductController extends HttpServlet {
 
-    private static final String ADD_PRODUCT_PAGE = "addproduct.jsp";
+    private static final String ADD_PRODUCT_PAGE = "AddProduct.jsp";
     private static final String PRODUCT_MANAGEMENT_PAGE = "staff/productManagement.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

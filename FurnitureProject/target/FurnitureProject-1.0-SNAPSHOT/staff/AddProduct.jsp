@@ -196,7 +196,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <form action="addproductcontroller" method="post" enctype="multipart/form-data">
+                                <form action="productManagement" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="category">Loại sản phẩm:</label>
                                         <select class="form-control" id="categoryId" name="categoryId">

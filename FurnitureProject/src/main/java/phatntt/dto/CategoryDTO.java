@@ -4,81 +4,25 @@
  */
 package phatntt.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  *
  * @author Dell
  */
+
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
+@Builder
 public class CategoryDTO {
     private int categoryId;
     private String name;  
     private String thumbnail;
     private int countProduct;
 
-    public int getCountProduct() {
-        return countProduct;
-    }
-
-    public void setCountProduct(int countProduct) {
-        this.countProduct = countProduct;
-    }
-
-    public CategoryDTO() {
-    }
-
-    public CategoryDTO(int categoryId, String name, String thumbnail) {
-        this.categoryId = categoryId;
-        this.name = name;
-        this.thumbnail = thumbnail;
-    }
-
-    public CategoryDTO(int categoryId, String name, String thumbnail, int countProduct) {
-        this.categoryId = categoryId;
-        this.name = name;
-        this.thumbnail = thumbnail;
-        this.countProduct = countProduct;
-    }
-       
     
-    /**
-     * @return the categoryId
-     */
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    /**
-     * @param categoryId the categoryId to set
-     */
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the thumbnail
-     */
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    /**
-     * @param thumbnail the thumbnail to set
-     */
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
 }

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
      <head>
@@ -71,8 +72,8 @@
                     <a class="nav-link collapsed" href="orderManagement">                  
                         <span>Tất Cả Đơn Hàng</span>
                     </a>
-                    <a class="nav-link collapsed" href="orderManagement">                  
-                        <span>Đơn Hàng Đã Huỷ</span>
+                     <a class="nav-link collapsed" href="requestCancelOrderManager">                  
+                        <span>Yêu cầu huỷ đơn</span>
                     </a>
                 </li>
 
@@ -245,10 +246,10 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng huỷ đơn</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng yêu cầu huỷ đơn</h6>
                             </div>
                             <div class="card-body">
-                                <form action="" method="get">
+                                <form action="ProcessOrderCancellationRequests" method="post">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -259,6 +260,7 @@
                                                     <th>SĐT</th>                                                                                  
                                                     <th>Trạng thái</th>
                                                     <th>Lí do</th>
+                                                    <th>Tác vụ</th>                                                    
                                                 </tr>
                                             </thead>
 
@@ -266,17 +268,28 @@
                                                 <c:forEach var="request" items="${requests}">
                                                     <tr>
                                                         <td>
+                                                            <input type="hidden" name="orderId" value="${request.orderId}" />
                                                             #${request.orderId}
                                                         </td>
                                                         <td>${request.email}</td>
                                                         <td>${request.name}</td>
                                                         <td>${request.phone}</td>
                                                         <td style="color: red">
-                                                            ${request.requestStatus}
+                                                            <c:if test="${request.requestStatus == true}">
+                                                                <span style="color: green">Đã xử lý</span>
+                                                            </c:if>
+                                                                <c:if test="${request.requestStatus == false}">
+                                                                Chưa xử lý
+                                                            </c:if>
+                                                            
                                                         </td>
                                                         <td>
                                                             ${request.reason}
-                                                        </td>                                                                                  
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" class="btn btn-outline-info">Chấp nhận</button>
+                                                            <a href="ProcessOrderCancellationRequests?requestCancelOrderId=${request.id}" class="btn btn-danger">Từ chối</a>
+                                                        </td> 
                                                     </tr>  
                                                 </c:forEach>
 

@@ -5,7 +5,6 @@
 package phatntt.controller.staff;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -19,10 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import phatntt.dao.OrdersDAO;
 import phatntt.dto.RequestCancellationDTO;
-import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 /**
@@ -43,15 +40,13 @@ public class RequestCancelOrderManager extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
+
             ServletContext context = this.getServletContext();
             Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-
-
-            HttpSession session = request.getSession();
-            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
             OrdersDAO dao = new OrdersDAO();
             List<RequestCancellationDTO> requestCancels = dao.getAllRequestCancellations();
@@ -59,7 +54,7 @@ public class RequestCancelOrderManager extends HttpServlet {
             if (requestCancels != null) {
                 request.setAttribute("REQUEST_CANCELS", requestCancels);
                 RequestDispatcher rd = request.getRequestDispatcher(
-                siteMaps.getProperty(Constants.Management.REQUEST_TO_CANCEL_ORDER_PAGE));
+                        siteMaps.getProperty(Constants.Management.REQUEST_TO_CANCEL_ORDER_PAGE));
                 rd.forward(request, response);
             }
         } catch (SQLException ex) {

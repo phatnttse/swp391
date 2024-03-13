@@ -45,7 +45,8 @@
                                                 <div class="fieldset">
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="email" class="field__label">Email*</label>
+                                                            <label for="email" class="field__label">Email <span style="color:red"> *</span>
+                                                            </label>
                                                             <input name="email" id="email" type="email" class="field__input"
                                                                    value="${user.email}">
                                                         </div>
@@ -53,7 +54,8 @@
 
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="name" class="field__label">Họ và tên*</label>
+                                                            <label for="name" class="field__label">Họ và tên <span style="color:red"> *</span>
+                                                            </label>
                                                             <input name="name" id="name" type="text" class="field__input"
                                                                    value="${user.name}">
                                                         </div>
@@ -61,7 +63,8 @@
 
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="phone" class="field__label">Số điện thoại*</label>
+                                                            <label for="phone" class="field__label">Số điện thoại <span style="color:red"> *</span>
+                                                            </label>
                                                             <input name="phone" id="phone" type="phone" class="field__input"
                                                                    value="${user.phone}" required>
                                                         </div>
@@ -70,7 +73,7 @@
                                                     <div class="field ">
                                                         <div class="field__input-wrapper">
                                                             <label for="billingAddress" class="field__label">
-                                                                Địa chỉ*
+                                                                Địa chỉ <span style="color:red"> *</span>
                                                             </label>
                                                             <input name="billingAddress" id="billingAddress" type="text"
                                                                    class="field__input" value="${user.address}" required>
@@ -85,7 +88,8 @@
                                                 <div class="fieldset">
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="email" class="field__label">Email*</label>
+                                                            <label for="email" class="field__label">Email <span style="color:red"> *</span>
+                                                            </label>
                                                             <input name="email" id="email" type="email" class="field__input"
                                                                    value="${param.email}">
                                                         </div>
@@ -93,7 +97,8 @@
 
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="name" class="field__label">Họ và tên*</label>
+                                                            <label for="name" class="field__label">Họ và tên <span style="color:red"> *
+                                                            </label>
                                                             <input name="name" id="name" type="text" class="field__input"
                                                                    value="${param.name}">
                                                         </div>
@@ -101,7 +106,8 @@
 
                                                     <div class="field  field--show-floating-label">
                                                         <div class="field__input-wrapper">
-                                                            <label for="phone" class="field__label">Số điện thoại*</label>
+                                                            <label for="phone" class="field__label">Số điện thoại <span style="color:red"> *
+                                                            </label>
                                                             <input name="phone" id="phone" type="phone" class="field__input"
                                                                    value="${param.phone}" required>
                                                         </div>
@@ -110,7 +116,7 @@
                                                     <div class="field ">
                                                         <div class="field__input-wrapper">
                                                             <label for="billingAddress" class="field__label">
-                                                                Địa chỉ*
+                                                                Địa chỉ <span style="color:red">*</span> 
                                                             </label>
                                                             <input name="billingAddress" id="billingAddress" type="text"
                                                                    class="field__input" value="${param.address}" required>
@@ -176,14 +182,11 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" value="Thu hộ (COD)" class="input-radio" required> 
+                                                            <input id="cod" name="paymentMethod" type="radio" value="Thu hộ (COD)" class="input-radio" required> 
                                                         </div>
-                                                        <label for="" class="radio__label">
-                                                            <span class="radio__label__primary">Thu hộ (COD)</span>
+                                                        <label for="cod" class="radio__label">
+                                                            <span id="cod" class="radio__label__primary">Thu hộ (COD)</span>
                                                             <span class="radio__label__accessory">
-                                                                <span class="radio__label__icon">
-                                                                    <i class="payment-icon payment-icon--4"></i>
-                                                                </span>
                                                                 <img height="80px" width="80px" src="https://www.coolmate.me/images/COD.svg"
                                                                      alt="VNPAY">
                                                             </span>
@@ -194,14 +197,11 @@
                                                 <div class="content-box__row">
                                                     <div class="radio-wrapper">
                                                         <div class="radio__input">
-                                                            <input name="paymentMethod" type="radio" value="vnPay" class="input-radio" required>
+                                                            <input id="vnpay" name="paymentMethod" type="radio" value="vnPay" class="input-radio" required>
                                                         </div>
-                                                        <label for="" class="radio__label">
+                                                        <label for="vnpay" class="radio__label">
                                                             <span class="radio__label__primary">VNPAY</span>
                                                             <span class="radio__label__accessory">
-                                                                <span class="radio__label__icon">
-                                                                    <i class="payment-icon payment-icon--3"></i>
-                                                                </span>
                                                                 <img height="80px" width="80px" src="https://s-vnba-cdn.aicms.vn/vnba-media/23/8/16/vnpay-logo_64dc3da9d7a11.jpg"
                                                                      alt="VNPAY">
                                                             </span>

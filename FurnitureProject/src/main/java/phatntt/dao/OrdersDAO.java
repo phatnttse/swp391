@@ -8,10 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
+import lombok.Cleanup;
 import phatntt.dto.OrderDTO;
 import phatntt.dto.RequestCancellationDTO;
 import phatntt.util.DBConnect;
@@ -23,50 +23,31 @@ import phatntt.util.Key_Utils;
  */
 public class OrdersDAO {
 
-    private Connection con = null;
-    private PreparedStatement stm = null;
-    private ResultSet rs = null;
-
     public boolean createOrder(String orderId, String user_id, String email, String name, String phone, String shipping_address, String note, int status, String payment_method, boolean payment_status, int amount) throws SQLException, NamingException {
         boolean result = false;
-        try {
-            // Create connection
-            con = DBConnect.createConnection();
-            if (con != null) {
-                // Prepare SQL statement
-                String sql = "INSERT INTO `order` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                stm = con.prepareStatement(sql);
 
-                // Set values for parameters
-                stm.setString(1, orderId);
-                stm.setString(2, user_id);
-                stm.setString(3, email);
-                stm.setString(4, name);
-                stm.setString(5, phone);
-                stm.setString(6, shipping_address);
-                stm.setString(7, note);
-                stm.setInt(8, status);
-                stm.setBoolean(9, payment_status);
-                stm.setString(10, payment_method);
-                stm.setInt(11, amount);
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "INSERT INTO `order` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
 
-                // Execute the query
-                int affectedRows = stm.executeUpdate();
+            stm.setString(1, orderId);
+            stm.setString(2, user_id);
+            stm.setString(3, email);
+            stm.setString(4, name);
+            stm.setString(5, phone);
+            stm.setString(6, shipping_address);
+            stm.setString(7, note);
+            stm.setInt(8, status);
+            stm.setBoolean(9, payment_status);
+            stm.setString(10, payment_method);
+            stm.setInt(11, amount);
 
-                // Check if the query was successful
-                if (affectedRows > 0) {
-                    result = true;
-                }
-            }
-        } finally {
-
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+            int affectedRows = stm.executeUpdate();
+            result = affectedRows > 0;
         }
 
         return result;
@@ -74,76 +55,53 @@ public class OrdersDAO {
 
     public void addOrderDetail(String orderId, int productId, String title, int price, int quantity, String thumbnail, int totalMoney) throws SQLException, NamingException {
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "INSERT INTO order_detail (order_id, product_id, title, price, quantity, thumbnail, total_money) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, orderId);
-                stm.setInt(2, productId);
-                stm.setString(3, title);
-                stm.setInt(4, price);
-                stm.setInt(5, quantity);
-                stm.setString(6, thumbnail);
-                stm.setInt(7, totalMoney);
-                stm.executeUpdate();
-
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "INSERT INTO order_detail (order_id, product_id, title, price, quantity, thumbnail, total_money) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, orderId);
+            stm.setInt(2, productId);
+            stm.setString(3, title);
+            stm.setInt(4, price);
+            stm.setInt(5, quantity);
+            stm.setString(6, thumbnail);
+            stm.setInt(7, totalMoney);
+            stm.executeUpdate();
         }
 
     }
 
     public boolean cancelOrder(String orderId) throws SQLException, NamingException {
         boolean result = false;
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, 5);
-                stm.setString(2, orderId);
-                int affectedRows = stm.executeUpdate();
-                if (affectedRows > 0) {
-                    result = true;
-                }
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, 5);
+            stm.setString(2, orderId);
+            int affectedRows = stm.executeUpdate();
+            result = affectedRows > 0;
         }
+
         return result;
     }
 
     public void clearCartByUserId(String userId) throws SQLException, NamingException {
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "DELETE FROM cart WHERE user_id = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, userId);
-                stm.executeUpdate();
-            }
-        } finally {
-
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "DELETE FROM cart WHERE user_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, userId);
+            stm.executeUpdate();
         }
 
     }
@@ -151,44 +109,34 @@ public class OrdersDAO {
     public List<OrderDTO> getAllOrders() throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT o.*, os.name AS status_name "
-                        + "FROM `order` o "
-                        + "INNER JOIN `order_status` os ON o.status = os.status_id";
-                stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `order` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-                while (rs.next()) {
-                    OrderDTO order = new OrderDTO();
-                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
-                    order.setUserId(rs.getString("user_id"));
-                    order.setEmail(rs.getString("email"));
-                    order.setName(rs.getString("name"));
-                    order.setPhone(rs.getString("phone"));
-                    order.setAddress(rs.getString("shipping_address"));
-                    order.setNote(rs.getString("note"));
-                    order.setStatus(rs.getInt("status"));
-                    order.setPaymentStatus(rs.getBoolean("payment_status"));
-                    order.setPaymentMethod(rs.getString("payment_method"));
-                    order.setAmount(rs.getInt("amount"));
-                    order.setStatusName(rs.getString("status_name"));
-                    order.setCreatedAt(rs.getTimestamp("created_at")); // Set trạng thái bằng tên
-
-                    orders.add(order);
-                }
-            }
-        } finally {
-            // Close resources
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+            while (rs.next()) {
+                OrderDTO order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(rs.getString("user_id"))
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .address(rs.getString("shipping_address"))
+                        .note(rs.getString("note"))
+                        .status(rs.getInt("status"))
+                        .paymentStatus(rs.getBoolean("payment_status"))
+                        .paymentMethod(rs.getString("payment_method"))
+                        .amount(rs.getInt("amount"))
+                        .statusName(rs.getString("status_name"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
+                orders.add(order);
             }
         }
 
@@ -197,44 +145,36 @@ public class OrdersDAO {
 
     public OrderDTO getOrderById(String orderId) throws SQLException, NamingException {
         OrderDTO order = null;
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT o.*, os.name AS status_name "
-                        + "FROM `order` o "
-                        + "INNER JOIN `order_status` os ON o.status = os.status_id "
-                        + "WHERE o.order_id = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, orderId);
-                rs = stm.executeQuery();
 
-                if (rs.next()) {
-                    order = new OrderDTO();
-                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
-                    order.setUserId(rs.getString("user_id"));
-                    order.setEmail(rs.getString("email"));
-                    order.setName(rs.getString("name"));
-                    order.setPhone(rs.getString("phone"));
-                    order.setAddress(rs.getString("shipping_address"));
-                    order.setNote(rs.getString("note"));
-                    order.setStatus(rs.getInt("status"));
-                    order.setPaymentStatus(rs.getBoolean("payment_status"));
-                    order.setPaymentMethod(rs.getString("payment_method"));
-                    order.setAmount(rs.getInt("amount"));
-                    order.setStatusName(rs.getString("status_name"));
-                    order.setCreatedAt(rs.getTimestamp("created_at"));
-                }
-            }
-        } finally {
-            // Close resources
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `order` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + "WHERE o.order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, orderId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(rs.getString("user_id"))
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .address(rs.getString("shipping_address"))
+                        .note(rs.getString("note"))
+                        .status(rs.getInt("status"))
+                        .paymentStatus(rs.getBoolean("payment_status"))
+                        .paymentMethod(rs.getString("payment_method"))
+                        .amount(rs.getInt("amount"))
+                        .statusName(rs.getString("status_name"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
             }
         }
 
@@ -243,181 +183,136 @@ public class OrdersDAO {
 
     public List<OrderDTO> allOwnOrder(String user_id) throws SQLException, NamingException {
         List<OrderDTO> list = new ArrayList<>();
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT \n"
-                        + "    o.*,\n"
-                        + "    os.name AS status_name,\n"
-                        + "    SUM(od.total_money) AS total_order_price\n"
-                        + "FROM \n"
-                        + "    `order` o\n"
-                        + "JOIN \n"
-                        + "    `order_detail` od ON o.order_id = od.order_id\n"
-                        + "JOIN \n"
-                        + "    `order_status` os ON o.status = os.status_id\n"
-                        + "WHERE \n"
-                        + "    o.user_id = ? \n"
-                        + "GROUP BY \n"
-                        + "    o.order_id;";
-                stm = con.prepareCall(sql);
-                stm.setString(1, user_id);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    String order_id = rs.getString("order_id"); // Use String for order_id
-                    String email = rs.getString("email");
-                    String name = rs.getString("name");
-                    String phone = rs.getString("phone");
-                    String shipping_address = rs.getString("shipping_address");
-                    String note = rs.getString("note");
-                    int status = rs.getInt("status");
-                    String statusName = rs.getString("status_name");
-                    boolean payment_status = rs.getBoolean("payment_status");
-                    String payment_method = rs.getString("payment_method");
-                    int amount = rs.getInt("amount");
-                    Timestamp created_at = rs.getTimestamp("created_at");
-                    int priceOfOrder = rs.getInt("total_order_price");
-                    OrderDTO odto = new OrderDTO(order_id, user_id, email, name, phone, shipping_address, note, status, statusName, payment_status, payment_method, amount, created_at);
-                    odto.setFormattedPrice(Key_Utils.getInstance().formattedPrice(priceOfOrder));
-                    list.add(odto);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT \n"
+                    + "    o.*,\n"
+                    + "    os.name AS status_name,\n"
+                    + "    SUM(od.total_money) AS total_order_price\n"
+                    + "FROM \n"
+                    + "    `order` o\n"
+                    + "JOIN \n"
+                    + "    `order_detail` od ON o.order_id = od.order_id\n"
+                    + "JOIN \n"
+                    + "    `order_status` os ON o.status = os.status_id\n"
+                    + "WHERE \n"
+                    + "    o.user_id = ? \n"
+                    + "GROUP BY \n"
+                    + "    o.order_id;";
+            @Cleanup
+            PreparedStatement stm = con.prepareCall(sql);
+            stm.setString(1, user_id);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                OrderDTO odto = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(user_id)
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .address(rs.getString("shipping_address"))
+                        .note(rs.getString("note"))
+                        .status(rs.getInt("status"))
+                        .statusName(rs.getString("status_name"))
+                        .paymentStatus(rs.getBoolean("payment_status"))
+                        .paymentMethod(rs.getString("payment_method"))
+                        .amount(rs.getInt("amount"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .formattedPrice(Key_Utils.getInstance().formattedPrice(rs.getInt("total_order_price")))
+                        .build();
+                list.add(odto);
             }
         }
+
         return list;
     }
 
     public List<OrderDTO> getOrdersByCondition(String condition) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT o.*, os.name AS status_name "
-                        + "FROM `order` o "
-                        + "INNER JOIN `order_status` os ON o.status = os.status_id "
-                        + condition;
-                stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `order` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + condition;
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-                while (rs.next()) {
-                    OrderDTO order = new OrderDTO();
-                    order.setOrderId(rs.getString("order_id")); // Set order_id as String
-                    orders.add(order);
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+            while (rs.next()) {
+                OrderDTO order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .build();
+                orders.add(order);
             }
         }
 
         return orders;
     }
 
-    public boolean RequestCancellation(String userId, String orderId, String reason)
+    public boolean requestCancellation(String userId, String orderId, String reason)
             throws SQLException, NamingException {
         boolean result = false;
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                // Start a transaction
-                con.setAutoCommit(false);
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            con.setAutoCommit(false);
 
-                // Insert a new request_cancellation record
-                String insertRequestSql = "INSERT INTO request_cancellation (user_id, order_id, reason, request_status) VALUES (?, ?, ?, ?)";
-                stm = con.prepareStatement(insertRequestSql);
-                stm.setString(1, userId);
+            String insertRequestSql = "INSERT INTO request_cancellation (user_id, order_id, reason, request_status) VALUES (?, ?, ?, ?)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(insertRequestSql);
+            stm.setString(1, userId);
+            stm.setString(2, orderId);
+            stm.setString(3, reason);
+            stm.setBoolean(4, false);
+            int rowsAffected = stm.executeUpdate();
+
+            if (rowsAffected > 0) {
+                String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ? ";
+                stm = con.prepareStatement(updateOrderSql);
+                stm.setInt(1, 6);
                 stm.setString(2, orderId);
-                stm.setString(3, reason);
-                stm.setBoolean(4, false);
-                int rowsAffected = stm.executeUpdate();
+                int updatedRows = stm.executeUpdate();
 
-                if (rowsAffected > 0) {
-                    // Update the order status to 'Pending Cancellation Confirmation'
-                    String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ? ";
-                    stm = con.prepareStatement(updateOrderSql);
-                    stm.setInt(1, 6);
-                    stm.setString(2, orderId);
-                    int updatedRows = stm.executeUpdate();
-
-                    if (updatedRows > 0) {
-                        result = true;
-                    }
+                if (updatedRows > 0) {
+                    result = true;
                 }
+            }
 
-                // Commit the transaction
-                con.commit();
-            }
-        } catch (SQLException ex) {
-            // Rollback the transaction in case of an exception
-            if (con != null) {
-                con.rollback();
-            }
-            throw ex;
-        } finally {
-            // Reset auto-commit mode and close resources
-            if (con != null) {
-                con.setAutoCommit(true);
-                con.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
+            con.commit();
         }
-
         return result;
     }
 
     public RequestCancellationDTO getRequestCancellationByOrderId(String orderId)
             throws SQLException, NamingException {
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellation WHERE order_id = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, orderId);
-                rs = stm.executeQuery();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellation WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, orderId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-                if (rs.next()) {
-                    return RequestCancellationDTO.builder()
-                            .id(rs.getInt("id"))
-                            .userId(rs.getString("user_id"))
-                            .orderId(orderId)
-                            .reason(rs.getString("reason"))
-                            .requestStatus(rs.getBoolean("request_status"))
-                            .createdAt(rs.getTimestamp("created_at"))
-                            .build();
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
+            if (rs.next()) {
+                return RequestCancellationDTO.builder()
+                        .id(rs.getInt("id"))
+                        .userId(rs.getString("user_id"))
+                        .orderId(orderId)
+                        .reason(rs.getString("reason"))
+                        .requestStatus(rs.getBoolean("request_status"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
             }
         }
 
@@ -427,47 +322,60 @@ public class OrdersDAO {
     public List<RequestCancellationDTO> getAllRequestCancellations() throws SQLException, NamingException {
         List<RequestCancellationDTO> requestList = new ArrayList<>();
 
-        try {
-            con = DBConnect.createConnection();
-            if (con != null) {
-                String sql = "SELECT rc.id, rc.user_id, u.name, u.email, u.phone, rc.order_id, rc.reason, rc.request_status, rc.created_at "
-                        + "FROM request_cancellation rc "
-                        + "JOIN user u ON rc.user_id = u.user_id";
-                stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT rc.id, rc.user_id, o.name, o.email, o.phone, rc.order_id, rc.reason, rc.request_status, rc.created_at "
+                    + "FROM request_cancellation rc "
+                    + "JOIN `order` o ON rc.order_id = o.order_id";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-                while (rs.next()) {
-                    RequestCancellationDTO request = RequestCancellationDTO.builder()
-                            .id(rs.getInt("id"))
-                            .userId(rs.getString("user_id"))
-                            .name(rs.getString("name"))
-                            .email(rs.getString("email"))
-                            .phone(rs.getString("phone"))
-                            .orderId(rs.getString("order_id"))
-                            .reason(rs.getString("reason"))
-                            .requestStatus(rs.getBoolean("request_status"))
-                            .createdAt(rs.getTimestamp("created_at"))
-                            .build();
+            while (rs.next()) {
+                RequestCancellationDTO request = RequestCancellationDTO.builder()
+                        .id(rs.getInt("id"))
+                        .userId(rs.getString("user_id"))
+                        .name(rs.getString("name"))
+                        .email(rs.getString("email"))
+                        .phone(rs.getString("phone"))
+                        .orderId(rs.getString("order_id"))
+                        .reason(rs.getString("reason"))
+                        .requestStatus(rs.getBoolean("request_status"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
 
-                    requestList.add(request);
-                }
-                
-                
+                requestList.add(request);
+            }
 
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
         }
 
         return requestList;
+    }
+
+    public void deleteRequestToCancelOrder(String orderId) throws SQLException, NamingException {
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            con.setAutoCommit(false);
+
+            String sqlOrder = "UPDATE `order` SET status = ? WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sqlOrder);
+            stm.setInt(1, 7);
+            stm.setString(2, orderId);
+            stm.executeUpdate();
+
+            String sqlRequest = "UPDATE request_cancellation SET request_status = true WHERE order_id = ?";
+            stm = con.prepareStatement(sqlRequest);
+            stm.setString(1, orderId);
+            stm.executeUpdate();
+
+            con.commit();
+
+        }
     }
 
 }

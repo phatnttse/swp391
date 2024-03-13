@@ -135,33 +135,6 @@ END$$
 DELIMITER ;
 
 
-DELIMITER $$
-
-CREATE TRIGGER TR_RequestCancellation_Delete
-AFTER INSERT ON request_cancellation 
-FOR EACH ROW 
-BEGIN
-    DECLARE order_status_id INT;
-
-    -- Lấy trạng thái của đơn hàng mới được thêm vào
-    SELECT `status` INTO order_status_id
-    FROM `order` 
-    WHERE `order_id` = NEW.order_id;
-
-    -- Kiểm tra nếu đơn hàng có trạng thái là Đang chờ xác nhận huỷ
-    IF order_status_id = 6 THEN
-        -- Xoá đơn hàng từ bảng `order`
-        DELETE FROM `order`
-        WHERE `order_id` = NEW.order_id;
-        
-        -- Xoá các chi tiết đơn hàng từ bảng `order_detail`
-        DELETE FROM `order_detail`
-        WHERE `order_id` = NEW.order_id;
-    END IF;
-END$$
-
-DELIMITER ;
-
 
 
 ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);

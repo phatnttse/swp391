@@ -94,19 +94,18 @@ public class CancelOrderController extends HttpServlet {
 
             String orderId = request.getParameter("orderId");
             String reason = request.getParameter("reason");
-            
+
             OrdersDAO dao = new OrdersDAO();
-            boolean result = dao.RequestCancellation(user.getId(), orderId, reason);
-            if (result) {            
-                url = "allOrder";                       
+            boolean result = dao.requestCancellation(user.getId(), orderId, reason);
+            if (result) {
+                url = "allOrder";              
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-             RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

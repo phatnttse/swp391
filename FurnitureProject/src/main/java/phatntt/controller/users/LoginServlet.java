@@ -7,7 +7,6 @@ package phatntt.controller.users;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

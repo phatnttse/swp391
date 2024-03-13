@@ -4,46 +4,22 @@
  */
 package phatntt.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  *
  * @author Admin
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderStatusDTO {
-    
+
     private int statusId;
     private String name;
 
-    public OrderStatusDTO() {
-    }
-
-    /**
-     * @return the statusId
-     */
-    public int getStatusId() {
-        return statusId;
-    }
-
-    /**
-     * @param statusId the statusId to set
-     */
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    
-    
 }

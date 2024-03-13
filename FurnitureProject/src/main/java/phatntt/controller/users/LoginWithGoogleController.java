@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dao.UsersDAO;
 import phatntt.dto.UsersDTO;
+import phatntt.util.Constants;
 import phatntt.util.Key_Utils;
 
 /**
@@ -53,19 +54,19 @@ public class LoginWithGoogleController extends HttpServlet {
                     UsersDTO user = dao.checkLoginByGoogle(userInfo.getEmail(), userInfo.getId());
                     if (user != null) {
                         session.setAttribute("USER_INFO", user);
-                        response.sendRedirect("home");
+                        response.sendRedirect(Constants.LoginFeatures.HOME);
                     } else {  //Chưa có tài khoản, thêm thông tin tài khoản 
                         boolean result = dao.loginWithGoogle(userInfo);
                         if (result) {
                             UsersDTO userGoogle = dao.checkLoginByGoogle(userInfo.getEmail(), userInfo.getId());
                             session.setAttribute("USER_INFO", userGoogle);
-                            response.sendRedirect("home");
+                            response.sendRedirect(Constants.LoginFeatures.HOME);
                         }
                     }
                 }
                 
                 } else {
-                    response.sendRedirect("loginPage");
+                    response.sendRedirect(Constants.LoginFeatures.LOGIN_PAGE);
                 }
 
             }catch (SQLException ex) {

@@ -39,53 +39,61 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                 <ul class="ng-scope">
                                                     <c:if test="${not empty listOrder}">
                                                         <c:forEach var="order" items="${listOrder}">
-                                                            
 
-                                                            <li class="orf row">
-                                                                <div class="col-md-7 ng-binding">
-                                                                    <p>
-                                                                    </p><h4> <b class="ng-binding"><span class="thong-tin-ma-don-hang">Mã đơn hàng</span>: ${order.orderId} </b> </h4> <br>
-                                                                    <span class="thong-tin-ho-va-ten-khach-hang">Họ và tên khách hàng</span>: ${order.name}<br>
-                                                                    <span class="thong-tin-so-dien-thoai">Số điện thoại</span>: <span class="order-phone ng-binding">${order.phone}</span><br>
-                                                                    <span class="thong-tin-email">Email</span>: <span class="order-email ng-binding">${order.email}</span><br>
-                                                                    <span class="thong-tin-ngay-mua">Ngày mua</span>:  <span class="ng-binding">${order.createdAt}</span><br>
-                                                                    <span class="thong-tin-dia-chi-giao">Địa chỉ giao hàng</span>: ${order.address}
-                                                                    <br>
-                                                                    <br>
-                                                                    <br>
-                                                                    <span style="color:red;">
-                                                                        <span class="thong-tin-trang-thai-thanh-toan">Trạng thái thanh toán</span>: <b class="ng-binding">
-                                                                            <c:if test="${order.paymentStatus == true}">
-                                                                                Đã thanh toán
-                                                                            </c:if>
-                                                                            <c:if test="${order.paymentStatus == false}">
-                                                                                Chưa thanh toán
-                                                                            </c:if>
-                                                                        </b><br>
-                                                                    </span>
-                                                                    <span style="color:red;">
-                                                                        <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b class="ng-binding">${order.statusName}</b><br>
-                                                                    </span>
-                                                                    <p></p>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <h4><b class="thong-tin-gia-tri-don-hang">Giá trị đơn hàng</b></h4>
-                                                                    <p style="font-size:28px;">
-                                                                        <span style="font-size:28px;color:#FF0000;" class="ng-binding">${order.formattedPrice}</span>
-                                                                        <span style="font-size:18px;color:#000000;"><span class="thong-tin-don-vi-tien-te">VNĐ</span></span>
-                                                                    </p>
-                                                                    <br>
-                                                                    <a href="AllOrderDetail?orderId=${order.orderId}">Xem chi tiết đơn hàng của bạn</a><br><br><br><br><br> 
-
-                                                                    <c:if test="${order.status != 6}">
-                                                                        <input type="hidden" name="orderId" value="${order.orderId}" />
-                                                                        <span style="color:red;margin-top: 20px;font-weight: 600">
-                                                                            <a href="#" class="cancel-order-link" data-order-id="${order.orderId}">Huỷ đơn hàng</a>
+                                                            <c:if test="${order.status != 7}">
+                                                                <li class="orf row">
+                                                                    <div class="col-md-7 ng-binding">
+                                                                        <p>
+                                                                        </p><h4> <b class="ng-binding"><span class="thong-tin-ma-don-hang">Mã đơn hàng</span>: ${order.orderId} </b> </h4> <br>
+                                                                        <span class="thong-tin-ho-va-ten-khach-hang">Họ và tên khách hàng</span>: ${order.name}<br>
+                                                                        <span class="thong-tin-so-dien-thoai">Số điện thoại</span>: <span class="order-phone ng-binding">${order.phone}</span><br>
+                                                                        <span class="thong-tin-email">Email</span>: <span class="order-email ng-binding">${order.email}</span><br>
+                                                                        <span class="thong-tin-ngay-mua">Ngày mua</span>:  <span class="ng-binding">${order.createdAt}</span><br>
+                                                                        <span class="thong-tin-dia-chi-giao">Địa chỉ giao hàng</span>: ${order.address}
+                                                                        <br>
+                                                                        <br>
+                                                                        <br>
+                                                                        <span style="color:red;">
+                                                                            <span class="thong-tin-trang-thai-thanh-toan">Trạng thái thanh toán</span>: <b class="ng-binding">
+                                                                                <c:if test="${order.paymentStatus == true}">
+                                                                                    Đã thanh toán
+                                                                                </c:if>
+                                                                                <c:if test="${order.paymentStatus == false}">
+                                                                                    Chưa thanh toán
+                                                                                </c:if>
+                                                                            </b><br>
                                                                         </span>
-                                                                    </c:if>
+                                                                        <span style="color:red;">
+                                                                            <span class="thong-tin-trang-thai-thanh-toan">Trạng thái đơn hàng</span>: <b class="ng-binding">${order.statusName}</b><br>
+                                                                        </span>
+                                                                        <p></p>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <h4><b class="thong-tin-gia-tri-don-hang">Giá trị đơn hàng</b></h4>
+                                                                        <p style="font-size:28px;">
+                                                                            <span style="font-size:28px;color:#FF0000;" class="ng-binding">${order.formattedPrice}</span>
+                                                                            <span style="font-size:18px;color:#000000;"><span class="thong-tin-don-vi-tien-te">VNĐ</span></span>
+                                                                        </p>
+                                                                        <br>
+                                                                        <a href="AllOrderDetail?orderId=${order.orderId}">Xem chi tiết đơn hàng của bạn</a><br><br><br><br><br> 
 
+                                                                        <c:if test="${order.status != 6}">
+                                                                            <input type="hidden" name="orderId" value="${order.orderId}" />
+                                                                            <span style="color:red;margin-top: 20px;font-weight: 600">
+                                                                                <a href="#" class="cancel-order-link" data-order-id="${order.orderId}">Huỷ đơn hàng</a>
+                                                                            </span>
+                                                                        </c:if>
+
+                                                                    </div>
+                                                                </li>  
+                                                            </c:if>
+                                                            <c:if test="${order.status == 7}">
+                                                                <div>
+                                                                    <center>
+                                                                        <h3 class="" style="margin-top: 20px;">Bạn chưa có đơn hàng nào</h3>
+                                                                    </center>
                                                                 </div>
-                                                            </li>                                                           
+                                                            </c:if>
                                                         </c:forEach>
                                                     </c:if>
                                                     <c:if test="${empty listOrder}">

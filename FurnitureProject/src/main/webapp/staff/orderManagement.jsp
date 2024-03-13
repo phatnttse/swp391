@@ -73,7 +73,7 @@
                         <span>Tất Cả Đơn Hàng</span>
                     </a>
                     <a class="nav-link collapsed" href="requestCancelOrderManager">                  
-                        <span>Đơn Hàng Đã Huỷ</span>
+                        <span>Yêu cầu huỷ đơn</span>
                     </a>
                 </li>
 

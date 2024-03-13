@@ -1,3 +1,4 @@
+phatntt\dto\EmailDTO$EmailDTOBuilder.class
 phatntt\controller\email\ForgotPasswordController.class
 phatntt\dto\OrderDetailDTO.class
 phatntt\dto\UsersDTO.class
@@ -7,6 +8,8 @@ phatntt\util\DBConnect.class
 phatntt\controller\orders\ViewAllOrderDetailController.class
 phatntt\controller\email\ConfirmVerificationResetPassController.class
 phatntt\dao\ProductsDAO.class
+phatntt\dto\CategoryDTO$CategoryDTOBuilder.class
+phatntt\dto\UsersDTO$UsersDTOBuilder.class
 phatntt\controller\products\LoadProductDetailController.class
 phatntt\util\Constants$LoginWithGoogleFeatures.class
 phatntt\controller\admin\ViewProductsController.class
@@ -35,8 +38,10 @@ phatntt\dao\CartDAO.class
 phatntt\util\Constants$AdminFeatures.class
 phatntt\controller\email\CheckVerificationCode.class
 phatntt\controller\users\RegisterAccountServlet.class
+phatntt\dto\ErrorDTO$ErrorDTOBuilder.class
 phatntt\controller\admin\DeleteUsersController.class
 phatntt\dao\UsersDAO.class
+phatntt\dto\OrderDetailDTO$OrderDetailDTOBuilder.class
 phatntt\controller\admin\UserAccountsController.class
 phatntt\controller\products\ProductsController.class
 phatntt\controller\users\LoginWithGoogleController.class
@@ -45,9 +50,11 @@ phatntt\controller\users\EWalletPayment.class
 phatntt\dto\ProductsDTO.class
 phatntt\controller\staff\OrderDetailManagementController.class
 phatntt\dao\OrderDetailDAO.class
+phatntt\dto\OrderStatusDTO$OrderStatusDTOBuilder.class
 phatntt\dto\RequestCancellationDTO.class
 phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
+phatntt\dto\CartDTO$CartDTOBuilder.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\users\LogOutServlet.class
 phatntt\controller\products\ViewPopupProductController.class
@@ -56,6 +63,7 @@ phatntt\dto\CartDTO.class
 phatntt\dto\EmailDTO.class
 phatntt\dto\ErrorDTO.class
 phatntt\controller\users\ChangePasswordController.class
+phatntt\dto\OrderDTO$OrderDTOBuilder.class
 phatntt\dao\EmailDAO$2.class
 phatntt\dto\OrderDTO.class
 phatntt\util\Constants$ValidateFeatures.class
@@ -70,6 +78,7 @@ phatntt\util\Constants.class
 phatntt\controller\orders\ViewAllOrderController.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class
+phatntt\controller\staff\ProcessOrderCancellationRequests.class
 phatntt\dto\OrderStatusDTO.class
 phatntt\listener\MyContextServletListener.class
 phatntt\util\Constants$DispatchFeatures.class
@@ -78,3 +87,4 @@ phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\controller\email\CreateNewPasswordController.class
 phatntt\dao\OrdersDAO.class
+phatntt\dto\ProductsDTO$ProductsDTOBuilder.class

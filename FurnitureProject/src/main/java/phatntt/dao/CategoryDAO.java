@@ -4,13 +4,13 @@
  */
 package phatntt.dao;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import javax.naming.NamingException;
 import phatntt.dto.CategoryDTO;
 import phatntt.util.DBConnect;
@@ -67,7 +67,7 @@ public class CategoryDAO {
         return result;
 
     }
-    
+
     public List<CategoryDTO> getAllCategoryDTOs() throws SQLException, NamingException {
 
         List<CategoryDTO> result = new ArrayList<>();
@@ -157,29 +157,20 @@ public class CategoryDAO {
         return result;
 
     }
-    // Helper method to extract filename from the full path
-    private String getSubmittedFileName(String fullPath) {
-        return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
-    }
-        public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
+
+    public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean result = false;
 
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "INSERT INTO category (category_id, name, thumbnail) "
+                String sql = "INSERT INTO category (category_id, name, thumbnail)"
                         + "VALUES (?, ?, ?)";
                 stm = con.prepareStatement(sql);
 
                 stm.setInt(1, category.getCategoryId());
                 stm.setString(2, category.getName());
-           
-
-                // Update thumbnail path to be relative to the web application
-                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
-                stm.setString(6, relativeFilePath);
-
-                
+                stm.setString(3, category.getThumbnail());
 
                 int rowsAffected = stm.executeUpdate();
                 if (rowsAffected > 0) {
@@ -187,7 +178,7 @@ public class CategoryDAO {
                 }
             }
         } finally {
-            // Close resources
+
             if (stm != null) {
                 stm.close();
             }
@@ -197,5 +188,5 @@ public class CategoryDAO {
         }
         return result;
     }
-    
+
 }

@@ -168,20 +168,24 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- Content Row -->
-
-                    <c:set var="categorys" value="${requestScope.CATEGORYDETAIL}"/>
-
                     <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục Chi Tiết</h6>
+                    <c:if test="${not empty requestScope.UPDATE_SUCCESS}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>${requestScope.UPDATE_SUCCESS}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="card-body">
+                    </c:if>
 
-                            <form action="categoryManagement" method="get" style="margin-top: 7px">
+                    <form action="EditCategoryManagement" method="get" enctype="multipart/form-data" style="margin-top: 7px">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục Chi Tiết</h6>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
@@ -189,56 +193,41 @@
                                                 <th>Mã sản phẩm</th>
                                                 <th>Loại</th>
                                                 <th>Thumbnail</th>
-                                                     
                                             </tr>
                                         </thead>
-
                                         <tbody>
-
                                             <tr>
-                                                <td>#${category.categoryId}</td>
-                                                <td>${category.name}</td>
-                                                <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>                            
-                                            </tr>  
-
-
+                                                <td>
+                                                    <input type="text" class="form-control" name="categoryId" value="${category.categoryId}" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" value="${category.name}">
+                                                </td>
+                                                <td>
+                                                    <img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" />
+                                                    <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <div class="btn-group">
-
-                                        <!-- Detail Button -->
-                                        <a href="EditCategoryController?productId=${category.categoryId}" class="btn btn-outline-info ">Sửa</a>
-
-                                    </div>   
-                                </div>                               
-                            </form>
-
+                                        <button type="submit" class="btn btn-primary">Sửa</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
 
+                <!-- Footer (previous code) -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
-
-
-</body>
+    </body>
 </html>

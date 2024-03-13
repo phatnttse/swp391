@@ -237,26 +237,28 @@ public class CategoryDAO {
         return result;
     }
     
-    public boolean updateCategory(CategoryDTO category) throws SQLException, NamingException {
+    public boolean updateCategories(CategoryDTO category) throws SQLException, NamingException {
         boolean check = false;
+
         try {
             con = DBConnect.createConnection();
             if (con != null) {
                 String sql = "UPDATE category "
-                        + "SET category_id = ?, thumbnail = ? "
+                        + "SET name = ?, thumbnail = ? "
                         + "WHERE category_id = ?";
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, category.getCategoryId());
-                // Update thumbnail path to be relative to the web application
-                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
-                stm.setString(2, relativeFilePath);
+                stm.setString(1, category.getName());
+                stm.setString(2, category.getThumbnail());
+                stm.setInt(3, category.getCategoryId());
                 
                 check = stm.executeUpdate() > 0 ? true : false;
+                stm.setInt(3, category.getCategoryId());
+
+                check = stm.executeUpdate() > 0;
             }
         } finally {
-            // Close resources
-            if (stm != null) {
+             if (stm != null) {
                 stm.close();
             }
             if (con != null) {
@@ -265,4 +267,5 @@ public class CategoryDAO {
         }
         return check;
     }
+
 }

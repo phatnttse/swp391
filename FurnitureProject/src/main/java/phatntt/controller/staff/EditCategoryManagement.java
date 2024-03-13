@@ -68,33 +68,39 @@ public class EditCategoryManagement extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGEMENT_PAGE);
-        
+
         try {
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            String thumbnail = request.getParameter("thumbnail");
+            String name = request.getParameter("name"); // Assuming you have a parameter for category name
+
             CategoryDAO categoryDAO = new CategoryDAO();
-            
-            CategoryDTO category = categoryDAO.getCategoryById(categoryId);
-           
-            url = siteMaps.getProperty(Constants.Management.EDIT_CATEGORY_PAGE)
-                    +"?categoryId=" + categoryId;
-            
-           request.setAttribute("EDITCATEGORY", category);
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            CategoryDTO category = new CategoryDTO();
+
+            category.setCategoryId(categoryId);
+            category.setThumbnail(thumbnail);
+            category.setName(name);
+
+            // Corrected the method invocation on categoryDAO instance
+            boolean success = categoryDAO.updateCategories(category);
+
+            if (success) {
+                url = "CategoryDetailManagementController" + "?categoryId=" + categoryId;
+                request.setAttribute("UPDATE_SUCCESS", "Cập nhật danh mục thành công");
+            }
+
+        } catch (SQLException | NamingException ex) {
+            ex.printStackTrace();
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
-        
-    } 
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : productManagement
-    Created on : Mar 4, 2024, 12:33:48 AM
-    Author     : mac
+    Document   : categoryManagement
+    Created on : Mar 13, 2024, 11:28:55 PM
+    Author     : Admin
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -129,10 +129,7 @@
                 Interface
             </div>
             <li class="nav-item">
-
                 <a class="nav-link collapsed" href="categoryManagement">
-
-
                     <span>Danh Mục</span>
                 </a>                  
             </li>
@@ -249,7 +246,6 @@
 
                     <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
 
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -305,15 +301,12 @@
                                                     <td>
                                                         <div class="btn-group">
 
-                                                            <!--ADD Button-->
-                                                            <a href="addCategoryPage" class="btn btn-outline-success">Thêm</a>
-
                                                             <!-- Detail Button -->
-                                                            <a href="productdetailmanagement?productId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
+                                                            <a href="CategoryDetailManagementController?categoryId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
 
 
                                                             <!-- Delete Button -->
-                                                            <a href="DeleteProductsController?productId=${category.categoryId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
+                                                            <a href="#" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>                                                                                  
                                                 </tr>  
                                             </c:forEach>
@@ -348,6 +341,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
 
 </body>
 </html>

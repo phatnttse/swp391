@@ -11,6 +11,7 @@
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/util/Config.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/staff/AddCategoryController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/cart/RemoveProductFromCart.java
+/Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/staff/DeleteCategoryController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/dto/OrderStatusDTO.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/products/AddProductsToCartController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/users/LogOutServlet.java
@@ -42,6 +43,7 @@
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/filter/AuthorizationFilter.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/staff/DeleteProductsController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/staff/SortProductByStaffController.java
+/Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/staff/SortCategoryByStaffController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/products/ViewPopupProductController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/cart/CartController.java
 /Users/mac/Documents/GitHub/SWP/Untitled/FurnitureProject/src/main/java/phatntt/controller/email/ForgotPasswordController.java

@@ -70,6 +70,7 @@ phatntt/controller/email/CheckVerificationCode.class
 phatntt/util/Constants$LoginWithGoogleFeatures.class
 phatntt/controller/email/UserVerifyServlet.class
 phatntt/controller/users/LogOutServlet.class
+phatntt/controller/staff/DeleteCategoryController.class
 phatntt/controller/admin/UserAccountsController.class
 phatntt/dao/CategoryDAO.class
 phatntt/controller/staff/DeleteProductsController.class

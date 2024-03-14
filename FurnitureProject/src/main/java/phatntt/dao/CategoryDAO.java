@@ -4,22 +4,22 @@
  */
 package phatntt.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-
 import javax.naming.NamingException;
 import phatntt.dto.CategoryDTO;
+import phatntt.dto.ProductsDTO;
 import phatntt.util.DBConnect;
+import phatntt.util.Key_Utils;
 
 /**
  *
@@ -73,7 +73,7 @@ public class CategoryDAO {
         return result;
 
     }
-
+    
     public List<CategoryDTO> getAllCategoryDTOs() throws SQLException, NamingException {
 
         List<CategoryDTO> result = new ArrayList<>();
@@ -163,20 +163,65 @@ public class CategoryDAO {
         return result;
 
     }
+    
+   public CategoryDTO getCategoryById(int categoryId) throws SQLException, NamingException {
+    CategoryDTO result = null;
 
+    try {
+        con = DBConnect.createConnection();
+
+        if (con != null) {
+            String sql = "SELECT category_id, name, thumbnail FROM category WHERE category_id = ?";
+
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, categoryId);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String thumbnail = rs.getString("thumbnail");
+                result = new CategoryDTO(categoryId, name, thumbnail);
+            }
+        }
+    } finally {
+        // Close resources
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+    e.printStackTrace(); // Log the exception
+}
+    }
+
+    return result;
+}
+
+    // Helper method to extract filename from the full path
+    private String getSubmittedFileName(String fullPath) {
+        return fullPath.substring(fullPath.lastIndexOf('/') + 1).substring(fullPath.lastIndexOf('\\') + 1);
+    }
     public boolean addCategory(CategoryDTO category) throws SQLException, NamingException {
         boolean result = false;
 
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "INSERT INTO category (category_id, name, thumbnail)"
-                        + "VALUES (?, ?, ?)";
+                String sql = "INSERT INTO category ( name, thumbnail)"
+                        + "VALUES (?, ?)";
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, category.getCategoryId());
-                stm.setString(2, category.getName());
-                stm.setString(3, category.getThumbnail());
+                
+                stm.setString(1, category.getName());
+                // Update thumbnail path to be relative to the web application
+                String relativeFilePath = "uploads" + File.separator + getSubmittedFileName(category.getThumbnail());
+                stm.setString(2, relativeFilePath);
 
                 int rowsAffected = stm.executeUpdate();
                 if (rowsAffected > 0) {
@@ -194,33 +239,36 @@ public class CategoryDAO {
         }
         return result;
     }
-
-    public boolean deleteCategory(int categoryId) throws SQLException, NamingException {
-
-        boolean result = false;
+    
+    public boolean updateCategories(CategoryDTO category) throws SQLException, NamingException {
+        boolean check = false;
 
         try {
             con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "DELETE FROM category WHERE category_id = ?";
+                String sql = "UPDATE category "
+                        + "SET name = ?, thumbnail = ? "
+                        + "WHERE category_id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, categoryId);
 
-                int rowsAffected = stm.executeUpdate();
-                if (rowsAffected > 0) {
-                    result = true;
-                }
+                stm.setString(1, category.getName());
+                stm.setString(2, category.getThumbnail());
+                stm.setInt(3, category.getCategoryId());
+                
+                check = stm.executeUpdate() > 0 ? true : false;
+                stm.setInt(3, category.getCategoryId());
+
+                check = stm.executeUpdate() > 0;
             }
-
         } finally {
-            if (stm != null) {
+             if (stm != null) {
                 stm.close();
             }
             if (con != null) {
                 con.close();
             }
         }
-        return result;
+        return check;
     }
     
     
@@ -297,5 +345,31 @@ public List<CategoryDTO> sortCategoryByNameDescending() throws SQLException, Nam
 }
 
 
+    public boolean deleteCategory(int categoryId) throws SQLException, NamingException {
 
+        boolean result = false;
+
+        try {
+            con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "DELETE FROM category WHERE category_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

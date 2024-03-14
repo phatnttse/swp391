@@ -15,11 +15,86 @@
     <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <style>
-
-    </style>
 
     <title>Category Page</title>
+
+    <style>
+        /* Your existing CSS ... */
+
+        /* Additional styles for the dropdown */
+        #sort-by ul {
+            width: 100%;
+            text-align: left;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        #sort-by ul li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #sort-by ul li:hover {
+            background-color: #f4f4f4;
+        }
+
+        /* Additional styles from sortPagiBar */
+        #sort-by label {
+            display: inline-block;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        #sort-by .ul_col {
+            position: relative;
+            margin-left: 15px;
+            background: #fff;
+            width: 145px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 14px;
+            border: 1px solid #E5E5E5;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url(//bizweb.dktcdn.net/100/499/932/themes/926650/assets/arrow_down.svg?1705830293643);
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        #sort-by .ul_col .content_ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            width: 100%;
+            z-index: 99;
+            border: 1px solid #E5E5E5;
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            display: none;
+        }
+
+        #sort-by .ul_col .content_ul ul li {
+            display: block;
+        }
+
+        #sort-by .ul_col:hover .content_ul {
+            display: block;
+
+        }
+    </style>
+
 </head>
 
 
@@ -53,11 +128,11 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="categoryManagement">
-                        <span>Danh Mục</span>
-                    </a>                  
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="categoryManagement">
+                    <span>Danh Mục</span>
+                </a>                  
+            </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="productManagement">
@@ -70,9 +145,9 @@
                 <a class="nav-link collapsed" href="orderManagement">                  
                     <span>Đơn Hàng</span>
                 </a>
-                
+
             </li>
-                                                     
+
 
 
             <!-- Divider -->
@@ -163,42 +238,67 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                         <!-- Content Row -->
-                 
-                        <c:set var="categorys" value="${requestScope.CATEGORYS}"/>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Content Row -->
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
+                    <c:set var="categorys" value="${requestScope.CATEGORYS}"/>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục</h6>
-                            </div>
-                            <div class="card-body">
-                                <a href="addCategoryPage" class="btn btn-outline-success" style="margin-left: 94%">Thêm</a>
-                                <form action="categoryManagement" method="get" style="margin-top: 7px">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã sản phẩm</th>
-                                                    <th>Loại</th>
-                                                    <th>Thumbnail</th>
-                                                    <th>Thao tác</th>      
-                                                </tr>
-                                            </thead>
-                                            
-                                            <tbody>
-                                                <c:forEach var="category" items="${categorys}">
-                                                    <tr>
-                                                        <td>#${category.categoryId}</td>
-                                                        <td>${category.name}</td>
-                                                        <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                    <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
 
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục</h6>
+                                </div>
+                                <!-- Add Sort Dropdown -->
+                                <div class="col-md-6 text-right right">
+                                    <div id="sort-by">
+                                        <label class="left">Sắp xếp theo</label>
+                                        <ul class="ul_col">
+                                            <li>
+                                                <span>
+                                                    Mặc định
+                                                </span>
+                                                <ul class="content_ul">
+                                                    <li><a href="SortCategoryByStaffController?typeSort=default">Mặc định</a></li>
+                                                    <li><a href="SortCategoryByStaffController?typeSort=AtoZ">A → Z</a></li>
+                                                    <li><a href="SortCategoryByStaffController?typeSort=ZtoA">Z → A</a></li>
                
-                                                        <td>
+                                                    
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Sort Dropdown -->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a href="addCategoryPage" class="btn btn-outline-success" style="margin-left: 94%">Thêm</a>
+                            <form action="categoryManagement" method="get" style="margin-top: 7px">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Loại</th>
+                                                <th>Thumbnail</th>
+                                                <th>Thao tác</th>      
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <c:forEach var="category" items="${categorys}">
+                                                <tr>
+                                                    <td>#${category.categoryId}</td>
+                                                    <td>${category.name}</td>
+                                                    <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+
+
+                                                    <td>
                                                         <div class="btn-group">
 
                                                             <!-- Detail Button -->
@@ -208,19 +308,19 @@
                                                             <!-- Delete Button -->
                                                             <a href="#" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>                                                                                  
-                                                    </tr>  
-                                                </c:forEach>
+                                                </tr>  
+                                            </c:forEach>
 
-                                            </tbody>
-                                        </table>
-                                    </div>                               
-                                </form>
+                                        </tbody>
+                                    </table>
+                                </div>                               
+                            </form>
 
-                            </div>
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- /.container-fluid -->
 
 
             </div>
@@ -241,7 +341,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
-    
+
 
 </body>
 </html>

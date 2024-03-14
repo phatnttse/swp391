@@ -10,8 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.naming.NamingException;
 import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
@@ -267,5 +270,80 @@ public class CategoryDAO {
         }
         return check;
     }
+    
+    
+public List<CategoryDTO> sortCategoryByNameAscending() throws SQLException, NamingException {
+    List<CategoryDTO> result = new ArrayList<>();
+
+    try {
+        con = DBConnect.createConnection();
+
+        if (con != null) {
+            String sql = "SELECT * FROM category ORDER BY `name` ASC";
+            stm = con.prepareCall(sql);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                int categoryId = rs.getInt("category_id");
+                String name = rs.getString("name");
+                String thumbnail = rs.getString("thumbnail");
+
+                CategoryDTO category = new CategoryDTO(categoryId, name, thumbnail);
+                result.add(category);
+            }
+        }
+
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+
+    return result;
+}
+
+public List<CategoryDTO> sortCategoryByNameDescending() throws SQLException, NamingException {
+    List<CategoryDTO> result = new ArrayList<>();
+
+    try {
+        con = DBConnect.createConnection();
+
+        if (con != null) {
+            String sql = "SELECT * FROM category ORDER BY `name` DESC"; // Thay đổi ASC thành DESC để sắp xếp theo thứ tự giảm dần
+            stm = con.prepareCall(sql);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                int categoryId = rs.getInt("category_id");
+                String name = rs.getString("name");
+                String thumbnail = rs.getString("thumbnail");
+
+                CategoryDTO category = new CategoryDTO(categoryId, name, thumbnail);
+                result.add(category);
+            }
+        }
+
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+
+    return result;
+}
+
+
 
 }

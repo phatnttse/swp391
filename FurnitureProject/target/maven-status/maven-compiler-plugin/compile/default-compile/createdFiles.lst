@@ -21,6 +21,7 @@ phatntt/controller/staff/EditCategoryManagement.class
 phatntt/controller/products/ViewPopupProductController.class
 phatntt/filter/AuthorizationFilter.class
 phatntt/util/Constants$SignUpFeatures.class
+phatntt/controller/staff/SortCategoryByStaffController.class
 phatntt/controller/orders/OrdersController.class
 phatntt/controller/email/ConfirmVerificationResetPassController.class
 phatntt/util/Constants$ValidateFeatures.class

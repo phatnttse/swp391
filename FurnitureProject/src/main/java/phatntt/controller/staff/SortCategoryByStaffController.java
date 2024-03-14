@@ -19,7 +19,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -71,23 +73,23 @@ public class SortCategoryByStaffController extends HttpServlet {
         String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGEMENT_PAGE);
         
         try {
-            ProductsDAO dao = new ProductsDAO();
-            List<ProductsDTO> dTOs = new ArrayList<>();
+            CategoryDAO dao = new CategoryDAO();
+            List<CategoryDTO> dTOs = new ArrayList<>();
             switch (typeSort) {
                 case "AtoZ":
-                    dTOs = dao.sortProductByNameAscending();
-                    request.setAttribute("PRODUCTS", dTOs);
+                    dTOs = dao.sortCategoryByNameAscending();
+                    request.setAttribute("CATEGORYS", dTOs);
 
                     break;
                 case "ZtoA":
-                    dTOs = dao.sortProductByNameDescending();
-                    request.setAttribute("PRODUCTS", dTOs);
+                    dTOs = dao.sortCategoryByNameDescending();
+                    request.setAttribute("CATEGORYS", dTOs);
                     break;
                
                 default:
                     // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác
-                    dTOs = dao.getAllProducts();
-                    request.setAttribute("PRODUCTS", dTOs);
+                    dTOs = dao.getAllCategoryDTOs();
+                    request.setAttribute("CATEGORYS", dTOs);
 
                     break;
             }

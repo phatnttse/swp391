@@ -45,9 +45,22 @@ public class ProductManagerController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE);
 
+        String pageParam = request.getParameter("page");
+        int page = 1;
+
+        if (pageParam != null) {
+            page = Integer.parseInt(pageParam);
+        }
+
         try {
+            int limit = 9;
+
+            if (page != 1) {
+                page = page - 1;
+                page = page * limit - 1;
+            }
             ProductsDAO productDAO = new ProductsDAO();
-            List<ProductsDTO> products = productDAO.getAllProducts();
+            List<ProductsDTO> products = productDAO.getAllProducts(page,limit);
             request.setAttribute("PRODUCTS", products);
 
        

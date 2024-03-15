@@ -54,7 +54,7 @@
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
 
-                        <!-- DataTales Example -->
+
                         <c:if test="${not empty requestScope.UPDATE_SUCCESS}">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>${requestScope.UPDATE_SUCCESS}</strong>
@@ -64,13 +64,12 @@
                             </div>
                         </c:if>
 
-                        <form action="actionWithProducts" method="post" class="needs-validation">
+                        <form action="actionWithProducts" method="post" enctype="multipart/form-data">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sản Phẩm</h6>
                                 </div>
                                 <div class="card-body">
-                                    <!--                                    <form action="orderDetailManagement" method="get">-->
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -87,8 +86,8 @@
                                                         <input type="text" class="form-control" name="productId" value="${product.productId}" readonly="">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="categoryId" value="${product.categoryId}">
-                                                        <input type="text" class="form-control" name="categoryName" value="${product.categoryName}">
+                                                        <input type="hidden" name="categoryId"  value="${product.categoryId}">
+                                                        <input type="text" class="form-control" value="${product.categoryName}">
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="title" value="${product.title}">
@@ -132,8 +131,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="thumbnails/products/${product.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                        <img src="thumbnails/products/${product.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px; margin-bottom: 10px"
+                                                             class="rounded">
                                                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                                                        
 
                                                     </td>
                                                     <td>
@@ -160,23 +161,22 @@
                                         <div class="btn-group">
                                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                                         </div>
-                                        <!--                                    </form>-->
                                     </div>
                                 </div>
+                            </div>
                         </form>
+                        <!-- /.container-fluid -->
+
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- End of Main Content -->
+
+                    <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
 
                 </div>
-                <!-- End of Main Content -->
-
-                <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- End of Page Wrapper -->
 
     </body>
 </html>

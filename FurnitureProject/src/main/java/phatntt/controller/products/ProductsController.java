@@ -47,9 +47,24 @@ public class ProductsController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
+
+        String pageParam = request.getParameter("page");
+        int page = 1;
+
+        if (pageParam != null) {
+            page = Integer.parseInt(pageParam);
+        }
+
         try {
+            int limit = 9;
+
+            if (page != 1) {
+                page = page - 1;
+                page = page * limit - 1;
+            }
+
             ProductsDAO product = new ProductsDAO();
-            List<ProductsDTO> listProducts = product.getAllProducts();
+            List<ProductsDTO> listProducts = product.getAllProducts(page, limit);
 
             request.setAttribute("PRODUCTS_LIST", listProducts);
 

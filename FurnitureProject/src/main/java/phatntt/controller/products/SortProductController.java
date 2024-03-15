@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -20,9 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
-import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -75,8 +71,23 @@ public class SortProductController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_PAGE);
-        String span = null;
+        String span;
+        
+        String pageParam = request.getParameter("page");
+        int page = 1;
+
+        if (pageParam != null) {
+            page = Integer.parseInt(pageParam);
+        }
+        
         try {
+            int limit = 9;
+
+            if (page != 1) {
+                page = page - 1;
+                page = page * limit - 1;
+            }
+
             ProductsDAO dao = new ProductsDAO();
             List<ProductsDTO> dTOs = new ArrayList<>();
             switch (sortType) {
@@ -118,7 +129,7 @@ public class SortProductController extends HttpServlet {
                     break;
                 default:
                     // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác
-                    dTOs = dao.getAllProducts();
+                    dTOs = dao.getAllProducts(page, limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
 
                     break;

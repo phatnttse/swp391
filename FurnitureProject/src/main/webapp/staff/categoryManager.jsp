@@ -10,12 +10,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
-    
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <title>Category Page</title>
+    <title>Quản lý danh mục</title>
 
     <style>
         /* Your existing CSS ... */
@@ -128,6 +128,16 @@
                                 <div class="col">
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Danh Mục</h6>
                                 </div>
+
+                                <c:if test="${not empty requestScope.DELETE_SUCCESS}">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>${requestScope.DELETE_SUCCESS}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </c:if>
+
                                 <!-- Add Sort Dropdown -->
                                 <div class="col-md-6 text-right right">
                                     <div id="sort-by">
@@ -138,9 +148,9 @@
                                                     Mặc định
                                                 </span>
                                                 <ul class="content_ul">
-                                                    <li><a href="SortCategoryByStaffController?typeSort=default">Mặc định</a></li>
-                                                    <li><a href="SortCategoryByStaffController?typeSort=AtoZ">A → Z</a></li>
-                                                    <li><a href="SortCategoryByStaffController?typeSort=ZtoA">Z → A</a></li>
+                                                    <li><a href="filterCategories?typeSort=default">Mặc định</a></li>
+                                                    <li><a href="filterCategories?typeSort=AtoZ">A → Z</a></li>
+                                                    <li><a href="filterCategories?typeSort=ZtoA">Z → A</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -168,13 +178,13 @@
                                                 <tr>
                                                     <td>#${category.categoryId}</td>
                                                     <td>${category.name}</td>
-                                                    <td><img height="100px" width="100px" src="${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                    <td><img height="100px" width="100px" src="thumbnails/categories/${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
                                                     <td>
                                                         <div class="btn-group">
-                                                           
-                                                            <a href="CategoryDetailManagementController?categoryId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
-                                                           
-                                                            <a href="#" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
+
+                                                            <a href="categoryDetailManager?categoryId=${category.categoryId}" class="btn btn-outline-info">Sửa</a>
+
+                                                            <a href="updateDeleteCategory?categoryId=${category.categoryId}" class="btn btn-outline-danger" style="margin-left: 5px; margin-right: -30px">Xóa</a>                                                         
                                                         </div>                                                                                  
                                                 </tr>  
                                             </c:forEach>

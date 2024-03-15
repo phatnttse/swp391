@@ -37,7 +37,6 @@ phatntt\controller\staff\orders\ProcessOrderCancellationRequests.class
 phatntt\util\Constants.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class
-phatntt\util\Constants$DispatchFeatures.class
 phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\dao\OrdersDAO.class
@@ -81,6 +80,7 @@ phatntt\dao\OrderDetailDAO.class
 phatntt\dto\CartDTO$CartDTOBuilder.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\products\ViewPopupProductController.class
+phatntt\controller\staff\categories\CategoryDetailManagerController.class
 phatntt\controller\staff\orders\OrderDetailManagementController.class
 phatntt\dao\StaffDAO.class
 phatntt\dto\CartDTO.class

@@ -90,7 +90,7 @@ public class AccountInfoController extends HttpServlet {
 
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.DispatchFeatures.ACCOUNT_INFO_PAGE);
+        String url = siteMaps.getProperty(Constants.UsersFeatures.ACCOUNT_INFO_PAGE);
 
         try {
             String name = request.getParameter("name");

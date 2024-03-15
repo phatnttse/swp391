@@ -10,21 +10,15 @@ package phatntt.util;
  */
 public class Constants {
 
-    public class DispatchFeatures {
-
-        public static final String ACCOUNT_INFO_PAGE = "accountInfoPage";
-        public static final String FEED_BACK = "feedBack";
-    }
-
-    //Login - Logout - SignUp
     public class LoginFeatures {
-
+  
         public static final String LOGIN_PAGE = "loginPage";
         public static final String PRODUCTS_PAGE = "productsPage";
         public static final String HOME_PAGE = "homePage";
         public static final String ADMIN_PAGE = "adminHomePage";
         public static final String HOME = "home";
         public static final String STAFF_PAGE = "staffPage";
+        
     }
 
     public class LoginWithGoogleFeatures {
@@ -93,6 +87,7 @@ public class Constants {
         public static final String LOGIN_PAGE = "loginPage";
         public static final String EDIT_PROFILE_PAGE = "editProfilePage";
         public static final String CHANGE_PASSWORD_PAGE = "changePasswordPage";
+        public static final String ACCOUNT_INFO_PAGE = "accountInfoPage";
     }
 
     public class ProductsFeatures {
@@ -130,11 +125,13 @@ public class Constants {
         public static final String ORDER_MANAGEMENT_PAGE = "orderManagerPage";
         public static final String VIEW_ORDERDETAIL_PAGE = "orderDetailManagerPage";
         public static final String REQUEST_TO_CANCEL_ORDER_PAGE = "requestToCancelOrderPage";
-       
+
         public static final String PRODUCT_MANAGER_PAGE = "productManagerPage";
         public static final String VIEW_PRODUCT_DETAIL_PAGE = "productDetailManagerPage";
         public static final String ADD_PRODUCT_PAGE = "addProductPage";
-        
+
         public static final String CATEGORY_MANAGER_PAGE = "categoryManagerPage";
+        public static final String CATEGORY_DETAIL_PAGE = "categoryDetailManagerPage";
+        public static final String ADD_NEW_CATEGORY_PAGE = "addCategoryPage";
     }
 }

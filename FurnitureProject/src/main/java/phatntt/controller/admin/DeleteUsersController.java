@@ -8,8 +8,10 @@ package phatntt.controller.admin;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.UsersDAO;
+import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 
@@ -55,27 +58,7 @@ public class DeleteUsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties)context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty( Constants.AdminFeatures.USERACCOUNT_PAGE);
-        
-        String email = request.getParameter("email");
-        
-        try  {
-            UsersDAO dao = new UsersDAO();
-            boolean result = dao.deleteAccount(email);
-            if (result){
-                url = "userAccounts";
-            }
-            
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-        }finally {
-            response.sendRedirect(url);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -89,7 +72,29 @@ public class DeleteUsersController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE);
+
+        String userId = request.getParameter("Id");
+
+        try {
+            UsersDAO dao = new UsersDAO();
+            boolean result = dao.deleteUserManagementpublic(userId);
+            if (result) {
+                List<UsersDTO> dTOs = dao.getAllUsersWithNameOfRole();
+                request.setAttribute("LIST_USER_ROLE", dTOs);
+                url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } finally {
+             RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     /**

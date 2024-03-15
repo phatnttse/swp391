@@ -171,7 +171,7 @@ INSERT INTO category (category_id, name, thumbnail) VALUES
   (6, 'Phụ kiện', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/guong.jpg?v=1699504456387');
   
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
-(1, 'Bồn tắm Massage đặt góc', 5595000, 10, 10, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/js-8098-js-8099.jpg', 
+(1, 'Bồn tắm Massage đặt góc', 5595000, 10, 10, 'Bồn tắm Massage đặt góc.jpg', 
 'Kích thước (mm):  1500x1500x580mm
 Nguồn điện : AC 220 V ± 15% / 50 Hz
 Sục thủy lực, sục khím đổi màu
@@ -183,7 +183,7 @@ Mực nước : 70 – 80 %
 Đường ống thoát nước : Ø42 ÷ Ø48
 Gối đầu : 01
 Chất liệu: Nhựa Acrylic, Men acrylic', '2024-01-24 12:00:00'),
-(1, 'Bồn tắm nằm đặt sàn tròn', 3960000, 10, 15, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/m20808-avt.jpg?v=1699887883713', 
+(1, 'Bồn tắm nằm đặt sàn tròn', 3960000, 10, 15, 'Bồn tắm nằm đặt sàn tròn.jpg', 
 'Kích thước: 1500x1500x630 mm
 Chất liệu: nhựa Acrylic
 Màu sắc: màu trắng
@@ -192,25 +192,25 @@ Trọng lượng: 40kg
 Dung tích: 270 lít
 Giá chưa bao gồm vòi nước & đã bao gồm bộ xả
 Bảo hành: Sản phẩm 24 tháng – Linh kiện, phụ kiện 12 tháng', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm đặt sàn massage 1.8m gồm vòi', 10192000, 20, 20, '//bizweb.dktcdn.net/thumb/large/100/499/932/products/mw6018-180-2ms-1-6260ba462c4ea.jpg?v=1699887565620', 
+(1, 'Bồn tắm đặt sàn massage 1.8m gồm vòi', 10192000, 20, 20, 'Bồn tắm đặt sàn massage 1.8m gồm vòi.jpg', 
 'Loại Bồn: Double MASSAGE Bathtub
 Màu sắc: Trắng Bóng
 Kích thước: 1800x1200x600 mm
 Chất liệu: Cấu tạo hoàn toàn bằng sợi thủy tinh với lớp phủ Acrylic Lucite
 Đã bao gồm vòi sen gắn thành', '2024-01-24 13:00:00'),
-(1, 'Bồn tắm đặt sàn massage 1.69m', 5100000, 10, 19, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/mw8215b-170-ms-1-625f85b7e2c3b.jpg', 
+(1, 'Bồn tắm đặt sàn massage 1.69m', 5100000, 10, 19, 'Bồn tắm đặt sàn massage 1.69m.jpg', 
 'Loại Bồn: Freestanding MASSAGE
 Màu sắc: Trắng Bóng
 Kích thước: 1690 x 810 x 760(mm)
 Chất liệu: Cấu tạo hoàn toàn bằng sợi thủy tinh với lớp phủ Acrylic Lucite
 Không bao gồm vòi sen', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm đặt sàn 1.37m', 2590000, 10, 20, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/mw8225-137-1-625f6bfab7319.jpg', 
+(1, 'Bồn tắm đặt sàn 1.37m', 2590000, 10, 20, 'Bồn tắm đặt sàn 1.37m.jpg', 
 'Loại Bồn: Freestanding bath
 Màu sắc: Trắng Bóng
 Kích thước: 1370 x 720 x 720 (mm)
 Chất liệu: Cấu tạo hoàn toàn bằng sợi thủy tinh với lớp phủ Acrylic Lucite
 Không bao gồm vòi sen', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm đặt sàn 1.2m', 2490000, 10, 20, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/mw8202-120-avt.jpg', 
+(1, 'Bồn tắm đặt sàn 1.2m', 2490000, 10, 20, 'Bồn tắm đặt sàn 1.2m.jpg', 
 'Kích thước: 1200x720x600 mm
 Vật liệu: Acrylic Lucite kết hợp sợi thuỷ tinh 7 lớp
 Loại bồn tắm: Ngâm nguyên khối đặt sàn hiện đại
@@ -218,7 +218,7 @@ Thiết kế: Theo công thái học
 Nút nhấn xả: Chất liệu Đồng mạ Chrome
 Tính năng: Chống trơn trượt chống vi khuẩn và dễ lau chùi giữ nhiệt
 Công nghệ: Liền mạch', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm đặt sàn massage 1.7m', 4590000, 10, 20, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/mw8266-170-ms-avt.jpg', 
+(1, 'Bồn tắm đặt sàn massage 1.7m', 4590000, 10, 20, 'Bồn tắm đặt sàn massage 1.7m.jpg', 
 'Kích thước: 1700x800x580 mm
 Vật liệu: Acrylic Lucite kết hợp sợi thuỷ tinh 7 lớp
 Loại bồn tắm: Massage nguyên khối đặt sàn hiện đại
@@ -227,7 +227,7 @@ Nút nhấn xả: Chất liệu Đồng mạ Chrome
 Tính năng: Chống trơn trượt chống vi khuẩn và dễ lau chùi giữ nhiệt
 Công nghệ: Liền mạch massage thuỷ lực đèn led 7 màu
 Lọc nước ozon chống rò rỉ điện IPX5', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm đặt sàn 1.7m', 2990000, 10, 20, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/mw8024-170-avt.jpg', 
+(1, 'Bồn tắm đặt sàn 1.7m', 2990000, 10, 20, 'Bồn tắm đặt sàn 1.7m.jpg', 
 'Kích thước: 1700x800x580 mm
 Vật liệu: Acrylic Lucite kết hợp sợi thuỷ tinh 7 lớp
 Loại bồn tắm: Ngâm nguyên khối đặt sàn hiện đại
@@ -235,11 +235,11 @@ Thiết kế: Theo công thái học
 Nút nhấn xả: Chất liệu Đồng mạ Chrome
 Tính năng: Chống trơn trượt chống vi khuẩn và dễ lau chùi giữ nhiệt
 Công nghệ: Liền mạch', '2024-01-24 12:30:00'),
-(1, 'Bồn tắm ngâm cao cấp, chất liệu Acrylic', 2590000, 10, 19, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/6-1-2-1-2fada2d8-374c-4419-939e-c2cf8575c5e3.jpg', 
+(1, 'Bồn tắm ngâm cao cấp, chất liệu Acrylic', 2590000, 10, 19, 'Bồn tắm ngâm cao cấp, chất liệu Acrylic.jpg', 
 'Không có mô tả', '2024-01-24 12:30:00');
 
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
-(2, 'Bồn cầu treo âm tường Mission', 460000, 10, 15, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/vn-11134207-7qukw-lk46hh77f6pgb0-1.jpg', 
+(2, 'Bồn cầu treo âm tường Mission', 460000, 10, 15, 'Bồn cầu treo âm tường Mission.jpg', 
 'Bồn cầu két nước âm tường Mission
  Giảm trọng lượng sàn 900kg/1 phòng vệ sinh 3m2(do không phải tôn nền)
  Chống thấm tuyệt đối
@@ -256,7 +256,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Tiết kiệm không gian do thiết kế két âm tường
  Men Nano nung: Diệt khuẩn, chống bám dính.
  Thiết kế treo tường làm giảm trọng lượng sản tối đa', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu treo tường thông minh', 2900000, 10, 12, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/bon-cau-treo-tuong-dien-tu-kazoshi-301-white1.jpg', 
+(2, 'Bồn cầu treo tường thông minh', 2900000, 10, 12, 'Bồn cầu treo tường thông minh.jpg', 
 'Trọng lượng chịu lực: 400KG.
  Công suất sưởi: 40-1420W
  Công nghệ: Tiêu chuẩn EN 1717 bảo vệ nguồn nước
@@ -264,7 +264,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Téc nước: Sử dụng téc nước âm tường
  Dây nguồn: 1,5 mét
  Kích thước: 580 x 380 x 450mm', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu treo tường tét nước âm, thân sứ tròn', 1450000, 10, 25, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/bet-treo-tuuong-14.jpg', 
+(2, 'Bồn cầu treo tường tét nước âm, thân sứ tròn', 1450000, 10, 25, 'Bồn cầu treo tường tét nước âm, thân sứ tròn.jpg', 
 'Hệ thống xả:  ECOMAX hiệu quả, tiết kiệm nước 
  Lượng nước xả: 4.8/3L 
  Áp lực nước: 0.05MPa~0.75MPa
@@ -273,7 +273,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  ION bạc ức chế sự phát triển của vi khuẩn
  Xuất xứ : Nhập khẩu chính hãng
  Bảo hành:  men 15 năm', '2024-01-24 12:00:00'),
-(2, 'Bồn bán thông minh, cảm ứng đá chân xả nước', 465000, 10, 0, 'https://bizweb.dktcdn.net/100/499/932/products/16143430453-714444955.jpg?v=1699864204697', 
+(2, 'Bồn bán thông minh, cảm ứng đá chân xả nước', 465000, 10, 0, 'Bồn bán thông minh, cảm ứng đá chân xả nước.jpg', 
 'Mã sp: KA5158
 Chất liệu: Sứ nung tráng men nano cao cấp
 Kiểu dáng: Bệt liền khối
@@ -283,25 +283,25 @@ Dung tích xả: 4/5lit
 Thương hiệu: Kanax
 Xuất xứ: Trung quốc
 Bảo hành: 5 năm', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu thông minh nắp ngồi hình chữ U', 1280000, 10, 14, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/z4298754515638-94d9b7c38a3dd6c1dbff373a579a407f.jpg', 
+(2, 'Bồn cầu thông minh nắp ngồi hình chữ U', 1280000, 10, 14, 'Bồn cầu thông minh nắp ngồi hình chữ U.jpg', 
 'Ứng Dụng: Phòng Tắm
 điều khiển từ xa: Bao gồm
 Thiết Kế Phong Cách: Hiện Đại
 dịch vụ sau khi bán hàng: Trực Tuyến Hỗ Trợ Kỹ Thuật
 Mô hình thoát nước: S-Trap
 trọng lượng: 41-50kg', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu trứng thông minh cao cấp full chức năng', 1359000, 10, 10, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/z4294072504741-47f7bf596402056bf1e68f4ea5ae84f9-copy.jpg', 
+(2, 'Bồn cầu trứng thông minh cao cấp full chức năng', 1359000, 10, 10, 'Bồn cầu trứng thông minh cao cấp full chức năng.jpg', 
 'Đèn led hiển thị nhiệt độ. 
  Chế độ đóng nắp êm. 
  Tự động đóng mở nắp.
  Chế độ vòi xịt hậu môn, xịt vệ sinh phụ nữ.', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu thông minh cao cấp full chức năng, tự động mở nắp', 1420000, 10, 0, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/z4249792872544-b58274ef7547fdce3e3802af0c05426c.jpg', 
+(2, 'Bồn cầu thông minh cao cấp full chức năng, tự động mở nắp', 1420000, 10, 0, 'Bồn cầu thông minh cao cấp full chức năng, tự động mở nắp.jpg', 
 'Tên sản phẩm: Nhà Vệ Sinh thông minh K6908
  Bảo hành: 5 năm
  Mô hình Số: TX-42
  Chất liệu: Gốm
  Kiểu lắp đặt: Gắn sàn', '2024-01-24 12:00:00'),
-(2, 'Bồn cầu thông minh cao cấp full chức năng, có xịt bọt', 1250000, 10, 16, 'https://bizweb.dktcdn.net/100/499/932/products/460ab7502e13bd2522f63c805a9cc934.jpg?v=1699862288183', 
+(2, 'Bồn cầu thông minh cao cấp full chức năng, có xịt bọt', 1250000, 10, 16, 'Bồn cầu thông minh cao cấp full chức năng, có xịt bọt.jpg', 
 'Các chức năng chính:
 1.Đèn led hiển thị nhiệt độ. 
 2.Chế độ đóng nắp êm. 
@@ -326,24 +326,24 @@ trọng lượng: 41-50kg', '2024-01-24 12:00:00'),
 21. Xả nước không phụ thuộc áp lực nguồn nước.', '2024-01-24 12:00:00');
 
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
-(3, 'Sen tắm đồng thau phủ nano xám màn hình led', 450000, 10, 14, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/sen-tam-3849.jpg', 
+(3, 'Sen tắm đồng thau phủ nano xám màn hình led', 450000, 10, 14, 'Sen tắm đồng thau phủ nano xám màn hình led.jpg', 
 'Thương Hiệu: Lusenter
  Công Nghệ: Đức
  Bảo Hành Chính Hãng: 1 năm
  Chất liệu: Inox 304 đồng thau phủ NANO', '2024-01-24 12:00:00'),
-(3, 'Sen phím bóng màn hình led xám', 575000, 10, 16, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/st46c-9592.jpg', 
+(3, 'Sen phím bóng màn hình led xám', 575000, 10, 16, 'Sen phím bóng màn hình led xám.jpg', 
 'Thương Hiệu: Lusenter
  Công Nghệ: Đức
  Bảo Hành Chính Hãng: 1 năm
  Chất liệu: Inox 304 bóng đồng thau Xám', '2024-01-24 12:00:00'),
-(3, 'Sen cây bàn phím đồng mạ crom bóng cao cấp', 265000, 10, 38, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/z4582676500037-8179ab59008c791c338ae71a17154b32.jpg', 
+(3, 'Sen cây bàn phím đồng mạ crom bóng cao cấp', 265000, 10, 38, 'Sen cây bàn phím đồng mạ crom bóng cao cấp.jpg', 
 'Sản phẩm được thiết kế hiện đại,sang trọng tiện lợi cho người tiêu dùng
  Cấu tạo bởi đồng và 5 lớp mạ crom giúp sản phẩm luôn sáng bóng,chống bám bẩn và đẽ dàng lau chùi vệ sinh
  Lượng đồng lên tới 63% và 37% hợp chất khác là yếu tó khiến sản phẩm có độ bền cao
  Đầu vòi có 1 lớp lưới tạo bọt lọc nước giúp dòng nước chảy êm hơn và không bị bắn nước.
  Sản phẩm có 3 chức năng phun nước : vòi xả – sen tắm to – sen tắm nhỏ
  Sản phẩm an toàn không gây hại sức khoẻ,phù hợp với mọi nhà.', '2024-01-24 12:00:00'),
-(3, 'Sen cây tắm mạ PVD màu ghi xám', 560000, 10, 20, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/6542-afc83bee98873f4379e158963f64d536-9f4398cd85a141e7ade7111f9be7456d-caaded0a95ef471e96e166c923684594.jpg', 
+(3, 'Sen cây tắm mạ PVD màu ghi xám', 560000, 10, 20, 'Sen cây tắm mạ PVD màu ghi xám.jpg', 
 'Sen cây sử dụng các phím độc lập, dễ dàng sự dụng cho trẻ nhỏ và người già
  Có màn hình hiển thị hiện độ, dễ dàng kiểm soát nhiệt độ nước sử dụng, tránh gây bỏng dát.
  Có thêm bộ xịt ghi xám đồng bộ, vệ sinh đồ đạc xuynh quaynh thật đơn giản.
@@ -359,17 +359,17 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Sản xuất tại: Tera China', '2024-01-24 12:00:00');
 
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
-(4, 'Tủ chậu lavabo phòng tắm kiêm máy giặt', 1350000, 10, 0, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/dh-21.jpg', 
+(4, 'Tủ chậu lavabo phòng tắm kiêm máy giặt', 1350000, 10, 0, 'Tủ chậu lavabo phòng tắm kiêm máy giặt.jpg', 
 'Tủ chậu lavabo kê máy giặt là một giải pháp thông minh để tiết kiệm không gian trong phòng tắm hoặc nhà vệ sinh. Nó kết hợp hai chức năng chính là tủ chậu lavabo và không gian để đặt máy giặt.
  Tủ chậu lavabo thường đi kèm với một chậu rửa, một vòi nước và các ngăn để lưu trữ đồ vật như xà bông, kem đánh răng, và các vật dụng nhà tắm khác. Phía dưới chậu rửa, có không gian để đặt máy giặt. Một số mẫu tủ chậu lavabo kê máy giặtcòn có thiết kế thông minh để che giấu máy giặt bên trong tủ, giúp tạo ra một diện mạo gọn gàng và tiết kiệm không gian.', '2024-01-24 12:00:00'),
-(4, 'Tủ chậu lavabo liền khối 2 tầng', 559000, 10, 12, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/o1cn01oi3pdg1dnadhusego-2215652100261-0-cib.jpg', 
+(4, 'Tủ chậu lavabo liền khối 2 tầng', 559000, 10, 12, 'Tủ chậu lavabo liền khối 2 tầng.jpg', 
 'Một giải pháp hoàn hảo để kết hợp tính thẩm mỹ và tính ứng dụng trong không gian phòng tắm của bạn. Với thiết kế độc đáo và chất lượng xuất sắc, tủ chậu lavabo liền khối 2 tầng là sự lựa chọn tuyệt vời để tăng cường sự tiện nghi và tạo điểm nhấn độc đáo cho phòng tắm của bạn.', '2024-01-24 12:00:00'),
-(4, 'Tủ chậu bo tròn kèm tủ gương thông minh', 1020000, 10, 10, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/o1cn01ygwggu1weuwnygvbc-2214665986277-0-cib.jpg', 
+(4, 'Tủ chậu bo tròn kèm tủ gương thông minh', 1020000, 10, 10, 'Tủ chậu bo tròn kèm tủ gương thông minh.jpg', 
 'Chất liệu bồn rửa: Đá nhân tạo phủ NANO cao cấp kết cấu cứng, chống cháy, chống trầy xước mài mòn
  Chất liệu tủ gỗ plywood phủ melamine chống nước , chống ẩm
  Tất cả sản phầm đều đầy đủ phụ kiện gồm vòi rửa (bản cao cấp dây rút ) – dây cấp nóng lạnh , Xi phông thoát nước ngăn mùi.
  Mẫu tủ chậu lavabo mới 2023 bo tròn góc – Sự hoàn hảo trong thiết kế và chất lượng', '2024-01-24 12:00:00'),
-(4, 'Bàn đá đôi chống xước, bề mặt bóng, chậu liền mép', 275000, 10, 18, 'https://bizweb.dktcdn.net/thumb/large/100/499/932/products/img-0980.jpg', 
+(4, 'Bàn đá đôi chống xước, bề mặt bóng, chậu liền mép', 275000, 10, 18, 'Bàn đá đôi chống xước, bề mặt bóng, chậu liền mép.jpg', 
 'Chất liệu: Đá nhân tạo chống xước cao cấp
  Màu sắc: Đen bóng
  Kiểu dáng: Hiện đại

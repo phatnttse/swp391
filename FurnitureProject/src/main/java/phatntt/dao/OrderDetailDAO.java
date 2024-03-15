@@ -23,63 +23,7 @@ import phatntt.util.DBConnect;
  */
 public class OrderDetailDAO {
 
-    public List<OrderDetailDTO> getOrderDetailsByOrderId(String orderId) throws SQLException, NamingException {
-        List<OrderDetailDTO> orderDetails = new ArrayList<>();
-
-        @Cleanup
-        Connection con = DBConnect.createConnection();
-        if (con != null) {
-            String sql = "SELECT * FROM order_detail WHERE order_id = ?";
-            @Cleanup
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, orderId);
-            @Cleanup
-            ResultSet rs = stm.executeQuery();
-
-            while (rs.next()) {
-                OrderDetailDTO orderDetail = OrderDetailDTO.builder()
-                        .id(rs.getInt("id"))
-                        .order_id(orderId) // Set order_id as String
-                        .product_id(rs.getInt("product_id"))
-                        .title(rs.getString("title"))
-                        .price(rs.getInt("price"))
-                        .quantity(rs.getInt("quantity"))
-                        .thumbnail(rs.getString("thumbnail"))
-                        .total_money(rs.getInt("total_money"))
-                        .build();
-
-                orderDetails.add(orderDetail);
-            }
-        }
-
-        return orderDetails;
-    }
-
-    public List<OrderStatusDTO> getAllOrderStatus() throws SQLException, NamingException {
-        List<OrderStatusDTO> orderStatusList = new ArrayList<>();
-
-        @Cleanup
-        Connection con = DBConnect.createConnection();
-        if (con != null) {
-            String sql = "SELECT * FROM order_status";
-            @Cleanup
-            PreparedStatement stm = con.prepareStatement(sql);
-            @Cleanup
-            ResultSet rs = stm.executeQuery();
-
-            while (rs.next()) {
-                OrderStatusDTO orderStatus = OrderStatusDTO.builder()
-                        .statusId(rs.getInt("status_id"))
-                        .name(rs.getString("name"))
-                        .build();
-
-                orderStatusList.add(orderStatus);
-            }
-        }
-
-        return orderStatusList;
-    }
-
+    
     public boolean updateOrderStatus(String orderId, int statusId, boolean paymentStatus) throws SQLException, NamingException {
         boolean result = false;
 

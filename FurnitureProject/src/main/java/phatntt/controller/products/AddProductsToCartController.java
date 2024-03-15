@@ -125,7 +125,7 @@ public class AddProductsToCartController extends HttpServlet {
                 for (CartDTO cart : carts) {
                     out.println("            <div class=\"ajaxcart__row\">\n"
                             + "                <div class=\"ajaxcart__product cart_product\">\n"
-                            + "                    <a href=\"\" class=\"ajaxcart__product-image cart_image\" title=\"" + cart.getTitle() + "\"><img width=\"80\" height=\"80\" src=\"" + cart.getThumbnail() + "\" alt=\"" + cart.getTitle() + "\"></a>\n"
+                            + "                    <a href=\"\" class=\"ajaxcart__product-image cart_image\" title=\"" + cart.getTitle() + "\"><img width=\"80\" height=\"80\" src=\"thumbnails/products/" + cart.getThumbnail() + "\" alt=\"" + cart.getTitle() + "\"></a>\n"
                             + "                    <div class=\"grid__item cart_info\">\n"
                             + "                        <div class=\"ajaxcart__product-name-wrapper cart_name\">\n"
                             + "                            <a href=\"\" class=\"ajaxcart__product-name h4\" title=\"" + cart.getTitle() + "\">" + cart.getTitle() + "</a>\n"

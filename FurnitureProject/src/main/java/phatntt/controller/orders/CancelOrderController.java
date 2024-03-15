@@ -4,6 +4,9 @@
  */
 package phatntt.controller.orders;
 
+import static io.sentry.Breadcrumb.user;
+import io.sentry.Sentry;
+import io.sentry.protocol.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -98,9 +101,16 @@ public class CancelOrderController extends HttpServlet {
             OrdersDAO dao = new OrdersDAO();
             boolean result = dao.requestCancellation(user.getId(), orderId, reason);
             if (result) {
-                url = "allOrder";              
+                url = "allOrder";
             }
         } catch (SQLException ex) {
+            HttpSession session = request.getSession();
+            UsersDTO user2 = (UsersDTO) session.getAttribute("USER_INFO");
+            User sentryUser = new User();
+            sentryUser.setId(user2.getId());
+            sentryUser.setName(user2.getName());
+            Sentry.setUser(sentryUser);
+            Sentry.captureException(ex);
             Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(CancelOrderController.class.getName()).log(Level.SEVERE, null, ex);

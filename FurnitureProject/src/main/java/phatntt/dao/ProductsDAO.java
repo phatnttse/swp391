@@ -64,7 +64,9 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product";
+             String sql = "SELECT product.product_id, product.category_id, product.title, product.price, product.quantity, product.discount, product.thumbnail, product.description, product.purchases, product.created_at, category.name AS category_name "
+                        + "FROM product "
+                        + "LEFT JOIN category ON product.category_id = category.category_id";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             @Cleanup
@@ -74,6 +76,7 @@ public class ProductsDAO implements Serializable {
                 result.add(ProductsDTO.builder()
                         .productId(rs.getInt("product_id"))
                         .categoryId(rs.getInt("category_id"))
+                        .categoryName(rs.getString("category_name"))
                         .title(rs.getString("title"))
                         .description(rs.getString("description"))
                         .quantity(rs.getInt("quantity"))

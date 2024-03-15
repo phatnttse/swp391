@@ -40,7 +40,7 @@
                                                                 <a href=""
                                                                    class="ajaxcart__product-image cart_image"
                                                                    title="Tủ chậu bo tròn kèm tủ gương thông minh"><img
-                                                                        src="${product.thumbnail}"
+                                                                        src="thumbnails/products/${product.thumbnail}"
                                                                         alt="${product.title}"></a>
                                                                 <div class="grid__item cart_info">
                                                                     <div class="ajaxcart__product-name-wrapper cart_name">
@@ -152,7 +152,7 @@
                 </div>
             </div>
         </section>
-        <script src="assets/js/ajax.js"></script>                                                                           
+        <script src="assets/js/ajaxfunctions.js"></script>                                                                           
         <%@include file="../UIcomponents/footer.jsp" %>
     </body>
 </html>

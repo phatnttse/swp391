@@ -105,7 +105,7 @@ public class CategoryController extends HttpServlet {
                     out.append("                        <form action=\"cart\" method=\"post\" class=\"variants product-action\" enctype=\"multipart/form-data\">");
                     out.append("                            <div class=\"product-thumbnail\">");
                     out.append("                                <a class=\"image_thumb\" href=\"LoadProductDetailController?productId="+product.getProductId()+"\" title=\""+product.getTitle()+"\">");
-                    out.append("                                    <img class=\"lazyload loaded\" width=\"480\" height=\"480\" src=\"" + product.getThumbnail() + "\" alt=\"" + product.getTitle() + "\">");
+                    out.append("                                    <img class=\"lazyload loaded\" width=\"480\" height=\"480\" src=\"thumbnails/products/" + product.getThumbnail() + "\" alt=\"" + product.getTitle() + "\">");
                     out.append("                                </a>");
                     out.append("                                <span class=\"smart\">-" + product.getDiscount() + "%</span>");
                     out.append("                                <a href=\"\" class=\"btn-compare js-btn-wishlist setWishlist btn-views\" data-wish=\"bon-tam-massage-dat-goc\" tabindex=\"0\" title=\"Thêm vào yêu thích\">");

@@ -68,7 +68,7 @@
                                                     <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                         <div class="product-thumbnail">
                                                             <a class="image_thumb" href="LoadProductDetailController?productId=${product.productId}" title="${product.title}">
-                                                                <img class="lazyload loaded" width="480" height="480" src="${product.thumbnail}"  alt="${product.title}" >
+                                                                <img class="lazyload loaded" width="480" height="480" src="thumbnails/products/${product.thumbnail}"  alt="${product.title}" >
                                                             </a>
                                                             <span class="smart">-
                                                                 ${product.discount}% 
@@ -171,7 +171,7 @@
         </section>
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
-        <script src="assets/js/ajax.js"></script>
+        <script src="assets/js/ajaxfunctions.js"></script>
 
     </body>
 </html>

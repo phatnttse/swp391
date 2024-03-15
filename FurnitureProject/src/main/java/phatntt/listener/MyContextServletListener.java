@@ -22,6 +22,7 @@ public class MyContextServletListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+//        SentryInitializer.initializeSentry(); testing tool
         System.out.println("Application is deploying..............");
         //1. get current context
         ServletContext context = sce.getServletContext();       
@@ -32,7 +33,7 @@ public class MyContextServletListener implements ServletContextListener {
         Properties siteMaps = null;
         InputStream is = null;
         
-        try {
+        try {         
             is = context.getResourceAsStream(siteMapsFile);
             siteMaps = new Properties();
             siteMaps.load(is);

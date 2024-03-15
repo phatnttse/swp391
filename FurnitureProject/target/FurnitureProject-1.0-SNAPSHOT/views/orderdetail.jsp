@@ -66,7 +66,7 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-md-3">
-                                                                <img src="${orderDetail.thumbnail}"
+                                                                <img src="thumbnails/products/${orderDetail.thumbnail}"
                                                                      class="rounded" alt="">
                                                             </div>
                                                             <div class="col-md-3 text-center d-flex justify-content-center align-items-center">

@@ -126,8 +126,14 @@ public class Constants {
 
     public class Management {
 
-        public static final String ORDER_MANAGEMENT_PAGE = "orderManagementPage";
-        public static final String VIEW_ORDERDETAIL_PAGE = "orderManagementDetailPage";
+        public static final String ORDER_MANAGEMENT_PAGE = "orderManagerPage";
+        public static final String VIEW_ORDERDETAIL_PAGE = "orderDetailManagerPage";
         public static final String REQUEST_TO_CANCEL_ORDER_PAGE = "requestToCancelOrderPage";
+       
+        public static final String PRODUCT_MANAGER_PAGE = "productManagerPage";
+        public static final String VIEW_PRODUCT_DETAIL_PAGE = "productDetailManagerPage";
+        public static final String ADD_PRODUCT_PAGE = "addProductPage";
+        
+        public static final String CATEGORY_MANAGER_PAGE = "categoryManagerPage";
     }
 }

@@ -5,6 +5,7 @@
  */
 package phatntt.controller.users;
 
+import io.sentry.Sentry;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -112,6 +113,7 @@ public class LoginServlet extends HttpServlet {
 
         } catch (SQLException ex) {
             log("LoginServlet_SQL: " + ex.getMessage());
+             Sentry.captureException(ex);
         } catch (NamingException ex) {
             log("LoginServlet_Naming: " + ex.getMessage());
         } finally {

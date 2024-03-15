@@ -26,5 +26,5 @@ public class CartDTO implements Serializable{
     private String thumbnail;
     private int quantity;
     private int price;
-   
+    
 }

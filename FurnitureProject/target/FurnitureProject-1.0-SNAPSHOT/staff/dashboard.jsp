@@ -23,65 +23,7 @@
     </head>
     <body id="page-top">
 
-        <!-- Page Wrapper -->
-        <div id="wrapper">
-
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gray-900  sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-
-                    <div class="sidebar-brand-text mx-3">Lofi Furniture</div>
-                </a>
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="staffPage">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Menu
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
-                        <span>Sản Phẩm</span>
-                        <i id="arrow-icon" class="fas fa-chevron-right" style="color: white;margin-left: 100px"></i>
-                    </a>                  
-                </li>
-
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" onclick="toggleSubMenu('sub-order')">                  
-                        <span>Đơn Hàng</span>
-                        <i id="arrow-icon-sub-order" class="fas fa-chevron-right" style="color: white;margin-left: 100px"></i>
-                    </a>
-                </li>
-
-                <li id="sub-order" class="nav-item" style="display: none">
-                    <a class="nav-link collapsed" href="orderManagement">                  
-                        <span>Tất Cả Đơn Hàng</span>
-                    </a>
-                     <a class="nav-link collapsed" href="requestCancelOrderManager">                  
-                        <span>Yêu cầu huỷ đơn</span>
-                    </a>
-                </li>
-
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">       
-
-
-            </ul>
-            <!-- End of Sidebar -->
+       <%@include file="../UIcomponents/sidebar.jsp"%>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -90,75 +32,7 @@
 
                 <div id="content">
 
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                       aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-
-                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <li class="nav-item dropdown no-arrow d-sm-none">
-                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                     aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto w-100 navbar-search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                   placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" onclick="toggleSubMenu('sub-menu')">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Phatntt</span>
-                                    <img class="img-profile rounded-circle"
-                                         src="assets/img/users/avatar.jpg">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div id="sub-menu" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>                                                                    
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="logOut">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- End of Topbar -->
+                    <%@include file="../UIcomponents/topbar.jsp"%>
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -343,15 +217,7 @@
         </div>
         <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class=" my-4 sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+        <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
 
     </div>
     <!-- End of Content Wrapper -->

@@ -26,12 +26,12 @@ public class UsersDTO {
     private String email;
     private String password;
     private String name;
-    private String givenName;
-    private String familyName;
+    private String given_name;
+    private String family_name;
     private String picture;
     private String phone;
     private String address;
-    private String googleId;
+    private String google_id;
     private int role;
     private Timestamp createdAt;
     private String roleName;

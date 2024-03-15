@@ -13,6 +13,7 @@ public class Constants {
     public class DispatchFeatures {
 
         public static final String ACCOUNT_INFO_PAGE = "accountInfoPage";
+        public static final String FEED_BACK = "feedBack";
     }
 
     //Login - Logout - SignUp
@@ -77,7 +78,7 @@ public class Constants {
 
         public static final String ADMIN_PAGE = "adminHomePage";
         public static final String USERACCOUNT_PAGE = "viewUsersPage";
-        public static final String VIEW_PRODUCTS_PAGE = "viewProductsPage";
+        public static final String VIEW_DETAIL_ACCOUNT = "detailUserPage";
 
     }
 

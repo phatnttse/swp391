@@ -4,6 +4,7 @@
  */
 package phatntt.controller.orders;
 
+import io.sentry.Sentry;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -50,9 +51,9 @@ public class ViewAllOrderController extends HttpServlet {
             HttpSession session = request.getSession();
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
             OrdersDAO dao = new OrdersDAO();
-            
+
             List<OrderDTO> orders = dao.allOwnOrder(user.getId());
-            
+
             if (orders != null) {
                 request.setAttribute("ALL_ORDER", orders);
                 url = siteMaps.getProperty(Constants.OderFeatures.ORDER_PAGE);

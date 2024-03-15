@@ -112,6 +112,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (SQLException ex) {
+            Sentry.captureException(ex);
             log("LoginServlet_SQL: " + ex.getMessage());
              Sentry.captureException(ex);
         } catch (NamingException ex) {

@@ -27,6 +27,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\EmailDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\cart\ProductQuantity.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\UpdateUsersController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\CheckVerificationCode.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\categories\CategoryDetailManagerController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\UsersDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\orders\ProcessOrderCancellationRequests.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\HomePageServlet.java
@@ -51,10 +52,10 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\LoadProductCategoryController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\ErrorDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\products\AddNewProductController.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\util\SentryConfig.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\staff\orders\OrderManagementController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\StaffDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\util\Key_Utils.java
-E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\ViewProductsController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\email\ConfirmVerificationResetPassController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\LogOutServlet.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\ProductsController.java

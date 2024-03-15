@@ -297,7 +297,7 @@ public class StaffDAO {
         if (con != null) {
             String sql = "UPDATE product "
                     + "SET category_id = ?, title = ?,  description = ?, price = ?,  quantity = ?, "
-                    + " thumbnail = ?, discount = ?, purchases = ? "
+                    + " thumbnail = ?, discount = ? "
                     + "WHERE product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
@@ -308,9 +308,8 @@ public class StaffDAO {
             stm.setInt(4, product.getPrice());
             stm.setInt(5, product.getQuantity());
             stm.setString(6, product.getThumbnail());
-            stm.setInt(7, product.getDiscount());
-            stm.setInt(8, product.getPurchases());
-            stm.setInt(9, product.getProductId());
+            stm.setInt(7, product.getDiscount());          
+            stm.setInt(8, product.getProductId());
             
             int affectedRows = stm.executeUpdate();
             if (affectedRows > 0){

@@ -163,12 +163,12 @@ ALTER TABLE `request_cancellation` ADD FOREIGN KEY (`order_id`) REFERENCES `orde
 
 
 INSERT INTO category (category_id, name, thumbnail) VALUES
-  (1, 'Bồn tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-tam.jpg?v=1699504371993'),
-  (2, 'Bồn cầu', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/bon-cau.jpg?v=1699504384923'),
-  (3, 'Sen tắm', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/sen-tam.jpg?v=1699504399643'),
-  (4, 'Tủ chậu Lavabo', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/chau-lavabo.jpg?v=1699504446760'),
-  (5, 'Vòi Lavabo', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/voi-lavabo.jpg?v=1699504435520'),
-  (6, 'Phụ kiện', '//bizweb.dktcdn.net/thumb/large/100/499/932/collections/guong.jpg?v=1699504456387');
+  (1, 'Bồn tắm', 'bontam.jpg'),
+  (2, 'Bồn cầu', 'boncau.jpg'),
+  (3, 'Sen tắm', 'sentam.jpg'),
+  (4, 'Tủ chậu Lavabo', 'tuchaulavabo.jpg'),
+  (5, 'Vòi Lavabo', 'voilavabo.jpg'),
+  (6, 'Phụ kiện', 'phukien.jpg');
   
 INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (1, 'Bồn tắm Massage đặt góc', 5595000, 10, 10, 'Bồn tắm Massage đặt góc.jpg', 

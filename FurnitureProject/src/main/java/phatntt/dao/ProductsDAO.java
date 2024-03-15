@@ -58,15 +58,16 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> getAllProducts() throws SQLException, NamingException {
+    public List<ProductsDTO> getAllProducts(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-             String sql = "SELECT product.product_id, product.category_id, product.title, product.price, product.quantity, product.discount, product.thumbnail, product.description, product.purchases, product.created_at, category.name AS category_name "
-                        + "FROM product "
-                        + "LEFT JOIN category ON product.category_id = category.category_id";
+            String sql = "SELECT product.product_id, product.category_id, product.title, product.price, product.quantity, product.discount, product.thumbnail, product.description, product.purchases, product.created_at, category.name AS category_name "
+                    + "FROM product "
+                    + "LEFT JOIN category ON product.category_id = category.category_id "
+                    + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             @Cleanup

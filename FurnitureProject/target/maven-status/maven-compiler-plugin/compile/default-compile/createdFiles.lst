@@ -2,7 +2,6 @@ phatntt\controller\email\ForgotPasswordController.class
 phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
 phatntt\util\Constants$LoginWithGoogleFeatures.class
-phatntt\controller\admin\ViewProductsController.class
 phatntt\dto\CategoryDTO.class
 phatntt\controller\HomePageServlet.class
 phatntt\util\Constants$VerifyEmailFeatures.class
@@ -36,7 +35,6 @@ phatntt\controller\staff\orders\ProcessOrderCancellationRequests.class
 phatntt\util\Constants.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class
-phatntt\util\Constants$DispatchFeatures.class
 phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
 phatntt\dao\OrdersDAO.class
@@ -80,6 +78,7 @@ phatntt\dao\OrderDetailDAO.class
 phatntt\dto\CartDTO$CartDTOBuilder.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\products\ViewPopupProductController.class
+phatntt\controller\staff\categories\CategoryDetailManagerController.class
 phatntt\controller\staff\orders\OrderDetailManagementController.class
 phatntt\dao\StaffDAO.class
 phatntt\dto\CartDTO.class
@@ -93,5 +92,6 @@ phatntt\dto\OrderStatusDTO.class
 phatntt\listener\MyContextServletListener.class
 phatntt\controller\staff\categories\CategoryManager.class
 phatntt\dao\CategoryDAO.class
+phatntt\util\SentryConfig.class
 phatntt\controller\email\CreateNewPasswordController.class
 phatntt\dto\ProductsDTO$ProductsDTOBuilder.class

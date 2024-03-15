@@ -10,9 +10,12 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import phatntt.dao.StaffDAO;
 import phatntt.dto.ProductsDTO;
+import phatntt.util.Constants;
 
 /**
  *
@@ -85,6 +89,9 @@ public class AddNewProductController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE);
 
         try {
             String categoryIdStr = request.getParameter("categoryId");
@@ -99,31 +106,28 @@ public class AddNewProductController extends HttpServlet {
             int price = Integer.parseInt(priceStr);
             int quantity = Integer.parseInt(quantityStr);
             int discount = Integer.parseInt(discountStr);
-            String thumbnail = null;
 
             Part part = request.getPart("thumbnail");
 
-            if (part.getSize() > 0) {
-                String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
-                
-                String pathUpload = request.getServletContext().getRealPath("/thumbnails/products");
-                
-                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
 
-                // Kiểm tra và tạo thư mục nếu chưa tồn tại
-                File directory = new File(folderSaveFile);
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-                if (!Files.exists(Paths.get(pathUpload))) {
-                    Files.createDirectories(Paths.get(pathUpload));
-                }
+            String pathUpload = request.getServletContext().getRealPath("/thumbnails/products");
 
-                // Lưu trữ file vào thư mục
-                part.write(folderSaveFile + File.separator + fileName);
-                part.write(pathUpload + File.separator + fileName );
-                thumbnail = fileName;
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            File directory = new File(folderSaveFile);
+            if (!directory.exists()) {
+                directory.mkdirs();
             }
+            if (!Files.exists(Paths.get(pathUpload))) {
+                Files.createDirectories(Paths.get(pathUpload));
+            }
+
+            // Lưu trữ file vào thư mục
+            part.write(folderSaveFile + File.separator + fileName);
+            part.write(pathUpload + File.separator + fileName);
+            String thumbnail = fileName;
 
             ProductsDTO product = ProductsDTO.builder()
                     .categoryId(categoryId)
@@ -138,12 +142,16 @@ public class AddNewProductController extends HttpServlet {
             boolean result = dao.addProduct(product);
 
             if (result) {
-                response.sendRedirect("productManager");
+                request.setAttribute("ADD_PRODUCT_SUCCESS", "Thêm sản phẩm mới thành công");
+                url = siteMaps.getProperty(Constants.Management.ADD_PRODUCT_PAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddNewProductController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(AddNewProductController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
 
     }

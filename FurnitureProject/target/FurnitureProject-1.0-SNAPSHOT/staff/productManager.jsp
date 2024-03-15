@@ -14,30 +14,80 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
     <style>
-        .filter-section {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-        ưw
-        .filter-label {
-            margin-right: 10px;
-        }
+        /* Your existing CSS ... */
 
-        .filter-select {
-            margin-right: 10px;
-            padding: 8px;
+        /* Additional styles for the dropdown */
+        #sort-by ul {
+            width: 100%;
+            text-align: left;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
-        .filter-btn {
-            margin-left: 10px;
-        }
-        a {
+        #sort-by ul li {
+            padding: 10px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
+        #sort-by ul li:hover {
+            background-color: #f4f4f4;
+        }
 
+        /* Additional styles from sortPagiBar */
+        #sort-by label {
+            display: inline-block;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        #sort-by .ul_col {
+            position: relative;
+            margin-left: 15px;
+            background: #fff;
+            width: 145px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 14px;
+            border: 1px solid #E5E5E5;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url(//bizweb.dktcdn.net/100/499/932/themes/926650/assets/arrow_down.svg?1705830293643);
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        #sort-by .ul_col .content_ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            width: 100%;
+            z-index: 99;
+            border: 1px solid #E5E5E5;
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            display: none;
+        }
+
+        #sort-by .ul_col .content_ul ul li {
+            display: block;
+        }
+
+        #sort-by .ul_col:hover .content_ul {
+            display: block;
+
+        }
     </style>
 
     <title>Product Page</title>
@@ -73,47 +123,37 @@
                                 <div class="col">
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
                                 </div>
-                                <div class="col">
+                                <c:if test="${not empty requestScope.DELETE_SUCCESS}">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>${requestScope.DELETE_SUCCESS}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </c:if>
 
-                                    <form action="productManagement" method="get" class="form-inline float-right mt-3">
-                                        <div class="form-group mx-2">
-                                            <label for="combinedFilter" class="mr-2">Chọn:</label>
-                                            <select class="form-control filter-select" id="combinedFilter" name="combinedFilter">
-                                                <option value="productId">Mã Sản Phẩm</option>
-                                                <option value="price">Giá</option>
-                                                <option value="category">Loại</option>
-                                            </select>
-                                        </div>
-
-                                        <div id="filterOptions" class="form-group mx-2">
-                                            <!-- Options for Mã Sản Phẩm -->
-                                            <select class="form-control filter-select" id="productIdFilter" name="productIdFilter">
-                                                <option value="asc">Tăng Dần</option>
-                                                <option value="desc">Giảm Dần</option>
-                                            </select>
-
-                                            <!-- Options for Giá -->
-                                            <select class="form-control filter-select" id="priceFilter" name="priceFilter">
-                                                <option value="asc">Tăng Dần</option>
-                                                <option value="desc">Giảm Dần</option>
-                                            </select>
-
-                                            <!-- Options for Loại -->
-                                            <select class="form-control filter-select" id="categoryFilter" name="categoryFilter">
-                                                <option value="Bồn tắm">Bồn tắm</option>
-                                                <option value="Bồn cầu">Bồn cầu</option>
-                                                <option value="Sen tắm">Sen tắm</option>
-                                                <option value="Tủ chậu Lavabo">Tủ chậu Lavabo</option>
-                                                <option value="Vòi Lavabo">Vòi Lavabo</option>
-                                                <option value="Phụ kiện">Phụ kiện</option>
-                                                <!-- Add other categories as needed -->
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary mb-2">Lọc</button>
-
-                                    </form>
-
+                                <div class="col-md-6 text-right right">
+                                    <div id="sort-by">
+                                        <label class="left">Sắp xếp theo</label>
+                                        <ul class="ul_col">
+                                            <li>
+                                                <span>
+                                                    Mặc định
+                                                </span>
+                                                <ul class="content_ul">
+                                                    <li><a href="filterProductsByStaff?typeSort=default">Mặc định</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=AtoZ">A → Z</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=ZtoA">Z → A</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=IncreasePrice">Giá tăng dần</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=DecreasePrice">Giá giảm dần</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=Newest">Hàng mới nhất</a></li>
+                                                    <li><a href="filterProductsByStaff?typeSort=Oldest">Hàng cũ nhất</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+                                <!-- End Sort Dropdown -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -163,6 +203,17 @@
                         </div>
                     </div>
 
+                    <ul class="pagination justify-content-center my-3">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+
+
+
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -193,19 +244,7 @@
             });
         });
 
-        function toggleSubMenu(menuId) {
-            var subMenu = document.getElementById(menuId);
-            var arrowIcon = document.getElementById('arrow-icon-' + menuId);
-            if (subMenu.style.display === 'none') {
-                subMenu.style.display = 'block';
-                arrowIcon.classList.remove('fa-chevron-right');
-                arrowIcon.classList.add('fa-chevron-down');
-            } else {
-                subMenu.style.display = 'none';
-                arrowIcon.classList.remove('fa-chevron-down');
-                arrowIcon.classList.add('fa-chevron-right');
-            }
-        }
+
     </script>
 
 </body>

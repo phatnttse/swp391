@@ -4,8 +4,11 @@
  */
 package phatntt.controller.staff.products;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -14,10 +17,12 @@ import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import phatntt.dao.StaffDAO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
@@ -26,6 +31,7 @@ import phatntt.util.Constants;
  *
  * @author Admin
  */
+@MultipartConfig
 @WebServlet(name = "ActionWithProductsController", urlPatterns = {"/actionWithProducts"})
 public class ActionWithProductsController extends HttpServlet {
 
@@ -81,7 +87,7 @@ public class ActionWithProductsController extends HttpServlet {
                 url = "productManager";
                 request.setAttribute("DELETE_SUCCESS", "Xóa sản phẩm thành công");
             }
- 
+
         } catch (SQLException ex) {
             Logger.getLogger(ActionWithProductsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
@@ -111,17 +117,37 @@ public class ActionWithProductsController extends HttpServlet {
 
         try {
             int productId = Integer.parseInt(request.getParameter("productId"));
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));        
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String title = request.getParameter("title");
             int price = Integer.parseInt(request.getParameter("price"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int discount = Integer.parseInt(request.getParameter("discount"));
-            String thumbnail = request.getParameter("thumbnail");
             String description = request.getParameter("description");
-            int purchases = Integer.parseInt(request.getParameter("purchases"));
+
+            Part part = request.getPart("thumbnail");
+
+            String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
+
+            String pathUpload = request.getServletContext().getRealPath("/thumbnails/products");
+
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            File directory = new File(folderSaveFile);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            if (!Files.exists(Paths.get(pathUpload))) {
+                Files.createDirectories(Paths.get(pathUpload));
+            }
+
+            // Lưu trữ file vào thư mục
+            part.write(folderSaveFile + File.separator + fileName);
+            part.write(pathUpload + File.separator + fileName);
+            String thumbnail = fileName;
 
             StaffDAO dao = new StaffDAO();
-            ProductsDTO product =  ProductsDTO.builder()
+            ProductsDTO product = ProductsDTO.builder()
                     .productId(productId)
                     .categoryId(categoryId)
                     .title(title)
@@ -129,13 +155,11 @@ public class ActionWithProductsController extends HttpServlet {
                     .quantity(quantity)
                     .discount(discount)
                     .thumbnail(thumbnail)
-                    .purchases(purchases)
                     .description(description)
                     .build();
             boolean success = dao.updateProduct(product);
             if (success) {
                 url = "productManager";
-                    
                 request.setAttribute("UPDATE_SUCCESS", "Cập nhật sản phẩm thành công");
             }
 
@@ -149,16 +173,14 @@ public class ActionWithProductsController extends HttpServlet {
         }
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}

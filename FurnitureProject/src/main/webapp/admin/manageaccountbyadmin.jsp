@@ -4,7 +4,7 @@
     Author     : Dell
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -169,69 +169,75 @@
                     <!-- Begin The Table Manage User -->
                     <c:set var="UserAccount" value="${requestScope.LIST_USER_ROLE}"/>
 
-                    <div class="container mt-5">
+                    <div class="container mt-6">
                         <h2>Danh sách tài khoản</h2>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Email</th>
-<!--                                    <th>Mật khẩu</th>-->
-                                    <th>Tên</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Vai trò</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <c:if test="${not empty UserAccount}">
-                                <tbody>
-                                <c:forEach var="userDetail" items="${UserAccount}">
+                        <form action="DeleteUsersController" method="POST">
+                            <div class="table-responsive">
 
-                                    <!-- Replace the data below with your actual data from the database -->
-                                    <tr>
-                                        <td>#${userDetail.id}</td>
-                                        <td>${userDetail.email}</td>
-<!--                                        <td>${userDetail.password}</td>-->
-                                        <td>${userDetail.name}</td>
-                                        <td>${userDetail.phone}</td>
-                                        <td>${userDetail.address}</td>
-                                        <td>${userDetail.roleName}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary btn-sm">Update</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <!-- Add more rows as needed -->
-                                </tbody>
-                            </c:if>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Tên</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Vai trò</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${not empty UserAccount}">
+                                        <tbody>
 
-                        </table>
+                                            <c:forEach var="userDetail" items="${UserAccount}">
+
+                                                <!-- Replace the data below with your actual data from the database -->
+                                                <tr>
+                                                    <td>${userDetail.id}</td>
+                                                    <td>${userDetail.email}</td>
+                                                    <td>${userDetail.name}</td>
+                                                    <td>${userDetail.phone}</td>
+                                                    <td>${userDetail.address}</td>
+                                                    <td>
+                                                        ${userDetail.roleName}
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" class="btn btn-outline-danger" >Delete</button>                                            
+
+                                                    <td>
+                                                        <a href="UserDetailController?Id=${userDetail.id}" class="btn btn-outline-info">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            <!-- Add more rows as needed -->
+                                        </tbody>
+                                    </c:if>
+
+                                </table>
+                        </form>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class=" my-4 sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class=" my-4 sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

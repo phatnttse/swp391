@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import phatntt.util.SentryConfig;
 
 /**
  * Web application lifecycle listener.
@@ -22,6 +23,7 @@ public class MyContextServletListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        SentryConfig.configureSentry();
         System.out.println("Application is deploying..............");
         //1. get current context
         ServletContext context = sce.getServletContext();       

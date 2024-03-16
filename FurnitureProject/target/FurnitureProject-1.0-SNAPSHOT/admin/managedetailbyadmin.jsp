@@ -58,6 +58,9 @@
         </style>
     </head>
     <body>
+
+        
+
         <c:set var="UserAccount" value="${requestScope.USER_DETAIL}"/>
 
         <form action="UpdateUsersController" method="POST">
@@ -102,7 +105,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <label for="roleId">Vai trò</label>
-                                <input type="text" class="form-control" name="roleId" value="${UserAccount.role}" />
+                                <input type="text" class="form-control" name="roleId" value="${UserAccount.roleName}" />
                             </div>
 
                             <div class="btn-group">
@@ -113,8 +116,6 @@
                 </div>
             </div>
         </form>
-
-
 
     </body>
 </html>

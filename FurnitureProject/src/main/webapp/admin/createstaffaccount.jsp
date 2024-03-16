@@ -46,8 +46,11 @@
                                         <div class="col-md-3 ps-5">
                                             <h6 class="mb-0">Full name</h6>
                                         </div>
-                                        <div class="col-md-9 pe-5">
-                                            <input type="text" class="form-control form-control-lg" />
+                                        <div class="col-md-4 pe-3">
+                                            <input type="text" class="form-control form-control-lg" name="given_name" placeholder="Given Name" required />
+                                        </div>
+                                        <div class="col-md-5 pe-5">
+                                            <input type="text" class="form-control form-control-lg" name="family_name" placeholder="Family Name" required />
                                         </div>
                                     </div>
                                     <hr class="mx-n3">
@@ -56,27 +59,62 @@
                                             <h6 class="mb-0">Email address</h6>
                                         </div>
                                         <div class="col-md-9 pe-5">
-                                            <input type="email" class="form-control form-control-lg" placeholder="example@example.com" />
+                                            <input type="email" class="form-control form-control-lg" name="email" placeholder="example@example.com" required />
                                         </div>
                                     </div>
                                     <hr class="mx-n3">
                                     <div class="row align-items-center py-3">
                                         <div class="col-md-3 ps-5">
-                                            <h6 class="mb-0">Message</h6>
+                                            <h6 class="mb-0">Password</h6>
                                         </div>
                                         <div class="col-md-9 pe-5">
-                                            <textarea class="form-control" rows="3" placeholder="Message sent to the employer"></textarea>
+                                            <input type="password" class="form-control form-control-lg" name="password" required />
                                         </div>
                                     </div>
                                     <hr class="mx-n3">
                                     <div class="row align-items-center py-3">
                                         <div class="col-md-3 ps-5">
-                                            <h6 class="mb-0">Upload CV</h6>
+                                            <h6 class="mb-0">Address</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input type="text" class="form-control form-control-lg" name="address" />
+                                        </div>
+                                    </div>
+                                    <hr class="mx-n3">
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Google ID</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input type="text" class="form-control form-control-lg" name="google_id" />
+                                        </div>
+                                    </div>
+                                    <hr class="mx-n3">
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Role ID</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input type="text" class="form-control form-control-lg" name="role_id" required />
+                                        </div>
+                                    </div>
+                                    <hr class="mx-n3">
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Created At</h6>
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input type="text" class="form-control form-control-lg" name="created_at" required />
+                                        </div>
+                                    </div>
+                                    <hr class="mx-n3">
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+                                            <h6 class="mb-0">Upload Image</h6>
                                         </div>
                                         <div class="col-md-9 pe-5">
                                             <input class="form-control form-control-lg" id="formFileLg" type="file" />
-                                            <div class="small text-muted mt-2">Upload your CV/Resume or any other relevant file. Max file
-                                                size 50 MB</div>
+                                            <div class="small text-muted mt-2">Upload your image. Max file size 50 MB</div>
                                         </div>
                                     </div>
                                     <hr class="mx-n3">
@@ -84,6 +122,7 @@
                                         <button type="submit" class="btn btn-primary btn-lg">Send application</button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

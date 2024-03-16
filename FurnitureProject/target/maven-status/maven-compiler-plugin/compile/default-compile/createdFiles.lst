@@ -2,6 +2,7 @@ phatntt\controller\email\ForgotPasswordController.class
 phatntt\util\Constants$ShoppingFeatures.class
 phatntt\util\DBConnect.class
 phatntt\util\Constants$LoginWithGoogleFeatures.class
+phatntt\controller\staff\categories\FilterCategoriesByStaffController.class
 phatntt\dto\CategoryDTO.class
 phatntt\controller\HomePageServlet.class
 phatntt\util\Constants$VerifyEmailFeatures.class
@@ -13,6 +14,7 @@ phatntt\cart\ProductQuantity.class
 phatntt\dto\RequestCancellationDTO$RequestCancellationDTOBuilder.class
 phatntt\controller\category\CategoryController.class
 phatntt\dao\CartDAO.class
+phatntt\controller\staff\products\FilterProductsByStaff.class
 phatntt\controller\users\RegisterAccountServlet.class
 phatntt\controller\admin\DeleteUsersController.class
 phatntt\dao\UsersDAO.class
@@ -27,11 +29,11 @@ phatntt\controller\users\CheckOutSuccessController.class
 phatntt\dto\EmailDTO.class
 phatntt\dao\EmailDAO$2.class
 phatntt\dto\OrderDTO.class
-phatntt\controller\FeedbackServlet.class
 phatntt\util\Constants$OderFeatures.class
 phatntt\controller\admin\UpdateUsersController.class
 phatntt\controller\orders\CancelOrderController.class
 phatntt\controller\staff\products\AddNewProductController.class
+phatntt\controller\staff\categories\UpdateDeleteCategoryController.class
 phatntt\dao\EmailDAO.class
 phatntt\controller\staff\orders\ProcessOrderCancellationRequests.class
 phatntt\util\Constants.class
@@ -81,10 +83,13 @@ phatntt\dto\CartDTO$CartDTOBuilder.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\products\ViewPopupProductController.class
 phatntt\controller\staff\categories\CategoryDetailManagerController.class
+phatntt\controller\staff\orders\FilterOrdersByStaffController.class
 phatntt\controller\staff\orders\OrderDetailManagementController.class
+phatntt\controller\products\ProductPaginationController.class
 phatntt\dao\StaffDAO.class
 phatntt\dto\CartDTO.class
 phatntt\dto\ErrorDTO.class
+phatntt\controller\staff\categories\AddNewCategoryController.class
 phatntt\controller\users\ChangePasswordController.class
 phatntt\dto\OrderDTO$OrderDTOBuilder.class
 phatntt\util\Constants$ValidateFeatures.class

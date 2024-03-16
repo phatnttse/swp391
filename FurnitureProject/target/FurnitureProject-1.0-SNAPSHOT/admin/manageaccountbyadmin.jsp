@@ -62,8 +62,8 @@
 
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">                  
-                        <span>Biểu đồ</span>
+                    <a class="nav-link collapsed" href="AddStaffByAdminController">                  
+                        <span>Tạo tài khoản</span>
                     </a>
                 </li>
 
@@ -86,6 +86,7 @@
             </ul>
             <!-- End of Sidebar -->
 
+
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -95,15 +96,11 @@
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <form action="SearchUserByNameController" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" name="SearchValue" placeholder="Search for...">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
+                                    <button class="btn btn-primary" type="submit">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -124,7 +121,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
                                                    placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
+                                                   aria-describedby="basic-addon2" id="SearchValue" >
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button">
                                                     <i class="fas fa-search fa-sm"></i>
@@ -171,9 +168,38 @@
 
                     <div class="container mt-6">
                         <h2>Danh sách tài khoản</h2>
-                        <form action="DeleteUsersController" method="POST">
-                            <div class="table-responsive">
+                        <!-- Navbar Form -->
+                        <form id="filterForm" class="d-flex justify-content-end" action="FilterUserController" method="post">
+                            <!-- Dropdown for Filter by Role -->
+                            <div class="dropdown me-2">
+                                <div class="input-group">
+                                    <select name="role" class="form-control">
+                                        <option value="">Theo vai trò</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="User">User</option>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <!-- Dropdown for Sort -->
+                            <div class="dropdown dropdown-end me-2">
+                                <div class="input-group">
+                                    <select name="sort" class="form-control">
+                                        <option value="">Sắp xếp theo tên</option>
+                                        <option value="ASC">Tên (A-Z)</option>
+                                        <option value="DESC">Tên (Z-A)</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        Lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <c:set var="success" value="${requestScope.DELETE_SUCCESS}"/>
+                        <form action="deleteUsers" method="POST">
+                            <div class="table-responsive">
+                                <p style="color: red">${success}</p>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -191,25 +217,32 @@
                                         <tbody>
 
                                             <c:forEach var="userDetail" items="${UserAccount}">
+                                                <!-- Check if userDetail.delete is false -->
+                                                <c:if test="${not userDetail.delete}">
+                                                    <!-- Replace the data below with your actual data from the database -->
+                                                    <tr>
+                                                        <td>
+                                                            <input type="hidden" name="Id" value="${userDetail.id}">
+                                                            ${userDetail.id}
+                                                        </td>
 
-                                                <!-- Replace the data below with your actual data from the database -->
-                                                <tr>
-                                                    <td>${userDetail.id}</td>
-                                                    <td>${userDetail.email}</td>
-                                                    <td>${userDetail.name}</td>
-                                                    <td>${userDetail.phone}</td>
-                                                    <td>${userDetail.address}</td>
-                                                    <td>
-                                                        ${userDetail.roleName}
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-outline-danger" >Delete</button>                                            
-
-                                                    <td>
-                                                        <a href="UserDetailController?Id=${userDetail.id}" class="btn btn-outline-info">Detail</a>
-                                                    </td>
-                                                </tr>
+                                                        <td>${userDetail.email}</td>
+                                                        <td id="user-name">${userDetail.name}</td>
+                                                        <td>${userDetail.phone}</td>
+                                                        <td>${userDetail.address}</td>
+                                                        <td id="user-role">
+                                                            ${userDetail.roleName}
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="UserDetailController?Id=${userDetail.id}" class="btn btn-outline-info">Detail</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>
                                             </c:forEach>
+
                                             <!-- Add more rows as needed -->
                                         </tbody>
                                     </c:if>
@@ -247,6 +280,73 @@
     function toggleSubMenu(menuId) {
         var subMenu = document.getElementById(menuId);
         subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function applyFilters(event) {
+        event.preventDefault(); // Ngăn chặn gửi yêu cầu đến máy chủ khi nhấn nút "Lọc"
+
+        // Lấy giá trị từ cả hai dropdown
+        var roleFilterValue = document.getElementById("roleFilter").value;
+        var sortFilterValue = document.getElementById("sortFilter").value;
+
+        // Gọi hàm xử lý lọc với các giá trị đã chọn
+        applyFilterByRole(roleFilterValue);
+        applySortByName(sortFilterValue);
+
+        return false; // Ngăn chặn trang được load lại
+    }
+
+// Hàm xử lý lọc theo vai trò
+    function applyFilterByRole(selectedValue) {
+        // Lấy tất cả các phần tử có id là "user-role"
+        var userRoles = document.querySelectorAll("#user-role");
+
+        // Duyệt qua từng phần tử và ẩn hoặc hiển thị tùy thuộc vào giá trị lọc
+        userRoles.forEach(function (userRole) {
+            if (selectedValue === "" || userRole.textContent.trim() === selectedValue) {
+                userRole.parentElement.style.display = "table-row"; // Hiển thị phần tử
+            } else {
+                userRole.parentElement.style.display = "none"; // Ẩn phần tử
+            }
+        });
+    }
+
+// Hàm xử lý sắp xếp theo tên
+    function applySortByName(selectedValue) {
+        // Lấy tất cả các phần tử có id là "user-name"
+        var userNames = document.querySelectorAll("#user-name");
+
+        // Tạo mảng tạm thời để lưu trữ các phần tử
+        var usersArray = [];
+
+        // Duyệt qua từng phần tử và đưa vào mảng tạm thời
+        userNames.forEach(function (userName) {
+            usersArray.push(userName.parentElement);
+        });
+
+        // Sắp xếp mảng tạm thời dựa trên giá trị của các phần tử con (tên người dùng)
+        if (selectedValue === "asc") {
+            usersArray.sort(function (a, b) {
+                var nameA = a.querySelector("#user-name").textContent.trim().toLowerCase();
+                var nameB = b.querySelector("#user-name").textContent.trim().toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+        } else if (selectedValue === "desc") {
+            usersArray.sort(function (a, b) {
+                var nameA = a.querySelector("#user-name").textContent.trim().toLowerCase();
+                var nameB = b.querySelector("#user-name").textContent.trim().toLowerCase();
+                return nameB.localeCompare(nameA);
+            });
+        }
+
+        // Xóa tất cả các phần tử hiện có trong bảng
+        var tableBody = document.querySelector("tbody");
+        tableBody.innerHTML = "";
+
+        // Thêm lại các phần tử đã sắp xếp vào bảng
+        usersArray.forEach(function (user) {
+            tableBody.appendChild(user);
+        });
     }
 </script> 
 

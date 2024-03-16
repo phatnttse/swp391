@@ -81,10 +81,13 @@ public class DeleteUsersController extends HttpServlet {
         try {
             UsersDAO dao = new UsersDAO();
             boolean result = dao.deleteUserManagementpublic(userId);
+            String success = "Xóa thành công tài khoản có id: " + userId;
             if (result) {
                 List<UsersDTO> dTOs = dao.getAllUsersWithNameOfRole();
                 request.setAttribute("LIST_USER_ROLE", dTOs);
-                url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE);
+                request.setAttribute("DELETE_SUCCESS", success);
+                url = siteMaps.getProperty(Constants.AdminFeatures.USERACCOUNT_PAGE)
+                        +"?Id=" + userId;
             }
 
         } catch (SQLException ex) {

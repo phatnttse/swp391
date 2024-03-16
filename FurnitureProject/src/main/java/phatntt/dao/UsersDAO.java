@@ -328,6 +328,7 @@ public class UsersDAO implements Serializable {
                             .role(rs.getInt("role_id"))
                             .createdAt(rs.getTimestamp("created_at"))
                             .roleName(rs.getString("role_name"))
+                            .delete(rs.getBoolean("is_delete"))
                             .build();
 
                     result.add(userDTO);
@@ -674,7 +675,9 @@ public class UsersDAO implements Serializable {
             Connection con = DBConnect.createConnection();
             if (con != null) {
                 // Tạo chuỗi SQL DELETE
-                String sql = "DELETE FROM user WHERE user_id = ?";
+                String sql = "UPDATE `user`\n"
+                        + "SET `is_delete` = TRUE\n"
+                        + "WHERE `user_id` = ?;";
                 // Tạo PreparedStatement
                 @Cleanup
                 PreparedStatement stm = con.prepareStatement(sql);
@@ -699,44 +702,75 @@ public class UsersDAO implements Serializable {
         return result;
     }
 
-//    public boolean createStaffAccount(UsersDTO dto) throws SQLException, NamingException{
-//        boolean result = false;
-//        try {
-//            //1. Create connection
-//            con = DBConnect.createConnection();
-//            if (con != null) {
-//                //2. Create SQL string
-//                String sql = "Insert Into Registration(username, password, lastname, isAdmin)"
-//                        + " Values(?, ?, ?, ?)";
-//
-//                        
-//                //3. Create Statement Object
-//                stm = con.prepareStatement(sql);
-//                stm.setString(1, account.getUsername());
-//                 stm.setString(2, account.getPassword());
-//                 stm.setString(3, account.getFullName());
-//                stm.setBoolean(4, account.isRole());
-//              
-//                //4. Execute querry
-//                int effectRows = stm.executeUpdate();
-//
-//                //5. Process
-//                if (effectRows > 0) {
-//                    result = true;
-//                }//end username and password are existed
-//            }// end connection available
-//
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//        return result;
-//    }
+    public List<UsersDTO> searchUserByName(String name) throws SQLException, NamingException {
+        List<UsersDTO> userList = new ArrayList<>();
+        String query = "SELECT user.*, role.name as role_name\n"
+                + "FROM user\n"
+                + "JOIN role ON user.role_id = role.role_id\n"
+                + "WHERE user.name LIKE ?";
+        con = DBConnect.createConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + name + "%");
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    // Sử dụng constructor của Lombok để tạo đối tượng User từ ResultSet
+                    UsersDTO user = UsersDTO.builder()
+                            .id(rs.getString("user_id"))
+                            .email(rs.getString("email"))
+                            .password(rs.getString("password"))
+                            .name(rs.getString("name"))
+                            .given_name(rs.getString("given_name"))
+                            .family_name(rs.getString("family_name"))
+                            .picture(rs.getString("picture"))
+                            .phone(rs.getString("phone"))
+                            .address(rs.getString("address"))
+                            .google_id(rs.getString("google_id"))
+                            .role(rs.getInt("role_id"))
+                            .roleName(rs.getString("role_name"))
+                            .createdAt(rs.getTimestamp("created_at"))
+                            .build();
+                    userList.add(user);
+                }
+            }
+        }
+        return userList;
+    }
+
+    public List<UsersDTO> filterAccount(String roleName, String sort) throws SQLException, NamingException {
+        List<UsersDTO> result = new ArrayList<>();
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        try (PreparedStatement stmt = con.prepareStatement("SELECT user.* \n"
+                + "FROM user\n"
+                + "JOIN role ON user.role_id = role.role_id\n"
+                + "WHERE role.name = ?\n"
+                + "ORDER BY user.name " + sort)) {
+            stmt.setString(1, roleName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    UsersDTO user = UsersDTO.builder()
+                            .id(rs.getString("user_id"))
+                            .email(rs.getString("email"))
+                            .password(rs.getString("password"))
+                            .name(rs.getString("name"))
+                            .given_name(rs.getString("given_name"))
+                            .family_name(rs.getString("family_name"))
+                            .phone(rs.getString("phone"))
+                            .picture(rs.getString("picture"))
+                            .address(rs.getString("address"))
+                            .google_id(rs.getString("google_id"))
+                            .role(rs.getInt("role_id"))
+                            .createdAt(rs.getTimestamp("created_at"))
+                            .build();
+                    result.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

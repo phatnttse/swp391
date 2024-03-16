@@ -73,7 +73,7 @@ public class Constants {
         public static final String ADMIN_PAGE = "adminHomePage";
         public static final String USERACCOUNT_PAGE = "viewUsersPage";
         public static final String VIEW_DETAIL_ACCOUNT = "detailUserPage";
-
+        public static final String CREATE_STAFF_ACCOUNT = "createStaffPage";
     }
 
     public class OderFeatures {

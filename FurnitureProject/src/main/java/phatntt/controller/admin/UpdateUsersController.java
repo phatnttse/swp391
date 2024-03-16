@@ -101,7 +101,13 @@ public class UpdateUsersController extends HttpServlet {
             dto.setName(userName);
             dto.setPhone(userPhone);
             dto.setAddress(userAddress);
-            dto.setRole(Integer.parseInt(userRoleId));
+            if (userRoleId.equalsIgnoreCase("Admin")) {
+                dto.setRole(2);
+            } else if (userRoleId.equalsIgnoreCase("Staff")) {
+                dto.setRole(1);
+            } else if (userRoleId.equalsIgnoreCase("Customer")) {
+                dto.setRole(0);
+            }
             boolean result = dao.updateUserManagement(dto);
             if (result) {
                 List<UsersDTO> dTOs = dao.getAllUsersWithNameOfRole();

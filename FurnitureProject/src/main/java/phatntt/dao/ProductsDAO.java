@@ -70,6 +70,9 @@ public class ProductsDAO implements Serializable {
                     + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, page ); 
+            stm.setInt(2, limit); 
+
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -317,15 +320,17 @@ public class ProductsDAO implements Serializable {
         return list;
     }
 
-    public List<ProductsDTO> sortProductByNameAscending() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByNameAscending(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `title` ASC";
+            String sql = "SELECT * FROM product ORDER BY `title` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -350,15 +355,17 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> sortProductByNameDescending() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByNameDescending(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `title` DESC";
+            String sql = "SELECT * FROM product ORDER BY `title` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -383,15 +390,17 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> sortProductByPriceAscending() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByPriceAscending(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `price` ASC";
+            String sql = "SELECT * FROM product ORDER BY `price` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -416,15 +425,17 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> sortProductByPriceDescending() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByPriceDescending(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `price` DESC";
+            String sql = "SELECT * FROM product ORDER BY `price` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -449,15 +460,17 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> sortProductByNewCreateAt() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByNewCreateAt(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `created_at` DESC";
+            String sql = "SELECT * FROM product ORDER BY `created_at` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -482,15 +495,17 @@ public class ProductsDAO implements Serializable {
         return result;
     }
 
-    public List<ProductsDTO> sortProductByOldCreateAt() throws SQLException, NamingException {
+    public List<ProductsDTO> sortProductByOldCreateAt(int page, int limit) throws SQLException, NamingException {
         List<ProductsDTO> result = new ArrayList<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `created_at` ASC";
+            String sql = "SELECT * FROM product ORDER BY `created_at` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -554,4 +569,24 @@ public class ProductsDAO implements Serializable {
         }
         return result;
     }
+    public int getTotalProducts() throws SQLException, NamingException {
+    int totalProducts = 0;
+
+    @Cleanup
+    Connection con = DBConnect.createConnection();
+    if (con != null) {
+        String sql = "SELECT COUNT(*) AS total FROM product";
+        @Cleanup
+        PreparedStatement stm = con.prepareCall(sql);
+        @Cleanup
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            totalProducts = rs.getInt("total");
+        }
+    }
+
+    return totalProducts;
+}
+
 }

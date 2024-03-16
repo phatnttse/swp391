@@ -52,25 +52,19 @@ public class HomePageServlet extends HttpServlet {
             List<CategoryDTO> categoryDTOs = categoryDAO.getCategoryCount();
             request.setAttribute("CATEGORY_ALL", categoryDTOs);
 
-            //sản phẩm mới
             ProductsDAO productDAO = new ProductsDAO();
-            List<ProductsDTO> listProducts = productDAO.getNewestProducts();
-            request.setAttribute("PRODUCTS_LIST", listProducts);
-
             List<ProductsDTO> listProductsByCategory = productDAO.getProductByCategory();
             request.setAttribute("PRODUCTS_CATEGORY", listProductsByCategory);
-            
-          
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
-        }finally {
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
     }
-        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -93,10 +87,10 @@ public class HomePageServlet extends HttpServlet {
             CategoryDAO categoryDAO = new CategoryDAO();
             List<CategoryDTO> categoryDTOs = categoryDAO.countProduct();
             request.setAttribute("COUNT_PRODUCT", categoryDTOs);
-            
+
             ProductsDAO productsDAO = new ProductsDAO();
             //ProductsDTO dTO = productsDAO.getProductByThumbnail(url)
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
@@ -104,8 +98,7 @@ public class HomePageServlet extends HttpServlet {
         } finally {
             processRequest(request, response);
         }
-        
-        
+
     }
 
     /**

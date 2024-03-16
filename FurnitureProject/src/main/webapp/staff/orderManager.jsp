@@ -118,7 +118,34 @@
                         </div>
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1>
+                        <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1
+                        <!-- Navbar Form -->
+                        <form id="filterForm" class="d-flex justify-content-end" action="FilterUserController" method="post">
+                            <!-- Dropdown for Filter by Role -->
+                            <div class="dropdown me-2">
+                                <div class="input-group">
+                                    <select name="role" class="form-control">
+                                        <option value="">Theo ngày</option>
+                                        <option value="Admin">Trong ngày</option>
+                                        <option value="User">Hôm qua</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Dropdown for Sort -->
+                            <div class="dropdown dropdown-end me-2">
+                                <div class="input-group">
+                                    <select name="sort" class="form-control">
+                                        <option value="">Theo trạng thái</option>
+                                        <option value="ASC">Xác nhận</option>
+                                        <option value="DESC">Đã xác nhận</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        Lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -149,9 +176,18 @@
                                                         <td>${order.email}</td>
                                                         <td>${order.name}</td>
                                                         <td>${order.phone}</td>
-                                                        <td style="color: red">${order.statusName}</td>
+                                                        <td style="color: red; ">
+                                                            
+                                                            <c:if test="${order.status == 1}">
+                                                                 <a class="btn btn-outline-success" href="orderDetailManager?orderId=${order.orderId}">Xác nhận</a>
+                                                            </c:if>
+                                                            <c:if test="${order.status > 1}">
+                                                                ${order.statusName}
+                                                            </c:if>
+                                                           
+                                                        </td>
                                                         <td>
-                                                            <a class="btn btn-outline-info" href="orderDetailManagement?orderId=${order.orderId}">Chi tiết</a>
+                                                            <a class="btn btn-outline-info" href="orderDetailManager?orderId=${order.orderId}">Chi tiết</a>
                                                         </td>                                                                                  
                                                     </tr>  
                                                 </c:forEach>

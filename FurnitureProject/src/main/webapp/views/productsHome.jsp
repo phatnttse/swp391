@@ -10,11 +10,121 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/productshome.css" />
+        <link rel="stylesheet" href="assets/css/productsHome.css" />
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <script src="assets/js/product.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
         <title>JSP Page</title>
+
+        <style>
+            .pagination>li:first-child>a,.pagination>li:first-child>span {
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+                border-radius: 50%
+            }
+
+            .pagination>li:last-child>a,.pagination>li:last-child>span {
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+                border-radius: 50%
+            }
+
+            .pagenav {
+                position: relative;
+                width: 100%;
+                margin-top: 20px
+            }
+
+            .pagenav span {
+                display: inline-block;
+                float: left;
+                margin-right: 10px;
+                line-height: 30px;
+                font-weight: 700
+            }
+
+            .nav_pagi {
+                display: inline-block;
+                padding-left: 10px;
+                width: 100%
+            }
+
+            .nav_pagi .pagination {
+                position: relative;
+                z-index: 1;
+                padding: 0 0px;
+                margin: 0 0 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                list-style: none
+            }
+
+            @media (max-width: 768px) {
+                .nav_pagi .pagination {
+                    padding:0 0px
+                }
+            }
+
+            .nav_pagi .pagination .page-link {
+                font-weight: 400;
+                float: left;
+                margin: 0 2.5px;
+                width: 35px;
+                background: transparent;
+                border: solid 1px #000;
+                text-align: center;
+                height: 35px;
+                font-size: 14px;
+                padding: 0;
+                line-height: 35px;
+                color: #000;
+                text-decoration: none;
+                border-radius: initial;
+                border-radius: 8px
+            }
+
+            @media (max-width: 375px) {
+                .nav_pagi .pagination .page-link {
+                    width:27px;
+                    height: 27px;
+                    line-height: 27px
+                }
+            }
+
+            .nav_pagi .pagination .page-link.page-db {
+                width: auto;
+                padding: 0 20px
+            }
+
+            .nav_pagi .pagination .page-link:hover {
+                background-color: #000;
+                color: #fff;
+                background: #000;
+                font-weight: bold;
+                border-color: #000
+            }
+
+            .nav_pagi .pagination .page-link svg {
+                width: 14px;
+                height: 14px;
+                margin-top: -3px
+            }
+
+            .nav_pagi .pagination .page-item.disabled .page-link {
+                border: 0;
+                display: none
+            }
+
+            .nav_pagi .pagination .page-item.active .page-link {
+                background-color: #000;
+                border-color: #000;
+                background: #000;
+                color: #fff;
+                display: block;
+                font-weight: bold
+            }
+        </style>
     </head>
     <body>
 
@@ -128,43 +238,9 @@
 
 
                                     </div>
-                                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span></div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="tab-2 tab-content">
-                            <div class="contentfill">
-
-
-                            </div>
-
-                            <div class="tab-3 tab-content">
-                                <div class="contentfill">
-
+                                   
                                 </div>
                             </div>
-
-                            <div class="tab-4 tab-content">
-                                <div class="contentfill">
-
-                                </div>
-                            </div>
-
-                            <div class="tab-5 tab-content">
-                                <div class="contentfill">
-
-                                </div>
-                            </div>
-
-                            <div class="tab-6 tab-content">
-                                <div class="contentfill">
-
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

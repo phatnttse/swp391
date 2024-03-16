@@ -85,7 +85,7 @@
                                                                     <td class="product__image">
                                                                         <div class="product-thumbnail">
                                                                             <div class="product-thumbnail__wrapper">
-                                                                                <img src="thumbnails/products/${product.thumbnail}" alt="${product.title}" class="product-thumbnail__image" />
+                                                                                <img src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="${product.title}" class="product-thumbnail__image" />
                                                                             </div>
                                                                             <span class="product-thumbnail__quantity unprintable">${product.quantity}</span>
                                                                         </div>

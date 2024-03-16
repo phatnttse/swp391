@@ -60,18 +60,19 @@
                                                 <code>Đơn hàng (#${order.orderId})</code>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text font-weight-bold">Person</span>
-                                                <span class="form-control">${order.email}</span>
-                                                <span class="form-control">${order.name}</span>
+                                                <span class="input-group-text font-weight-bold">Email</span>
+                                                <span class="form-control">${order.email}</span>                                              
+                                            </div>
+                                             <div class="input-group mb-3">
+                                                <span class="input-group-text font-weight-bold">Tên</span>
+                                                 <span class="form-control">${order.name}</span>                                                 
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text font-weight-bold">SĐT</span>
+                                                <span class="input-group-text font-weight-bold">SĐT/ĐC</span>
                                                 <span class="form-control">${order.phone}</span>
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text font-weight-bold">Địa chỉ giao hàng</span>
                                                 <span class="form-control">${order.address}</span>
                                             </div>
+                                         
                                             <div class="input-group mb-3">
                                                 <div class="input-group mb-3">
                                                     <label class="input-group-text font-weight-bold" for="orderStatusSelect">Trạng thái</label>
@@ -124,14 +125,14 @@
                                                             <th>Hình Ảnh</th>
                                                             <th>Tên Sản Phẩm</th>
                                                             <th>Giá</th>
-                                                            <th>Số lượng</th>                                                                                                            
+                                                            <th>SL</th>                                                                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="detail" items="${order_details}">
                                                             <tr>
                                                                 <td>
-                                                                    <img src="${detail.thumbnail}" class="rounded" width="80px" height="80px" alt="${detail.title}"/>                                                              
+                                                                    <img src="thumbnails/products/${detail.thumbnail}" class="rounded" width="80px" height="80px" alt="${detail.title}"/>                                                              
                                                                 </td>
                                                                 <td>${detail.title}</td>
                                                                 <td>

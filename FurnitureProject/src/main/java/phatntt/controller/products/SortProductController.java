@@ -83,7 +83,7 @@ public class SortProductController extends HttpServlet {
         try {
             int limit = 9;
 
-            if (page != 1) {
+            if (page > 1) {
                 page = page - 1;
                 page = page * limit - 1;
             }
@@ -92,48 +92,50 @@ public class SortProductController extends HttpServlet {
             List<ProductsDTO> dTOs = new ArrayList<>();
             switch (sortType) {
                 case "AtoZ":
-                    dTOs = dao.sortProductByNameAscending();
+                    dTOs = dao.sortProductByNameAscending(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
                     span = "A → Z";
                     request.setAttribute("SPAN", span);
                     break;
                 case "ZtoA":
-                    dTOs = dao.sortProductByNameDescending();
+                    dTOs = dao.sortProductByNameDescending(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
                      span = "Z → A";
                     request.setAttribute("SPAN", span);
                     break;
                 case "IncreasePrice":
-                    dTOs = dao.sortProductByPriceAscending();
+                    dTOs = dao.sortProductByPriceAscending(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-                     span = "Giá tăng dần";
+                    span = "Giá tăng dần";
                     request.setAttribute("SPAN", span);
                     break;
                 case "DecreasePrice":
-                    dTOs = dao.sortProductByPriceDescending();
+                    dTOs = dao.sortProductByPriceDescending(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
                      span = "Giá giảm dần";
                     request.setAttribute("SPAN", span);
                     break;
                 case "Newest":
-                    dTOs = dao.sortProductByNewCreateAt();
+                    dTOs = dao.sortProductByNewCreateAt(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
                      span = "Hàng mới nhất";
                     request.setAttribute("SPAN", span);
                     break;
                 case "Oldest":
-                    dTOs = dao.sortProductByOldCreateAt();
+                    dTOs = dao.sortProductByOldCreateAt(page,limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
                      span = "Hàng cũ nhất";
                     request.setAttribute("SPAN", span);
                     break;
                 default:
-                    // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác
                     dTOs = dao.getAllProducts(page, limit);
                     request.setAttribute("PRODUCTS_LIST", dTOs);
-
                     break;
             }
+            int totalProducts = dao.getTotalProducts(); 
+            int totalPages = (int) Math.ceil((double) totalProducts / limit); // Tính số trang
+            request.setAttribute("TOTAL_PAGES", totalPages); 
+            request.setAttribute("PAGE", Integer.parseInt(pageParam));
             url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE)
                     + "?sortType=" + sortType;
 

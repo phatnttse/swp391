@@ -127,7 +127,7 @@ public class OrderDetailManagementController extends HttpServlet {
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
             boolean result = orderDetailDAO.updateOrderStatus(orderId, orderStatus, paymentStatus);
             if (result){
-                url = "orderManagement";
+                url = "orderManager";
             }
             
         } catch (SQLException ex) {

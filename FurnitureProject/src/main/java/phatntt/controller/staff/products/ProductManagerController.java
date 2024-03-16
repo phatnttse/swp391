@@ -7,6 +7,7 @@ package phatntt.controller.staff.products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -29,7 +30,8 @@ import phatntt.util.Constants;
  */
 @WebServlet(name = "ProductManagerController", urlPatterns = {"/productManager"})
 public class ProductManagerController extends HttpServlet {
-/**
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -45,11 +47,15 @@ public class ProductManagerController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE);
 
+        String span;
+        String sortType = request.getParameter("typeSort");
         String pageParam = request.getParameter("page");
         int page = 1;
 
         if (pageParam != null) {
             page = Integer.parseInt(pageParam);
+            url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE)
+                    + "?page=" + page;
         }
 
         try {
@@ -59,11 +65,70 @@ public class ProductManagerController extends HttpServlet {
                 page = page - 1;
                 page = page * limit - 1;
             }
-            ProductsDAO productDAO = new ProductsDAO();
-            List<ProductsDTO> products = productDAO.getAllProducts(page,limit);
-            request.setAttribute("PRODUCTS", products);
+            ProductsDAO dao = new ProductsDAO();
+            List<ProductsDTO> dTOs = new ArrayList<>();
 
-       
+            if (sortType != null) {
+                switch (sortType) {
+                    case "AtoZ":
+                        dTOs = dao.sortProductByNameAscending(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "A → Z";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "ZtoA":
+                        dTOs = dao.sortProductByNameDescending(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "Z → A";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "IncreasePrice":
+                        dTOs = dao.sortProductByPriceAscending(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "Giá tăng dần";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "DecreasePrice":
+                        dTOs = dao.sortProductByPriceDescending(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "Giá giảm dần";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "Newest":
+                        dTOs = dao.sortProductByNewCreateAt(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "Hàng mới nhất";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "Oldest":
+                        dTOs = dao.sortProductByOldCreateAt(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        span = "Hàng cũ nhất";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    default:
+                        // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác
+                        dTOs = dao.getAllProducts(page, limit);
+                        request.setAttribute("PRODUCTS", dTOs);
+                        break;
+                }
+                url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE)
+                        + "?page=" + page
+                        + "&sortType=" + sortType;
+
+            } else {
+
+                List<ProductsDTO> products = dao.getAllProducts(page, limit);
+                request.setAttribute("PRODUCTS", products);
+
+            }
+
+            int totalProducts = dao.getTotalProducts();
+            int totalPages = (int) Math.ceil((double) totalProducts / limit); // Tính số trang
+            request.setAttribute("TOTAL_PAGES", totalPages);
+
+            request.setAttribute("PAGE", Integer.parseInt(pageParam));
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductManagerController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

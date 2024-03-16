@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package phatntt.controller.staff.orders;
+package phatntt.cart;
 
-import io.sentry.Sentry;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,20 +19,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phatntt.dao.OrderDetailDAO;
-import phatntt.dao.OrdersDAO;
-import phatntt.dao.StaffDAO;
-import phatntt.dto.OrderDTO;
-import phatntt.dto.OrderDetailDTO;
-import phatntt.dto.OrderStatusDTO;
+import javax.servlet.http.HttpSession;
+import phatntt.dao.CartDAO;
+import phatntt.dto.CartDTO;
+import phatntt.dto.UsersDTO;
 import phatntt.util.Constants;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "OrderDetailManagementController", urlPatterns = {"/orderDetailManager"})
-public class OrderDetailManagementController extends HttpServlet {
+@WebServlet(name = "BuyNowController", urlPatterns = {"/buyNow"})
+public class BuyNowController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +49,10 @@ public class OrderDetailManagementController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderDetailManagementController</title>");            
+            out.println("<title>Servlet BuyNowController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderDetailManagementController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuyNowController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,30 +70,39 @@ public class OrderDetailManagementController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE);
+        String url = siteMaps.getProperty(Constants.ShoppingFeatures.CREATE_ORDER_PAGE);
+
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        String title = request.getParameter("title");
+        String thumbnail = request.getParameter("thumbnail");
+        int quantity = 1;
+        String quantityStr = request.getParameter("quantity");
+        if (quantityStr != null) {
+            quantity = Integer.parseInt(quantityStr);
+        }
+        int price = Integer.parseInt(request.getParameter("price"));
         try {
-            String orderId = request.getParameter("orderId");
-            StaffDAO staffDAO = new StaffDAO();
-            
-            OrderDTO order = staffDAO.getOrderById(orderId);
-            
-            List<OrderDetailDTO> orderDetails = staffDAO.getOrderDetailsByOrderId(orderId);
-            
-            List<OrderStatusDTO> orderStatus = staffDAO.getAllOrderStatus();
-            
-            url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE)
-                    +"?orderId=" + orderId;
-            
-            request.setAttribute("ORDER", order);
-            request.setAttribute("ORDER_DETAILS", orderDetails);
-            request.setAttribute("ORDER_STATUS", orderStatus);
-            
+            HttpSession session = request.getSession();
+            UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
+
+            CartDAO cartDAO = new CartDAO();
+            boolean result = cartDAO.addProductToCart(user.getId(), productId, title, thumbnail, quantity , price);
+
+            if (result) {
+                List<CartDTO> products = cartDAO.getCartByUserId(user.getId());
+                session.setAttribute("ORDER_DETAILS", products);
+                request.setAttribute("NUMBER_PRODUCT", products.size());
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
         } catch (NamingException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductQuantity.class.getName()).log(Level.SEVERE, null, ex);
+            // Xử lý lỗi nếu cần
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
@@ -114,30 +120,7 @@ public class OrderDetailManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE);
-        
-        int orderStatus =  Integer.parseInt(request.getParameter("orderStatus"));
-        boolean paymentStatus = Boolean.parseBoolean(request.getParameter("paymentStatus"));
-        String orderId = request.getParameter("orderId");
-        
-        try {
-            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            boolean result = orderDetailDAO.updateOrderStatus(orderId, orderStatus, paymentStatus);
-            if (result){
-                url = "orderManager";
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderDetailManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(OrderDetailManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -33,17 +33,17 @@
             }
 
             .custom-filter-button:hover {
-                background-color: #138496; 
-                border-color: #117a8b; 
+                background-color: #138496;
+                border-color: #117a8b;
             }
 
             .custom-filter-button:focus {
-                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); 
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
             }
 
             .custom-filter-button:disabled {
-                background-color: #6c757d; 
-                border-color: #6c757d; 
+                background-color: #6c757d;
+                border-color: #6c757d;
             }
 
         </style>
@@ -90,7 +90,7 @@
                                             </span>
                                         </div>
                                         <div class="aside-content filter-group">
-                                            <form action="LoadProductByPriceController" method="POST" id="myForm">
+                                            <form action="LoadProductByPriceController" method="get" id="myForm">
                                                 <ul>
 
                                                     <li class="filter-item filter-item--check-box filter-item--green">
@@ -157,70 +157,6 @@
                                             </form>
                                         </div>
                                     </aside>
-
-
-                                    <aside class="aside-item filter-type">
-                                        <div class="aside-title">Loại sản phẩm 
-                                            <span class="nd-svg collapsible-plus">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
-                                                <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div class="aside-content filter-group">
-                                            <ul class="filter-type">
-
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <label data-filter="cảm ứng" for="filter-cam-ung">
-                                                        <input type="checkbox" id="filter-cam-ung"  data-group="Loại" data-field="product_type.filter_key" data-text="Cảm ứng" value="(&quot;Cảm ứng&quot;)" data-operator="OR">
-                                                        <i class="fa"></i>
-                                                        Cảm ứng
-                                                    </label>
-                                                </li>
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <label data-filter="treo tường" for="filter-treo-tuong">
-                                                        <input type="checkbox" id="filter-treo-tuong" onchange="toggleFilter(this)" data-group="Loại" data-field="product_type.filter_key" data-text="Treo tường" value="(&quot;Treo tường&quot;)" data-operator="OR">
-                                                        <i class="fa"></i>
-                                                        Treo tường
-                                                    </label>
-                                                </li>
-
-                                                <li class="filter-item filter-item--check-box filter-item--green">
-                                                    <label data-filter="tự động" for="filter-tu-dong">
-                                                        <input type="checkbox" id="filter-tu-dong"  data-group="Loại" data-field="product_type.filter_key" data-text="Tự động" value="(&quot;Tự động&quot;)" data-operator="OR">
-                                                        <i class="fa"></i>
-                                                        Tự động
-                                                    </label>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </aside>
-
-                                    <aside class="aside-item filter-vendor">
-                                        <div class="aside-title">Thương hiệu 
-                                            <span class="nd-svg collapsible-plus">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
-                                                <path d="M0.993164 0.968199L5.0001 4.97514L9.00704 0.968201L8.06423 0.0253911L5.0001 3.08952L1.93597 0.0253906L0.993164 0.968199Z" fill="#333333"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div class="aside-content filter-group">
-                                            <ul class="filter-vendor">
-
-                                                <li class="filter-item filter-item--check-box filter-item--green ">
-                                                    <label data-filter="mission" for="filter-mission" class="mission">
-                                                        <input type="checkbox" id="filter-mission" data-group="Hãng" data-field="vendor.filter_key" data-text="Mission" value="(&quot;Mission&quot;)" data-operator="OR">
-                                                        <i class="fa"></i>
-                                                        Mission
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </aside>
-
                                 </div>
                             </div>
                         </div>
@@ -254,14 +190,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="category-products">
+                        <div id="productPagination" class="category-products">
 
                             <div class="products-view products-view-grid list_hover_pro">
                                 <div class="row">
                                     <c:set var="listProduct" value="${requestScope.PRODUCTS_LIST}"/>
                                     <c:if test="${not empty listProduct}">
                                         <c:forEach var="product" items="${listProduct}">                                    
-                                            <div class="col-6 col-xl-4 col-lg-4 col-md-4">
+                                            <div  class="col-6 col-xl-4 col-lg-4 col-md-4">
                                                 <div class="item_product_main">
                                                     <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                         <div class="product-thumbnail">
@@ -316,25 +252,91 @@
                                 </div>
                             </div>
 
-                            <div class="pagenav">
-                                <nav class="clearfix relative nav_pagi w_100 ">
-                                    <ul class="pagination clearfix">
-                                        <li class="page-item disabled"><a class="page-link" href="#">
-                                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
-                                            </a></li>
-                                        <li class="active page-item disabled"><a class="page-link" href="">1</a></li>
+                            <c:set var="page" value="${requestScope.PAGE}"/>
+                            <c:set var="uri" value="${pageContext.request.requestURI}" />
+                            
+                            <c:if test="${param['sortType'] == null && param['price'] == null}">
+                                 <div class="pagenav">
+                                    <nav class="clearfix relative nav_pagi w_100 ">
+                                        <ul class="pagination clearfix">
+                                            <c:if test="${page == 1}">
+                                                <li class="page-item disabled"><a class="page-link" href="#">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
+                                                    </a></li> 
+                                                </c:if>
+                                                <c:if test="${page > 1}">
+                                                <li class="page-item"><a href="productPagination?page=${page - 1}" class="page-link" href="#">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
+                                                    </a></li> 
+                                                </c:if>
 
-                                        <li class="page-item"><a class="page-link" onclick="" href="">2</a></li>
 
-                                        <li class="page-item"><a class="page-link" onclick="" href="">3</a></li>
+                                            <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+                                                <c:set var="numberPage" value="${pageNumber}" />
+                                                <c:choose>
+                                                    <c:when test="${pageNumber == page}">
+                                                        <li class="page-item active">
+                                                            <a class="page-link" href="productPagination?page=${pageNumber}">${pageNumber}</a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="productPagination?page=${pageNumber}">${pageNumber}</a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
 
-                                        <li class="page-item hidden-xs"><a class="page-link">
-                                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-right fa-w-6"><path fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z" class=""></path></svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                                            <li class="page-item hidden-xs"><a href="productPagination?page=${page + 1}"class="page-link">
+                                                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-right fa-w-6"><path fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z" class=""></path></svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${param['sortType'] != null}">
+                                <div class="pagenav">
+                                    <nav class="clearfix relative nav_pagi w_100 ">
+                                        <ul class="pagination clearfix">
+                                            <c:if test="${page == 1}">
+                                                <li id="prevPage" class="page-item disabled"><a class="page-link" href="#">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
+                                                    </a></li> 
+                                                </c:if>
+                                                <c:if test="${page > 1}">
+                                                <li class="page-item"><a href="productPagination?page=${page - 1}&sortType=${param['sortType']}" class="page-link" href="#">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-left fa-w-6"><path fill="currentColor" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z" class=""></path></svg>
+                                                    </a></li> 
+                                                </c:if>
+
+
+                                            <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+                                                <c:set var="numberPage" value="${pageNumber}" />
+                                                <c:choose>
+                                                    <c:when test="${pageNumber == page}">
+                                                        <li class="page-item active">
+                                                            <a class="page-link" href="productPagination?page=${pageNumber}&sortType=sortType=${param['sortType']}">${pageNumber}</a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="productPagination?page=${pageNumber}&sortType=${param['sortType']}">${pageNumber}</a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+
+                                            <li class="page-item hidden-xs"><a href="productPagination?page=${page + 1}&sortType=${param['sortType']}"class="page-link">
+                                                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-angle-right fa-w-6"><path fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z" class=""></path></svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </c:if>
+                            
                         </div>
                     </div>
                 </div>
@@ -355,6 +357,7 @@
     <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
     <script src="assets/js/ajaxfunctions.js"></script>
+
 
 
     <%@include file="../UIcomponents/footer.jsp" %>

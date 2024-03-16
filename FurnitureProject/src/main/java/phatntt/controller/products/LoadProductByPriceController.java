@@ -67,31 +67,21 @@ public class LoadProductByPriceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         String[] price = request.getParameterValues("price");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
+        
+
         try {
+
             CategoryDAO catedao = new CategoryDAO();
             List<CategoryDTO> cdtos = catedao.getAllCategoryDTOs();
             request.setAttribute("CATEGORY_LIST", cdtos);
+
             List<ProductsDTO> productsDTOs = new ArrayList<>();
             ProductsDAO dao = new ProductsDAO();
+
             if (price != null) {
                 int from = 0, to = 0;
                 for (int i = 0; i < price.length; i++) {
@@ -139,6 +129,10 @@ public class LoadProductByPriceController extends HttpServlet {
                     }
                 }
             }
+            int totalProducts = dao.getTotalProducts();
+            int totalPages = (int) Math.ceil((double) totalProducts / 9); // Tính số trang
+            request.setAttribute("TOTAL_PAGES", totalPages);
+
             request.setAttribute("PRODUCTS_LIST", productsDTOs);
             url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_PAGE)
                     + "?price=" + price;
@@ -148,6 +142,21 @@ public class LoadProductByPriceController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
+
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

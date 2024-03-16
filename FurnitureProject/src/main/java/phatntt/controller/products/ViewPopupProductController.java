@@ -96,7 +96,7 @@ public class ViewPopupProductController extends HttpServlet {
                     + "<div class='image-block large-image col_large_default'>"
                     + "<span class='view_full_size'>"
                     + "<a class='img-product' title='' href=''>"
-                    + "<img src='" + product.getThumbnail() + "' id='product-featured-image-quickview' "
+                    + "<img src='thumbnails/products/" + product.getThumbnail() + "' id='product-featured-image-quickview' "
                     + "class='img-responsive product-featured-image-quickview'>"
                     + "</a>"
                     + "</span>"

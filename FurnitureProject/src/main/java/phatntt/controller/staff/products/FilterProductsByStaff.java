@@ -80,7 +80,7 @@ public class FilterProductsByStaff extends HttpServlet {
         }
 
         try {
-            int limit = 9;
+            int limit = 6;
 
             if (page != 1) {
                 page = page - 1;
@@ -90,32 +90,32 @@ public class FilterProductsByStaff extends HttpServlet {
             List<ProductsDTO> dTOs = new ArrayList<>();
             switch (typeSort) {
                 case "AtoZ":
-                    dTOs = dao.sortProductByNameAscending();
+                    dTOs = dao.sortProductByNameAscending(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;
                 case "ZtoA":
-                    dTOs = dao.sortProductByNameDescending();
+                    dTOs = dao.sortProductByNameDescending(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;
                 case "IncreasePrice":
-                    dTOs = dao.sortProductByPriceAscending();
+                    dTOs = dao.sortProductByPriceAscending(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;
                 case "DecreasePrice":
-                    dTOs = dao.sortProductByPriceDescending();
+                    dTOs = dao.sortProductByPriceDescending(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;
                 case "Newest":
-                    dTOs = dao.sortProductByNewCreateAt();
+                    dTOs = dao.sortProductByNewCreateAt(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;
                 case "Oldest":
-                    dTOs = dao.sortProductByOldCreateAt();
+                    dTOs = dao.sortProductByOldCreateAt(page, limit);
                     request.setAttribute("PRODUCTS", dTOs);
 
                     break;

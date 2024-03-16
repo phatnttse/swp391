@@ -141,13 +141,13 @@
                                                     Mặc định
                                                 </span>
                                                 <ul class="content_ul">
-                                                    <li><a href="filterProductsByStaff?typeSort=default">Mặc định</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=AtoZ">A → Z</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=ZtoA">Z → A</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=IncreasePrice">Giá tăng dần</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=DecreasePrice">Giá giảm dần</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=Newest">Hàng mới nhất</a></li>
-                                                    <li><a href="filterProductsByStaff?typeSort=Oldest">Hàng cũ nhất</a></li>
+                                                    <li><a href="productManager?typeSort=default">Mặc định</a></li>
+                                                    <li><a href="productManager?typeSort=AtoZ">A → Z</a></li>
+                                                    <li><a href="productManager?typeSort=ZtoA">Z → A</a></li>
+                                                    <li><a href="productManager?typeSort=IncreasePrice">Giá tăng dần</a></li>
+                                                    <li><a href="productManager?typeSort=DecreasePrice">Giá giảm dần</a></li>
+                                                    <li><a href="productManager?typeSort=Newest">Hàng mới nhất</a></li>
+                                                    <li><a href="productManager?typeSort=Oldest">Hàng cũ nhất</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -203,13 +203,34 @@
                         </div>
                     </div>
 
-                    <ul class="pagination justify-content-center my-3">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+                    <c:set var="page" value="${requestScope.PAGE}"/>
+                    <c:if test="${param['typeSort'] != null}">
+                        <ul class="pagination justify-content-center my-3">
+                            <li class="page-item"><a class="page-link" href="productManager?page=${page - 1}&typeSort=${param['typeSort']}">Previous</a></li>
+                            
+                                <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+
+                                <li class="page-item"><a class="page-link" href="productManager?page=${pageNumber}&typeSort=${param['typeSort']}">${pageNumber}</a></li>
+
+                              </c:forEach>
+                                
+                            <li class="page-item"><a class="page-link" href="productManager?page=${page + 1}&typeSort=${param['typeSort']}">Next</a></li>
+
+                        </ul>
+                    </c:if>
+                    <c:if test="${param['sortType'] == null}">
+                        <ul class="pagination justify-content-center my-3">
+                            <li class="page-item"><a class="page-link" href="productManager?page=${page - 1}">Previous</a></li>
+                                <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+
+                                <li class="page-item"><a class="page-link" href="productManager?page=${pageNumber}">${pageNumber}</a></li>
+
+                            </c:forEach>
+                            <li class="page-item"><a class="page-link" href="productManager?page=${page + 1}">Next</a></li>
+
+                        </ul>
+
+                    </c:if>
 
 
 

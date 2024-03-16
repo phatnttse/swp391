@@ -7,10 +7,7 @@ package phatntt.controller.category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -136,13 +133,8 @@ public class CategoryController extends HttpServlet {
                     out.append("                        </form>");
                     out.append("                    </div>");
                     out.append("                </div>");
-                }
-                
-                out.append("            </div>");
-                out.append("            <div class=\"swiper-pagination swiper-pagination-clickable swiper-pagination-bullets\">");
-                out.append("                <span class=\"swiper-pagination-bullet swiper-pagination-bullet-active\"></span>");
-                out.append("                <span class=\"swiper-pagination-bullet\"></span>");
-                out.append("            </div>");
+                }           
+                out.append("            </div>");    
                 out.append("        </div>");
                 out.append("    </div>");
                 out.append("</div>");

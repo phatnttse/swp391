@@ -48,29 +48,22 @@ public class ProductsController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
 
-        String pageParam = request.getParameter("page");
-        int page = 1;
-
-        if (pageParam != null) {
-            page = Integer.parseInt(pageParam);
-        }
-
         try {
-            int limit = 9;
-
-            if (page != 1) {
-                page = page - 1;
-                page = page * limit - 1;
-            }
 
             ProductsDAO product = new ProductsDAO();
-            List<ProductsDTO> listProducts = product.getAllProducts(page, limit);
+            List<ProductsDTO> listProducts = product.getAllProducts(1, 9);
 
             request.setAttribute("PRODUCTS_LIST", listProducts);
 
             CategoryDAO dao = new CategoryDAO();
             List<CategoryDTO> cdtos = dao.getAllCategoryDTOs();
             request.setAttribute("CATEGORY_LIST", cdtos);
+            
+           
+             int totalProducts = product.getTotalProducts();
+            int totalPages = (int) Math.ceil((double) totalProducts / 9); // Tính số trang
+            request.setAttribute("TOTAL_PAGES", totalPages);
+
             url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
 
         } catch (SQLException ex) {

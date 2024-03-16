@@ -94,6 +94,7 @@ phatntt\controller\users\ChangePasswordController.class
 phatntt\dto\OrderDTO$OrderDTOBuilder.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
+phatntt\cart\BuyNowController.class
 phatntt\controller\orders\ViewAllOrderController.class
 phatntt\dto\OrderStatusDTO.class
 phatntt\listener\MyContextServletListener.class

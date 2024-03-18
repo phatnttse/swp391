@@ -29,7 +29,7 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "INSERT INTO `order` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
+            String sql = "INSERT INTO `orders` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "INSERT INTO order_detail (order_id, product_id, title, price, quantity, thumbnail, total_money) "
+            String sql = "INSERT INTO order_details (order_id, product_id, title, price, quantity, thumbnail, total_money) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+            String sql = "UPDATE `orders` SET status = ? WHERE order_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, 5);
@@ -99,7 +99,7 @@ public class OrdersDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT o.*, os.name AS status_name "
-                    + "FROM `order` o "
+                    + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
                     + "WHERE o.order_id = ?";
             @Cleanup
@@ -135,7 +135,7 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "DELETE FROM cart WHERE user_id = ?";
+            String sql = "DELETE FROM carts WHERE user_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, userId);
@@ -155,9 +155,9 @@ public class OrdersDAO {
                     + "    os.name AS status_name,\n"
                     + "    SUM(od.total_money) AS total_order_price\n"
                     + "FROM \n"
-                    + "    `order` o\n"
+                    + "    `orders` o\n"
                     + "JOIN \n"
-                    + "    `order_detail` od ON o.order_id = od.order_id\n"
+                    + "    `order_details` od ON o.order_id = od.order_id\n"
                     + "JOIN \n"
                     + "    `order_status` os ON o.status = os.status_id\n"
                     + "WHERE \n"
@@ -202,7 +202,7 @@ public class OrdersDAO {
         if (con != null) {
             con.setAutoCommit(false);
 
-            String insertRequestSql = "INSERT INTO request_cancellation (user_id, order_id, reason, request_status) VALUES (?, ?, ?, ?)";
+            String insertRequestSql = "INSERT INTO request_cancellations (user_id, order_id, reason, request_status) VALUES (?, ?, ?, ?)";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(insertRequestSql);
             stm.setString(1, userId);
@@ -212,7 +212,7 @@ public class OrdersDAO {
             int rowsAffected = stm.executeUpdate();
 
             if (rowsAffected > 0) {
-                String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ? ";
+                String updateOrderSql = "UPDATE `orders` SET status = ? WHERE order_id = ? ";
                 stm = con.prepareStatement(updateOrderSql);
                 stm.setInt(1, 6);
                 stm.setString(2, orderId);
@@ -234,7 +234,7 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellation WHERE order_id = ?";
+            String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellations WHERE order_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, orderId);

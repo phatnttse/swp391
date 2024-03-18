@@ -22,8 +22,8 @@ import phatntt.dao.StaffDAO;
  *
  * @author Admin
  */
-@WebServlet(name = "ProcessOrderCancellationRequests", urlPatterns = {"/ProcessOrderCancellationRequests"})
-public class ProcessOrderCancellationRequests extends HttpServlet {
+@WebServlet(name = "HandlingOrderCancellationReqController", urlPatterns = {"/handlingOrderCancellationReq"})
+public class HandlingOrderCancellationReqController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -32,7 +32,7 @@ public class StaffDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM order_detail WHERE order_id = ?";
+            String sql = "SELECT * FROM order_details WHERE order_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, orderId);
@@ -90,7 +90,7 @@ public class StaffDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT o.*, os.name AS status_name "
-                    + "FROM `order` o "
+                    + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
                     + "WHERE o.order_id = ?";
             @Cleanup
@@ -128,7 +128,7 @@ public class StaffDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT o.*, os.name AS status_name "
-                    + "FROM `order` o "
+                    + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
@@ -165,7 +165,7 @@ public class StaffDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT o.*, os.name AS status_name "
-                    + "FROM `order` o "
+                    + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
                     + condition;
             @Cleanup
@@ -189,13 +189,13 @@ public class StaffDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String deleteRequestSql = "DELETE FROM request_cancellation WHERE order_id = ?";
+            String deleteRequestSql = "DELETE FROM request_cancellations WHERE order_id = ?";
             @Cleanup
             PreparedStatement stmRequest = con.prepareStatement(deleteRequestSql);
             stmRequest.setString(1, orderId);
             stmRequest.executeUpdate();
 
-            String updateOrderSql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+            String updateOrderSql = "UPDATE `orders` SET status = ? WHERE order_id = ?";
             @Cleanup
             PreparedStatement stmOrder = con.prepareStatement(updateOrderSql);
             stmOrder.setInt(1, 7);
@@ -212,8 +212,8 @@ public class StaffDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT rc.id, rc.user_id, o.name, o.email, o.phone, rc.order_id, rc.reason, rc.request_status, rc.created_at "
-                    + "FROM request_cancellation rc "
-                    + "JOIN `order` o ON rc.order_id = o.order_id";
+                    + "FROM request_cancellations rc "
+                    + "JOIN `orders` o ON rc.order_id = o.order_id";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             @Cleanup
@@ -246,7 +246,7 @@ public class StaffDAO {
     @Cleanup
     Connection con = DBConnect.createConnection();
     if (con != null) {
-        String sql = "INSERT INTO product(category_id, title, description, quantity, price, thumbnail, discount) "
+        String sql = "INSERT INTO products(category_id, title, description, quantity, price, thumbnail, discount) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         @Cleanup
         PreparedStatement stm = con.prepareStatement(sql);
@@ -275,7 +275,7 @@ public class StaffDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "DELETE FROM product WHERE product_id = ?";
+            String sql = "DELETE FROM products WHERE product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, productId);
@@ -295,7 +295,7 @@ public class StaffDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "UPDATE product "
+            String sql = "UPDATE products "
                     + "SET category_id = ?, title = ?,  description = ?, price = ?,  quantity = ?, "
                     + " thumbnail = ?, discount = ? "
                     + "WHERE product_id = ?";

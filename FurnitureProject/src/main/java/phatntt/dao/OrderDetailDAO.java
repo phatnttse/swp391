@@ -30,7 +30,7 @@ public class OrderDetailDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "UPDATE `order` SET status = ?, payment_status = ? WHERE order_id = ?";
+            String sql = "UPDATE `orders` SET status = ?, payment_status = ? WHERE order_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, statusId);
@@ -57,9 +57,9 @@ public class OrderDetailDAO {
                 + "    o.created_at AS order_created_at,\n"
                 + "    o.name AS order_status_name\n"
                 + "FROM \n"
-                + "    `order_detail` od\n"
+                + "    `order_details` od\n"
                 + "JOIN \n"
-                + "    `order` o ON od.order_id = o.order_id\n"
+                + "    `orders` o ON od.order_id = o.order_id\n"
                 + "WHERE \n"
                 + "    od.order_id = ? ";
         @Cleanup

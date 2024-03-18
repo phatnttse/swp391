@@ -28,7 +28,7 @@ public class CartDAO {
         Connection con = DBConnect.createConnection();
 
         if (con != null) {
-            String checkIfExistsSQL = "SELECT * FROM cart WHERE user_id = ? AND product_id = ?";
+            String checkIfExistsSQL = "SELECT * FROM carts WHERE user_id = ? AND product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(checkIfExistsSQL);
             stm.setString(1, userId);
@@ -40,7 +40,7 @@ public class CartDAO {
                 int currentQuantity = rs.getInt("quantity");
                 int newQuantity = currentQuantity + quantity;
 
-                String updateQuantitySQL = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+                String updateQuantitySQL = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
                 stm = con.prepareStatement(updateQuantitySQL);
                 stm.setInt(1, newQuantity);
                 stm.setString(2, userId);
@@ -51,7 +51,7 @@ public class CartDAO {
                     result = true;
                 }
             } else {
-                String insertSQL = "INSERT INTO cart (user_id, product_id, title, thumbnail, quantity, price) VALUES (?, ?, ?, ?, ?, ?)";
+                String insertSQL = "INSERT INTO carts (user_id, product_id, title, thumbnail, quantity, price) VALUES (?, ?, ?, ?, ?, ?)";
                 stm = con.prepareStatement(insertSQL);
                 stm.setString(1, userId);
                 stm.setInt(2, productId);
@@ -77,7 +77,7 @@ public class CartDAO {
         Connection con = DBConnect.createConnection();
 
         if (con != null) {
-            String checkIfExistsSQL = "SELECT * FROM cart WHERE user_id = ? AND product_id = ?";
+            String checkIfExistsSQL = "SELECT * FROM carts WHERE user_id = ? AND product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(checkIfExistsSQL);
             stm.setString(1, userId);
@@ -89,7 +89,7 @@ public class CartDAO {
                 int currentQuantity = rs.getInt("quantity");
                 int newQuantity = currentQuantity - 1;
                 if (newQuantity == 0) {
-                    String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+                    String sql = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
                     stm = con.prepareStatement(sql);
                     stm.setString(1, userId);
                     stm.setInt(2, productId);
@@ -100,7 +100,7 @@ public class CartDAO {
                     }
                 }
 
-                String updateQuantitySQL = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+                String updateQuantitySQL = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
                 stm = con.prepareStatement(updateQuantitySQL);
                 stm.setInt(1, newQuantity);
                 stm.setString(2, userId);
@@ -122,7 +122,7 @@ public class CartDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM cart WHERE product_id = ?";
+            String sql = "SELECT * FROM carts WHERE product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, productId);
@@ -152,7 +152,7 @@ public class CartDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM cart WHERE user_id = ?";
+            String sql = "SELECT * FROM carts WHERE user_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, userId);
@@ -182,7 +182,7 @@ public class CartDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM cart WHERE product_id = ?";
+            String sql = "SELECT * FROM carts WHERE product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, productId);
@@ -210,7 +210,7 @@ public class CartDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT SUM(quantity) AS totalQuantity FROM cart WHERE user_id = ?";
+            String sql = "SELECT SUM(quantity) AS totalQuantity FROM carts WHERE user_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, userId);
@@ -230,7 +230,7 @@ public class CartDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+            String sql = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, userId);

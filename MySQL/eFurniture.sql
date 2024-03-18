@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS eFurniture;
 USE eFurniture;
 
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
     `user_id` VARCHAR(255) PRIMARY KEY NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255),
@@ -14,16 +14,17 @@ CREATE TABLE `user` (
     `address` VARCHAR(255),
     `google_id` VARCHAR(255),
     `role_id` INT NOT NULL,
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `deleted` BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 
-CREATE TABLE `role` (
+CREATE TABLE `roles` (
   `role_id` int PRIMARY KEY NOT NULL,
   `name` varchar(50) NOT NULL
 );
 
-CREATE TABLE `product` (
+CREATE TABLE `products` (
     `product_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `category_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
@@ -36,13 +37,13 @@ CREATE TABLE `product` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `category_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `thumbnail` varchar(200) NULL
 );
 
-CREATE TABLE `order` (
+CREATE TABLE `orders` (
     `order_id` VARCHAR(10) PRIMARY KEY NOT NULL,
     `user_id` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
@@ -62,7 +63,7 @@ CREATE TABLE `order_status` (
     `name` VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE `order_detail` (
+CREATE TABLE `order_details` (
     `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `order_id` VARCHAR(10) NOT NULL,
     `product_id` INT NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE `order_detail` (
     `total_money` INT NOT NULL
 );
 
-CREATE TABLE `cart` (
+CREATE TABLE `carts` (
     `cart_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `product_id` INT NOT NULL,
@@ -84,13 +85,13 @@ CREATE TABLE `cart` (
 );
 
 
-CREATE TABLE `payment` (
+CREATE TABLE `payments` (
     `payment_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `order_id` VARCHAR(10)  NOT NULL
 );
 
-CREATE TABLE `request_cancellation` (
+CREATE TABLE `request_cancellations` (
     `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(255) NOT NULL,
     `order_id` VARCHAR(10)  NOT NULL,
@@ -112,7 +113,7 @@ INSERT INTO `order_status` (`name`) VALUES
 
  DELIMITER $$
 
-CREATE TRIGGER TR_OrderDetail_Insert AFTER INSERT ON order_detail 
+CREATE TRIGGER TR_OrderDetails_Insert AFTER INSERT ON order_details 
 FOR EACH ROW 
 BEGIN
     DECLARE quantity_ordered INT;
@@ -120,13 +121,13 @@ BEGIN
 
     -- Lấy số lượng sản phẩm và trạng thái của đơn hàng mới được thêm vào
     SELECT NEW.quantity, `status` INTO quantity_ordered, order_status
-    FROM `order` 
+    FROM `orders` 
     WHERE `order_id` = NEW.order_id;
 
     -- Kiểm tra nếu đơn hàng đã được thanh toán
     IF order_status = 1 THEN
         -- Giảm số lượng sản phẩm trong kho tương ứng
-        UPDATE `product` 
+        UPDATE `products` 
         SET `quantity` = `quantity` - NEW.quantity
         WHERE `product_id` = NEW.product_id;
     END IF;
@@ -137,32 +138,32 @@ DELIMITER ;
 
 
 
-ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
+ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
-ALTER TABLE `order` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `cart` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `carts` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `cart` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+ALTER TABLE `carts` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
-ALTER TABLE `payment` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `order_detail` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+ALTER TABLE `order_details` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
-ALTER TABLE `order_detail` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+ALTER TABLE `order_details` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
-ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
+ALTER TABLE `users` ADD FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`);
 
-ALTER TABLE `payment` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+ALTER TABLE `payments` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
-ALTER TABLE `order` ADD FOREIGN KEY (`status`) REFERENCES `order_status` (`status_id`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`status`) REFERENCES `order_status` (`status_id`);
 
-ALTER TABLE `request_cancellation` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `request_cancellations` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `request_cancellation` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+ALTER TABLE `request_cancellations` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
 
-INSERT INTO category (category_id, name, thumbnail) VALUES
+INSERT INTO categories (category_id, name, thumbnail) VALUES
   (1, 'Bồn tắm', 'bontam.jpg'),
   (2, 'Bồn cầu', 'boncau.jpg'),
   (3, 'Sen tắm', 'sentam.jpg'),
@@ -170,7 +171,7 @@ INSERT INTO category (category_id, name, thumbnail) VALUES
   (5, 'Vòi Lavabo', 'voilavabo.jpg'),
   (6, 'Phụ kiện', 'phukien.jpg');
   
-INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
+INSERT INTO products (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (1, 'Bồn tắm Massage đặt góc', 5595000, 10, 10, 'Bồn tắm Massage đặt góc.jpg', 
 'Kích thước (mm):  1500x1500x580mm
 Nguồn điện : AC 220 V ± 15% / 50 Hz
@@ -238,7 +239,7 @@ Công nghệ: Liền mạch', '2024-01-24 12:30:00'),
 (1, 'Bồn tắm ngâm cao cấp, chất liệu Acrylic', 2590000, 10, 19, 'Bồn tắm ngâm cao cấp, chất liệu Acrylic.jpg', 
 'Không có mô tả', '2024-01-24 12:30:00');
 
-INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
+INSERT INTO products (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (2, 'Bồn cầu treo âm tường Mission', 460000, 10, 15, 'Bồn cầu treo âm tường Mission.jpg', 
 'Bồn cầu két nước âm tường Mission
  Giảm trọng lượng sàn 900kg/1 phòng vệ sinh 3m2(do không phải tôn nền)
@@ -325,7 +326,7 @@ trọng lượng: 41-50kg', '2024-01-24 12:00:00'),
 20.Chế độ xả khi mất điện.
 21. Xả nước không phụ thuộc áp lực nguồn nước.', '2024-01-24 12:00:00');
 
-INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
+INSERT INTO products (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (3, 'Sen tắm đồng thau phủ nano xám màn hình led', 450000, 10, 14, 'Sen tắm đồng thau phủ nano xám màn hình led.jpg', 
 'Thương Hiệu: Lusenter
  Công Nghệ: Đức
@@ -358,7 +359,7 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Công nghệ sản xuất: Hàn Quốc
  Sản xuất tại: Tera China', '2024-01-24 12:00:00');
 
-INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
+INSERT INTO products (category_id, title, price, quantity, discount, thumbnail, description, created_at) VALUES 
 (4, 'Tủ chậu lavabo phòng tắm kiêm máy giặt', 1350000, 10, 0, 'Tủ chậu lavabo phòng tắm kiêm máy giặt.jpg', 
 'Tủ chậu lavabo kê máy giặt là một giải pháp thông minh để tiết kiệm không gian trong phòng tắm hoặc nhà vệ sinh. Nó kết hợp hai chức năng chính là tủ chậu lavabo và không gian để đặt máy giặt.
  Tủ chậu lavabo thường đi kèm với một chậu rửa, một vòi nước và các ngăn để lưu trữ đồ vật như xà bông, kem đánh răng, và các vật dụng nhà tắm khác. Phía dưới chậu rửa, có không gian để đặt máy giặt. Một số mẫu tủ chậu lavabo kê máy giặtcòn có thiết kế thông minh để che giấu máy giặt bên trong tủ, giúp tạo ra một diện mạo gọn gàng và tiết kiệm không gian.', '2024-01-24 12:00:00'),
@@ -384,13 +385,13 @@ INSERT INTO product (category_id, title, price, quantity, discount, thumbnail, d
  Giá đỡ	Giá đỡ inox + ốc vít
  Xiphong: Xiphong thoát chậu ruột gà đầu inox đuôi nhựa', '2024-01-24 12:00:00');
  
- INSERT INTO role (role_id, name) values
+ INSERT INTO roles (role_id, name) values
  (0,"User"),
  (1,"Staff"),
  (2,"Admin");
  
 
-INSERT INTO `user` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
+INSERT INTO `users` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
 VALUES ('123', 'staff@gmail.com', '$2a$10$wNGqMyi/jy8aURA1Bbm8.e6l90CY5A6FU0gmqKdLWC7BmWDYkoPpG', 'Staff', 'Staff', 'Staff', '1234567890', 'picture_url', 'Address', 1);
 
 

@@ -30,7 +30,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE category_id = ?";
+            String sql = "SELECT * FROM products WHERE category_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, categoryId);
@@ -64,13 +64,13 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT product.product_id, product.category_id, product.title, product.price, product.quantity, product.discount, product.thumbnail, product.description, product.purchases, product.created_at, category.name AS category_name "
-                    + "FROM product "
-                    + "LEFT JOIN category ON product.category_id = category.category_id "
+            String sql = "SELECT products.product_id, products.category_id, products.title, products.price, products.quantity, products.discount, products.thumbnail, products.description, products.purchases, products.created_at, categories.name AS category_name "
+                    + "FROM products "
+                    + "LEFT JOIN categories ON products.category_id = categories.category_id "
                     + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setInt(1, page ); 
+            stm.setInt(1, page - 1 ); 
             stm.setInt(2, limit); 
 
             @Cleanup
@@ -104,7 +104,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE title LIKE ?";
+            String sql = "SELECT * FROM products WHERE title LIKE ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, "%" + searchValue + "%");
@@ -138,7 +138,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE product_id = ?";
+            String sql = "SELECT * FROM products WHERE product_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, productId);
@@ -171,7 +171,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE category_id = 1";
+            String sql = "SELECT * FROM products WHERE category_id = 1";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             @Cleanup
@@ -204,7 +204,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE category_id = ?";
+            String sql = "SELECT * FROM products WHERE category_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, categoryId);
@@ -238,7 +238,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY created_at DESC LIMIT 8";
+            String sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 8";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             @Cleanup
@@ -271,8 +271,8 @@ public class ProductsDAO implements Serializable {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT COUNT(p.product_id) AS productCount\n"
-                    + "FROM category c\n"
-                    + "LEFT JOIN product p ON c.category_id = p.category_id\n"
+                    + "FROM categories c\n"
+                    + "LEFT JOIN products p ON c.category_id = p.category_id\n"
                     + "GROUP BY c.category_id;";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
@@ -292,7 +292,7 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product WHERE price BETWEEN ? AND ?";
+            String sql = "SELECT * FROM products WHERE price BETWEEN ? AND ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, from);
@@ -326,10 +326,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `title` ASC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `title` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -361,10 +361,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `title` DESC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `title` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -396,10 +396,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `price` ASC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `price` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -431,10 +431,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `price` DESC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `price` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -466,10 +466,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `created_at` DESC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `created_at` DESC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -501,10 +501,10 @@ public class ProductsDAO implements Serializable {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM product ORDER BY `created_at` ASC LIMIT ?, ?";
+            String sql = "SELECT * FROM products ORDER BY `created_at` ASC LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
-            stm.setInt(1, page);
+            stm.setInt(1, page - 1);
             stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -536,8 +536,8 @@ public class ProductsDAO implements Serializable {
             @Cleanup
             Connection con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "SELECT p.* FROM product p\n"
-                        + "INNER JOIN category c ON p.category_id = c.category_id\n"
+                String sql = "SELECT p.* FROM products p\n"
+                        + "INNER JOIN categories c ON p.category_id = c.category_id\n"
                         + "WHERE p.product_id <> ? AND c.category_id = (SELECT category_id FROM product WHERE product_id = ?)\n"
                         + "ORDER BY RAND()\n"
                         + "LIMIT 3;";
@@ -575,7 +575,7 @@ public class ProductsDAO implements Serializable {
     @Cleanup
     Connection con = DBConnect.createConnection();
     if (con != null) {
-        String sql = "SELECT COUNT(*) AS total FROM product";
+        String sql = "SELECT COUNT(*) AS total FROM products";
         @Cleanup
         PreparedStatement stm = con.prepareCall(sql);
         @Cleanup

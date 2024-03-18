@@ -27,7 +27,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM category LIMIT 6";
+            String sql = "SELECT * FROM categories LIMIT 6";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
             @Cleanup
@@ -51,7 +51,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM category";
+            String sql = "SELECT * FROM categories";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
             @Cleanup
@@ -76,8 +76,8 @@ public class CategoryDAO {
         Connection con = DBConnect.createConnection();
         if (con != null) {
             String sql = "SELECT c.category_id, c.name, c.thumbnail, COUNT(p.product_id) AS product_count\n"
-                    + "FROM category c\n"
-                    + "LEFT JOIN product p ON c.category_id = p.category_id\n"
+                    + "FROM categories c\n"
+                    + "LEFT JOIN products p ON c.category_id = p.category_id\n"
                     + "GROUP BY c.category_id, c.name, c.thumbnail";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
@@ -105,7 +105,7 @@ public class CategoryDAO {
             Connection con = DBConnect.createConnection();
 
             if (con != null) {
-                String sql = "SELECT * FROM category WHERE category_id = ?";
+                String sql = "SELECT * FROM categories WHERE category_id = ?";
 
                 @Cleanup
                 PreparedStatement stm = con.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "UPDATE category "
+            String sql = "UPDATE categories "
                     + "SET name = ?, thumbnail = ? "
                     + "WHERE category_id = ?";
             @Cleanup
@@ -157,7 +157,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "DELETE FROM category WHERE category_id = ?";
+            String sql = "DELETE FROM categories WHERE category_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, categoryId);
@@ -177,7 +177,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "INSERT INTO category (name, thumbnail) VALUES (?, ?)";
+            String sql = "INSERT INTO categories (name, thumbnail) VALUES (?, ?)";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
 
@@ -197,7 +197,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM category ORDER BY `name` ASC";
+            String sql = "SELECT * FROM categories ORDER BY `name` ASC";
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
             @Cleanup
@@ -226,7 +226,7 @@ public class CategoryDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT * FROM category ORDER BY `name` DESC"; 
+            String sql = "SELECT * FROM categories ORDER BY `name` DESC"; 
             @Cleanup
             PreparedStatement stm = con.prepareCall(sql);
             @Cleanup

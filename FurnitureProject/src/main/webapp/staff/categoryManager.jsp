@@ -130,9 +130,10 @@
                                 </div>
 
                                 <c:if test="${not empty requestScope.DELETE_SUCCESS}">
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>${requestScope.DELETE_SUCCESS}</strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                        ${requestScope.DELETE_SUCCESS}
+                                        <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -178,7 +179,7 @@
                                                 <tr>
                                                     <td>#${category.categoryId}</td>
                                                     <td>${category.name}</td>
-                                                    <td><img height="100px" width="100px" src="thumbnails/categories/${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                    <td><img height="100px" width="100px" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
                                                     <td>
                                                         <div class="btn-group">
 
@@ -208,6 +209,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
+    <script src="/FurnitureProject/assets/js/alert.js"></script>
 
 
 </body>

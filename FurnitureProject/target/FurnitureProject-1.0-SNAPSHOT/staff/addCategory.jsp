@@ -33,10 +33,12 @@
                         <!-- Content Row -->
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Thêm Danh Mục</h1>
+
                         <c:if test="${not empty requestScope.ADD_CATEGORY_SUCCESS}">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>${requestScope.ADD_CATEGORY_SUCCESS}</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                ${requestScope.ADD_CATEGORY_SUCCESS}
+                                <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -64,18 +66,17 @@
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+                <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
 
             </div>
             <!-- End of Main Content -->
 
-            <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
-
         </div>
         <!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+
+        <script src="/FurnitureProject/assets/js/alert.js"></script>
 
 
-</body>
+    </body>
 </html>

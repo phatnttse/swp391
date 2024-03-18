@@ -50,16 +50,16 @@ public class OrderManagementController extends HttpServlet {
         try {
             StaffDAO dao = new StaffDAO();
             List<OrderDTO> orders = dao.getAllOrders();
-            List<OrderDTO> ordersByDay = dao.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
-            List<OrderDTO> ordersByMonth = dao.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
-            List<OrderDTO> cancelledOrders = dao.getOrdersByCondition("WHERE o.status = 7"); 
+//            List<OrderDTO> ordersByDay = dao.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
+//            List<OrderDTO> ordersByMonth = dao.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
+//            List<OrderDTO> cancelledOrders = dao.getOrdersByCondition("WHERE o.status = 7"); 
 
 
             request.setAttribute("ORDERS", orders);
-            request.setAttribute("ORDERS_CURRENT", orders.size());
-            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
-            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
-            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
+//            request.setAttribute("ORDERS_CURRENT", orders.size());
+//            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
+//            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
+//            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
 
         } catch (SQLException ex) {
             Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);

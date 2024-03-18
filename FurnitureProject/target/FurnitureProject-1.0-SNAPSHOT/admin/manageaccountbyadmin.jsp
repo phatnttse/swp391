@@ -218,7 +218,7 @@
 
                                             <c:forEach var="userDetail" items="${UserAccount}">
                                                 <!-- Check if userDetail.delete is false -->
-                                                <c:if test="${not userDetail.delete}">
+                                                <c:if test="${not userDetail.deleted}">
                                                     <!-- Replace the data below with your actual data from the database -->
                                                     <tr>
                                                         <td>

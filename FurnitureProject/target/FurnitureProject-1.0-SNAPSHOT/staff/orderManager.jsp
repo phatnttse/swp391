@@ -42,9 +42,9 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Content Row -->
-                        <div class="row my-5">
+<!--                        <div class="row my-5">
 
-                            <!-- Earnings (Monthly) Card Example -->
+                             Earnings (Monthly) Card Example 
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
 
-                            <!-- Earnings (Monthly) Card Example -->
+                             Earnings (Monthly) Card Example 
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <!-- Earnings (Monthly) Card Example -->
+                             Earnings (Monthly) Card Example 
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
 
-                            <!-- Pending Requests Card Example -->
+                             Pending Requests Card Example 
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1

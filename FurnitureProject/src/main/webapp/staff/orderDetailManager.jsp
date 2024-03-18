@@ -132,7 +132,7 @@
                                                         <c:forEach var="detail" items="${order_details}">
                                                             <tr>
                                                                 <td>
-                                                                    <img src="thumbnails/products/${detail.thumbnail}" class="rounded" width="80px" height="80px" alt="${detail.title}"/>                                                              
+                                                                    <img src="/FurnitureProject/thumbnails/products/${detail.thumbnail}" class="rounded" width="80px" height="80px" alt="${detail.title}"/>                                                              
                                                                 </td>
                                                                 <td>${detail.title}</td>
                                                                 <td>

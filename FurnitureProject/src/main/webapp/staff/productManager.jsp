@@ -123,14 +123,19 @@
                                 <div class="col">
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Sản Phẩm</h6>
                                 </div>
+
+
                                 <c:if test="${not empty requestScope.DELETE_SUCCESS}">
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>${requestScope.DELETE_SUCCESS}</strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                        ${requestScope.DELETE_SUCCESS}
+                                        <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                 </c:if>
+
+
 
                                 <div class="col-md-6 text-right right">
                                     <div id="sort-by">
@@ -180,7 +185,7 @@
                                                     <td>${product.categoryName}</td>
                                                     <td>${product.title}</td>
                                                     <td>${product.formattedPrice}đ</td>                                          
-                                                    <td><img height="100px" width="100px" src="thumbnails/products/${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
+                                                    <td><img height="100px" width="100px" src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
 
                                                     <td>
@@ -207,13 +212,13 @@
                     <c:if test="${param['typeSort'] != null}">
                         <ul class="pagination justify-content-center my-3">
                             <li class="page-item"><a class="page-link" href="productManager?page=${page - 1}&typeSort=${param['typeSort']}">Previous</a></li>
-                            
-                                <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+
+                            <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
 
                                 <li class="page-item"><a class="page-link" href="productManager?page=${pageNumber}&typeSort=${param['typeSort']}">${pageNumber}</a></li>
 
-                              </c:forEach>
-                                
+                            </c:forEach>
+
                             <li class="page-item"><a class="page-link" href="productManager?page=${page + 1}&typeSort=${param['typeSort']}">Next</a></li>
 
                         </ul>
@@ -249,24 +254,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Initially hide all filter options
-            $("#filterOptions select").hide();
-
-            // Show filter options based on selected filter type
-            $("#combinedFilter").change(function () {
-                // Hide all options
-                $("#filterOptions select").hide();
-
-                // Show options for the selected filter
-                var selectedFilter = $(this).val();
-                $("#" + selectedFilter + "Filter").show();
-            });
-        });
-
-
-    </script>
+    <script src="/FurnitureProject/assets/js/alert.js"></script>
 
 </body>
 </html>

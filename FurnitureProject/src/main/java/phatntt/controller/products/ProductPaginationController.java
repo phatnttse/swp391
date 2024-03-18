@@ -82,6 +82,7 @@ public class ProductPaginationController extends HttpServlet {
 
         if (pageParam != null) {
             page = Integer.parseInt(pageParam);
+            request.setAttribute("PAGE", Integer.parseInt(pageParam));
         }
 
         try {
@@ -156,7 +157,7 @@ public class ProductPaginationController extends HttpServlet {
 
             url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE)
                     + "?page=" + page;
-            request.setAttribute("PAGE", Integer.parseInt(pageParam));
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductPaginationController.class.getName()).log(Level.SEVERE, null, ex);

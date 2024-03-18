@@ -56,6 +56,7 @@ public class ProductManagerController extends HttpServlet {
             page = Integer.parseInt(pageParam);
             url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE)
                     + "?page=" + page;
+            request.setAttribute("PAGE", Integer.parseInt(pageParam));
         }
 
         try {
@@ -127,7 +128,7 @@ public class ProductManagerController extends HttpServlet {
             int totalPages = (int) Math.ceil((double) totalProducts / limit); // Tính số trang
             request.setAttribute("TOTAL_PAGES", totalPages);
 
-            request.setAttribute("PAGE", Integer.parseInt(pageParam));
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductManagerController.class.getName()).log(Level.SEVERE, null, ex);

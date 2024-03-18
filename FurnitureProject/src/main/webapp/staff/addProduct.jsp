@@ -47,11 +47,12 @@
                     <div class="container-fluid">
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Thêm Sản Phẩm</h1>
-                        
+
                         <c:if test="${not empty requestScope.ADD_PRODUCT_SUCCESS}">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>${requestScope.ADD_PRODUCT_SUCCESS}</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                ${requestScope.ADD_PRODUCT_SUCCESS}
+                                <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -115,6 +116,8 @@
 
         </div>
         <!-- End of Page Wrapper -->
+
+        <script src="/FurnitureProject/assets/js/alert.js"></script>
 
     </body>
 </body>

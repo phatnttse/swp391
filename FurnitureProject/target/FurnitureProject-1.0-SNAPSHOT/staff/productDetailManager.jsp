@@ -53,12 +53,12 @@
                         <c:set var="product" value="${requestScope.PRODUCT_DETAIL}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
-
-
+                        
                         <c:if test="${not empty requestScope.UPDATE_SUCCESS}">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>${requestScope.UPDATE_SUCCESS}</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                ${requestScope.UPDATE_SUCCESS}
+                                <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -131,7 +131,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="thumbnails/products/${product.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px; margin-bottom: 10px"
+                                                        <img src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px; margin-bottom: 10px"
                                                              class="rounded">
                                                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
                                                         
@@ -177,6 +177,8 @@
 
             </div>
             <!-- End of Page Wrapper -->
+            
+            <script src="/FurnitureProject/assets/js/alert.js"></script>
 
     </body>
 </html>

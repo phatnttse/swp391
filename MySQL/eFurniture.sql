@@ -18,6 +18,10 @@ CREATE TABLE `users` (
     `deleted` BOOLEAN DEFAULT FALSE NOT NULL
 );
 
+SELECT SUM(amount) AS total_revenue FROM orders WHERE status = 5 and MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE());
+
+SELECT DATEDIFF(day, 2024-3-20, 2024-3-25);
+
 
 CREATE TABLE `roles` (
   `role_id` int PRIMARY KEY NOT NULL,
@@ -52,6 +56,7 @@ CREATE TABLE `orders` (
     `shipping_address` VARCHAR(255) NOT NULL,
     `note` LONGTEXT,
     `status` INT NOT NULL,
+    `previous_status` INT NOT NULL,
     `payment_status` BOOLEAN NOT NULL,
     `payment_method` VARCHAR(50) NOT NULL,
     `amount` INT NOT NULL,
@@ -111,29 +116,40 @@ INSERT INTO `order_status` (`name`) VALUES
     
 
 
- DELIMITER $$
 
-CREATE TRIGGER TR_OrderDetails_Insert AFTER INSERT ON order_details 
-FOR EACH ROW 
+DELIMITER $$
+
+CREATE TRIGGER TR_Order_Update AFTER UPDATE ON orders 
+FOR EACH ROW
 BEGIN
-    DECLARE quantity_ordered INT;
-    DECLARE order_status INT;
+    DECLARE product_quantity INT;
+    DECLARE product_id_found INT;
 
-    -- Lấy số lượng sản phẩm và trạng thái của đơn hàng mới được thêm vào
-    SELECT NEW.quantity, `status` INTO quantity_ordered, order_status
-    FROM `orders` 
-    WHERE `order_id` = NEW.order_id;
+    -- Kiểm tra nếu trạng thái đơn hàng đã được thay đổi từ 4 (Đang giao hàng) sang 5 (Giao hàng thành công)
+    IF OLD.status = 4 AND NEW.status = 5 THEN
+        -- Tìm kiếm product_id từ bảng order_details dựa trên order_id
+        SELECT od.product_id INTO product_id_found
+        FROM order_details od
+        WHERE od.order_id = NEW.order_id;
 
-    -- Kiểm tra nếu đơn hàng đã được thanh toán
-    IF order_status = 1 THEN
-        -- Giảm số lượng sản phẩm trong kho tương ứng
-        UPDATE `products` 
-        SET `quantity` = `quantity` - NEW.quantity
-        WHERE `product_id` = NEW.product_id;
+        -- Kiểm tra xem product_id đã được tìm thấy hay không
+        IF product_id_found IS NOT NULL THEN
+            -- Nếu tìm thấy product_id, tiến hành lấy số lượng sản phẩm từ bảng order_details
+            SELECT od.quantity INTO product_quantity
+            FROM order_details od
+            WHERE od.order_id = NEW.order_id AND od.product_id = product_id_found;
+
+            -- Giảm số lượng sản phẩm trong kho và tăng lượt mua
+            UPDATE products 
+            SET quantity = quantity - product_quantity,
+                purchases = purchases + product_quantity
+            WHERE product_id = product_id_found;
+        END IF;
     END IF;
 END$$
 
 DELIMITER ;
+
 
 
 

@@ -72,6 +72,7 @@
                                                         <img height="100px" width="100px" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded"
                                                              style="margin-bottom: 10px"/>
                                                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                                                        <input type="hidden" name="defaultThumbnail" value="${category.thumbnail}">
                                                     </td>
                                                 </tr>
                                             </tbody>

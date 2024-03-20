@@ -63,7 +63,24 @@ public class HandlingOrderCancellationReqController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        try {
+            String orderId = request.getParameter("orderId");
+
+            StaffDAO dao = new StaffDAO();
+            dao.refuseToCancelOrder(orderId);
+
+            RequestDispatcher rd = request.getRequestDispatcher("requestCancelOrderManager");
+            rd.forward(request, response);
+        
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestCancelOrderManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(RequestCancelOrderManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

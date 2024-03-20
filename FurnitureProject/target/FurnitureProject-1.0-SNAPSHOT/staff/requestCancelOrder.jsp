@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-     <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
         <link
@@ -28,7 +28,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-             <%@include file="../UIcomponents/sidebar.jsp"%>
+            <%@include file="../UIcomponents/sidebar.jsp"%>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -42,80 +42,80 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Content Row -->
-<!--                        <div class="row my-5">
-
-                             Earnings (Monthly) Card Example 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Số đơn hiện tại</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                             Earnings (Monthly) Card Example 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Đơn hàng trong ngày</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                             Earnings (Monthly) Card Example 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Đơn hàng trong tháng</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                             Pending Requests Card Example 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Đơn hàng đã huỷ</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="row my-5">
+                        
+                                                     Earnings (Monthly) Card Example 
+                                                    <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="card border-left-primary shadow h-100 py-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                                            Số đơn hiện tại</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        
+                                                     Earnings (Monthly) Card Example 
+                                                    <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="card border-left-success shadow h-100 py-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                            Đơn hàng trong ngày</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        
+                                                     Earnings (Monthly) Card Example 
+                                                    <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="card border-left-info shadow h-100 py-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                            Đơn hàng trong tháng</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        
+                                                     Pending Requests Card Example 
+                                                    <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="card border-left-warning shadow h-100 py-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                                            Đơn hàng đã huỷ</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                         <c:set var="requests" value="${requestScope.REQUEST_CANCELS}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Yêu cầu huỷ đơn</h1>
@@ -126,7 +126,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Bảng yêu cầu huỷ đơn</h6>
                             </div>
                             <div class="card-body">
-                                <form action="ProcessOrderCancellationRequests" method="post">
+                                <form action="handlingOrderCancellationReq" method="post">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -135,7 +135,7 @@
                                                     <th>Tên</th>
                                                     <th>Email</th>
                                                     <th>SĐT</th>                                                                                  
-                                                    <th>Trạng thái</th>
+                                                    <th>Xử lý</th>
                                                     <th>Lí do</th>
                                                     <th>Tác vụ</th>                                                    
                                                 </tr>
@@ -151,21 +151,14 @@
                                                         <td>${request.email}</td>
                                                         <td>${request.name}</td>
                                                         <td>${request.phone}</td>
-                                                        <td style="color: red">
-                                                            <c:if test="${request.requestStatus == true}">
-                                                                <span style="color: green">Đã xử lý</span>
-                                                            </c:if>
-                                                                <c:if test="${request.requestStatus == false}">
-                                                                Chưa xử lý
-                                                            </c:if>
-                                                            
+                                                        <td>
+                                                            <button type="submit" class="btn btn-outline-info">Chấp nhận</button>
                                                         </td>
                                                         <td>
                                                             ${request.reason}
                                                         </td>
                                                         <td>
-                                                            <button type="submit" class="btn btn-outline-info">Chấp nhận</button>
-                                                            <a href="ProcessOrderCancellationRequests?requestCancelOrderId=${request.id}" class="btn btn-danger">Từ chối</a>
+                                                            <a href="handlingOrderCancellationReq?orderId=${request.orderId}" class="btn btn-danger">Từ chối</a>
                                                         </td> 
                                                     </tr>  
                                                 </c:forEach>

@@ -6,11 +6,20 @@ package phatntt.controller.staff.orders;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.StaffDAO;
+import phatntt.util.Constants;
 
 /**
  *
@@ -36,7 +45,7 @@ public class HandlingOrderController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HandlingOrderController</title>");            
+            out.println("<title>Servlet HandlingOrderController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HandlingOrderController at " + request.getContextPath() + "</h1>");
@@ -71,7 +80,27 @@ public class HandlingOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE);
+        try {
+
+            String orderId = request.getParameter("orderId");
+            StaffDAO dao = new StaffDAO();
+            boolean result = dao.acceptOrders(orderId);
+            if (result) {
+                url = "orderManager";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlingOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(HandlingOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
+
     }
 
     /**

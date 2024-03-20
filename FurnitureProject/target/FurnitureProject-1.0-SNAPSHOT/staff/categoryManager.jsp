@@ -138,7 +138,8 @@
                                         </button>
                                     </div>
                                 </c:if>
-
+                                
+                                <c:set var="span" value="${requestScope.SPAN}"/>
                                 <!-- Add Sort Dropdown -->
                                 <div class="col-md-6 text-right right">
                                     <div id="sort-by">
@@ -146,7 +147,12 @@
                                         <ul class="ul_col">
                                             <li>
                                                 <span>
-                                                    Mặc định
+                                                   <c:if test="${span != null}">
+                                                        ${span}
+                                                    </c:if>
+                                                    <c:if test="${span == null}">
+                                                        Mặc định
+                                                    </c:if>
                                                 </span>
                                                 <ul class="content_ul">
                                                     <li><a href="filterCategories?typeSort=default">Mặc định</a></li>
@@ -169,7 +175,7 @@
                                             <tr>
                                                 <th>Mã sản phẩm</th>
                                                 <th>Loại</th>
-                                                <th>Thumbnail</th>
+                                                <th>Hình ảnh</th>
                                                 <th>Thao tác</th>      
                                             </tr>
                                         </thead>

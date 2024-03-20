@@ -117,43 +117,44 @@
                                                     </div>
                                                 </div>-->
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
+                        <c:set var="order_status" value="${requestScope.ORDER_STATUS}"/>
+                        <c:set var="statusName" value="${requestScope.STATUS_NAME}"/>
+                        <c:set var="date" value="${requestScope.FILTER_DATE}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Đơn Hàng</h1
                         <!-- Navbar Form -->
-                        <form id="filterForm" class="d-flex justify-content-end" action="FilterUserController" method="post">
-                            <!-- Dropdown for Filter by Role -->
-                            <div class="dropdown me-2">
-                                <div class="input-group">
-                                    <select name="role" class="form-control">
-                                        <option value="">Theo ngày</option>
-                                        <option value="Admin">Trong ngày</option>
-                                        <option value="User">Hôm qua</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <form id="filterForm" class="d-flex justify-content-start" action="filterOrders" method="get">
 
                             <!-- Dropdown for Sort -->
-                            <div class="dropdown dropdown-end me-2">
+                            <div class="dropdown dropdown-end me-2">                              
                                 <div class="input-group">
-                                    <select name="sort" class="form-control">
-                                        <option value="">Theo trạng thái</option>
-                                        <option value="ASC">Xác nhận</option>
-                                        <option value="DESC">Đã xác nhận</option>
-                                    </select>
                                     <button type="submit" class="btn btn-outline-secondary">
                                         Lọc
                                     </button>
+                                    <select name="statusId" class="form-control">
+                                        <c:if test="${statusName != null}">
+                                            <option value="${requestScope.STATUS_ID}">${statusName}</option> 
+                                        </c:if>
+                                       
+                                        <option value="">Mặc định</option>
+
+                                        <c:forEach var="status" items="${order_status}">
+                                            <option value="${status.statusId}">${status.name}</option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <input type="date" value="${date}" name="filterDate" class="form-control" placeholder="Chọn ngày...">
                                 </div>
                             </div>
                         </form>
 
                         <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
+                        <div class="card shadow my-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Bảng đơn hàng</h6>
                             </div>
                             <div class="card-body">
-                                <form action="orderDetailManagement" method="get">
+                                <form action="handlingOrder" method="post">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -163,6 +164,7 @@
                                                     <th>Tên</th>
                                                     <th>SĐT</th>                                                                                  
                                                     <th>Xử lý</th>
+                                                    <th>Ngày đặt hàng</th>
                                                     <th>Xem chi tiết</th>
                                                 </tr>
                                             </thead>
@@ -177,9 +179,15 @@
                                                         <td>${order.email}</td>
                                                         <td>${order.name}</td>
                                                         <td>${order.phone}</td>
-                                                        <td>
-                                                            <button type="submit" class="btn btn-outline-success">Xác nhận</button>
+                                                        <td style="color: red">
+                                                            <c:if test="${order.status == 1}">
+                                                                <button type="submit" class="btn btn-outline-success">Xác nhận</button>
+                                                            </c:if>
+                                                            <c:if test="${order.status > 1}">
+                                                                ${order.statusName}
+                                                            </c:if>
                                                         </td>
+                                                        <td>${order.createdAt}</td>
                                                         <td>
                                                             <a class="btn btn-outline-info" href="orderDetailManager?orderId=${order.orderId}">Chi tiết</a>
                                                         </td>                                                                                  

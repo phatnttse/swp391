@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.OrdersDAO;
 import phatntt.dao.StaffDAO;
 import phatntt.dto.OrderDTO;
+import phatntt.dto.OrderStatusDTO;
 import phatntt.util.Constants;
 
 /**
@@ -50,12 +51,14 @@ public class OrderManagementController extends HttpServlet {
         try {
             StaffDAO dao = new StaffDAO();
             List<OrderDTO> orders = dao.getAllOrders();
+            List<OrderStatusDTO> orderStatus = dao.getAllOrderStatus();
 //            List<OrderDTO> ordersByDay = dao.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
 //            List<OrderDTO> ordersByMonth = dao.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
 //            List<OrderDTO> cancelledOrders = dao.getOrdersByCondition("WHERE o.status = 7"); 
 
 
             request.setAttribute("ORDERS", orders);
+            request.setAttribute("ORDER_STATUS", orderStatus);
 //            request.setAttribute("ORDERS_CURRENT", orders.size());
 //            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
 //            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());

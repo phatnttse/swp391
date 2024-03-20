@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import lombok.Cleanup;
+import phatntt.dto.ChartDTO;
 import phatntt.dto.OrderDTO;
-import phatntt.dto.RequestCancellationDTO;
 import phatntt.util.DBConnect;
 import phatntt.util.Key_Utils;
 
@@ -29,8 +29,8 @@ public class OrdersDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "INSERT INTO `orders` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `orders` (order_id, user_id, email, name, phone, shipping_address, note, status, payment_status, payment_method, amount, previous_status) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
 
@@ -45,6 +45,7 @@ public class OrdersDAO {
             stm.setBoolean(9, payment_status);
             stm.setString(10, payment_method);
             stm.setInt(11, amount);
+            stm.setInt(12, status);
 
             int affectedRows = stm.executeUpdate();
             result = affectedRows > 0;
@@ -74,24 +75,6 @@ public class OrdersDAO {
 
     }
 
-    public boolean cancelOrder(String orderId) throws SQLException, NamingException {
-        boolean result = false;
-
-        @Cleanup
-        Connection con = DBConnect.createConnection();
-        if (con != null) {
-            String sql = "UPDATE `orders` SET status = ? WHERE order_id = ?";
-            @Cleanup
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setInt(1, 5);
-            stm.setString(2, orderId);
-            int affectedRows = stm.executeUpdate();
-            result = affectedRows > 0;
-        }
-
-        return result;
-    }
-    
     public OrderDTO getOrderById(String orderId) throws SQLException, NamingException {
         OrderDTO order = null;
 
@@ -193,7 +176,7 @@ public class OrdersDAO {
         return list;
     }
 
-    public boolean requestCancellation(String userId, String orderId, String reason)
+    public boolean requestToCancelOrder(String userId, String orderId, String reason)
             throws SQLException, NamingException {
         boolean result = false;
 
@@ -228,35 +211,91 @@ public class OrdersDAO {
         return result;
     }
 
-    public RequestCancellationDTO getRequestCancellationByOrderId(String orderId)
-            throws SQLException, NamingException {
+    public int getTotalRevenue() throws SQLException, NamingException {
+        int totalRevenue = 0;
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT id, user_id, reason, request_status, created_at FROM request_cancellations WHERE order_id = ?";
+            String sql = "SELECT SUM(amount) AS total_revenue FROM orders WHERE status = 5";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, orderId);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-                return RequestCancellationDTO.builder()
-                        .id(rs.getInt("id"))
-                        .userId(rs.getString("user_id"))
-                        .orderId(orderId)
-                        .reason(rs.getString("reason"))
-                        .requestStatus(rs.getBoolean("request_status"))
-                        .createdAt(rs.getTimestamp("created_at"))
-                        .build();
+                totalRevenue = rs.getInt("total_revenue");
             }
         }
 
-        return null;
+        return totalRevenue;
     }
-    
-    
-    
-   
+
+    public List<ChartDTO> calculateDailyRevenue(String start, String end) throws SQLException, NamingException {
+
+        List<ChartDTO> dailyRevenueList = new ArrayList<>();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT DATE(created_at) AS date, SUM(amount) AS revenue "
+                    + "FROM orders "
+                    + "WHERE created_at BETWEEN ? AND ? "
+                    + "GROUP BY DATE(created_at)";
+
+            @Cleanup
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, start);
+            statement.setString(2, end);
+
+            @Cleanup
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+
+                String date = resultSet.getString("date");
+                int revenue = resultSet.getInt("revenue");
+                ChartDTO revenueData = ChartDTO.builder()
+                        .date(date)
+                        .value(revenue)
+                        .build();
+                dailyRevenueList.add(revenueData);
+            }
+
+        }
+
+        return dailyRevenueList;
+
+    }
+
+    public List<ChartDTO> getRevenueByMonth() throws SQLException, NamingException {
+        List<ChartDTO> revenueList = new ArrayList<>();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT MONTH(created_at) AS month, SUM(amount) AS total_revenue "
+                    + "FROM orders "
+                    + "WHERE status = 5 "
+                    + "GROUP BY MONTH(created_at)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            // Duyệt qua kết quả truy vấn và tạo đối tượng ChartDTO tương ứng cho mỗi tháng
+            while (rs.next()) {
+                int month = rs.getInt("month");
+                int revenue = rs.getInt("total_revenue");
+                ChartDTO chart = ChartDTO.builder()
+                        .date("Tháng " + month)
+                        .value(revenue)
+                        .build();
+                revenueList.add(chart);
+            }
+        }
+
+        return revenueList;
+    }
+
 }

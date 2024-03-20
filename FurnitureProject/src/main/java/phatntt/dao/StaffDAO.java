@@ -4,7 +4,6 @@
  */
 package phatntt.dao;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,7 +41,7 @@ public class StaffDAO {
             while (rs.next()) {
                 OrderDetailDTO orderDetail = OrderDetailDTO.builder()
                         .id(rs.getInt("id"))
-                        .order_id(orderId) 
+                        .order_id(orderId)
                         .product_id(rs.getInt("product_id"))
                         .title(rs.getString("title"))
                         .price(rs.getInt("price"))
@@ -142,12 +141,7 @@ public class StaffDAO {
                         .email(rs.getString("email"))
                         .name(rs.getString("name"))
                         .phone(rs.getString("phone"))
-                        .address(rs.getString("shipping_address"))
-                        .note(rs.getString("note"))
                         .status(rs.getInt("status"))
-                        .paymentStatus(rs.getBoolean("payment_status"))
-                        .paymentMethod(rs.getString("payment_method"))
-                        .amount(rs.getInt("amount"))
                         .statusName(rs.getString("status_name"))
                         .createdAt(rs.getTimestamp("created_at"))
                         .build();
@@ -157,6 +151,130 @@ public class StaffDAO {
 
         return orders;
     }
+
+    public List<OrderDTO> filterOrderByStatus(int status) throws SQLException, NamingException {
+        List<OrderDTO> orders = new ArrayList<>();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `orders` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + "WHERE o.status = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, status);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                OrderDTO order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(rs.getString("user_id"))
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .status(rs.getInt("status"))
+                        .statusName(rs.getString("status_name"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
+                orders.add(order);
+            }
+        }
+
+        return orders;
+    }
+
+    public List<OrderDTO> filterOrderByDate(String filterDate) throws SQLException, NamingException {
+        List<OrderDTO> orders = new ArrayList<>();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `orders` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + "WHERE DATE(o.created_at) = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, filterDate);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                OrderDTO order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(rs.getString("user_id"))
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .status(rs.getInt("status"))
+                        .statusName(rs.getString("status_name"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
+                orders.add(order);
+            }
+        }
+
+        return orders;
+    }
+
+    public List<OrderDTO> filterOrderByStatusAndDate(int status, String filterDate) throws SQLException, NamingException {
+        List<OrderDTO> orders = new ArrayList<>();
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT o.*, os.name AS status_name "
+                    + "FROM `orders` o "
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + "WHERE o.status = ? AND DATE(o.created_at) = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setString(2, filterDate);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                OrderDTO order = OrderDTO.builder()
+                        .orderId(rs.getString("order_id"))
+                        .userId(rs.getString("user_id"))
+                        .email(rs.getString("email"))
+                        .name(rs.getString("name"))
+                        .phone(rs.getString("phone"))
+                        .status(rs.getInt("status"))
+                        .statusName(rs.getString("status_name"))
+                        .createdAt(rs.getTimestamp("created_at"))
+                        .build();
+                orders.add(order);
+            }
+        }
+
+        return orders;
+    }
+    public String getStatusNameById(int statusId) throws SQLException, NamingException {
+    String statusName = null;
+
+    @Cleanup
+    Connection con = DBConnect.createConnection();
+    if (con != null) {
+        String sql = "SELECT name FROM order_status WHERE status_id = ?";
+        @Cleanup
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, statusId);
+        @Cleanup
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            statusName = rs.getString("name");
+        }
+    }
+
+    return statusName;
+}
+
 
     public List<OrderDTO> getOrdersByCondition(String condition) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
@@ -205,6 +323,59 @@ public class StaffDAO {
         }
     }
 
+    public void refuseToCancelOrder(String orderId) throws SQLException, NamingException {
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            try {
+                // Lấy giá trị previous_status từ bảng orders
+                int previousStatus = getPreviousOrderStatus(orderId);
+
+                // Xoá yêu cầu huỷ từ bảng request_cancellations
+                String deleteRequestSql = "DELETE FROM request_cancellations WHERE order_id = ?";
+
+                @Cleanup
+                PreparedStatement stmRequest = con.prepareStatement(deleteRequestSql);
+                stmRequest.setString(1, orderId);
+                stmRequest.executeUpdate();
+
+                // Cập nhật status bằng previous_status
+                String updateOrderSql = "UPDATE orders SET status = ? WHERE order_id = ?";
+                @Cleanup
+                PreparedStatement stmOrder = con.prepareStatement(updateOrderSql);
+                stmOrder.setInt(1, previousStatus);
+                stmOrder.setString(2, orderId);
+                stmOrder.executeUpdate();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                // Xử lý ngoại lệ
+            }
+        }
+    }
+
+// Phương thức để lấy giá trị previous_status từ bảng orders
+    private int getPreviousOrderStatus(String orderId) throws SQLException, NamingException {
+        int previousStatus = 0;
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        String query = "SELECT previous_status FROM orders WHERE order_id = ?";
+
+        @Cleanup
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, orderId);
+
+        @Cleanup
+        ResultSet rs = statement.executeQuery();
+
+        if (rs.next()) {
+            previousStatus = rs.getInt("previous_status");
+        }
+
+        return previousStatus;
+    }
+
     public List<RequestCancellationDTO> getAllRequestCancellations() throws SQLException, NamingException {
         List<RequestCancellationDTO> requestList = new ArrayList<>();
 
@@ -241,33 +412,32 @@ public class StaffDAO {
     }
 
     public boolean addProduct(ProductsDTO product) throws SQLException, NamingException {
-    boolean result = false;
+        boolean result = false;
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "INSERT INTO products(category_id, title, description, quantity, price, thumbnail, discount) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         @Cleanup
-        PreparedStatement stm = con.prepareStatement(sql);
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "INSERT INTO products(category_id, title, description, quantity, price, thumbnail, discount) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
 
-        stm.setInt(1, product.getCategoryId());
-        stm.setString(2, product.getTitle());
-        stm.setString(3, product.getDescription());
-        stm.setInt(4, product.getQuantity());
-        stm.setInt(5, product.getPrice());
-        stm.setString(6, product.getThumbnail());
-        stm.setInt(7, product.getDiscount());
+            stm.setInt(1, product.getCategoryId());
+            stm.setString(2, product.getTitle());
+            stm.setString(3, product.getDescription());
+            stm.setInt(4, product.getQuantity());
+            stm.setInt(5, product.getPrice());
+            stm.setString(6, product.getThumbnail());
+            stm.setInt(7, product.getDiscount());
 
-        int rowsAffected = stm.executeUpdate();
-        if (rowsAffected > 0) {
-            result = true;
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
+
         }
-
+        return result;
     }
-    return result;
-}
-
 
     public boolean deleteProduct(int productId) throws SQLException, NamingException {
         boolean result = false;
@@ -288,8 +458,29 @@ public class StaffDAO {
         return result;
     }
 
+    public boolean acceptOrders(String orderId) throws SQLException, NamingException {
+        boolean result = false;
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "UPDATE `orders` "
+                    + "SET status = 2 "
+                    + "WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, orderId);
+
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     public boolean updateProduct(ProductsDTO product) throws SQLException, NamingException {
-        
+
         boolean result = false;
 
         @Cleanup
@@ -308,14 +499,14 @@ public class StaffDAO {
             stm.setInt(4, product.getPrice());
             stm.setInt(5, product.getQuantity());
             stm.setString(6, product.getThumbnail());
-            stm.setInt(7, product.getDiscount());          
+            stm.setInt(7, product.getDiscount());
             stm.setInt(8, product.getProductId());
-            
+
             int affectedRows = stm.executeUpdate();
-            if (affectedRows > 0){
+            if (affectedRows > 0) {
                 result = true;
             }
-            
+
         }
 
         return result;

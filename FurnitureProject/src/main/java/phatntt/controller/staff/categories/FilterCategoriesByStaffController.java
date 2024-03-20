@@ -46,7 +46,7 @@ public class FilterCategoriesByStaffController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FilterCategoriesByStaffController</title>");            
+            out.println("<title>Servlet FilterCategoriesByStaffController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet FilterCategoriesByStaffController at " + request.getContextPath() + "</h1>");
@@ -67,11 +67,12 @@ public class FilterCategoriesByStaffController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String typeSort = request.getParameter("typeSort");
+        String typeSort = request.getParameter("typeSort");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGER_PAGE);
-        
+        String span;
+
         try {
             CategoryDAO dao = new CategoryDAO();
             List<CategoryDTO> dTOs = new ArrayList<>();
@@ -79,16 +80,20 @@ public class FilterCategoriesByStaffController extends HttpServlet {
                 case "AtoZ":
                     dTOs = dao.sortCategoryByNameAscending();
                     request.setAttribute("CATEGORIES", dTOs);
-
+                    span = "A → Z";
+                    request.setAttribute("SPAN", span);
                     break;
                 case "ZtoA":
                     dTOs = dao.sortCategoryByNameDescending();
                     request.setAttribute("CATEGORIES", dTOs);
+                    span = "Z → A";
+                    request.setAttribute("SPAN", span);
                     break;
-               
                 default:
                     dTOs = dao.getAllCategoryDTOs();
                     request.setAttribute("CATEGORIES", dTOs);
+                    span = "Mặc định";
+                    request.setAttribute("SPAN", span);
                     break;
             }
             url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGER_PAGE)

@@ -30,6 +30,7 @@ public class OrderDTO implements Serializable{
     private String address;
     private String note;
     private int status;
+    private int previous_status;
     private String statusName;
     private boolean paymentStatus;
     private String paymentMethod;

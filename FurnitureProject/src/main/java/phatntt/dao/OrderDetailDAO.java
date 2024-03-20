@@ -30,6 +30,7 @@ public class OrderDetailDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
+            paymentStatus = (statusId == 5); // Nếu statusId là 5, paymentStatus sẽ là true
             String sql = "UPDATE `orders` SET status = ?, payment_status = ? WHERE order_id = ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);

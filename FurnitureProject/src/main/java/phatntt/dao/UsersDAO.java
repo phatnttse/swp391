@@ -150,7 +150,7 @@ public class UsersDAO implements Serializable {
                 stm.setString(4, user.getGiven_name());
                 stm.setString(5, user.getFamily_name());
                 stm.setString(6, user.getPicture());
-                stm.setString(7, user.getGoogle_id());
+                stm.setString(7, user.getId());
                 stm.setInt(8, user.getRole());
 
                 int affectedRows = stm.executeUpdate();
@@ -339,10 +339,10 @@ public class UsersDAO implements Serializable {
             @Cleanup
             Connection con = DBConnect.createConnection();
             if (con != null) {
-                String sql = "SELECT user.*, role.name AS role_name\n"
+                String sql = "SELECT users.*, roles.name AS role_name\n"
                         + "FROM users\n"
                         + "INNER JOIN roles\n"
-                        + "ON user.role_id = role.role_id\n"
+                        + "ON users.role_id = roles.role_id\n"
                         + "WHERE user_id = ?;";
                 @Cleanup
                 PreparedStatement stm = con.prepareStatement(sql);

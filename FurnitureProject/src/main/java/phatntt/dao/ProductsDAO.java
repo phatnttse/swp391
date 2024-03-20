@@ -538,7 +538,7 @@ public class ProductsDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT p.* FROM products p\n"
                         + "INNER JOIN categories c ON p.category_id = c.category_id\n"
-                        + "WHERE p.product_id <> ? AND c.category_id = (SELECT category_id FROM product WHERE product_id = ?)\n"
+                        + "WHERE p.product_id <> ? AND c.category_id = (SELECT category_id FROM products WHERE product_id = ?)\n"
                         + "ORDER BY RAND()\n"
                         + "LIMIT 3;";
                 @Cleanup

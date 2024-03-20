@@ -124,27 +124,24 @@ public class ActionWithProductsController extends HttpServlet {
             int discount = Integer.parseInt(request.getParameter("discount"));
             String description = request.getParameter("description");
 
+            String thumbnail;
             Part part = request.getPart("thumbnail");
+            if (part.getSize() > 0) {
+                String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
 
-            String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
-            String pathUpload = request.getServletContext().getRealPath("/thumbnails/products");
-
-            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-
-            // Kiểm tra và tạo thư mục nếu chưa tồn tại
-            File directory = new File(folderSaveFile);
-            if (!directory.exists()) {
-                directory.mkdirs();
+                // Kiểm tra và tạo thư mục nếu chưa tồn tại
+                File directory = new File(folderSaveFile);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                // Lưu trữ file vào thư mục
+                part.write(folderSaveFile + File.separator + fileName);
+                thumbnail = fileName;
+            } else {
+                thumbnail = request.getParameter("defaultThumbnail");
             }
-            if (!Files.exists(Paths.get(pathUpload))) {
-                Files.createDirectories(Paths.get(pathUpload));
-            }
-
-            // Lưu trữ file vào thư mục
-            part.write(folderSaveFile + File.separator + fileName);
-            part.write(pathUpload + File.separator + fileName);
-            String thumbnail = fileName;
 
             StaffDAO dao = new StaffDAO();
             ProductsDTO product = ProductsDTO.builder()
@@ -159,7 +156,10 @@ public class ActionWithProductsController extends HttpServlet {
                     .build();
             boolean success = dao.updateProduct(product);
             if (success) {
-                url = "productManager";
+                url = siteMaps.getProperty(Constants.Management.VIEW_PRODUCT_DETAIL_PAGE)
+                        + "?productId=" + productId;
+
+                request.setAttribute("PRODUCT_DETAIL", product);
                 request.setAttribute("UPDATE_SUCCESS", "Cập nhật sản phẩm thành công");
             }
 

@@ -99,7 +99,7 @@ public class CancelOrderController extends HttpServlet {
             String reason = request.getParameter("reason");
 
             OrdersDAO dao = new OrdersDAO();
-            boolean result = dao.requestCancellation(user.getId(), orderId, reason);
+            boolean result = dao.requestToCancelOrder(user.getId(), orderId, reason);
             if (result) {
                 url = "allOrder";
             }

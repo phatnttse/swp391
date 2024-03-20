@@ -73,7 +73,7 @@
                                                  transform: translate3d(-1026px, 0px, 0px);">
 
                                                 <a class="swiper-slide" href="${product.thumbnail}" title="Click để xem" style="width: 513px">                                                   
-                                                    <img height="540" width="540" src="thumbnails/products/${product.thumbnail}" alt="${product.title}"
+                                                    <img height="540" width="540" src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="${product.title}"
                                                          class="img-responsive mx-auto d-block lazy"
                                                          />
                                                 </a>
@@ -88,7 +88,7 @@
                                                     <img
                                                         height="540"
                                                         width="540"
-                                                        src="thumbnails/products/${product.thumbnail}"
+                                                        src="/FurnitureProject/thumbnails/products/${product.thumbnail}"
                                                         alt="Tủ chậu lavabo phòng tắm kiêm máy giặt"                                                      
                                                         class="img-responsive mx-auto d-block lazy"
                                                         />
@@ -103,7 +103,7 @@
                                                     <img
                                                         height="540"
                                                         width="540"
-                                                        src="thumbnails/products/${product.thumbnail}"
+                                                        src="/FurnitureProject/thumbnails/products/${product.thumbnail}"
                                                         alt="Tủ chậu lavabo phòng tắm kiêm máy giặt"
                                                         class="img-responsive mx-auto d-block lazy"
                                                         />

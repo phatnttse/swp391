@@ -75,9 +75,12 @@
                                                     <p class="text-muted">Chưa cập nhật</p>
                                                 </c:if>
                                             </div>
-                                            <div class="col-5 mb-3">
-                                                <a href="changePasswordPage">Đổi mật khẩu</a>
-                                            </div>
+                                            <c:if test="${user.google_id == null}">
+                                                <div class="col-5 mb-3">
+                                                    <a href="changePasswordPage">Đổi mật khẩu</a>
+                                                </div>
+                                            </c:if>
+
                                         </div>                                      
                                     </div>
                                 </div>
@@ -88,7 +91,7 @@
             </div>
         </section>
         <%@include file="../UIcomponents/footer.jsp" %>
-        
+
         <script>
             function editProfile() {
                 window.location.href = "/FurnitureProject/editProfilePage";

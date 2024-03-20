@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/productsHome.css" />
+        <link rel="stylesheet" href="assets/css/productshome.css" />
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
         <script src="assets/js/product.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
@@ -178,7 +178,7 @@
                                                     <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                         <div class="product-thumbnail">
                                                             <a class="image_thumb" href="LoadProductDetailController?productId=${product.productId}" title="${product.title}">
-                                                                <img class="lazyload loaded" width="480" height="480" src="thumbnails/products/${product.thumbnail}"  alt="${product.title}" >
+                                                                <img class="lazyload loaded" width="480" height="480" src="/FurnitureProject/thumbnails/products/${product.thumbnail}"  alt="${product.title}" >
                                                             </a>
                                                             <span class="smart">-
                                                                 ${product.discount}% 

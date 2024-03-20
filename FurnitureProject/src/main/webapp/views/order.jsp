@@ -77,7 +77,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                         <br>
                                                                         <a href="AllOrderDetail?orderId=${order.orderId}">Xem chi tiết đơn hàng của bạn</a><br><br><br><br><br> 
 
-                                                                        <c:if test="${order.status != 6}">
+                                                                        <c:if test="${order.status != 6 && order.status != 5}">
                                                                             <input type="hidden" name="orderId" value="${order.orderId}" />
                                                                             <span style="color:red;margin-top: 20px;font-weight: 600">
                                                                                 <a href="#" class="cancel-order-link" data-order-id="${order.orderId}">Huỷ đơn hàng</a>

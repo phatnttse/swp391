@@ -35,7 +35,6 @@ phatntt\controller\orders\CancelOrderController.class
 phatntt\controller\staff\products\AddNewProductController.class
 phatntt\controller\staff\categories\UpdateDeleteCategoryController.class
 phatntt\dao\EmailDAO.class
-phatntt\controller\staff\orders\ProcessOrderCancellationRequests.class
 phatntt\util\Constants.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class

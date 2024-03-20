@@ -6,6 +6,7 @@ package phatntt.controller.staff.categories;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -40,20 +41,48 @@ public class CategoryManager extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        
+
+        String typeSort = request.getParameter("typeSort");
+        String span;
+
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGER_PAGE);
-    
+
         try {
             CategoryDAO dao = new CategoryDAO();
-            List<CategoryDTO> categories = dao.getAllCategoryDTOs();
-            request.setAttribute("CATEGORIES", categories);
-          
+            if (typeSort != null) {
+
+                List<CategoryDTO> dTOs = new ArrayList<>();
+                switch (typeSort) {
+                    case "AtoZ":
+                        dTOs = dao.sortCategoryByNameAscending();
+                        request.setAttribute("CATEGORIES", dTOs);
+                        span = "A → Z";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    case "ZtoA":
+                        dTOs = dao.sortCategoryByNameDescending();
+                        request.setAttribute("CATEGORIES", dTOs);
+                        span = "Z → A";
+                        request.setAttribute("SPAN", span);
+                        break;
+                    default:
+                        dTOs = dao.getAllCategoryDTOs();
+                        request.setAttribute("CATEGORIES", dTOs);
+                        span = "Mặc định";
+                        request.setAttribute("SPAN", span);
+                        break;
+                }
+            } else {
+                List<CategoryDTO> categories = dao.getAllCategoryDTOs();
+                request.setAttribute("CATEGORIES", categories);
+            }
+
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         } catch (NamingException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

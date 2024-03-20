@@ -10,7 +10,10 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -94,36 +97,24 @@ public class AddNewCategoryController extends HttpServlet {
         try {
 
             String name = request.getParameter("name");
-          
+
             Part part = request.getPart("thumbnail");
 
-           
-                String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/categories".trim();
-                String saveFile = "/thumbnails/categories";
+            String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/categories";
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
-                String pathUpload = request.getServletContext().getRealPath(saveFile).trim();
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            File directory = new File(folderSaveFile);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
 
-                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString().trim();
-               
-
-                // Kiểm tra và tạo thư mục nếu chưa tồn tại
-                File directory = new File(folderSaveFile);
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-                if (!Files.exists(Paths.get(pathUpload))) {
-                    Files.createDirectories(Paths.get(pathUpload));
-                }
-
-                // Lưu trữ file vào thư mục
-                part.write(folderSaveFile + File.separator + fileName);
-                part.write(pathUpload + File.separator + fileName);
-                String thumbnail = fileName;
-            
+            // Lưu trữ file vào thư mục
+            part.write(folderSaveFile + File.separator + fileName);
 
             CategoryDTO category = CategoryDTO.builder()
                     .name(name)
-                    .thumbnail(thumbnail)
+                    .thumbnail(fileName)
                     .build();
 
             CategoryDAO dao = new CategoryDAO();

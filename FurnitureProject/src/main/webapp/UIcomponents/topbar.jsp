@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -59,9 +60,10 @@
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
+                            <c:set var="staff" value="${sessionScope.STAFF_INFO}"/>
                             <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" onclick="toggleSubMenu('sub-menu')">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Phatntt</span>
+                                <a class="nav-link dropdown-toggle" onclick="toggleSubMenu('sub-menu')">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${staff.name}</span>
                                     <img class="img-profile rounded-circle"
                                          src="assets/img/users/avatar.jpg">
                                 </a>

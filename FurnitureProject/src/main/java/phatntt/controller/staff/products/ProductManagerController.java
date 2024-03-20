@@ -111,6 +111,8 @@ public class ProductManagerController extends HttpServlet {
                         // Mặc định, có thể là sắp xếp theo Mặc định hoặc xử lý theo logic khác
                         dTOs = dao.getAllProducts(page, limit);
                         request.setAttribute("PRODUCTS", dTOs);
+                        span = "Mặc định";
+                        request.setAttribute("SPAN", span);
                         break;
                 }
                 url = siteMaps.getProperty(Constants.Management.PRODUCT_MANAGER_PAGE)
@@ -121,14 +123,12 @@ public class ProductManagerController extends HttpServlet {
 
                 List<ProductsDTO> products = dao.getAllProducts(page, limit);
                 request.setAttribute("PRODUCTS", products);
-
+              
             }
 
             int totalProducts = dao.getTotalProducts();
             int totalPages = (int) Math.ceil((double) totalProducts / limit); // Tính số trang
             request.setAttribute("TOTAL_PAGES", totalPages);
-
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductManagerController.class.getName()).log(Level.SEVERE, null, ex);

@@ -18,7 +18,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-        <title>product Page</title>
+        <title>Thêm sản phẩm</title>
 
         <style>
             a {
@@ -58,20 +58,16 @@
                             </div>
                         </c:if>
 
-
+                        <c:set var="categories" value="${requestScope.CATEGORIES}"/>
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <form action="addNewProduct" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="category">Loại sản phẩm:</label>
+                                        <label for="category">Loại danh mục:</label>
                                         <select class="form-control" id="categoryId" name="categoryId">
-
-                                            <option value="1">Bồn Tắm</option>
-                                            <option value="2">Bồn Cầu</option>
-                                            <option value="3">Sen Tắm</option>
-                                            <option value="4">Tủ Chậu Lavabo</option>
-                                            <option value="5">Phụ Kiện</option>
-
+                                            <c:forEach var="category" items="${categories}">
+                                                <option value="${category.categoryId}">${category.name}</option>
+                                            </c:forEach>
                                         </select>                                                                             
                                     </div>
                                     <div class="form-group">
@@ -96,7 +92,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Mô tả:</label>
-                                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
                                 </form>

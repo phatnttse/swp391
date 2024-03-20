@@ -52,7 +52,7 @@
                                                 <form action="" method="post" class="variants product-action " enctype="multipart/form-data">
                                                     <div class="product-thumbnail">
                                                         <a class="image_thumb" href="" title="${product.title}">
-                                                            <img class="lazyload loaded" width="480" height="480" src="${product.thumbnail}"  alt="${product.title}" data-was-processed="true">
+                                                            <img class="lazyload loaded" width="480" height="480" src="/FurnitureProject/thumbnails/products/${product.thumbnail}"  alt="${product.title}" data-was-processed="true">
                                                         </a>
                                                         <span class="smart">-
                                                             15% 
@@ -100,7 +100,6 @@
                                         </div>
                                     </c:forEach>
                                 </div>
-                                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
                             </div>
                         </div>
                     </div>

@@ -73,6 +73,8 @@ public class UpdateDeleteCategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         String categoryIdStr = request.getParameter("categoryId");
         ServletContext context = this.getServletContext();
@@ -110,6 +112,8 @@ public class UpdateDeleteCategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.CATEGORY_MANAGER_PAGE);
@@ -118,27 +122,25 @@ public class UpdateDeleteCategoryController extends HttpServlet {
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String name = request.getParameter("name");
 
+            String thumbnail;
             Part part = request.getPart("thumbnail");
+            if (part.getSize() > 0) {
+                String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/categories";
 
-            String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/categories";
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
-            String pathUpload = request.getServletContext().getRealPath("/thumbnails/categories");
-
-            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-
-            // Kiểm tra và tạo thư mục nếu chưa tồn tại
-            File directory = new File(folderSaveFile);
-            if (!directory.exists()) {
-                directory.mkdirs();
+                // Kiểm tra và tạo thư mục nếu chưa tồn tại
+                File directory = new File(folderSaveFile);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                // Lưu trữ file vào thư mục
+                part.write(folderSaveFile + File.separator + fileName);
+                thumbnail = fileName;
+            } else {
+                thumbnail = request.getParameter("defaultThumbnail");
             }
-            if (!Files.exists(Paths.get(pathUpload))) {
-                Files.createDirectories(Paths.get(pathUpload));
-            }
-
-            // Lưu trữ file vào thư mục
-            part.write(folderSaveFile + File.separator + fileName);
-            part.write(pathUpload + File.separator + fileName);
-            String thumbnail = fileName;
+            
 
             CategoryDAO categoryDAO = new CategoryDAO();
             CategoryDTO category = CategoryDTO.builder()
@@ -150,7 +152,9 @@ public class UpdateDeleteCategoryController extends HttpServlet {
             boolean success = categoryDAO.updateCategory(category);
 
             if (success) {
-                url = "categoryDetailManager" + "?categoryId=" + categoryId;
+                url = siteMaps.getProperty(Constants.Management.CATEGORY_DETAIL_PAGE)
+                    + "?categoryId=" + categoryId;             
+                request.setAttribute("CATEGORY_DETAIL", category);
                 request.setAttribute("UPDATE_SUCCESS", "Cập nhật danh mục thành công");
             }
 

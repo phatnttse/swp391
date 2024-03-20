@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import phatntt.controller.staff.categories.AddNewCategoryController;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.StaffDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -73,7 +77,25 @@ public class AddNewProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.ADD_PRODUCT_PAGE);
+        
+        try {
+            CategoryDAO dao = new CategoryDAO();
+            List<CategoryDTO> categories = dao.getAllCategoryDTOs();
+            request.setAttribute("CATEGORIES", categories);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddNewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(AddNewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     /**
@@ -111,8 +133,6 @@ public class AddNewProductController extends HttpServlet {
 
             String folderSaveFile = "E:/Vit/SWP391/swp391/FurnitureProject/src/main/webapp/thumbnails/products";
 
-            String pathUpload = request.getServletContext().getRealPath("/thumbnails/products");
-
             String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
             // Kiểm tra và tạo thư mục nếu chưa tồn tại
@@ -120,21 +140,16 @@ public class AddNewProductController extends HttpServlet {
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            if (!Files.exists(Paths.get(pathUpload))) {
-                Files.createDirectories(Paths.get(pathUpload));
-            }
-
             // Lưu trữ file vào thư mục
             part.write(folderSaveFile + File.separator + fileName);
-            part.write(pathUpload + File.separator + fileName);
-            String thumbnail = fileName;
+
 
             ProductsDTO product = ProductsDTO.builder()
                     .categoryId(categoryId)
                     .title(title)
                     .description(description)
                     .price(price)
-                    .thumbnail(thumbnail)
+                    .thumbnail(fileName)
                     .quantity(quantity)
                     .discount(discount)
                     .build();

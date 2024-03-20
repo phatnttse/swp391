@@ -126,8 +126,7 @@
 
 
                                 <c:if test="${not empty requestScope.DELETE_SUCCESS}">
-                                    <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
+                                    <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">                                     
                                         ${requestScope.DELETE_SUCCESS}
                                         <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -136,15 +135,21 @@
                                 </c:if>
 
 
-
+                                <c:set var="span" value="${requestScope.SPAN}"/>
                                 <div class="col-md-6 text-right right">
                                     <div id="sort-by">
                                         <label class="left">Sắp xếp theo</label>
                                         <ul class="ul_col">
                                             <li>
                                                 <span>
-                                                    Mặc định
-                                                </span>
+                                                    <c:if test="${span != null}">
+                                                        ${span}
+                                                    </c:if>
+                                                    <c:if test="${span == null}">
+                                                        Mặc định
+                                                    </c:if>
+                                                    
+                                                </span>                                             
                                                 <ul class="content_ul">
                                                     <li><a href="productManager?typeSort=default">Mặc định</a></li>
                                                     <li><a href="productManager?typeSort=AtoZ">A → Z</a></li>
@@ -162,20 +167,19 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <a href="addNewProduct" class="btn btn-outline-success" style="margin-left: 93%; margin-bottom: 10px; margin-top: -16px">Thêm</a>
                             <form action="productManagement" method="get">
-                                <div class="table-responsive">
-                                    <p style="color: red">${requestScope.DELETE_SUCCESS}</p>
+                                <div class="table-responsive">                                  
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                        <a href="addProductPage" class="btn btn-outline-success" style="margin-left: 93%; margin-bottom: 10px; margin-top: -16px">Thêm</a>
-                                        <tr>
-                                            <th>Mã sản phẩm</th>
-                                            <th>Loại</th>
-                                            <th>Tên</th>
-                                            <th>Giá</th>
-                                            <th>Thumbnail</th>                                                
-                                            <th>Thao tác</th>
-                                        </tr>
+                                        <thead>                                      
+                                            <tr>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Loại</th>
+                                                <th>Tên</th>
+                                                <th>Giá</th>
+                                                <th>Hình ảnh</th>                                                
+                                                <th>Tác vụ</th>
+                                            </tr>
                                         </thead>
 
                                         <tbody>
@@ -187,14 +191,10 @@
                                                     <td>${product.formattedPrice}đ</td>                                          
                                                     <td><img height="100px" width="100px" src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="Thumbnail" class="img-thumbnail rounded" /></td>
 
-
                                                     <td>
                                                         <div class="btn-group">
-
                                                             <!-- Detail Button -->
                                                             <a href="productDetailManager?productId=${product.productId}" class="btn btn-outline-info">Chi Tiết</a>
-
-
                                                             <!-- Delete Button -->
                                                             <a href="actionWithProducts?productId=${product.productId}" class="btn btn-outline-danger" style="margin-left: 5px">Xóa</a>                                                         
                                                         </div>
@@ -227,22 +227,13 @@
                         <ul class="pagination justify-content-center my-3">
                             <li class="page-item"><a class="page-link" href="productManager?page=${page - 1}">Previous</a></li>
                                 <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
-
                                 <li class="page-item"><a class="page-link" href="productManager?page=${pageNumber}">${pageNumber}</a></li>
-
                             </c:forEach>
                             <li class="page-item"><a class="page-link" href="productManager?page=${page + 1}">Next</a></li>
-
                         </ul>
-
                     </c:if>
-
-
-
-
                 </div>
                 <!-- /.container-fluid -->
-
 
             </div>
             <!-- End of Main Content -->

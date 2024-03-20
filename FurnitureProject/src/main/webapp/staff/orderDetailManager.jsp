@@ -76,7 +76,7 @@
                                             <div class="input-group mb-3">
                                                 <div class="input-group mb-3">
                                                     <label class="input-group-text font-weight-bold" for="orderStatusSelect">Trạng thái</label>
-                                                    <select class="form-select" id="orderStatusSelect" name="orderStatus">
+                                                    <select class="form-control" id="orderStatusSelect" name="orderStatus">
                                                         <c:forEach var="status" items="${order_status}">
                                                             <option value="${status.statusId}" ${status.name eq order.statusName ? 'selected' : ''}>${status.name}</option>
                                                         </c:forEach>
@@ -89,7 +89,7 @@
                                             </div>
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text font-weight-bold" for="paymentStatusSelect">Trạng thái thanh toán</label>
-                                                <select class="form-select" id="paymentStatusSelect" name="paymentStatus">
+                                                <select class="form-control" id="paymentStatusSelect" name="paymentStatus">
                                                     <option value="true" ${order.paymentStatus ? 'selected' : ''}>Đã thanh toán</option>
                                                     <option value="false" ${!order.paymentStatus ? 'selected' : ''}>Chưa thanh toán</option>
                                                 </select>
@@ -101,7 +101,7 @@
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text font-weight-bold">Ghi chú</span>
-                                                <textarea class="form-control">${order.note}</textarea>                                             
+                                                <textarea class="form-control" rows="3">${order.note}</textarea>                                             
                                             </div>
                                         </div>
 
@@ -137,7 +137,7 @@
                                                                 <td>${detail.title}</td>
                                                                 <td>
                                                                     <script>
-                                                                        var price = parseFloat('${detail.price}');
+                                                                        var price = parseInt('${detail.price}');
                                                                         var formattedPrice = price.toLocaleString('vi-VN') + '₫';
                                                                         document.write(formattedPrice);
                                                                     </script>
@@ -165,14 +165,9 @@
                                         </div>
                                     </div>
 
-
                                 </div>
-
                             </div>
                         </form>
-
-
-
                     </div>
                     <!-- /.container-fluid -->
 
@@ -187,23 +182,5 @@
         </div>
         <!-- End of Page Wrapper -->
 
-
-        <script>
-
-            function toggleSubMenu(menuId) {
-                var subMenu = document.getElementById(menuId);
-                var arrowIcon = document.getElementById('arrow-icon-' + menuId);
-                if (subMenu.style.display === 'none') {
-                    subMenu.style.display = 'block';
-                    arrowIcon.classList.remove('fa-chevron-right');
-                    arrowIcon.classList.add('fa-chevron-down');
-                } else {
-                    subMenu.style.display = 'none';
-                    arrowIcon.classList.remove('fa-chevron-down');
-                    arrowIcon.classList.add('fa-chevron-right');
-                }
-            }
-            
-        </script> 
     </body>
 </html>

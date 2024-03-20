@@ -254,7 +254,7 @@
                                                             <td class="product__image">
                                                                 <div class="product-thumbnail">
                                                                     <div class="product-thumbnail__wrapper">
-                                                                        <img src="thumbnails/products/${product.thumbnail}"
+                                                                        <img src="/FurnitureProject/thumbnails/products/${product.thumbnail}"
                                                                              alt="" class="product-thumbnail__image">
                                                                     </div>
                                                                     <span class="product-thumbnail__quantity">${product.quantity}</span>

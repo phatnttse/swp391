@@ -7,6 +7,7 @@ package phatntt.controller.staff.products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.controller.staff.orders.OrderManagementController;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -52,6 +55,9 @@ public class ProductDetailManagerController extends HttpServlet {
             ProductsDAO productDAO = new ProductsDAO();
             
             ProductsDTO product = productDAO.getProductById(productId);
+             CategoryDAO dao = new CategoryDAO();
+            List<CategoryDTO> categories = dao.getAllCategoryDTOs();
+            request.setAttribute("CATEGORIES", categories);
             
             url = siteMaps.getProperty(Constants.Management.VIEW_PRODUCT_DETAIL_PAGE)
                     + "?productId=" + productId;

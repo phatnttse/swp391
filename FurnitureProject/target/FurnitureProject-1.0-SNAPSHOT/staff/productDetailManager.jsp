@@ -53,7 +53,7 @@
                         <c:set var="product" value="${requestScope.PRODUCT_DETAIL}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Chi Tiết Sản Phẩm</h1>
-                        
+
                         <c:if test="${not empty requestScope.UPDATE_SUCCESS}">
                             <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
                                 <!-- Nội dung của alert sẽ được thay đổi bằng JavaScript -->
@@ -64,6 +64,7 @@
                             </div>
                         </c:if>
 
+                        <c:set var="categories" value="${requestScope.CATEGORIES}"/>
                         <form action="actionWithProducts" method="post" enctype="multipart/form-data">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -75,7 +76,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Mã sản phẩm</th>
-                                                    <th>Mã Loại</th>
+                                                    <th>Danh mục</th>
                                                     <th>Tên</th>
                                                 </tr>
                                             </thead>
@@ -85,9 +86,21 @@
                                                     <td>
                                                         <input type="text" class="form-control" name="productId" value="${product.productId}" readonly="">
                                                     </td>
-                                                    <td>
-                                                        <input type="hidden" name="categoryId"  value="${product.categoryId}">
-                                                        <input type="text" class="form-control" value="${product.categoryName}">
+                                                    <td>                                                      
+                                                        <select class="form-control" id="categoryId" name="categoryId">
+                                                            <c:forEach var="category" items="${categories}">
+                                                                <c:choose>
+                                                                    <c:when test="${category.categoryId == product.categoryId}">
+                                                                        <option value="${category.categoryId}" selected>${category.name}</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value="${category.categoryId}">${category.name}</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </select>
+
+
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="title" value="${product.title}">
@@ -134,7 +147,9 @@
                                                         <img src="/FurnitureProject/thumbnails/products/${product.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px; margin-bottom: 10px"
                                                              class="rounded">
                                                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
-                                                        
+                                                        <input type="hidden" name="defaultThumbnail" value="${product.thumbnail}">
+
+
 
                                                     </td>
                                                     <td>
@@ -177,8 +192,9 @@
 
             </div>
             <!-- End of Page Wrapper -->
-            
+
             <script src="/FurnitureProject/assets/js/alert.js"></script>
+            
 
     </body>
 </html>

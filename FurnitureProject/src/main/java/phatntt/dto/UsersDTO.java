@@ -35,6 +35,6 @@ public class UsersDTO {
     private int role;
     private Timestamp createdAt;
     private String roleName;
-    private boolean delete;
+    private boolean deleted;
 
 }

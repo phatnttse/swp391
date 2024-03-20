@@ -24,6 +24,7 @@ phatntt\util\Constants$ProductsFeatures.class
 phatntt\util\Key_Utils.class
 phatntt\controller\staff\orders\OrderManagementController.class
 phatntt\controller\admin\UserDetailController.class
+phatntt\controller\admin\FilterUserController.class
 phatntt\controller\users\LogOutServlet.class
 phatntt\controller\users\CheckOutSuccessController.class
 phatntt\dto\EmailDTO.class
@@ -34,8 +35,8 @@ phatntt\controller\admin\UpdateUsersController.class
 phatntt\controller\orders\CancelOrderController.class
 phatntt\controller\staff\products\AddNewProductController.class
 phatntt\controller\staff\categories\UpdateDeleteCategoryController.class
+phatntt\controller\admin\SearchUserByNameController.class
 phatntt\dao\EmailDAO.class
-phatntt\controller\staff\orders\ProcessOrderCancellationRequests.class
 phatntt\util\Constants.class
 phatntt\dao\EmailDAO$1.class
 phatntt\util\Constants$LogoutFeatures.class
@@ -66,12 +67,15 @@ phatntt\util\Constants$ForgotPasswordFeatures.class
 phatntt\controller\staff\products\ActionWithProductsController.class
 phatntt\controller\email\UserVerifyServlet.class
 phatntt\listener\SentryInitializer.class
+phatntt\controller\admin\AddStaffByAdminController.class
 phatntt\controller\staff\products\ProductDetailManagerController.class
 phatntt\util\Constants$AdminFeatures.class
 phatntt\controller\email\CheckVerificationCode.class
+phatntt\controller\staff\orders\HandlingOrderController.class
 phatntt\dto\ErrorDTO$ErrorDTOBuilder.class
 phatntt\controller\staff\orders\RequestCancelOrderManager.class
 phatntt\dto\OrderDetailDTO$OrderDetailDTOBuilder.class
+phatntt\controller\admin\ChartBusinessController.class
 phatntt\controller\admin\UserAccountsController.class
 phatntt\controller\products\ProductsController.class
 phatntt\controller\users\LoginWithGoogleController.class
@@ -80,6 +84,7 @@ phatntt\controller\users\EWalletPayment.class
 phatntt\dto\ProductsDTO.class
 phatntt\dao\OrderDetailDAO.class
 phatntt\dto\CartDTO$CartDTOBuilder.class
+phatntt\controller\staff\orders\HandlingOrderCancellationReqController.class
 phatntt\controller\products\LoadProductCategoryController.class
 phatntt\controller\products\ViewPopupProductController.class
 phatntt\controller\staff\categories\CategoryDetailManagerController.class
@@ -92,6 +97,7 @@ phatntt\dto\ErrorDTO.class
 phatntt\controller\staff\categories\AddNewCategoryController.class
 phatntt\controller\users\ChangePasswordController.class
 phatntt\dto\OrderDTO$OrderDTOBuilder.class
+phatntt\controller\admin\LoginAdminStaffController.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
 phatntt\cart\BuyNowController.class
@@ -101,5 +107,6 @@ phatntt\listener\MyContextServletListener.class
 phatntt\controller\staff\categories\CategoryManager.class
 phatntt\dao\CategoryDAO.class
 phatntt\util\SentryConfig.class
+phatntt\controller\admin\LogOutAdmin.class
 phatntt\controller\email\CreateNewPasswordController.class
 phatntt\dto\ProductsDTO$ProductsDTOBuilder.class

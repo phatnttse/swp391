@@ -91,22 +91,6 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }
 
-            } else if (user != null && user.getRole() == 1) {
-                if (utils.checkPassword(password, user.getPassword())) {
-                    session.setAttribute("STAFF_INFO", user);
-                    url = siteMaps.getProperty(Constants.LoginFeatures.STAFF_PAGE);
-                } else {
-                    request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
-                }
-
-            } else if (user != null && user.getRole() == 2) {
-                if (utils.checkPassword(password, user.getPassword())) {
-                    session.setAttribute("ADMIN_INFO", user);
-                    url = siteMaps.getProperty(Constants.LoginFeatures.ADMIN_PAGE);
-                } else {
-                    request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
-                }
-
             } else {
                 request.setAttribute("LOGIN_ERROR", "Tài khoản hoặc mật khẩu không chính xác");
             }

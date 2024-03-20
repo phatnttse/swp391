@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -128,6 +129,39 @@ public class UsersDAO implements Serializable {
             if (affectedRows > 0) {
                 result = true;
             }
+        }
+
+        return result;
+    }
+
+    public boolean createNewStaffAccount(UsersDTO user) throws SQLException, NamingException {
+        boolean result = false;
+
+        try {
+            @Cleanup
+            Connection con = DBConnect.createConnection();
+            if (con != null) {
+                String sql = "INSERT INTO users (user_id, email, password,name, given_name, family_name, phone, role_id)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                @Cleanup
+                PreparedStatement stm = con.prepareStatement(sql);
+                stm.setString(1, UUID.randomUUID().toString());
+                stm.setString(2, user.getEmail());
+                stm.setString(3, user.getPassword());
+                stm.setString(4, user.getGiven_name() + " " + user.getFamily_name());
+                stm.setString(5, user.getGiven_name());
+                stm.setString(6, user.getFamily_name());
+                stm.setString(7, user.getPhone());
+                stm.setInt(8, 1);
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected > 0) {
+                    result = true;
+                }
+
+            }
+
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
 
         return result;
@@ -318,7 +352,7 @@ public class UsersDAO implements Serializable {
                             .role(rs.getInt("role_id"))
                             .createdAt(rs.getTimestamp("created_at"))
                             .roleName(rs.getString("role_name"))
-                            .delete(rs.getBoolean("is_delete"))
+                            .deleted(rs.getBoolean("deleted"))
                             .build();
 
                     result.add(userDTO);
@@ -626,7 +660,7 @@ public class UsersDAO implements Serializable {
         if (con != null) {
             // Tạo chuỗi SQL DELETE
             String sql = "UPDATE `users`\n"
-                    + "SET `is_delete` = TRUE\n"
+                    + "SET `deleted` = TRUE\n"
                     + "WHERE `user_id` = ?;";
             // Tạo PreparedStatement
             @Cleanup
@@ -660,7 +694,7 @@ public class UsersDAO implements Serializable {
 
         try (ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                
+
                 UsersDTO user = UsersDTO.builder()
                         .id(rs.getString("user_id"))
                         .email(rs.getString("email"))
@@ -710,11 +744,12 @@ public class UsersDAO implements Serializable {
                     .address(rs.getString("address"))
                     .google_id(rs.getString("google_id"))
                     .role(rs.getInt("role_id"))
+                    .roleName(roleName)
                     .createdAt(rs.getTimestamp("created_at"))
                     .build();
             result.add(user);
         }
-     
+
         return result;
     }
 

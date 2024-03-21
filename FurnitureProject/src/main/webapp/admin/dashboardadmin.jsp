@@ -220,23 +220,22 @@
 
                     </div>
                 </div>
+                    
 
             </div>
             <!-- /.container-fluid -->
+            
 
         </div>
+                      <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
+      
         <!-- End of Footer -->
 
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-
+  
+  
 
 <script>
     function toggleSubMenu(menuId) {

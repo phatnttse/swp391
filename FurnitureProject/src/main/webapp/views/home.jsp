@@ -17,9 +17,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
         <link rel="stylesheet" href="/FurnitureProject/assets/js/product.js" />
         <link rel="stylesheet" href="/FurnitureProject/assets/css/popupCart.css">
-        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>              
     </head>
+    
     <body>      
         <div class="backdrop__body-backdrop___1rvky"></div>
         <%@include file="../UIcomponents/header.jsp"%>
@@ -28,7 +28,7 @@
         <%@include file="../views/productset.jsp"%>
         <%@include file="../views/productsHome.jsp"%>
         <%@include file="../views/abouthome.jsp"%>
-
+                
         <div id="popup-cart-desktop" class="popup-cart"></div>
         
     <df-messenger

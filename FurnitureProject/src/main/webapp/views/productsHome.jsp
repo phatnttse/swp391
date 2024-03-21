@@ -12,119 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="assets/css/productshome.css" />
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/popupProduct.css">
-        <script src="assets/js/product.js"></script>
+        <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/alert.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
         <title>JSP Page</title>
-
-        <style>
-            .pagination>li:first-child>a,.pagination>li:first-child>span {
-                border-top-left-radius: 0px;
-                border-bottom-left-radius: 0px;
-                border-radius: 50%
-            }
-
-            .pagination>li:last-child>a,.pagination>li:last-child>span {
-                border-top-left-radius: 0px;
-                border-bottom-left-radius: 0px;
-                border-radius: 50%
-            }
-
-            .pagenav {
-                position: relative;
-                width: 100%;
-                margin-top: 20px
-            }
-
-            .pagenav span {
-                display: inline-block;
-                float: left;
-                margin-right: 10px;
-                line-height: 30px;
-                font-weight: 700
-            }
-
-            .nav_pagi {
-                display: inline-block;
-                padding-left: 10px;
-                width: 100%
-            }
-
-            .nav_pagi .pagination {
-                position: relative;
-                z-index: 1;
-                padding: 0 0px;
-                margin: 0 0 30px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                list-style: none
-            }
-
-            @media (max-width: 768px) {
-                .nav_pagi .pagination {
-                    padding:0 0px
-                }
-            }
-
-            .nav_pagi .pagination .page-link {
-                font-weight: 400;
-                float: left;
-                margin: 0 2.5px;
-                width: 35px;
-                background: transparent;
-                border: solid 1px #000;
-                text-align: center;
-                height: 35px;
-                font-size: 14px;
-                padding: 0;
-                line-height: 35px;
-                color: #000;
-                text-decoration: none;
-                border-radius: initial;
-                border-radius: 8px
-            }
-
-            @media (max-width: 375px) {
-                .nav_pagi .pagination .page-link {
-                    width:27px;
-                    height: 27px;
-                    line-height: 27px
-                }
-            }
-
-            .nav_pagi .pagination .page-link.page-db {
-                width: auto;
-                padding: 0 20px
-            }
-
-            .nav_pagi .pagination .page-link:hover {
-                background-color: #000;
-                color: #fff;
-                background: #000;
-                font-weight: bold;
-                border-color: #000
-            }
-
-            .nav_pagi .pagination .page-link svg {
-                width: 14px;
-                height: 14px;
-                margin-top: -3px
-            }
-
-            .nav_pagi .pagination .page-item.disabled .page-link {
-                border: 0;
-                display: none
-            }
-
-            .nav_pagi .pagination .page-item.active .page-link {
-                background-color: #000;
-                border-color: #000;
-                background: #000;
-                color: #fff;
-                display: block;
-                font-weight: bold
-            }
-        </style>
+             
     </head>
     <body>
 
@@ -183,7 +74,7 @@
                                                             <span class="smart">-
                                                                 ${product.discount}% 
                                                             </span>
-                                                            <a href="" class="btn-compare js-btn-wishlist setWishlist btn-views" data-wish="bon-tam-massage-dat-goc" tabindex="0" title="Thêm vào yêu thích">
+                                                                <a onclick="addProductToWishlist(${product.productId})" class="btn-compare js-btn-wishlist setWishlist btn-views" tabindex="0" title="Thêm vào yêu thích">
                                                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181"></path></svg>
                                                             </a>
 
@@ -215,14 +106,14 @@
                                                             <h3 class="product-name"><a href="" title="${product.title}">${product.title}</a></h3>
                                                             <div class="price-box">
                                                                 <script>
-                                                                    var totalMoney = parseFloat('${product.discountProduct}');
+                                                                    var totalMoney = parseInt('${product.discountProduct}');
                                                                     var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                     document.write(formattedTotalMoney);
                                                                 </script>
 
                                                                 <span class="compare-price">
                                                                     <script>
-                                                                        var totalMoney = parseFloat('${product.price}');
+                                                                        var totalMoney = parseInt('${product.price}');
                                                                         var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
                                                                         document.write(formattedTotalMoney);
                                                                     </script>
@@ -245,9 +136,55 @@
                     </div>
                 </div>
         </section>
+        <div id="alert-wishlist">
+            
+        </div>
+        
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
         <script src="assets/js/ajaxfunctions.js"></script>
+        
+        <script>
+            function addProductToWishlist(productId) {
+    
+    $.ajax({
+        url: "/FurnitureProject/addProductToWishlist",
+        type: "post",
+        data: {
+            productId: productId                 
+        },
+        success: function (response) {
+            // Kiểm tra phản hồi từ server
+            if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
+                // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
+                window.location.href = "/FurnitureProject/loginPage";
+                alert("Để thực hiện, bạn cần phải đăng nhập!");
+            } else {
+                // Nếu không, hiển thị giỏ hàng
+                const content = document.getElementById("alert-wishlist");
+                content.innerHTML = response;
+                initializeCloseAlertEvent();
+            }
+        },
+        error: function (xhr) {
+            // Xử lý lỗi nếu cần
+        }
+    });
+}
+function initializeCloseAlertEvent() {
+    const iconClose = document.querySelector('.close');
+    if (iconClose) {
+        iconClose.addEventListener('click', hideWishlistModal);
+    }
+}
+
+function hideWishlistModal() {
+    const popupcart = document.querySelector('.fadeInDown');
+    popupcart.style.display = 'none';
+    
+}
+        </script>
+        
 
     </body>
 </html>

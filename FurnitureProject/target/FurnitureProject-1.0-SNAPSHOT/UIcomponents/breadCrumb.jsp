@@ -28,6 +28,7 @@
         <c:set var="orderDetailURI" value="/FurnitureProject/views/orderdetail.jsp"/>
         <c:set var="editProfileURI" value="/FurnitureProject/views/editProfile.jsp"/>
         <c:set var="changePasswordURI" value="/FurnitureProject/views/changePassword.jsp"/>
+        <c:set var="wishListURI" value="/FurnitureProject/views/wishlist.jsp"/>
 
 
         <section class="bread-crumb" style="background-image: url('//bizweb.dktcdn.net/100/499/932/themes/926650/assets/breadcrumb-bg.jpg?1708512217480')"> 
@@ -81,6 +82,10 @@
             </c:if>
              <c:if test="${uri eq changePasswordURI}">
                 <div class="title-breadcrumb">Đổi mật khẩu
+                </div>                  
+            </c:if>
+            <c:if test="${uri eq wishListURI}">
+                <div class="title-breadcrumb">Sản phẩm yêu thích
                 </div>                  
             </c:if>
 
@@ -162,6 +167,11 @@
                     <c:if test="${uri eq changePasswordURI}">                               
                         <strong>
                             <span>Đổi mật khẩu</span>
+                        </strong>
+                    </c:if>
+                     <c:if test="${uri eq wishListURI}">                               
+                        <strong>
+                            <span>Sản phẩm yêu thích</span>
                         </strong>
                     </c:if>
 

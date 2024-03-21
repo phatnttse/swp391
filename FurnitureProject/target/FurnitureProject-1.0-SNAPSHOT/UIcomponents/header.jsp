@@ -149,7 +149,7 @@
                                 </c:if>
 
                                 <div class="header-wish">
-                                    <a href="#" class="wishlist_header" title="Sản phẩm yêu thích">
+                                    <a href="viewWishlist" class="wishlist_header" title="Sản phẩm yêu thích">
                                         <span class="headerWishlistCount count-item">0</span>
                                         <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/wish-icon.png?1708512217480"
                                              alt="Lofi Furniture" width="25" height="25" class="icon">

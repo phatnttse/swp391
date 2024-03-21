@@ -18,10 +18,6 @@ CREATE TABLE `users` (
     `deleted` BOOLEAN DEFAULT FALSE NOT NULL
 );
 
-SELECT SUM(amount) AS total_revenue FROM orders WHERE status = 5 and MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE());
-
-SELECT DATEDIFF(day, 2024-3-20, 2024-3-25);
-
 
 CREATE TABLE `roles` (
   `role_id` int PRIMARY KEY NOT NULL,
@@ -45,6 +41,13 @@ CREATE TABLE `categories` (
   `category_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `thumbnail` varchar(200) NULL
+);
+
+CREATE TABLE `wishlist` (
+	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `product_id` INT NOT NULL,
+	`user_id` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `orders` (
@@ -123,7 +126,7 @@ CREATE TRIGGER TR_Order_Update AFTER UPDATE ON orders
 FOR EACH ROW
 BEGIN
     DECLARE product_quantity INT;
-    DECLARE product_id_found INT;
+    DECLARE product_id_found INT;	
 
     -- Kiểm tra nếu trạng thái đơn hàng đã được thay đổi từ 4 (Đang giao hàng) sang 5 (Giao hàng thành công)
     IF OLD.status = 4 AND NEW.status = 5 THEN
@@ -177,6 +180,11 @@ ALTER TABLE `orders` ADD FOREIGN KEY (`status`) REFERENCES `order_status` (`stat
 ALTER TABLE `request_cancellations` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 ALTER TABLE `request_cancellations` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+ALTER TABLE `wishlist` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
+
+ALTER TABLE `wishlist`ADD FOREIGN KEY (`product_id`) REFERENCES `products`(`product_id`);
+
 
 
 INSERT INTO categories (category_id, name, thumbnail) VALUES
@@ -409,6 +417,9 @@ INSERT INTO products (category_id, title, price, quantity, discount, thumbnail, 
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
 VALUES ('123', 'staff@gmail.com', '$2a$10$wNGqMyi/jy8aURA1Bbm8.e6l90CY5A6FU0gmqKdLWC7BmWDYkoPpG', 'Staff', 'Staff', 'Staff', '1234567890', 'picture_url', 'Address', 1);
+
+INSERT INTO `users` (`user_id`, `email`, `password`, `name`, `given_name`, `family_name`, `phone`, `picture`, `address`,`role_id`) 
+VALUES ('123456', 'admin@gmail.com', '$2a$10$wNGqMyi/jy8aURA1Bbm8.e6l90CY5A6FU0gmqKdLWC7BmWDYkoPpG', 'Admin', 'Admin', 'Admin', '1234567890', 'picture_url', 'Address', 2);
 
 
 

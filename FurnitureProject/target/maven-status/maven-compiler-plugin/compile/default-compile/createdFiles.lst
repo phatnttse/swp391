@@ -7,6 +7,7 @@ phatntt\dto\CategoryDTO.class
 phatntt\controller\HomePageServlet.class
 phatntt\util\Constants$VerifyEmailFeatures.class
 phatntt\controller\users\LoginServlet.class
+phatntt\dto\DateDTO.class
 phatntt\controller\email\VerificationToResetPassController.class
 phatntt\controller\products\AddProductsToCartController.class
 phatntt\util\Constants$SignUpFeatures.class
@@ -30,15 +31,20 @@ phatntt\controller\users\CheckOutSuccessController.class
 phatntt\dto\EmailDTO.class
 phatntt\dao\EmailDAO$2.class
 phatntt\dto\OrderDTO.class
+phatntt\controller\users\ViewWishListController.class
 phatntt\util\Constants$OderFeatures.class
 phatntt\controller\admin\UpdateUsersController.class
+phatntt\dto\DateDTO$DateDTOBuilder.class
 phatntt\controller\orders\CancelOrderController.class
 phatntt\controller\staff\products\AddNewProductController.class
 phatntt\controller\staff\categories\UpdateDeleteCategoryController.class
+phatntt\dto\ChartDTO.class
 phatntt\controller\admin\SearchUserByNameController.class
 phatntt\dao\EmailDAO.class
 phatntt\util\Constants.class
+phatntt\dao\WishlistDAO.class
 phatntt\dao\EmailDAO$1.class
+phatntt\dto\ChartDTO$ChartDTOBuilder.class
 phatntt\util\Constants$LogoutFeatures.class
 phatntt\controller\orders\OrdersController.class
 phatntt\controller\users\AccountInfoController.class
@@ -54,6 +60,7 @@ phatntt\dto\CategoryDTO$CategoryDTOBuilder.class
 phatntt\dto\UsersDTO$UsersDTOBuilder.class
 phatntt\controller\products\LoadProductDetailController.class
 phatntt\controller\staff\products\ProductManagerController.class
+phatntt\dto\WishlistDTO$WishlistDTOBuilder.class
 phatntt\util\Constants$Management.class
 phatntt\controller\products\SearchProductsController.class
 phatntt\util\Config.class
@@ -74,6 +81,7 @@ phatntt\controller\email\CheckVerificationCode.class
 phatntt\controller\staff\orders\HandlingOrderController.class
 phatntt\dto\ErrorDTO$ErrorDTOBuilder.class
 phatntt\controller\staff\orders\RequestCancelOrderManager.class
+phatntt\controller\admin\DashBoardController.class
 phatntt\dto\OrderDetailDTO$OrderDetailDTOBuilder.class
 phatntt\controller\admin\ChartBusinessController.class
 phatntt\controller\admin\UserAccountsController.class
@@ -90,6 +98,7 @@ phatntt\controller\products\ViewPopupProductController.class
 phatntt\controller\staff\categories\CategoryDetailManagerController.class
 phatntt\controller\staff\orders\FilterOrdersByStaffController.class
 phatntt\controller\staff\orders\OrderDetailManagementController.class
+phatntt\controller\products\AddProductToWishlistController.class
 phatntt\controller\products\ProductPaginationController.class
 phatntt\dao\StaffDAO.class
 phatntt\dto\CartDTO.class
@@ -100,6 +109,7 @@ phatntt\dto\OrderDTO$OrderDTOBuilder.class
 phatntt\controller\admin\LoginAdminStaffController.class
 phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
+phatntt\dto\WishlistDTO.class
 phatntt\cart\BuyNowController.class
 phatntt\controller\orders\ViewAllOrderController.class
 phatntt\dto\OrderStatusDTO.class

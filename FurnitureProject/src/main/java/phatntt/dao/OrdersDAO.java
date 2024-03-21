@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.naming.NamingException;
 import lombok.Cleanup;
 import phatntt.dto.ChartDTO;
@@ -211,60 +213,52 @@ public class OrdersDAO {
         return result;
     }
 
-    public int getTotalRevenue() throws SQLException, NamingException {
-        int totalRevenue = 0;
+    public Map<String, Integer> getTotalPurchasesByCategory() throws SQLException, NamingException {
+        Map<String, Integer> totalPurchasesMap = new HashMap<>();
 
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT SUM(amount) AS total_revenue FROM orders WHERE status = 5";
+            String sql = "SELECT c.name AS category_name, SUM(p.purchases) AS total_purchases "
+                    + "FROM products p "
+                    + "JOIN categories c ON p.category_id = c.category_id "
+                    + "GROUP BY c.name";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
+
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
-            if (rs.next()) {
-                totalRevenue = rs.getInt("total_revenue");
+            // Duyệt qua kết quả truy vấn và lưu tổng lượt mua của từng danh mục vào Map
+            while (rs.next()) {
+                String categoryName = rs.getString("category_name");
+                int totalPurchases = rs.getInt("total_purchases");
+                totalPurchasesMap.put(categoryName, totalPurchases);
+            }
+        }
+        return totalPurchasesMap;
+    }
+
+    public int calculateTotalRevenue() throws SQLException, NamingException {
+        int totalRevenue = 0;
+
+        try (Connection con = DBConnect.createConnection()) {
+            if (con != null) {
+                String sql = "SELECT SUM(amount) AS totalRevenue "
+                        + "FROM orders "
+                        + "WHERE status = 5";
+                try (PreparedStatement statement = con.prepareStatement(sql)) {
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            totalRevenue = resultSet.getInt("totalRevenue");
+                        }
+                    }
+                }
             }
         }
 
         return totalRevenue;
-    }
-
-    public List<ChartDTO> calculateDailyRevenue(String start, String end) throws SQLException, NamingException {
-
-        List<ChartDTO> dailyRevenueList = new ArrayList<>();
-
-        @Cleanup
-        Connection con = DBConnect.createConnection();
-        if (con != null) {
-            String sql = "SELECT DATE(created_at) AS date, SUM(amount) AS revenue "
-                    + "FROM orders "
-                    + "WHERE created_at BETWEEN ? AND ? "
-                    + "GROUP BY DATE(created_at)";
-
-            @Cleanup
-            PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, start);
-            statement.setString(2, end);
-
-            @Cleanup
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-
-                String date = resultSet.getString("date");
-                int revenue = resultSet.getInt("revenue");
-                ChartDTO revenueData = ChartDTO.builder()
-                        .date(date)
-                        .value(revenue)
-                        .build();
-                dailyRevenueList.add(revenueData);
-            }
-
-        }
-
-        return dailyRevenueList;
-
     }
 
     public List<ChartDTO> getRevenueByMonth() throws SQLException, NamingException {

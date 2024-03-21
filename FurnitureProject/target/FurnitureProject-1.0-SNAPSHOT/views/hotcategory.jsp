@@ -29,11 +29,11 @@
                                 <div class="swiper-slide">
                                     <div class="item">
                                         <div class="image">
-                                            <a href="/bon-tam" title="Bồn tắm"><img class="lazyload" width="300" height="300" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="Bồn tắm"/></a>
+                                            <a href="product-category?categoryId=${category.categoryId}" title="${category.name}"><img class="lazyload" width="300" height="300" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="Bồn tắm"/></a>
                                         </div>
                                         <div class="info">
                                             <h3>
-                                                <a href="/bon-tam" title="Bồn tắm">
+                                                <a href="product-category?categoryId=${category.categoryId}" title="${category.name}">
                                                     ${category.name}
                                                     <span class="icon-wrap">
                                                         <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">

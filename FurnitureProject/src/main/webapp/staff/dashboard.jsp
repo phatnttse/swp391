@@ -1,5 +1,6 @@
-<%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html; charset=UTF-8"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="staffPage">
+                    <a class="nav-link" href="dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -134,7 +135,7 @@
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
-                             <c:set var="staff" value="${sessionScope.STAFF_INFO}"/>
+                            <c:set var="staff" value="${sessionScope.STAFF_INFO}"/>
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" onclick="toggleSubMenu('sub-menu')">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${staff.name}</span>
@@ -161,13 +162,26 @@
                         <!-- Content Row -->
 
                         <h1 class="my-4">Biểu đồ doanh thu</h1>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <canvas id="revenueChart"></canvas>
+
+                        <div class="row mb-4 my-4">
+                            <div class="col-md-4">
+                                <input type="date" id="startDate" class="form-control" placeholder="Ngày bắt đầu">
                             </div>
+                            <div class="col-md-4">
+                                <input type="date" id="endDate" class="form-control" placeholder="Ngày kết thúc">
+                            </div>
+                            <div class="col-md-4">
+                                <button  class="btn btn-primary">Thống kê</button>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <canvas id="monthlyRevenueChart"></canvas>
                             </div>
+                            <div class="col-md-6">
+                                <canvas id="purchasesByCategoryChart"></canvas>
+                            </div>
+
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-6">
@@ -178,77 +192,79 @@
                             </div>
                         </div>
 
+                        <c:set var="RevenueByMonth" value="${requestScope.REVENUE_BY_MONTH}"/>
+                        <c:set var="PurchasesByCategory" value="${requestScope.TOTAL_PURCHASES_BY_CATEGORY}"/>
+                       
+
                         <script>
-                            // Function to fetch total revenue data from Servlet and draw chart
-                            function drawRevenueChart() {
-                                fetch('dashboard')
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            const ctx = document.getElementById('revenueChart').getContext('2d');
-                                            const chart = new Chart(ctx, {
-                                                type: 'line',
-                                                data: {
-                                                    labels: ['Total Revenue', '1', '2', '3', '4'],
-                                                    datasets: [{
-                                                            label: 'Total Revenue',
-                                                            data: [data.totalRevenue, 10000000, 2000000, 5000000, 3000000],
-                                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                                            borderColor: 'rgba(75, 192, 192, 1)',
-                                                            borderWidth: 2
-                                                        }]
+                            var ctx1 = document.getElementById('monthlyRevenueChart').getContext('2d');
+                            var revenueChart = new Chart(ctx1, {
+                                type: 'bar',
+                                data: {
+                                    labels: [<c:forEach var="revenue" items="${RevenueByMonth}">"${revenue.date}",</c:forEach>],
+                                            datasets: [{
+                                                    label: "Doanh thu theo tháng",
+                                                    lineTension: 0.3,
+                                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                                    borderColor: "rgba(2,117,216,1)",
+                                                    pointRadius: 5,
+                                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                                    pointHoverRadius: 5,
+                                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                                    pointHitRadius: 50,
+                                                    pointBorderWidth: 2,
+                                                    data: [<c:forEach var="revenue" items="${RevenueByMonth}">${revenue.value},</c:forEach>],
+                                                }],
+                                },
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                                time: {
+                                                    unit: 'date'
                                                 },
-                                                options: {
-                                                    scales: {
-                                                        y: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
-                                                }
-                                            });
-                                        })
-                                        .catch(error => console.error('Error fetching data:', error));
-                            }
-
-                            // Function to fetch monthly revenue data from Servlet and draw chart
-                            function drawMonthlyRevenueChart() {
-                                fetch('dashboard')
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            const ctx = document.getElementById('monthlyRevenueChart').getContext('2d');
-                                            const labels = data.map(item => item.date); // Lấy mảng các ngày
-                                            const values = data.map(item => item.value); // Lấy mảng các giá trị
-
-                                            const chart = new Chart(ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: labels,
-                                                    datasets: [{
-                                                            label: 'Doanh thu hàng tháng',
-                                                            data: values,
-                                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                                            borderWidth: 1
-                                                        }]
+                                                gridLines: {
+                                                    display: false
                                                 },
-                                                options: {
-                                                    scales: {
-                                                        y: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
+                                                ticks: {
+                                                    maxTicksLimit: 7
                                                 }
-                                            });
-                                        })
-                                        .catch(error => console.error('Error fetching data:', error));
-                            }
+                                            }],
+                                        yAxes: [{
+                                                ticks: {
+                                                    min: 0,
+                                                    max: 10,
+                                                    maxTicksLimit: 5
+                                                },
+                                                gridLines: {
+                                                    color: "rgba(0, 0, 0, .125)",
+                                                }
+                                            }],
+                                    },
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            });
 
-
-                            // Call the function to draw the charts when the page loads
-                            window.onload = function () {
-                                drawRevenueChart(); // Draw the total revenue chart
-                                drawMonthlyRevenueChart(); // Draw the monthly revenue chart
-                            };
-
+                            var ctx2 = document.getElementById('purchasesByCategoryChart').getContext('2d');
+                            var purchasesByCategoryChart = new Chart(ctx2, {
+                                type: 'line',
+                                data: {
+                                    labels: [<c:forEach var="item" items="${PurchasesByCategory}">"${item.key}",</c:forEach>],
+                                    datasets: [{
+                                            label: "Số lượng mua hàng",
+                                            backgroundColor: "rgba(255,99,132,0.2)",
+                                            borderColor: "rgba(255,99,132,1)",
+                                            borderWidth: 1,
+                                            data: [<c:forEach var="item" items="${PurchasesByCategory}">${item.value},</c:forEach>]
+                                        }]
+                                },
+                                options: {
+                                    // Các tùy chọn của biểu đồ (nếu cần)
+                                }
+                            });
+                            
                             function toggleSubMenu(menuId) {
                                 var subMenu = document.getElementById(menuId);
                                 var arrowIcon = document.getElementById('arrow-icon-' + menuId);

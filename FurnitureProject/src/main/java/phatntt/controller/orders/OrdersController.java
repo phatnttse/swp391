@@ -74,6 +74,7 @@ public class OrdersController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
@@ -109,8 +110,8 @@ public class OrdersController extends HttpServlet {
                     orderDAO.clearCartByUserId(user.getId());
                     session.setAttribute("ORDER_SUCCESS", order);                  
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.ORDER_SUCCESS_PAGE);
-//                    EmailDAO emailDAO = new EmailDAO();
-//                    emailDAO.sendEmailTksForOrdering(email);
+                    EmailDAO emailDAO = new EmailDAO();
+                    emailDAO.sendEmailTksForOrdering(email);
                 }
 
             } else {

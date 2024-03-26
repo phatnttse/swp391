@@ -17,14 +17,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import phatntt.dto.EmailDTO;
 
-
 /**
  *
  * @author Admin
  */
 public class EmailDAO implements Serializable {
 
-    
     public String getRandom() {
         Random rnd = new Random();
         int code = rnd.nextInt(999999);
@@ -52,14 +50,14 @@ public class EmailDAO implements Serializable {
                 return new PasswordAuthentication(fromEmail, password);
             }
         });
-        
+
         // Message      
         Message message = new MimeMessage(session);
         try {
             message.addHeader("Content-type", "text/HTML ; chartset=UTF-8");
-            message.setFrom(new InternetAddress(fromEmail));       
+            message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            
+
             message.setSubject("Email Verification");
             message.setContent("<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"
@@ -141,7 +139,7 @@ public class EmailDAO implements Serializable {
         }
         return result;
     }
-    
+
     public void sendEmailTksForOrdering(String email) {
         // Email configuration
         final String fromEmail = "furnitureproject1910@gmail.com"; //  email 
@@ -157,11 +155,11 @@ public class EmailDAO implements Serializable {
         // Session
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(fromEmail, password);
-                    }
-                });
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        });
 
         // Message      
         Message message = new MimeMessage(session);
@@ -169,60 +167,64 @@ public class EmailDAO implements Serializable {
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject("Thanks For Ordering");
-            
+
             // Content
             String htmlContent = "<!DOCTYPE html>"
-                                + "<html lang=\"en\">"
-                                + "<head>"
-                                + "<meta charset=\"UTF-8\">"
-                                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-                                + "<title>Thank You for Ordering</title>"
-                                + "<style>"
-                                + "body {"
-                                + "font-family: Arial, sans-serif;"
-                                + "}"
-                                + ".container {"
-                                + "width: 80%;"
-                                + "margin: auto;"
-                                + "}"
-                                + ".card {"
-                                + "background-color: #fff;"
-                                + "border-radius: 8px;"
-                                + "box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
-                                + "margin-top: 50px;"
-                                + "}"
-                                + ".card-header {"
-                                + "background-color: #28a745;"
-                                + "color: #fff;"
-                                + "padding: 10px;"
-                                + "border-top-left-radius: 8px;"
-                                + "border-top-right-radius: 8px;"
-                                + "}"
-                                + ".card-body {"
-                                + "padding: 20px;"
-                                + "}"
-                                + "</style>"
-                                + "</head>"
-                                + "<body>"
-                                + "<div class=\"container\">"
-                                + "<div class=\"card\">"
-                                + "<div class=\"card-header\">"
-                                + "<h2 style=\"text-align: center;\">Thank You for Ordering</h2>"
-                                + "</div>"
-                                + "<div class=\"card-body\">"
-                                + "<p>Dear Customer,</p>"
-                                + "<p>We would like to extend our sincere gratitude for placing your order with us. Your business is greatly appreciated.</p>"
-                                + "<p>If you have any questions or concerns regarding your order, feel free to contact us.</p>"
-                                + "<p>Thank you again for choosing us. We look forward to serving you again in the future.</p>"
-                                + "<p>Sincerely,</p>"
-                                + "<p>The Furniture Project Team</p>"
-                                + "</div>"
-                                + "</div>"
-                                + "</div>"
-                                + "</body>"
-                                + "</html>";
-            
-            message.setContent(htmlContent, "text/html");
+                    + "<html lang=\"en\">"
+                    + "<head>"
+                    + "<meta charset=\"UTF-8\">"
+                    + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+                    + "<title>Thank You for Ordering</title>"
+                    + "<style>"
+                    + "body {"
+                    + "font-family: Arial, sans-serif;"
+                    + "}"
+                    + ".container {"
+                    + "width: 80%;"
+                    + "margin: auto;"
+                    + "}"
+                    + ".card {"
+                    + "background-color: #fff;"
+                    + "border-radius: 8px;"
+                    + "box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+                    + "margin-top: 50px;"
+                    + "}"
+                    + ".card-header {"
+                    + "background-color: #D94E28;"
+                    + "color: #fff;"
+                    + "padding: 10px;"
+                    + "border-top-left-radius: 8px;"
+                    + "border-top-right-radius: 8px;"
+                    + "}"
+                    + ".card-body {"
+                    + "padding: 20px;"
+                    + "}"
+                    + "</style>"
+                    + "</head>"
+                    + "<body>"
+                    + "<div class=\"container\">"
+                    + "<div class=\"card\">"
+                    + "<div class=\"card-header\">"
+                    + "<h2 style=\"text-align: center;\">Thư Cảm Ơn</h2>"
+                    + "</div>"
+                    + "<div class=\"card-body\">"
+                    + "<p>Khách hàng thân mến,</p>"
+                    + "<p>Chúng tôi xin gửi lời cảm ơn chân thành đến bạn vì đã lựa chọn Lux Furniture.Với sứ mệnh Khách hàng là ưu tiên số 1, chúng tôi luôn muốn mang đến cho khách hàng các sản phẩm tốt nhất về mặt chất lượng và giá cả.</p>"
+                    + "<p>Nếu bạn có bất kỳ câu hỏi hoặc thắc mắc nào về đơn hàng của mình, vui lòng liên hệ với chúng tôi qua:</p>"
+                    + "<p>Số điện thoại: 0123456789</p>"
+                    + "<p>Email: phatnttse173202@fpt.edu.vn</p>"
+                    + "<p>Địa chỉ: Khu CNC, Đại học FPT, Quận 9, TP.HCM</p>"
+                    + "<p>Một lần nữa, chúng tôi Cảm ơn bạn. Lux Furniture luôn sẵn sàng được phục vụ quý khách hàng trong tương lai.</p>"
+                    + "<p>Trân trọng,</p>"
+                    + "<p>Lux Furniture Team.</p>"
+                    + "</div>"
+                    + "</div>"
+                    + "</div>"
+                    + "</body>"
+                    + "</html>";
+
+            message.setContent(htmlContent, "text/html; charset=utf-8");
+            message.setHeader("Content-Type", "text/html; charset=utf-8");
 
             // Send the email
             Transport.send(message);

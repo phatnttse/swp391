@@ -21,6 +21,8 @@ public class RequestCancellationDTO {
     private String orderId;
     private String reason;
     private boolean requestStatus;
+    private int amount;
+    private Timestamp orderDate;
     private Timestamp createdAt;
     
 }

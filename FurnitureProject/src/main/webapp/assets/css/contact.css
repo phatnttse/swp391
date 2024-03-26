@@ -1,188 +1,99 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.bread-crumb {
-    position: relative;
-    padding: 100px 0;
-    color: #ffffff; /* Chuyển màu chữ thành trắng */
-    text-align: center;
-    z-index: 1; /* Đặt z-index để nằm trên layer */
-}
-
-.bread-crumb:after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1; /* Đặt z-index để nằm dưới layer */
-    pointer-events: none;
-}
-
-.bread-crumb .title-breadcrumb {
-    font-size: 30px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-weight: bold;
-    position: relative;
-    z-index: 8;
-}
-
-.breadcrumb {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Can giữa dấu mũi tên */
-}
-
-.breadcrumb li {
-    font-size: 14px;
-    margin: 0 5px;
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb li::before {
-    margin-right: 10px;
-    color: #ffffff; /* Màu chữ trắng */
-}
-
-.breadcrumb li a,
-.breadcrumb li span {
-    color: #ffffff; /* Màu chữ trắng */
-    text-decoration: none;
-    margin: 0 5px;
-}
-
-.breadcrumb li.home a::before {
-    content: none;
-    margin-right: 0;
-}
-
-.breadcrumb li:not(:last-child)::after {
-    content: none;
-    margin-left: 5px;
-}
-
 .layout-contact {
-    padding: 30px 0;
+    padding: 30px 0px
 }
 
-.layout-contact .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.layout-contact .contact {
+    margin-bottom: 20px
 }
 
-.layout-contact .col-lg-6 {
-    width: 48%;
+.layout-contact .contact h4 {
+    color: var(--textColor);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 10px
 }
 
-.map,
-.contact {
-    margin-top: 30px;
-}
-.contact{
-    margin-top: 0px;
-    margin-bottom: -25px;
+.layout-contact .contact .logo-contact {
+    margin-bottom: 20px
 }
 
-.contact h4 {
-    font-size: 24px;
-    margin-bottom: 15px;
+.layout-contact .contact .time_work .item {
+    position: relative;
+    padding-left: 20px;
+    font-size: 15px;
+    margin-bottom: 5px
 }
 
-.time_work,
-.item {
-    margin-bottom: 15px;
-}
-
-.item svg {
-    margin-right: 10px;
+.layout-contact .contact .time_work .item svg {
     width: 12px;
     height: 12px;
+    position: absolute;
+    top: 3px;
+    left: 0
 }
 
-/* Cân chỉnh chiều cao của hai cột */
-.layout-contact .col-lg-6 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.layout-contact .contact .time_work .item svg path {
+    fill: var(--textColor)
 }
 
-/* Định dạng nội dung trong cột phải */
-.contact .item {
-    align-items: center;
+.layout-contact .form-contact h4 {
+    color: var(--textColor);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 10px
 }
 
-.contact .item svg {
-    margin-right: 10px;
-    width: 12px;
-    height: 12px;
-}
-
-/* Chuyển màu của email và hotline sang đen và ẩn gạch chân */
-.contact .item a {
-    color: #000000;
-    text-decoration: none;
-}
-
-/* Chỉnh định dạng cho nội dung địa chỉ, email, và hotline */
-.contact .time_work {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Kết thúc định dạng nội dung địa chỉ, email, và hotline */
-
-
-.item svg {
-    margin-right: 10px;
-    width: 12px;
-    height: 12px;
- 
-}
-
-.content-form {
+.layout-contact .form-contact .content-form {
+    color: var(--textColor);
+    font-size: 15px;
+    font-weight: 500;
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 15px
 }
 
-.group_contact input,
-.group_contact textarea {
+.layout-contact .form-contact .group_contact input,.layout-contact .form-contact .group_contact textarea {
+    font-size: 15px;
+    border: solid 1px #ebebeb;
     width: 100%;
     margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    outline: none;
+    border-radius: 5px
 }
 
-.btn-lienhe {
-    background-color: #d94e28;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+.layout-contact .form-contact .group_contact input {
+    padding: 5px 20px
 }
 
-.btn-lienhe:hover {
-    background-color: #c43f1b;
+.layout-contact .form-contact .group_contact textarea {
+    height: 77px;
+    padding: 10px 20px
 }
-iframe {
-    max-width: 100%;
+
+.layout-contact .form-contact .group_contact .btn-lienhe {
+    background: var(--mainColor);
+    color: #fff;
+    border: initial;
+    padding: 0 20px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px
+}
+
+.layout-contact .form-contact .group_contact .btn-lienhe:hover {
+    background: var(--hover)
+}
+
+.layout-contact #contact_map iframe {
+    width: 100%;
+    height: 530px
+}
+
+@media (max-width: 991px) {
+    .layout-contact #contact_map {
+        margin-bottom:30px
+    }
 }

@@ -22,7 +22,8 @@
     <body>
         <%@include file="../UIcomponents/header.jsp"%>
         <%@include file="../UIcomponents/breadcrumb.jsp" %> 
-        <c:set var="searchList" value="${requestScope.SEARCH_RESULT}"/>
+        
+       <c:set var="searchList" value="${requestScope.SEARCH_RESULT}"/>
         <div class="backdrop__body-backdrop___1rvky"></div>
         <div id="popup-cart-desktop" class="popup-cart"></div>
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>

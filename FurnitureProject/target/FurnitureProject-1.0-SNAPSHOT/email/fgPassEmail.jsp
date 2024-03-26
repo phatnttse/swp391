@@ -26,7 +26,7 @@
 
                     <div class="logo">
                         <a href="home">
-                            <img src="assets/img/logo.webp" alt="Logo">
+                            <img src="/FurnitureProject/thumbnails/views/logoEmail.jpg" alt="Logo">
                         </a>
                     </div>
                     <div class="title">

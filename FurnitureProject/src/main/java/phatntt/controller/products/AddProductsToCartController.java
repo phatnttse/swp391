@@ -170,7 +170,7 @@ public class AddProductsToCartController extends HttpServlet {
                         + "                        </div>\n"
                         + "                    </div>\n"
                         + "                    <div class=\"cart__btn-proceed-checkout-dt\">\n"
-                        + "                        <button onclick=\"\" type=\"submit\" class=\"button btn btn-default cart__btn-proceed-checkout\"  title=\"Thanh toán\">Thanh toán</button>\n"
+                        + "                        <button onclick=\"\" type=\"submit\" class=\"button btn btn-default cart__btn-proceed-checkout\"  title=\"Thanh toán\">Tạo đơn hàng</button>\n"
                         + "                    </div>\n"
                         + "                </div>\n"
                         + "            </div>\n"

@@ -84,6 +84,10 @@ public class LoadProductCategoryController extends HttpServlet {
             request.setAttribute("CATEGORY_LIST", cdtos);
             url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_PAGE)
                     + "?categoryId=" + categoryId;
+            
+            int totalProducts = product.getTotalProducts(); 
+            int totalPages = (int) Math.ceil((double) totalProducts / 9); // Tính số trang
+            request.setAttribute("TOTAL_PAGES", totalPages); 
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,8 +8,11 @@ package phatntt.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Random;
 import org.apache.http.client.ClientProtocolException;
@@ -90,5 +93,24 @@ public class Key_Utils {
             sb.append(chars.charAt(rnd.nextInt(chars.length())));
         }
         return sb.toString();
+    }
+    
+    public String convertTimestamp(String timestampString) {
+        try {
+            // Chuyển đổi chuỗi timestamp thành kiểu dữ liệu Timestamp
+            Timestamp timestamp = Timestamp.valueOf(timestampString);
+
+            // Tạo định dạng cho ngày tháng và giờ
+            DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            // Chuyển đổi Timestamp thành chuỗi theo định dạng mong muốn
+            String formattedTimestamp = dateFormat.format(timestamp);
+
+            return formattedTimestamp;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            // Xử lý lỗi khi chuỗi timestamp không hợp lệ
+            return null;
+        }
     }
 }

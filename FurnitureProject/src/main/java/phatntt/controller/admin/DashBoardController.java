@@ -48,7 +48,7 @@ public class DashBoardController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = siteMaps.getProperty(Constants.Management.DASHBOARD);
+        String url = siteMaps.getProperty(Constants.LoginFeatures.DASHBOARD);
         try {
 
             OrdersDAO dao = new OrdersDAO();

@@ -111,6 +111,7 @@ phatntt\util\Constants$ValidateFeatures.class
 phatntt\cart\RemoveProductFromCart.class
 phatntt\dto\WishlistDTO.class
 phatntt\cart\BuyNowController.class
+phatntt\controller\products\RemoveProductFromWishList.class
 phatntt\controller\orders\ViewAllOrderController.class
 phatntt\dto\OrderStatusDTO.class
 phatntt\listener\MyContextServletListener.class

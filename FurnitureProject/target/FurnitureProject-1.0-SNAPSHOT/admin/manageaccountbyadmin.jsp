@@ -58,11 +58,6 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Bảng Tài Khoản</h6>
                                 </div>
 
-
-
-
-
-
                                 <div class="col-md-6 text-right right">
                                     <div id="sort-by">
                                         <!-- Navbar Form -->
@@ -72,8 +67,9 @@
                                                 <div class="input-group">
                                                     <select name="role" class="form-control">
                                                         <option value="User">Theo vai trò</option>
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="User">User</option>
+                                                        <option value="User">Khách hàng</option>
+                                                        <option value="Admin">Quản trị viên</option>
+                                                        <option value="Staff">Nhân viên</option>        
                                                     </select>
                                                 </div>
                                             </div>
@@ -204,11 +200,7 @@
 
 
 <script>
-    function toggleSubMenu(menuId) {
-        var subMenu = document.getElementById(menuId);
-        subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
-    }
-
+ 
     function applyFilters(event) {
         event.preventDefault(); // Ngăn chặn gửi yêu cầu đến máy chủ khi nhấn nút "Lọc"
 

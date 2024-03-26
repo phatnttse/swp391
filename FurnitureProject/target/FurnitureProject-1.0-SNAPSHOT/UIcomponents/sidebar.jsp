@@ -25,8 +25,7 @@
             <ul class="navbar-nav bg-gray-900  sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
                     <div class="sidebar-brand-text mx-3">Lofi Furniture</div>
                 </a>
 
@@ -34,7 +33,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Thống kê</span></a>
                 </li>
 
                 <!-- Divider -->

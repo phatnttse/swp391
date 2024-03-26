@@ -40,9 +40,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                     <c:if test="${not empty listOrder}">
                                                         <c:forEach var="order" items="${listOrder}">
 
-                                                            <c:if test="${order.status != 7}">
+                                                            <c:if test="${order.status < 7}">
                                                                 <li class="orf row">
-                                                                    <div class="col-md-7 ng-binding">
+                                                                    <div class="col-md-7">
                                                                         <p>
                                                                         </p><h4> <b class="ng-binding"><span class="thong-tin-ma-don-hang">Mã đơn hàng</span>: ${order.orderId} </b> </h4> <br>
                                                                         <span class="thong-tin-ho-va-ten-khach-hang">Họ và tên khách hàng</span>: ${order.name}<br>
@@ -52,7 +52,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                         <span class="thong-tin-dia-chi-giao">Địa chỉ giao hàng</span>: ${order.address}
                                                                         <br>
                                                                         <br>
-                                                                        <br>
+                                                                        
                                                                         <span style="color:red;">
                                                                             <span class="thong-tin-trang-thai-thanh-toan">Trạng thái thanh toán</span>: <b class="ng-binding">
                                                                                 <c:if test="${order.paymentStatus == true}">
@@ -68,7 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                         </span>
                                                                         <p></p>
                                                                     </div>
-                                                                    <div class="col-md-5">
+                                                                    <div class="col-md-5 my-3">
                                                                         <h4><b class="thong-tin-gia-tri-don-hang">Giá trị đơn hàng</b></h4>
                                                                         <p style="font-size:28px;">
                                                                             <span style="font-size:28px;color:#FF0000;" class="ng-binding">${order.formattedPrice}</span>
@@ -87,13 +87,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                                     </div>
                                                                 </li>  
                                                             </c:if>
-                                                            <c:if test="${order.status == 7}">
-                                                                <div>
-                                                                    <center>
-                                                                        <h3 class="" style="margin-top: 20px;">Bạn chưa có đơn hàng nào</h3>
-                                                                    </center>
-                                                                </div>
-                                                            </c:if>
+                                                            
                                                         </c:forEach>
                                                     </c:if>
                                                     <c:if test="${empty listOrder}">

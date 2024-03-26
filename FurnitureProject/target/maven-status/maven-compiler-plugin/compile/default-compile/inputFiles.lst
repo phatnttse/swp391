@@ -84,6 +84,7 @@ E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dao\OrdersDAO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\users\CheckOutSuccessController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\OrderStatusDTO.java
+E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\products\RemoveProductFromWishList.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\dto\CategoryDTO.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\controller\admin\DeleteUsersController.java
 E:\Vit\SWP391\swp391\FurnitureProject\src\main\java\phatntt\util\Constants.java

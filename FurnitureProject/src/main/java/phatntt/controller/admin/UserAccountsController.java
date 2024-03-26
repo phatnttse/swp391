@@ -28,7 +28,7 @@ import phatntt.util.Constants;
  *
  * @author Admin
  */
-@WebServlet(name = "UserAccountsController", urlPatterns = {"/UserAccountsController"})
+@WebServlet(name = "UserAccountsController", urlPatterns = {"/UserAccounts"})
 public class UserAccountsController extends HttpServlet {
 
     /**

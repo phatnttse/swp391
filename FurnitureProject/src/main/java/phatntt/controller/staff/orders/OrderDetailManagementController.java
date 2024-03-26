@@ -119,13 +119,13 @@ public class OrderDetailManagementController extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.VIEW_ORDERDETAIL_PAGE);
         
-        int orderStatus =  Integer.parseInt(request.getParameter("orderStatus"));
-        boolean paymentStatus = Boolean.parseBoolean(request.getParameter("paymentStatus"));
+        int orderStatus =  Integer.parseInt(request.getParameter("orderStatus"));      
         String orderId = request.getParameter("orderId");
+        boolean paymentStatus = Boolean.parseBoolean(request.getParameter("paymentStatus"));
         
         try {
-            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            boolean result = orderDetailDAO.updateOrderStatus(orderId, orderStatus, paymentStatus);
+            OrdersDAO dao = new OrdersDAO();
+            boolean result = dao.updateOrderStatus(orderId, orderStatus, paymentStatus);
             if (result){
                 url = "orderManager";
             }

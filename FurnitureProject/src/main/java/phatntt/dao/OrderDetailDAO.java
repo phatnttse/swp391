@@ -8,13 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import lombok.Cleanup;
 import phatntt.dto.OrderDetailDTO;
-import phatntt.dto.OrderStatusDTO;
 import phatntt.util.DBConnect;
 
 /**
@@ -23,33 +21,7 @@ import phatntt.util.DBConnect;
  */
 public class OrderDetailDAO {
 
-    
-    public boolean updateOrderStatus(String orderId, int statusId, boolean paymentStatus) throws SQLException, NamingException {
-        boolean result = false;
-
-        @Cleanup
-        Connection con = DBConnect.createConnection();
-        if (con != null) {
-            paymentStatus = (statusId == 5); // Nếu statusId là 5, paymentStatus sẽ là true
-            String sql = "UPDATE `orders` SET status = ?, payment_status = ? WHERE order_id = ?";
-            @Cleanup
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setInt(1, statusId);
-            stm.setBoolean(2, paymentStatus);
-            stm.setString(3, orderId);
-            int affectedRows = stm.executeUpdate();
-
-            if (affectedRows > 0) {
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    
-
-    public static List<OrderDetailDTO> getAllOrderDetail(String orderId) throws SQLException, NamingException {
+ public static List<OrderDetailDTO> getAllOrderDetail(String orderId) throws SQLException, NamingException {
         List<OrderDetailDTO> list = new ArrayList<>();
         @Cleanup
         Connection con = DBConnect.createConnection();

@@ -27,7 +27,7 @@ import phatntt.util.Key_Utils;
  *
  * @author Dell
  */
-@WebServlet(name = "LoginAdminStaffController", urlPatterns = {"/LoginAdminStaffController"})
+@WebServlet(name = "LoginAdminStaffController", urlPatterns = {"/LoginAdminStaff"})
 public class LoginAdminStaffController extends HttpServlet {
 
     /**
@@ -97,7 +97,7 @@ public class LoginAdminStaffController extends HttpServlet {
             if (user != null && user.getRole() == 1) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("STAFF_INFO", user);
-                    url = siteMaps.getProperty(Constants.LoginFeatures.STAFF_PAGE);
+                    url = "dashboard";
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }

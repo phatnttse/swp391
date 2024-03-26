@@ -114,10 +114,8 @@
 
                     <c:set var="products" value="${requestScope.PRODUCTS}"/>
 
-                    <h1 class="h3 my-5 mb-4 text-gray-800">Quản lý Sản Phẩm</h1>
-
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4 my-5">
                         <div class="card-header py-3">
                             <div class="row">
                                 <div class="col">

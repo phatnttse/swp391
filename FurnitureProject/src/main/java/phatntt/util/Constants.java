@@ -18,6 +18,7 @@ public class Constants {
         public static final String ADMIN_PAGE = "adminHomePage";
         public static final String HOME = "home";
         public static final String STAFF_PAGE = "dashboardPage";
+        public static final String DASHBOARD = "dashboardPage";
         
     }
 
@@ -135,7 +136,6 @@ public class Constants {
         public static final String CATEGORY_MANAGER_PAGE = "categoryManagerPage";
         public static final String CATEGORY_DETAIL_PAGE = "categoryDetailManagerPage";
         public static final String ADD_NEW_CATEGORY_PAGE = "addCategoryPage";
-        
-        public static final String DASHBOARD = "dashboardPage";
+              
     }
 }

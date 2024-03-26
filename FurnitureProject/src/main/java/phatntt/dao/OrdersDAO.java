@@ -77,6 +77,32 @@ public class OrdersDAO {
 
     }
 
+    public boolean updateOrderStatus(String orderId, int statusId, boolean paymentStatus) throws SQLException, NamingException {
+        boolean result = false;
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            if (statusId == 4) {
+                paymentStatus = true;
+            }
+            String sql = "UPDATE `orders` SET status = ?, previous_status = ?, payment_status = ? WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, statusId + 1);
+            stm.setInt(2, statusId + 1);
+            stm.setBoolean(3, paymentStatus);
+            stm.setString(4, orderId);
+            int affectedRows = stm.executeUpdate();
+
+            if (affectedRows > 0) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
     public OrderDTO getOrderById(String orderId) throws SQLException, NamingException {
         OrderDTO order = null;
 
@@ -290,6 +316,26 @@ public class OrdersDAO {
         }
 
         return revenueList;
+    }
+
+    public boolean getPaymentStatusByOrderId(String orderId) throws SQLException, NamingException {
+        boolean paymentStatus = false;
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT payment_status FROM orders WHERE order_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, orderId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                paymentStatus = rs.getBoolean("payment_status");
+            }
+        }
+
+        return paymentStatus;
     }
 
 }

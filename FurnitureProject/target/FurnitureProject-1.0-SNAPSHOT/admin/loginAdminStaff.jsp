@@ -1,9 +1,10 @@
 <%-- 
-    Document   : loginAdminStaff
-    Created on : Mar 20, 2024, 1:16:07 AM
-    Author     : Dell
+    Document   : test
+    Created on : Mar 21, 2024, 8:52:29 PM
+    Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,69 +15,83 @@
             rel="stylesheet">
         <link rel="stylesheet" href="/FurnitureProject/assets/css/admin/sb-admin-2.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <title>DashBoard</title>
+        <title>Trang đăng nhập</title>
+
         <style>
-            .custom-bg-image {
-                background-image: url('/FurnitureProject/thumbnails/views/loginAdmin.jpg'); /* Thay 'link_den_hinh_anh_cua_ban.jpg' bằng đường dẫn tới hình ảnh bạn muốn sử dụng */
-                background-size: cover;
-                background-position: center;
+            .divider:after,
+            .divider:before {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: #eee;
+            }
+            .h-custom {
+                height: calc(100% - 73px);
+            }
+            @media (max-width: 450px) {
+                .h-custom {
+                    height: 100%;
+                }
             }
         </style>
+
     </head>
-    <body class="bg-gradient-light  custom-bg-image">
-
-        <div class="container">
-            <form action="LoginAdminStaffController" method="POST">
-                <!-- Outer Row -->
-                <div class="row justify-content-center">
-
-                    <div class="col-xl-10 col-lg-12 col-md-9">
-
-                        <div class="card o-hidden border-0 shadow-lg my-5">
-                            <div class="card-body p-0">
-                                <!-- Nested Row within Card Body -->
-                                <div class="row">
-                                    <div class="col-lg-6 d-none d-lg-block custom-bg-image"></div>
-                                    <div class="col-lg-6">
-                                        <div class="p-5">
-                                            <div class="text-center">
-                                                <h1 class="h2 text-gray-900 mb-4 my-4">Đăng nhập</h1>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" name="email"  aria-describedby="emailHelp" placeholder="Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="password" placeholder="Mật khẩu">
-                                            </div>
-
-                                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                Đăng nhập
-                                            </button>
-
-                                            <hr>
-                                            <div class="text-center">
-                                                <a class="small" href="#">Forgot Password?</a>
-                                            </div>
-                                            <div class="text-center">
-                                                <a class="small" href=#">Create an Account!</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+    <body>
+      
+        <section class="vh-100">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-9 col-lg-6 col-xl-5">
+                        <img src="/FurnitureProject/thumbnails/views/loginAdmin.jpeg" class="img-fluid"
+                             alt="Sample image">
                     </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form action="LoginAdminStaff" method="post">
+                            
+                            <div class="divider d-flex align-items-center my-4">
+                                <h3 class="text-center fw-bold mx-3 mb-0">Đăng nhập</h3>
+                            </div>
 
+                            <!-- Email input -->
+                            <div class="form-outline mb-4 my-4">
+                                <input type="email" name="email" id="form3Example3" class="form-control form-control-lg"
+                                       placeholder="Email" />
+
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-3 my-4">
+                                <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
+                                       placeholder="Mật khẩu" />
+
+                            </div>
+                            <c:if test="${requestScope.LOGIN_ERROR != null}">
+                                <p style="color: red">${requestScope.LOGIN_ERROR}</p>
+                            </c:if>
+
+                            <div class="d-flex justify-content-between align-items-center">                           
+                                <a href="#!" class="text-body">Forgot password?</a>
+                            </div>
+
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <button type="submit" class="btn btn-secondary btn-lg"
+                                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>                               
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
+            <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-secondary">
+                <!-- Copyright -->
+                <div class="text-white mb-3 mb-md-0">
+                    © Trang quản trị của Lux Furniture <b>FurnitureProject
+                </div>
+                <!-- Copyright -->
 
 
-        </div>
+            </div>
+        </section>
 
-        <!-- Bootstrap Bundle JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

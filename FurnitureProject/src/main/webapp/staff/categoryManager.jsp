@@ -119,10 +119,10 @@
 
                     <c:set var="categorys" value="${requestScope.CATEGORIES}"/>
 
-                    <h1 class="h3 my-5 mb-4 text-gray-800">Danh Mục</h1>
+<!--                    <h1 class="h3 my-4 mb-4 text-gray-800">Danh Mục</h1>-->
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4 my-5">
                         <div class="card-header py-3">
                             <div class="row">
                                 <div class="col">

@@ -60,7 +60,6 @@
 
                                 <div class="swipertab swiper-container products-view-grid swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-multirow">
 
-
                                     <div class="swiper-wrapper" style="width: 1600px; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                                         <c:forEach var="product" items="${listProductByCategory}" varStatus="loopStatus">
                                             <div class="swiper-slide swiper-slide-active" style="width: 300px; margin-right: 20px;">
@@ -118,18 +117,13 @@
                                                                         document.write(formattedTotalMoney);
                                                                     </script>
                                                                 </span>
-
                                                             </div>
                                                         </div>
                                                     </form>
-
                                                 </div>
                                             </div>
                                         </c:forEach>
-
-
-                                    </div>
-                                   
+                                    </div>                                
                                 </div>
                             </div>
                         </div>

@@ -41,84 +41,27 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <!-- Content Row -->
-                        <!--                        <div class="row my-5">
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                                            Số đơn hiện tại</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-success shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                                            Đơn hàng trong ngày</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-info shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                                            Đơn hàng trong tháng</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Pending Requests Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-warning shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                                            Đơn hàng đã huỷ</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
+
                         <c:set var="requests" value="${requestScope.REQUEST_CANCELS}"/>
 
                         <h1 class="h3 my-5 mb-4 text-gray-800">Yêu cầu huỷ đơn</h1>
+
+                        <c:if test="${not empty requestScope.ACCEPT}">
+                            <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">                                     
+                                ${requestScope.ACCEPT}
+                                <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty requestScope.REFUSE}">
+                            <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">                                     
+                                ${requestScope.REFUSE}
+                                <button type="button" class="close" onclick="document.getElementById('autoCloseAlert').style.display = 'none';" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -126,23 +69,24 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Bảng yêu cầu huỷ đơn</h6>
                             </div>
                             <div class="card-body">
-                                <form action="handlingOrderCancellationReq" method="post">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã đơn hàng</th>
-                                                    <th>Tên</th>
-                                                    <th>Email</th>
-                                                    <th>SĐT</th>                                                                                  
-                                                    <th>Xử lý</th>
-                                                    <th>Lí do</th>
-                                                    <th>Tác vụ</th>                                                    
-                                                </tr>
-                                            </thead>
 
-                                            <tbody>
-                                                <c:forEach var="request" items="${requests}">
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã đơn hàng</th>
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>SĐT</th>                                                                                  
+                                                <th>Xử lý</th>
+                                                <th>Lí do</th>
+                                                <th>Tác vụ</th>                                                    
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="request" items="${requests}">
+                                            <form action="handlingOrderCancellationReq" method="post">
+                                                <tbody>
                                                     <tr>
                                                         <td>
                                                             <input type="hidden" name="orderId" value="${request.orderId}" />
@@ -152,6 +96,9 @@
                                                         <td>${request.name}</td>
                                                         <td>${request.phone}</td>
                                                         <td>
+                                                            <input type="hidden" name="trantype" value="02" />
+                                                            <input type="hidden" name="amount" value="${request.amount}" />
+                                                            <input type="hidden" name="trans_date" value="${request.orderDate}" />
                                                             <button type="submit" class="btn btn-outline-info">Chấp nhận</button>
                                                         </td>
                                                         <td>
@@ -161,12 +108,14 @@
                                                             <a href="handlingOrderCancellationReq?orderId=${request.orderId}" class="btn btn-danger">Từ chối</a>
                                                         </td> 
                                                     </tr>  
-                                                </c:forEach>
 
-                                            </tbody>
-                                        </table>
-                                    </div>                               
-                                </form>
+                                                </tbody>
+                                            </form>
+                                        </c:forEach>
+                                    </table>
+                                </div>                               
+
+
 
                             </div>
                         </div>
@@ -186,6 +135,6 @@
         <!-- End of Page Wrapper -->
 
 
-    </script>
-</body>
+        <script src="/FurntiureProject/assets/js/alert.js"></script>
+    </body>
 </html>

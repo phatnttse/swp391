@@ -382,7 +382,7 @@ public class StaffDAO {
         @Cleanup
         Connection con = DBConnect.createConnection();
         if (con != null) {
-            String sql = "SELECT rc.id, rc.user_id, o.name, o.email, o.phone, rc.order_id, rc.reason, rc.request_status, rc.created_at "
+            String sql = "SELECT rc.id, rc.user_id, o.name, o.email, o.phone, o.amount, o.created_at AS order_date, rc.order_id, rc.reason, rc.request_status, rc.created_at "
                     + "FROM request_cancellations rc "
                     + "JOIN `orders` o ON rc.order_id = o.order_id";
             @Cleanup
@@ -400,6 +400,8 @@ public class StaffDAO {
                         .orderId(rs.getString("order_id"))
                         .reason(rs.getString("reason"))
                         .requestStatus(rs.getBoolean("request_status"))
+                        .amount(rs.getInt("amount"))
+                        .orderDate(rs.getTimestamp("order_date"))
                         .createdAt(rs.getTimestamp("created_at"))
                         .build();
 

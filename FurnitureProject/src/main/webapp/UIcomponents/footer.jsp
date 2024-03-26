@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-4 ft-info"> 
                             <h4 class="title-menu">
-                                Lofi Furniture
+                                Lux Furniture
                             </h4>
 
                             <div class="des_foo">
@@ -112,15 +112,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-3"> 
-                            <h4 class="title-menu">
-                                Đăng ký nhận tin
-                            </h4>
-                            <span class="content-mailchimp">Đăng ký ngay! Để nhận thật nhiều ưu đãi</span>
-                            <form id="mc-form" class="newsletter-form">
-                                <input type="email" class="form-control" name="" placeholder="Nhập địa chỉ email" required="">
-                                <button class="btn btn-default" type="submit">ĐĂNG KÝ</button>
-                            </form>
-
+                           
                             <h4 class="title-menu">
                                 Hình thức thanh toán
                             </h4>
@@ -137,7 +129,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg-12">
-                            <span class="copy-right">© Trang web của phatntt <b>FurnitureProject</b></span>                     
+                            <span class="copy-right">© Trang web của furniture project team <b>Lux Furniture</b></span>                     
                         </div>
                     </div>
                 </div>

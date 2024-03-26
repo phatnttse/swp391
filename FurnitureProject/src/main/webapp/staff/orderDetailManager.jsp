@@ -63,24 +63,20 @@
                                                 <span class="input-group-text font-weight-bold">Email</span>
                                                 <span class="form-control">${order.email}</span>                                              
                                             </div>
-                                             <div class="input-group mb-3">
+                                            <div class="input-group mb-3">
                                                 <span class="input-group-text font-weight-bold">Tên</span>
-                                                 <span class="form-control">${order.name}</span>                                                 
+                                                <span class="form-control">${order.name}</span>                                                 
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text font-weight-bold">SĐT/ĐC</span>
                                                 <span class="form-control">${order.phone}</span>
                                                 <span class="form-control">${order.address}</span>
                                             </div>
-                                         
+
                                             <div class="input-group mb-3">
                                                 <div class="input-group mb-3">
                                                     <label class="input-group-text font-weight-bold" for="orderStatusSelect">Trạng thái</label>
-                                                    <select class="form-control" id="orderStatusSelect" name="orderStatus">
-                                                        <c:forEach var="status" items="${order_status}">
-                                                            <option value="${status.statusId}" ${status.name eq order.statusName ? 'selected' : ''}>${status.name}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <span class="form-control">${order.statusName}</span>    
                                                 </div>
                                             </div>
                                             <div class="input-group mb-3">
@@ -88,11 +84,15 @@
                                                 <span class="form-control">${order.paymentMethod}</span>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text font-weight-bold" for="paymentStatusSelect">Trạng thái thanh toán</label>
-                                                <select class="form-control" id="paymentStatusSelect" name="paymentStatus">
-                                                    <option value="true" ${order.paymentStatus ? 'selected' : ''}>Đã thanh toán</option>
-                                                    <option value="false" ${!order.paymentStatus ? 'selected' : ''}>Chưa thanh toán</option>
-                                                </select>
+                                                <label class="input-group-text font-weight-bold">Trạng thái thanh toán</label>
+                                                <c:if test="${order.paymentStatus == true}">
+                                                    <span class="form-control">Đã thanh toán</span>
+                                                </c:if>
+                                                <c:if test="${order.paymentStatus == false}">
+                                                    <span class="form-control">Chưa thanh toán</span>
+                                                </c:if>
+
+
                                             </div>
 
                                             <div class="input-group mb-3">
@@ -157,8 +157,12 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Cập nhật</h6>
                                         </div>
                                         <div class="card-body">
-                                            <input type="hidden" name="orderId" value="${order.orderId}"/>
-                                            <button type="submit" class="btn btn-google btn-block">Lưu</button>
+                                            <c:if test="${order.status < 5}">
+                                                <input type="hidden" name="orderId" value="${order.orderId}"/>
+                                                <input type="hidden" name="orderStatus" value="${order.status}"/>
+                                                <input type="hidden" name="paymentStatus" value="${order.paymentStatus}"/>
+                                                <button type="submit" class="btn btn-google btn-block">Chuyển trạng thái đơn hàng</button>
+                                            </c:if>                                           
                                             <a href="orderManager" class="btn btn-facebook btn-block"><i
                                                     class="" ></i>Quay Lại</a>
 

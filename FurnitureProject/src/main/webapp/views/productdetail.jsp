@@ -50,6 +50,91 @@
                 visibility: visible;
                 opacity: 0.5
             }
+            .form-group textarea {
+                width: 100%;
+                margin-bottom: 15px;
+                outline: none;
+                font-size: 14px;
+                padding: 5px 20px;
+                border: 1px solid #e6e6e6
+            }
+            .button_45 {
+                height: 40px;
+                line-height: 38px;
+                padding: 0 25px;
+                background: #d94e28;
+                font-size: 15px;
+                font-weight: 500;
+                color: #fff;
+                border-radius: 6px;
+                border: none;
+                margin-top: 10px;
+            }
+            .title-form-coment {
+                font-size: 18px;
+                margin-top: 0;
+                margin-bottom: 5px;
+                padding-bottom: 15px;
+                color: #000;
+                font-weight: bold
+            }
+
+            #article-comments .article-comment {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 1px dotted #c9c8c5
+            }
+
+            #article-comments .article-comment:last-child {
+                padding-bottom: 30px
+            }
+
+            #article-comments .article-comment-user-image {
+                margin: 0;
+                float: left;
+                width: 80px;
+                margin-right: 12px;
+                height: 80px;
+                border-radius: 0;
+                display: block
+            }
+
+            #article-comments .article-comment-user-comment {
+                display: block;
+                float: left;
+                width: calc(100% - 95px);
+                -webkit-width: calc(100% - 95px);
+                -moz-width: calc(100% - 95px);
+                -o-width: calc(100% - 95px);
+                -os-width: calc(100% - 95px);
+                padding-left: 10px;
+                word-break: break-word;
+                font-size: em(14px)
+            }
+
+            #article-comments .user-name-comment {
+                margin: 0;
+                font-size: 14px;
+                line-height: 1;
+                font-weight: 700
+            }
+
+            #article-comments .user-name-comment strong {
+                font-weight: 700
+            }
+
+            #article-comments .article-comment-date-bull {
+                padding: 5px 0;
+                display: block;
+                color: #b0b0b0;
+                font-size: 12px
+            }
+
+            #article-comments .cm {
+                font-size: 14px;
+                color: #000
+            }
+
         </style>
     </head>
 
@@ -119,7 +204,7 @@
                                         <div class="inventory_quantity">
                                             <span class="mb-break">
                                                 <span class="title">Thương hiệu:</span>
-                                                <span class="vendor">Lofi Furniture</span>
+                                                <span class="vendor">Lux Furniture</span>
                                             </span>
                                             <span class="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                                             <span class="mb-break stock-brand">
@@ -134,10 +219,7 @@
                                         <h1 class="title-product">
                                             ${product.title}
                                         </h1>
-                                        <form
-                                             action="buyNow" method="get"
-                                            class="form-inline"
-                                            >
+                                        <form action="buyNow" method="get" class="form-inline">
                                             <div class="price-box clearfix">
                                                 <span class="special-price">
                                                     <span class="price product-price">
@@ -245,99 +327,116 @@
                             </div>
                         </div>                   
                     </div>
-                </c:if>
-
-                <div class="container">
-                    <div class="productRelate">
-                        <div class="block-title">
-                            <h2>
-                                <a href="" title="Sản phẩm cùng loại">Sản phẩm cùng loại</a>
-                            </h2>
+                    <div class="form-coment">
+                        <div class="margin-top-0 margin-bottom-30 w-100">
+                            <h5 class="title-form-coment">Viết bình luận của bạn</h5>
                         </div>
-                        <c:set var="SameCategory" value="${requestScope.SAME_CATEGORY}"/>
-                        <c:if test="${not empty SameCategory}">
-
-                            <div class="margin-am">
-                                <div class="product-relate-swiper swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events" style="cursor: grab">
-                                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
-                                        <c:forEach var="productS" items="${SameCategory}">  
-                                            <div class="swiper-slide swiper-slide-active" style="width: 300px; margin-right: 20px">                                   
-                                                <div class="item_product_main">
-                                                    <form action="cart" method="post" class="variants product-action" enctype="multipart/form-data">
-                                                        <div class="product-thumbnail">
-                                                            <a class="image_thumb" title="Tủ chậu lavabo liền khối 2 tầng">                                                   
-                                                                <img class="lazyload loaded" width="480" height="480"
-                                                                     src="thumbnails/products/${productS.thumbnail}"
-                                                                     alt="Tủ chậu lavabo liền khối 2 tầng"/>
-                                                            </a>
-                                                            <span class="smart">- 14% </span>
-
-                                                            <div class="action">
-                                                                <div class="actions-secondary">
-                                                                    <div class="actions-primary">
-                                                                        <button class="btn-cart" title="Hết hàng" type="button" disabled="disabled">                                                                   
-                                                                            <span class="icon icon-outsock">
-                                                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">                                                                          
-                                                                                <defs>
-                                                                                <style>
-                                                                                    .cls-1 {
-                                                                                        fill: none;
-                                                                                        stroke: #000;
-                                                                                        stroke-linecap: round;
-                                                                                        stroke-linejoin: round;
-                                                                                        stroke-width: 2px;
-                                                                                    }
-                                                                                </style>
-                                                                                </defs>
-                                                                                <g>
-                                                                                <polyline class="cls-1" points="15 31 5 31 6 9 26 9 26.14 12"></polyline>
-                                                                                <path class="cls-1"d="M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6"></path>
-                                                                                <circle class="cls-1"cx="23"cy="23"r="8"></circle>
-                                                                                <line  class="cls-1" x1="27" x2="19" y1="23" y2="23"></line>
-                                                                                </g>
-                                                                                </svg>
-                                                                            </span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <a title="Xem nhanh" class="quick-view btn-views">
-                                                                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z"
-                                                                            ></path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <h3 class="product-name">
-                                                                <a href="" title="${productS.title}">${productS.title}</a>                                                       
-                                                            </h3>
-                                                            <div class="price-box">
-                                                                <span class="price">
-                                                                    <script>
-                                                                        var totalMoney = parseInt('${productS.discountProduct}');
-                                                                        var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
-                                                                        document.write(formattedTotalMoney);
-                                                                    </script>
-                                                                </span>
-                                                                <span class="compare-price">${productS.formattedPrice}₫</span>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
-
-                                    <div class="swiper-button-prev swiper-button-disabled"></div>
-                                    <div class="swiper-button-next swiper-button-disabled"></div>
-                                </div>
+                        <div class="row">                           
+                            <fieldset class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">	
+                                <textarea placeholder="Nội dung" class="form-control form-control-lg" id="comment" name="Body" rows="6" required=""></textarea>
+                            </fieldset>
+                            <div class="col-12" style="margin-bottom: 15px">
+                                <button type="submit" class="btn btn-primary button_45">Gửi bình luận</button>
                             </div>
-
                         </div>
                     </div>
-                </c:if>
+                    <div id="article-comments">
+                        <h5 class="title-form-coment margin-bottom-25">Bình luận (1)</h5>
+
+                        <div class="article-comment clearfix">
+                            <figure class="article-comment-user-image">
+                                <img src="https://www.gravatar.com/avatar/2bc01cd7be112cdab638c46feff9ba2e?s=110&amp;d=identicon" alt="binh-luan" class="block">
+                            </figure>
+
+                            <div class="article-comment-user-comment">
+                                <p class="user-name-comment"><strong>Phatntt</strong>
+                                    <a href="#article_comments" class="btn-link pull-xs-right d-none">Trả lời</a></p>
+                                <span class="article-comment-date-bull">22/03/2024</span>
+                                <p class="cm">ádnaslndasklndaskldnasklndasklndasklndas</p>
+
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+            </c:if>
+
+
+            <div class="container">
+                <div class="productRelate">
+                    <div class="block-title">
+                        <h2>
+                            <a href="" title="Sản phẩm cùng loại">Sản phẩm cùng loại</a>
+                        </h2>
+                  </div>
+                    <c:set var="SameCategory" value="${requestScope.SAME_CATEGORY}"/>
+                    <c:if test="${not empty SameCategory}">
+
+                        <div class="margin-am">
+                            <div class="product-relate-swiper swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events" style="cursor: grab">
+                                <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px)">
+                                    <c:forEach var="productS" items="${SameCategory}">  
+                                        <div class="swiper-slide swiper-slide-active" style="width: 300px; margin-right: 20px">                                   
+                                            <div class="item_product_main">
+                                                <form action="cart" method="post" class="variants product-action" enctype="multipart/form-data">
+                                                    <div class="product-thumbnail">
+                                                        <a class="image_thumb" title="Tủ chậu lavabo liền khối 2 tầng">                                                   
+                                                            <img class="lazyload loaded" width="480" height="480"
+                                                                 src="thumbnails/products/${productS.thumbnail}"
+                                                                 alt="Tủ chậu lavabo liền khối 2 tầng"/>
+                                                        </a>
+                                                        <span class="smart">- 14% </span>
+
+                                                        <div class="action">
+                                                            <div class="actions-secondary">
+                                                                <div class="actions-primary">
+                                                                    <button class="btn-cart" title="Hết hàng" type="button">                                                                   
+                                                                        <span class="icon icon-cart">
+                                                                            <span class="icon icon-cart">
+                                                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
+                                                                                        fill:none;
+                                                                                        stroke:#000;
+                                                                                        stroke-linecap:round;
+                                                                                        stroke-linejoin:round;
+                                                                                        stroke-width:2px;
+                                                                                    }</style></defs><title></title><g><polyline class="cls-1" points="15 31 5 31 6 9 26 9 26.14 12"></polyline><path class="cls-1" d="M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6"></path><circle class="cls-1" cx="23" cy="23" r="8"></circle><line class="cls-1" x1="23" x2="23" y1="19" y2="27"></line><line class="cls-1" x1="27" x2="19" y1="23" y2="23"></line></g></svg>
+                                                                            </span>                                                                       
+
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                                <button type="button" title="Xem nhanh" onclick="viewFastProduct(${product.productId})"  class="quick-view btn-views">
+                                                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z"></path></svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <h3 class="product-name">
+                                                            <a href="" title="${productS.title}">${productS.title}</a>                                                       
+                                                        </h3>
+                                                        <div class="price-box">
+                                                            <span class="price">
+                                                                <script>
+                                                                    var totalMoney = parseInt('${productS.discountProduct}');
+                                                                    var formattedTotalMoney = totalMoney.toLocaleString('vi-VN') + '₫';
+                                                                    document.write(formattedTotalMoney);
+                                                                </script>
+                                                            </span>
+                                                            <span class="compare-price">${productS.formattedPrice}₫</span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>                               
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </c:if>
 
         </section>
         <div id="popup-cart-desktop" class="popup-cart"></div>

@@ -46,7 +46,7 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-                        <h1 class="h3 my-5 mb-4 text-gray-800">Thêm Sản Phẩm</h1>
+                        <h1 class="h3 my-4 mb-4 text-gray-800">Thêm Sản Phẩm Mới</h1>
 
                         <c:if test="${not empty requestScope.ADD_PRODUCT_SUCCESS}">
                             <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">

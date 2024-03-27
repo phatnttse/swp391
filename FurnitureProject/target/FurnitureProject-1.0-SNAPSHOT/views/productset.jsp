@@ -23,8 +23,8 @@
                         <div class="product-set-content">
                             <div class="container">
                                 <div class="text-start">
-                                    <h2>Xây dựng phòng tắm</h2>
-                                    <div class="desc">Khám phá bộ sưu tập đầy đủ các sản phẩm phòng tắm của Lofi được thiết kế cho ngôi nhà của bạn.</div>
+                                    <h2>Xây dựng căn phòng của bạn</h2>
+                                    <div class="desc">Khám phá bộ sưu tập đầy đủ các sản phẩm phòng tắm của Lux được thiết kế cho ngôi nhà của bạn.</div>
                                     <div class="ctas-btn">
                                         <a class="btn" href="products">Mua ngay</a>
                                     </div>

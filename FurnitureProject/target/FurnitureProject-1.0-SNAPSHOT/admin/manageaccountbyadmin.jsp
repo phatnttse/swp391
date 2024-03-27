@@ -32,8 +32,7 @@
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
-                <div id="content">
-
+                <div id="">
                     <!-- Topbar -->
                    <%@include file="../UIcomponents/topbarAdmin.jsp"%>
                     <!-- End of Topbar -->
@@ -45,8 +44,6 @@
                 </div>
 
                 <div class="container-fluid">
-
-
 
                     <h1 class="h3 my-5 mb-4 text-gray-800">Danh sách tài khoản</h1>
 
@@ -149,33 +146,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-                <ul class="pagination justify-content-center my-3">
-                    <li class="page-item"><a class="page-link" href="productManager?page=2">Previous</a></li>
-
-
-                    <li class="page-item"><a class="page-link" href="productManager?page=1">1</a></li>
-
-
-
-                    <li class="page-item"><a class="page-link" href="productManager?page=2">2</a></li>
-
-
-
-                    <li class="page-item"><a class="page-link" href="productManager?page=3">3</a></li>
-
-
-                    <li class="page-item"><a class="page-link" href="productManager?page=4">Next</a></li>
-
-                </ul>
-
-
-
-
-
 
             </div>
             <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>

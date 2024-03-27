@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>Chi tiết nhân viên</title>
         <style>
             .avatar-container {
                 display: flex;
@@ -66,7 +67,7 @@
         <form action="UpdateUsersController" method="POST">
 
             <div class="container mt-6">
-                <h2 class="text-center mb-4">Thông tin chi tiết nhân viên: ${UserAccount.id}</h2>
+                <h2 class="text-center mb-4 my-5">Thông tin chi tiết nhân viên: ${UserAccount.name}</h2>
                 <div class="row">
                     <div class="col-md-4 d-flex justify-content-center align-items-center">
                         <!-- Phần bên trái -->
@@ -75,9 +76,9 @@
                             <div class="avatar">
                                 <img src="${UserAccount.picture}" alt="Avatar">
                             </div>
-                            <!-- Nút để tải lên ảnh đại diện -->
+<!--                             Nút để tải lên ảnh đại diện 
                             <input type="file" id="avatarUpload" name="avatarUpload" style="display:none;">
-                            <label for="avatarUpload" class="btn btn-outline-primary mt-3">Tải lên ảnh đại diện</label>
+                            <label for="avatarUpload" class="btn btn-outline-primary mt-3">Tải lên ảnh đại diện</label>-->
                         </div>
                     </div>
                     <div class="col-md-8">

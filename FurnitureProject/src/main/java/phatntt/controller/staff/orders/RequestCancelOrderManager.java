@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.OrdersDAO;
+import phatntt.dao.ProductsDAO;
 import phatntt.dao.StaffDAO;
 import phatntt.dto.RequestCancellationDTO;
 import phatntt.util.Constants;
@@ -43,25 +44,45 @@ public class RequestCancelOrderManager extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.Management.REQUEST_TO_CANCEL_ORDER_PAGE);
+
+//        String pageParam = request.getParameter("page");
+//        int page = 1;
+//
+//        if (pageParam != null) {
+//            page = Integer.parseInt(pageParam);
+//            url = siteMaps.getProperty(Constants.Management.REQUEST_TO_CANCEL_ORDER_PAGE)
+//                    + "?page=" + page;
+//            request.setAttribute("PAGE", Integer.parseInt(pageParam));
+//        }
 
         try {
-
-            ServletContext context = this.getServletContext();
-            Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+//            int limit = 9;
+//
+//            if (page != 1) {
+//                page = page - 1;
+//                page = page * limit - 1;
+//            }
 
             StaffDAO dao = new StaffDAO();
             List<RequestCancellationDTO> requestCancels = dao.getAllRequestCancellations();
 
             if (requestCancels != null) {
                 request.setAttribute("REQUEST_CANCELS", requestCancels);
-                RequestDispatcher rd = request.getRequestDispatcher(
-                        siteMaps.getProperty(Constants.Management.REQUEST_TO_CANCEL_ORDER_PAGE));
-                rd.forward(request, response);
             }
+
+//            int totalRequests = dao.getTotalRequests();
+//            int totalPages = (int) Math.ceil((double) totalRequests / limit);
+//            request.setAttribute("TOTAL_PAGES", totalPages);
         } catch (SQLException ex) {
             Logger.getLogger(RequestCancelOrderManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(RequestCancelOrderManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
 
     }

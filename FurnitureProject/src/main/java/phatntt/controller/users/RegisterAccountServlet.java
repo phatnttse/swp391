@@ -83,11 +83,11 @@ public class RegisterAccountServlet extends HttpServlet {
         String url = siteMaps.getProperty(Constants.SignUpFeatures.REGISTER_PAGE);
 
         try {
-//            if (!password.trim().matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))) {
-//                foundErr = true;
-//                errors.setPasswordRegexError(
-//                        siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
-//            }
+            if (!password.trim().matches(siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX))) {
+                foundErr = true;
+                errors.setPasswordRegexError(
+                        siteMaps.getProperty(Constants.ValidateFeatures.PASSWORD_REGEX_ERR_MSG));
+            }
 
             if (!confirm.trim().equals(password.trim())) {
                 foundErr = true;

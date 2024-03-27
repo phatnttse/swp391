@@ -26,7 +26,7 @@
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
-                    <div class="sidebar-brand-text mx-3">Lofi Furniture</div>
+                    <div class="sidebar-brand-text mx-3">Lux Furniture</div>
                 </a>
 
                 <!-- Nav Item - Dashboard -->

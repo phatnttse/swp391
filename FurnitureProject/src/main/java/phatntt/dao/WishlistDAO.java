@@ -21,83 +21,102 @@ import phatntt.util.Key_Utils;
  * @author Admin
  */
 public class WishlistDAO {
-    
+
     public boolean addProductToWishlist(int productId, String userId) throws SQLException, NamingException {
-    boolean result = false;
+        boolean result = false;
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "INSERT INTO wishlist (product_id, user_id) VALUES (?, ?)";
         @Cleanup
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, productId);
-        stm.setString(2, userId);
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "INSERT INTO wishlist (product_id, user_id) VALUES (?, ?)";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, productId);
+            stm.setString(2, userId);
 
-        int rowsAffected = stm.executeUpdate();
-        if (rowsAffected > 0) {
-            result = true;
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
         }
+
+        return result;
     }
 
-    return result;
-}
     public List<WishlistDTO> getWishlist(String userId) throws SQLException, NamingException {
-    List<WishlistDTO> wishlist = new ArrayList<>();
+        List<WishlistDTO> wishlist = new ArrayList<>();
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "SELECT w.id AS id, w.product_id AS product_id, "
-                   + "p.title AS title, p.price AS price, p.thumbnail AS thumbnail, p.discount AS discount "
-                   + "FROM wishlist w "
-                   + "JOIN products p ON w.product_id = p.product_id "
-                   + "WHERE w.user_id = ? LIMIT 8";
         @Cleanup
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1, userId);
-        @Cleanup
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            WishlistDTO item = WishlistDTO.builder()
-                    .id(rs.getInt("id"))
-                    .productId(rs.getInt("product_id"))
-                    .userId(userId)
-                    .title(rs.getString("title"))
-                    .price(rs.getInt("price"))
-                    .discount(rs.getInt("discount"))
-                    .formattedPrice(Key_Utils.getInstance().formattedPrice(rs.getInt("price")))
-                    .thumbnail(rs.getString("thumbnail"))
-                    .build();
-            wishlist.add(item);
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT w.id AS id, w.product_id AS product_id, "
+                    + "p.title AS title, p.price AS price, p.thumbnail AS thumbnail, p.discount AS discount "
+                    + "FROM wishlist w "
+                    + "JOIN products p ON w.product_id = p.product_id "
+                    + "WHERE w.user_id = ? LIMIT 8";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, userId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                WishlistDTO item = WishlistDTO.builder()
+                        .id(rs.getInt("id"))
+                        .productId(rs.getInt("product_id"))
+                        .userId(userId)
+                        .title(rs.getString("title"))
+                        .price(rs.getInt("price"))
+                        .discount(rs.getInt("discount"))
+                        .formattedPrice(Key_Utils.getInstance().formattedPrice(rs.getInt("price")))
+                        .thumbnail(rs.getString("thumbnail"))
+                        .build();
+                wishlist.add(item);
+            }
         }
+
+        return wishlist;
     }
 
-    return wishlist;
-}
-    
     public boolean removeProductFromWishlist(int productId, String userId) throws SQLException, NamingException {
-    boolean result = false;
+        boolean result = false;
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "DELETE FROM wishlist WHERE product_id = ? AND user_id = ?";
         @Cleanup
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, productId);
-        stm.setString(2, userId);
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "DELETE FROM wishlist WHERE product_id = ? AND user_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, productId);
+            stm.setString(2, userId);
 
-        int rowsAffected = stm.executeUpdate();
-        if (rowsAffected > 0) {
-            result = true;
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
         }
+
+        return result;
     }
 
-    return result;
-}
+    public WishlistDTO getProductFromWishlist(int productId) throws SQLException, NamingException {
 
+            @Cleanup
+            Connection con = DBConnect.createConnection();
+            // Câu truy vấn SQL
+            String sql = "SELECT * FROM wishlist where product_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, productId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+               WishlistDTO product = WishlistDTO.builder()
+                       .id(rs.getInt("id"))
+                       .build(); 
+               return product;
+            }
+        return null;
+                  
+    }
 
-
-    
 }

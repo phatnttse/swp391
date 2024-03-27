@@ -19,7 +19,7 @@
             <div class="section">
                 <div class="logo">
                     <a href="">
-                        <img src="assets/img/logo.webp" alt="Logo">
+                        <img src="/FurnitureProject/thumbnails/views/logoEmail.jpg" alt="Logo">
                     </a>
                 </div>
                 <div class="header">
@@ -37,10 +37,7 @@
                         <input name="code5" type="number" maxlength="1"/>
                         <input name="code6" type="number" maxlength="1"/>
                     </div>
-<!--                    <c:set var="error" value="${requestScope.INCORRECT_CODE}"/>
-                    <c:if test="${not empty error}">
-                        ${error}
-                    </c:if>-->
+
                     <div class="link">                        
                         <button type="submit">Gửi</button>                     
                         

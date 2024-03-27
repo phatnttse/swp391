@@ -42,88 +42,84 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Content Row -->
-                        <!--                        <div class="row my-5">
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                                            Số đơn hiện tại</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-success shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                                            Đơn hàng trong ngày</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Earnings (Monthly) Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-info shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                                            Đơn hàng trong tháng</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                        
-                                                     Pending Requests Card Example 
-                                                    <div class="col-xl-3 col-md-6 mb-4">
-                                                        <div class="card border-left-warning shadow h-100 py-2">
-                                                            <div class="card-body">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col mr-2">
-                                                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                                            Đơn hàng đã huỷ</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
+                        <div class="row my-5">
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Số đơn hiện tại</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CURRENT}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Đơn hàng trong ngày</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYDAY}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Đơn hàng trong tháng</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_BYMONTH}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Đơn hàng đã huỷ</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.ORDERS_CANCELLED}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <c:set var="orders" value="${requestScope.ORDERS}"/>
                         <c:set var="order_status" value="${requestScope.ORDER_STATUS}"/>
                         <c:set var="statusName" value="${requestScope.STATUS_NAME}"/>
                         <c:set var="date" value="${requestScope.FILTER_DATE}"/>
 
-                       
+
                         <!-- Navbar Form -->
-                        <form id="filterForm" class="d-flex justify-content-start my-5" action="filterOrders" method="get">
+                        <form id="filterForm" class="d-flex justify-content-start my-5" action="orderManager" method="get">
 
                             <!-- Dropdown for Sort -->
                             <div class="dropdown dropdown-end me-2">                              
@@ -199,6 +195,30 @@
                             </div>
                         </div>
 
+                        <c:set var="page" value="${requestScope.PAGE}"/>
+                        <c:if test="${param['statusId'] != null or param['filterDate'] != null}">
+                            <ul class="pagination justify-content-center my-3">
+                                <li class="page-item"><a class="page-link" href="orderManager?page=${page - 1}&statusId=${param['statusId']}&filterDate=${param['filterDate']}">Previous</a></li>
+
+                                <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+
+                                    <li class="page-item"><a class="page-link" href="orderManager?page=${pageNumber}&statusId=${param['statusId']}&filterDate=${param['filterDate']}">${pageNumber}</a></li>
+
+                                </c:forEach>
+
+                                <li class="page-item"><a class="page-link" href="orderManager?page=${page + 1}&statusId=${param['statusId']}&filterDate=${param['filterDate']}">Next</a></li>
+
+                            </ul>
+                        </c:if>
+                        <c:if test="${param['statusId'] == null && param['filterDate'] == null}">
+                            <ul class="pagination justify-content-center my-3">
+                                <li class="page-item"><a class="page-link" href="orderManager?page=${page - 1}">Previous</a></li>
+                                    <c:forEach begin="1" end="${requestScope.TOTAL_PAGES}" var="pageNumber">
+                                    <li class="page-item"><a class="page-link" href="orderManager?page=${pageNumber}">${pageNumber}</a></li>
+                                    </c:forEach>
+                                <li class="page-item"><a class="page-link" href="orderManager?page=${page + 1}">Next</a></li>
+                            </ul>
+                        </c:if>
                     </div>
                     <!-- /.container-fluid -->
 

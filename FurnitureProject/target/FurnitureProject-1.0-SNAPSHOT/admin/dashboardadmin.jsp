@@ -1,248 +1,274 @@
-<%-- 
-    Document   : dashboardadmin
-    Created on : Mar 10, 2024, 2:25:22 AM
-    Author     : Dell
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html; charset=UTF-8"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-        <link rel="stylesheet" href="/FurnitureProject/assets/css/admin/sb-admin-2.min.css"> 
-        <link rel="stylesheet" href="/FurnitureProject/assets/css/admin/dashboard.css"> 
-
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/admin/sb-admin-2.min.css">        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>        
         <title>DashBoard</title>
+        <style>
+            a {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body id="page-top">
-
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <%@include file="../UIcomponents/sidebarAdmin.jsp"%>
-            <!-- End of Sidebar -->
-
             <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gray-900  sidebar sidebar-dark accordion" id="accordionSidebar">
 
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
+                    <div class="sidebar-brand-text mx-3">Lofi Furniture</div>
+                </a>
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Thống kê</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Menu
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+               
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" onclick="toggleSubMenu('sub-account')">                  
+                        <span>Quản lý tài khoản</span>
+                        <i id="arrow-icon-sub-account" class="fas fa-chevron-right" style="color: white;margin-left: 50px"></i>
+                    </a>
+                </li>
+
+                <li id="sub-account" class="nav-item" style="display: none">
+                    <a class="nav-link collapsed" href="UserAccounts">                  
+                        <span>Tất Cả tài khoản</span>
+                    </a>
+                    <a class="nav-link collapsed" href="createStaffPage">                  
+                        <span>Tạo tài khoản nhân viên</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">       
+
+
+            </ul>
+            <!-- End of Sidebar -->
+            <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
-
-                    <!-- Topbar -->
-                  <%@include file="../UIcomponents/topbarAdmin.jsp"%>
-                    <!-- End of Topbar -->
-
                     <!-- Begin Page Content -->
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Topbar Search -->
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Nav Item - User Information -->
+                            <c:set var="admin" value="${sessionScope.ADMIN_INFO}"/>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" onclick="toggleSubMenu('sub-menu')">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${admin.name}</span>
+                                    <img class="img-profile rounded-circle"
+                                         src="assets/img/users/avatar.jpg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div id="sub-menu" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>                                                                    
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="LogOutAdmin">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- End of Topbar -->
                     <div class="container-fluid">
-                        <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4 my-4">
-                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                        </div>
-
-                        <!-- Content Row -->
-                        <div class="row my-4">
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Earnings (Monthly)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Earnings (Annual)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                                </div>
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-info" role="progressbar"
-                                                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                                 aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Pending Requests Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Pending Requests</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Content Row -->
 
+                        <h1 class="my-4">Thống kê</h1>
+                    
                         <div class="row">
-
-                            <!-- Area Chart -->
-                            <div class="col-xl-8 col-lg-7">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                 aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div class="chart-area">
-                                            <canvas id="myAreaChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                <canvas id="monthlyRevenueChart"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="purchasesByCategoryChart"></canvas>
                             </div>
 
-                            <!-- Pie Chart -->
-                            <div class="col-xl-4 col-lg-5">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                 aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
-                                        </div>
-                                        <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Direct
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Social
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> Referral
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <canvas id="thirdChart"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="fourthChart"></canvas>
                             </div>
                         </div>
 
+                        <c:set var="RevenueByMonth" value="${requestScope.REVENUE_BY_MONTH}"/>
+                        <c:set var="PurchasesByCategory" value="${requestScope.TOTAL_PURCHASES_BY_CATEGORY}"/>
+                       
 
+                        <script>
+                            var ctx1 = document.getElementById('monthlyRevenueChart').getContext('2d');
+                            var revenueChart = new Chart(ctx1, {
+                                type: 'bar',
+                                data: {
+                                    labels: [<c:forEach var="revenue" items="${RevenueByMonth}">"${revenue.date}",</c:forEach>],
+                                            datasets: [{
+                                                    label: "Doanh thu theo tháng",
+                                                    lineTension: 0.3,
+                                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                                    borderColor: "rgba(2,117,216,1)",
+                                                    pointRadius: 5,
+                                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                                    pointHoverRadius: 5,
+                                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                                    pointHitRadius: 50,
+                                                    pointBorderWidth: 2,
+                                                    data: [<c:forEach var="revenue" items="${RevenueByMonth}">${revenue.value},</c:forEach>],
+                                                }],
+                                },
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                                time: {
+                                                    unit: 'date'
+                                                },
+                                                gridLines: {
+                                                    display: false
+                                                },
+                                                ticks: {
+                                                    maxTicksLimit: 7
+                                                }
+                                            }],
+                                        yAxes: [{
+                                                ticks: {
+                                                    min: 0,
+                                                    max: 10,
+                                                    maxTicksLimit: 5
+                                                },
+                                                gridLines: {
+                                                    color: "rgba(0, 0, 0, .125)",
+                                                }
+                                            }],
+                                    },
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            });
 
-
-
+                            var ctx2 = document.getElementById('purchasesByCategoryChart').getContext('2d');
+                            var purchasesByCategoryChart = new Chart(ctx2, {
+                                type: 'line',
+                                data: {
+                                    labels: [<c:forEach var="item" items="${PurchasesByCategory}">"${item.key}",</c:forEach>],
+                                    datasets: [{
+                                            label: "Số lượng mua hàng",
+                                            backgroundColor: "rgba(255,99,132,0.2)",
+                                            borderColor: "rgba(255,99,132,1)",
+                                            borderWidth: 1,
+                                            data: [<c:forEach var="item" items="${PurchasesByCategory}">${item.value},</c:forEach>]
+                                        }]
+                                },
+                                options: {
+                                    // Các tùy chọn của biểu đồ (nếu cần)
+                                }
+                            });
+                            
+                            function toggleSubMenu(menuId) {
+                                var subMenu = document.getElementById(menuId);
+                                var arrowIcon = document.getElementById('arrow-icon-' + menuId);
+                                if (subMenu.style.display === 'none') {
+                                    subMenu.style.display = 'block';
+                                    arrowIcon.classList.remove('fa-chevron-right');
+                                    arrowIcon.classList.add('fa-chevron-down');
+                                } else {
+                                    subMenu.style.display = 'none';
+                                    arrowIcon.classList.remove('fa-chevron-down');
+                                    arrowIcon.classList.add('fa-chevron-right');
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
-                    
-
+                <!-- /.container-fluid -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
             </div>
-            <!-- /.container-fluid -->
-            
-
+            <!-- End of Main Content -->
         </div>
-                      <%@include file="../UIcomponents/footerStaffAdmin.jsp"%>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-      
-        <!-- End of Footer -->
-
-  
-  
-
-<script>
-    function toggleSubMenu(menuId) {
-        var subMenu = document.getElementById(menuId);
-        subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
-    }
-</script> 
-
-</body>
+        <!-- End of Content Wrapper -->
+    </body>
 </html>

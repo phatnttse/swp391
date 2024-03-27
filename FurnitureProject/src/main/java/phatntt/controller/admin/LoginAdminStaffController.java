@@ -105,7 +105,7 @@ public class LoginAdminStaffController extends HttpServlet {
             } else if (user != null && user.getRole() == 2) {
                 if (utils.checkPassword(password, user.getPassword())) {
                     session.setAttribute("ADMIN_INFO", user);
-                    url = siteMaps.getProperty(Constants.LoginFeatures.ADMIN_PAGE);
+                    url = "dashboardAdmin";
                 } else {
                     request.setAttribute("LOGIN_ERROR", "Email hoặc mật khẩu không chính xác");
                 }

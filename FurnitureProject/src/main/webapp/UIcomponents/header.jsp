@@ -150,7 +150,6 @@
 
                                 <div class="header-wish">
                                     <a href="viewWishlist" class="wishlist_header" title="Sản phẩm yêu thích">
-                                        <span class="headerWishlistCount count-item">0</span>
                                         <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/wish-icon.png?1708512217480"
                                              alt="Lofi Furniture" width="25" height="25" class="icon">
                                         <span class="info">Yêu thích</span>
@@ -158,8 +157,7 @@
                                 </div>
 
                                 <div class="header-cart block-cart">
-                                    <a href="cart" aria-label="Giỏ hàng" title="Giỏ hàng">
-                                        <span class="count_item_pr count-item">0</span>
+                                    <a href="cart" aria-label="Giỏ hàng" title="Giỏ hàng">                                     
                                         <img src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/shopping-cart.png?1708512217480"
                                              alt="Lofi Furniture" width="25" height="25" class="icon">
                                         <span class="info">Giỏ hàng</span>

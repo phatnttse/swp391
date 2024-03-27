@@ -21,7 +21,7 @@ import phatntt.dto.UsersDTO;
  *
  * @author Admin
  */
-@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/addProductsToCart","/allOrder", "/addProductToWishlist"})
+@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/addProductsToCart", "/addProductToWishlist"})
 public class AuthorizationFilter implements Filter {
     
     @Override

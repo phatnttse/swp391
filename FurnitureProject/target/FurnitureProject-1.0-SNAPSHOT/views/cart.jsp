@@ -47,8 +47,7 @@
                                                                         <a href=""
                                                                            class="ajaxcart__product-name h4"
                                                                            title="${product.title}">${product.title}</a>
-                                                                        <a class="cart__btn-remove remove-item-cart ajaxifyCart--remove"
-                                                                           onclick="removeProductFromCart('${product.userId}', ${product.productId})">Xóa</a>
+                                                                       
 
                                                                     </div>
                                                                     <div class="grid">

@@ -41,37 +41,33 @@ public class LoadProductDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
-        // Lấy productId từ request (có thể từ parameter hoặc attribute của session)
+        
+        
         String productId = request.getParameter("productId");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.LoginFeatures.HOME_PAGE);
         try {
 
-            // Lấy thông tin sản phẩm từ cơ sở dữ liệu
             ProductsDAO productDAO = new ProductsDAO();
-            ProductsDTO product;
+            ProductsDTO product = productDAO.getProductById(Integer.parseInt(productId));
 
-            product = productDAO.getProductById(Integer.parseInt(productId));
-
-            // Đặt thông tin sản phẩm vào request attribute
             request.setAttribute("product", product);
-
-            //set url
-            url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_DETAIL)
-                    + "?productId=" + productId;
-            
-            //sản phẩm cùng loại
+         
+            // Sản phẩm cùng loại
             List<ProductsDTO> dtos = productDAO.getProductSameCategory(Integer.parseInt(productId));
             request.setAttribute("SAME_CATEGORY", dtos);
+
+            url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_DETAIL) + "?productId=" + productId;
 
         } catch (SQLException ex) {
             Logger.getLogger(LoadProductDetailController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(LoadProductDetailController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Chuyển hướng tới trang productDetail.jsp
+
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }

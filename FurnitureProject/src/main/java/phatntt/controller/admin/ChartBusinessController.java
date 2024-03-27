@@ -6,17 +6,30 @@ package phatntt.controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.OrdersDAO;
+import phatntt.dto.ChartDTO;
+import phatntt.util.Constants;
 
 /**
  *
  * @author Dell
  */
-@WebServlet(name = "ChartBusinessController", urlPatterns = {"/ChartBusinessController"})
+@WebServlet(name = "ChartBusinessController", urlPatterns = {"/dashboardAdmin"})
 public class ChartBusinessController extends HttpServlet {
 
     /**
@@ -31,17 +44,48 @@ public class ChartBusinessController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ChartBusinessController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ChartBusinessController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
+        String url = siteMaps.getProperty(Constants.LoginFeatures.ADMIN_PAGE);
+        try {
+
+            OrdersDAO dao = new OrdersDAO();
+
+            // Nếu không có start và end parameters, tính doanh thu cho mỗi tháng trong năm qua
+            List<ChartDTO> revenueByMonthList = dao.getRevenueByMonth();
+
+            // Tạo một danh sách các tháng với giá trị doanh thu là 0 cho các tháng không có doanh thu
+            List<ChartDTO> completeRevenueByMonthList = new ArrayList<>();
+            for (int i = 1; i <= 12; i++) {
+                boolean found = false;
+                for (ChartDTO dto : revenueByMonthList) {
+                    // Chuyển đổi chuỗi biểu thị cho tháng thành số nguyên
+                    int month = Integer.parseInt(dto.getDate().substring(6)); // Loại bỏ "Month " và lấy số tháng
+                    if (month == i) {
+                        completeRevenueByMonthList.add(dto);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    completeRevenueByMonthList.add(ChartDTO.builder()
+                            .date("Tháng " + i)
+                            .value(0)
+                            .build());
+                }
+            }
+            Map<String, Integer> totalPurchasesByCategory = dao.getTotalPurchasesByCategory();
+            request.setAttribute("TOTAL_PURCHASES_BY_CATEGORY", totalPurchasesByCategory);
+            request.setAttribute("REVENUE_BY_MONTH", completeRevenueByMonthList);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

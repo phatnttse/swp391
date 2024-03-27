@@ -83,8 +83,8 @@ public class CheckOutSuccessController extends HttpServlet {
                     
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.CHECKOUT_SUCCESS_PAGE);
                     
-//                    EmailDAO emailDAO = new EmailDAO();
-//                    emailDAO.sendEmailTksForOrdering(email);
+                    EmailDAO emailDAO = new EmailDAO();
+                    emailDAO.sendEmailTksForOrdering(email);
                     
                     session.removeAttribute("ORDER_EMAIL");
                     session.removeAttribute("ORDER_NAME");

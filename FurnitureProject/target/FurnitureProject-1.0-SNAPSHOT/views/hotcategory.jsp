@@ -29,7 +29,7 @@
                                 <div class="swiper-slide">
                                     <div class="item">
                                         <div class="image">
-                                            <a href="product-category?categoryId=${category.categoryId}" title="${category.name}"><img class="lazyload" width="300" height="300" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="Bồn tắm"/></a>
+                                            <a href="product-category?categoryId=${category.categoryId}" title="${category.name}"><img class="lazyload" width="300" height="300" src="/FurnitureProject/thumbnails/categories/${category.thumbnail}" alt="${category.name}"/></a>
                                         </div>
                                         <div class="info">
                                             <h3>

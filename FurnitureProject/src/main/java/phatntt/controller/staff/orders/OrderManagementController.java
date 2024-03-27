@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phatntt.dao.OrdersDAO;
+import phatntt.dao.ProductsDAO;
 import phatntt.dao.StaffDAO;
 import phatntt.dto.OrderDTO;
 import phatntt.dto.OrderStatusDTO;
@@ -47,27 +48,71 @@ public class OrderManagementController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE);
+        String pageParam = request.getParameter("page");
+        int page = 1;
+
+        if (pageParam != null) {
+            page = Integer.parseInt(pageParam);
+            url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE)
+                    + "?page=" + page;
+            request.setAttribute("PAGE", Integer.parseInt(pageParam));
+        }
+        int limit = 9;
+
+        if (page > 1) {
+            page = page - 1;
+            page = page * limit - 1;
+        }
 
         try {
-            StaffDAO dao = new StaffDAO();
-            List<OrderDTO> orders = dao.getAllOrders();
-            List<OrderStatusDTO> orderStatus = dao.getAllOrderStatus();
-//            List<OrderDTO> ordersByDay = dao.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
-//            List<OrderDTO> ordersByMonth = dao.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
-//            List<OrderDTO> cancelledOrders = dao.getOrdersByCondition("WHERE o.status = 7"); 
+            // Lấy tham số statusId từ request
+            String statusIdStr = request.getParameter("statusId");
 
+            // Lấy tham số filterDate từ request
+            String filterDate = request.getParameter("filterDate");
+
+            StaffDAO dao = new StaffDAO();
+            List<OrderDTO> orders = null;
+            String statusName;
+
+            if (statusIdStr != null && filterDate != null) {
+
+                int statusId = Integer.parseInt(statusIdStr);
+                orders = dao.filterOrderByStatusAndDate(statusId, filterDate, page, limit);
+                statusName = dao.getStatusNameById(statusId);
+                url = siteMaps.getProperty(Constants.Management.ORDER_MANAGEMENT_PAGE) + "?page="
+                        + "&statusId=" + statusId
+                        + "&filterDate=" + filterDate;
+                request.setAttribute("FILTER_DATE", filterDate);
+                request.setAttribute("STATUS_NAME", statusName);
+                request.setAttribute("STATUS_ID", statusId);
+
+            }else{
+                orders = dao.getAllOrders(page, limit);
+            }
+
+            List<OrderStatusDTO> orderStatus = dao.getAllOrderStatus();
+
+            List<OrderDTO> ordersByDay = dao.getOrdersByCondition("WHERE DATE(o.created_at) = CURDATE()");
+            List<OrderDTO> ordersByMonth = dao.getOrdersByCondition("WHERE MONTH(o.created_at) = MONTH(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE())");
+            List<OrderDTO> cancelledOrders = dao.getOrdersByCondition("WHERE o.status = 7");
 
             request.setAttribute("ORDERS", orders);
             request.setAttribute("ORDER_STATUS", orderStatus);
-//            request.setAttribute("ORDERS_CURRENT", orders.size());
-//            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
-//            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
-//            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
+            request.setAttribute("ORDERS_CURRENT", orders.size());
+            request.setAttribute("ORDERS_BYDAY", ordersByDay.size());
+            request.setAttribute("ORDERS_BYMONTH", ordersByMonth.size());
+            request.setAttribute("ORDERS_CANCELLED", cancelledOrders.size());
+
+
+            int totalOrders = dao.getTotalOrders();
+            int totalPages = (int) Math.ceil((double) totalOrders / limit);
+            request.setAttribute("TOTAL_PAGES", totalPages);
 
         } catch (SQLException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (NamingException ex) {
-            Logger.getLogger(OrderManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

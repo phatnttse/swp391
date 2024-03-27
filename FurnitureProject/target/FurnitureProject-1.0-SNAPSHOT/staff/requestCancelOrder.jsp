@@ -115,10 +115,20 @@
                                     </table>
                                 </div>                               
 
-
-
                             </div>
                         </div>
+                        <c:set var="page" value="${requestScope.PAGE}"/>
+                        <c:set var="totalPage" value="${requestScope.TOTAL_PAGES}"/>
+                        <c:if test="${totalPage != null}">
+                            <ul class="pagination justify-content-center my-3">
+                                <li class="page-item"><a class="page-link" href="requestCancelOrderManager?page=${page - 1}">Previous</a></li>
+                                    <c:forEach begin="1" end="${totalPage}" var="pageNumber">
+                                    <li class="page-item"><a class="page-link" href="requestCancelOrderManager?page=${pageNumber}">${pageNumber}</a></li>
+                                    </c:forEach>
+                                <li class="page-item"><a class="page-link" href="requestCancelOrderManager?page=${page + 1}">Next</a></li>
+                            </ul>
+                        </c:if>
+                        
 
                     </div>
                     <!-- /.container-fluid -->

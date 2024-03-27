@@ -25,7 +25,7 @@
                         <div class="about-info">
                             <span class="title-top">Về chúng tôi</span>
                             <h2 class="title">Tìm hiểu thêm về chúng tôi và lý do tại sao nên chọn chúng tôi</h2>
-                            <div class="desc">Với mong muốn mang đến cho khách hàng những sản phẩm&nbsp;thiết bị vệ sinh chính hãng từ các hãng sản xuất trong và ngoài nước. Chúng tôi luôn lắng nghe và đưa ra cho khách hàng những lời khuyên, lời chia sẻ chân thành. Cùng với đó là quy trình mua hàng, giao hàng nhanh chóng, thuận tiện cho khách hàng.</div>
+                            <div class="desc">Với mong muốn mang đến cho khách hàng những sản phẩm&nbsp;thiết bị nội thất chính hãng từ các hãng sản xuất trong và ngoài nước. Chúng tôi luôn lắng nghe và đưa ra cho khách hàng những lời khuyên, lời chia sẻ chân thành. Cùng với đó là quy trình mua hàng, giao hàng nhanh chóng, thuận tiện cho khách hàng.</div>
                             <div class="item">
                                 <div class="icon">
                                     <img class="img-fluid" src="//bizweb.dktcdn.net/100/499/932/themes/926650/assets/ic-check.png?1708512217480" alt="Lofi Furniture">

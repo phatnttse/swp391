@@ -18,7 +18,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatntt.dao.CategoryDAO;
 import phatntt.dao.ProductsDAO;
+import phatntt.dto.CategoryDTO;
 import phatntt.dto.ProductsDTO;
 import phatntt.util.Constants;
 
@@ -133,8 +135,13 @@ public class SortProductController extends HttpServlet {
                     break;
             }
             int totalProducts = dao.getTotalProducts(); 
-            int totalPages = (int) Math.ceil((double) totalProducts / limit); // Tính số trang
+            int totalPages = (int) Math.ceil((double) totalProducts / limit);
             request.setAttribute("TOTAL_PAGES", totalPages); 
+            
+            CategoryDAO catedao = new CategoryDAO();
+            List<CategoryDTO> cdtos = catedao.getAllCategoryDTOs();
+            request.setAttribute("CATEGORY_LIST", cdtos);
+            
             request.setAttribute("PAGE", Integer.parseInt(pageParam));
             url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE)
                     + "?sortType=" + sortType;

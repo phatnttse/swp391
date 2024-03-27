@@ -71,11 +71,13 @@ public class ProductPaginationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sortType = request.getParameter("sortType");
+        
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
         String url = siteMaps.getProperty(Constants.ProductsFeatures.PRODUCTS_PAGE);
         String span;
+        String sortType = request.getParameter("sortType");
+        
 
         String pageParam = request.getParameter("page");
         int page = 1;
@@ -147,6 +149,8 @@ public class ProductPaginationController extends HttpServlet {
                 dTOs = dao.getAllProducts(page, limit);
                 request.setAttribute("PRODUCTS_LIST", dTOs);
             }
+            
+            
             CategoryDAO catedao = new CategoryDAO();
             List<CategoryDTO> cdtos = catedao.getAllCategoryDTOs();
             request.setAttribute("CATEGORY_LIST", cdtos);

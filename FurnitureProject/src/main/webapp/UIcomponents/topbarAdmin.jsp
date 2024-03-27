@@ -18,7 +18,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" name="SearchValue" placeholder="Nhập tên...">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>

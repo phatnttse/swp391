@@ -60,9 +60,10 @@ public class ProductsController extends HttpServlet {
             request.setAttribute("CATEGORY_LIST", cdtos);
             
            
-             int totalProducts = product.getTotalProducts();
+            int totalProducts = product.getTotalProducts();
             int totalPages = (int) Math.ceil((double) totalProducts / 9); // Tính số trang
             request.setAttribute("TOTAL_PAGES", totalPages);
+            
 
             url = siteMaps.getProperty(Constants.LoginFeatures.PRODUCTS_PAGE);
 

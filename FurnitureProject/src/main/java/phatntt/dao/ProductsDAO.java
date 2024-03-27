@@ -70,8 +70,8 @@ public class ProductsDAO implements Serializable {
                     + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setInt(1, page - 1 ); 
-            stm.setInt(2, limit); 
+            stm.setInt(1, page - 1);
+            stm.setInt(2, limit);
 
             @Cleanup
             ResultSet rs = stm.executeQuery();
@@ -569,24 +569,27 @@ public class ProductsDAO implements Serializable {
         }
         return result;
     }
+
     public int getTotalProducts() throws SQLException, NamingException {
-    int totalProducts = 0;
+        int totalProducts = 0;
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "SELECT COUNT(*) AS total FROM products";
         @Cleanup
-        PreparedStatement stm = con.prepareCall(sql);
-        @Cleanup
-        ResultSet rs = stm.executeQuery();
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT COUNT(*) AS total FROM products";
+            @Cleanup
+            PreparedStatement stm = con.prepareCall(sql);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-        if (rs.next()) {
-            totalProducts = rs.getInt("total");
+            if (rs.next()) {
+                totalProducts = rs.getInt("total");
+            }
         }
+
+        return totalProducts;
     }
 
-    return totalProducts;
-}
+
 
 }

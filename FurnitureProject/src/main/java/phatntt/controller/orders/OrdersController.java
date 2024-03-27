@@ -109,8 +109,8 @@ public class OrdersController extends HttpServlet {
                     orderDAO.clearCartByUserId(user.getId());
                     session.setAttribute("ORDER_SUCCESS", order);                  
                     url = siteMaps.getProperty(Constants.ShoppingFeatures.ORDER_SUCCESS_PAGE);
-//                    EmailDAO emailDAO = new EmailDAO();
-//                    emailDAO.sendEmailTksForOrdering(email);
+                    EmailDAO emailDAO = new EmailDAO();
+                    emailDAO.sendEmailTksForOrdering(email);
                 }
 
             } else {

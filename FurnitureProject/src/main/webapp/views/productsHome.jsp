@@ -15,11 +15,12 @@
         <link rel="stylesheet" type="text/css" href="/FurnitureProject/assets/css/alert.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
         <title>JSP Page</title>
-             
+
     </head>
     <body>
 
         <c:set var="listProductByCategory" value="${requestScope.PRODUCTS_CATEGORY}"/>
+        <c:set var="categories" value="${requestScope.CATEGORY_ALL}"/>
         <section class="section_product_tab">
             <div class="container">
                 <div class="e-tabs not-dqtab ajax-tab-1">
@@ -27,31 +28,11 @@
                         <div class="block-title">
                             <h2><a href="products">Sản phẩm</a></h2>
                             <ul class="tabs tabs-title tab-desktop ajax clearfix">
-
-                                <li class="tab-link has-content current" data-tab="tab-1" data-url="/bon-tam">
-                                    <span onclick="loadProductsByCategory(1)" title="Bồn tắm">Bồn tắm</span>
-                                </li>
-
-                                <li class="tab-link has-content" data-tab="tab-2" data-url="/bon-cau">
-                                    <span onclick="loadProductsByCategory(2)" title="Bồn cầu">Bồn cầu</span>
-                                </li>
-
-                                <li class="tab-link has-content" data-tab="tab-3" data-url="/sen-tam">
-                                    <span onclick="loadProductsByCategory(3)" title="Sen tắm">Sen tắm</span>
-                                </li>
-
-                                <li class="tab-link" data-tab="tab-4" data-url="/tu-chau-lavabo">
-                                    <span onclick="loadProductsByCategory(4)" title="Tủ chậu Lavabo">Tủ chậu Lavabo</span>
-                                </li>
-
-                                <li class="tab-link" data-tab="tab-5" data-url="/voi-lavabo">
-                                    <span onclick="loadProductsByCategory(5)" title="Vòi Lavado">Vòi Lavado</span>
-                                </li>
-
-                                <li class="tab-link" data-tab="tab-6" data-url="/phu-kien">
-                                    <span onclick="loadProductsByCategory(6)" title="Phụ kiện">Phụ kiện</span>
-                                </li>
-
+                                <c:forEach var="category" items="${categories}" varStatus="counter">
+                                    <li class="tab-link has-content current">
+                                        <span onclick="loadProductsByCategory(${counter.count})" title="${category.name}">${category.name}</span>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
 
@@ -73,7 +54,7 @@
                                                             <span class="smart">-
                                                                 ${product.discount}% 
                                                             </span>
-                                                                <a onclick="addProductToWishlist(${product.productId})" class="btn-compare js-btn-wishlist setWishlist btn-views" tabindex="0" title="Thêm vào yêu thích">
+                                                            <a onclick="addProductToWishlist(${product.productId})" class="btn-compare js-btn-wishlist setWishlist btn-views" tabindex="0" title="Thêm vào yêu thích">
                                                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181"></path></svg>
                                                             </a>
 
@@ -131,54 +112,54 @@
                 </div>
         </section>
         <div id="alert-wishlist">
-            
+
         </div>
-        
+
         <div id="quick-view-product" class="quickview-product" style="display: none;"></div>
 
         <script src="assets/js/ajaxfunctions.js"></script>
-        
-        <script>
-            function addProductToWishlist(productId) {
-    
-    $.ajax({
-        url: "/FurnitureProject/addProductToWishlist",
-        type: "post",
-        data: {
-            productId: productId                 
-        },
-        success: function (response) {
-            // Kiểm tra phản hồi từ server
-            if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
-                // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
-                window.location.href = "/FurnitureProject/loginPage";
-                alert("Để thực hiện, bạn cần phải đăng nhập!");
-            } else {
-                // Nếu không, hiển thị giỏ hàng
-                const content = document.getElementById("alert-wishlist");
-                content.innerHTML = response;
-                initializeCloseAlertEvent();
-            }
-        },
-        error: function (xhr) {
-            // Xử lý lỗi nếu cần
-        }
-    });
-}
-function initializeCloseAlertEvent() {
-    const iconClose = document.querySelector('.close');
-    if (iconClose) {
-        iconClose.addEventListener('click', hideWishlistModal);
-    }
-}
 
-function hideWishlistModal() {
-    const popupcart = document.querySelector('.fadeInDown');
-    popupcart.style.display = 'none';
-    
-}
+        <script>
+                                                                        function addProductToWishlist(productId) {
+
+                                                                            $.ajax({
+                                                                                url: "/FurnitureProject/addProductToWishlist",
+                                                                                type: "post",
+                                                                                data: {
+                                                                                    productId: productId
+                                                                                },
+                                                                                success: function (response) {
+                                                                                    // Kiểm tra phản hồi từ server
+                                                                                    if (response.includes("Để thực hiện, bạn cần phải đăng nhập!")) {
+                                                                                        // Nếu phản hồi chứa thông báo đăng nhập, chuyển hướng đến trang đăng nhập
+                                                                                        window.location.href = "/FurnitureProject/loginPage";
+                                                                                        alert("Để thực hiện, bạn cần phải đăng nhập!");
+                                                                                    } else {
+                                                                                        // Nếu không, hiển thị giỏ hàng
+                                                                                        const content = document.getElementById("alert-wishlist");
+                                                                                        content.innerHTML = response;
+                                                                                        initializeCloseAlertEvent();
+                                                                                    }
+                                                                                },
+                                                                                error: function (xhr) {
+                                                                                    // Xử lý lỗi nếu cần
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        function initializeCloseAlertEvent() {
+                                                                            const iconClose = document.querySelector('.close');
+                                                                            if (iconClose) {
+                                                                                iconClose.addEventListener('click', hideWishlistModal);
+                                                                            }
+                                                                        }
+
+                                                                        function hideWishlistModal() {
+                                                                            const popupcart = document.querySelector('.fadeInDown');
+                                                                            popupcart.style.display = 'none';
+
+                                                                        }
         </script>
-        
+
 
     </body>
 </html>

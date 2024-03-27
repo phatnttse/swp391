@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import phatntt.dao.WishlistDAO;
 import phatntt.dto.UsersDTO;
+import phatntt.dto.WishlistDTO;
 
 /**
  *
@@ -88,19 +89,31 @@ public class AddProductToWishlistController extends HttpServlet {
             UsersDTO user = (UsersDTO) session.getAttribute("USER_INFO");
 
             WishlistDAO dao = new WishlistDAO();
-            boolean result = dao.addProductToWishlist(productId, user.getId());
-            if (result) {
+            WishlistDTO product = dao.getProductFromWishlist(productId);
+            if (product != null) {
                 out.println("<div id=\"alert-wishlist\" class=\"col-xs-11 col-sm-4 alert alert-success animated fadeInDown\" style=\"display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; top: 20px; right: 20px;\">\n"
                         + "            <button type=\"button\" class=\"close\" style=\"position: absolute; right: 10px; top: 5px; z-index: 1033;\">×</button><span class=\"glyphicon glyphicon-ok\">\n"
                         + "\n"
-                        + "            </span> <span data-notify=\"title\"><strong>Tuyệt vời</strong><br></span>\n"
-                        + "            <span>Bạn vừa thêm 1 sản phẩm vào mục yêu thích thành công bấm \n"
-                        + "                <a style=\"color:#2196f3\" href=\"viewWishlist\">vào đây</a> \n"
-                        + "                để tới trang yêu thích\n"
-                        + "            </span>\n"
+                        + "            </span> <span data-notify=\"title\"><strong>Xin lỗi</strong><br></span>\n"
+                        + "            <span>Sản phẩm đã có trong mục yêu thích</span>\n"
                         + "         \n"
                         + "        </div>");
+            } else {
+                boolean result = dao.addProductToWishlist(productId, user.getId());
+                if (result) {
+                    out.println("<div id=\"alert-wishlist\" class=\"col-xs-11 col-sm-4 alert alert-success animated fadeInDown\" style=\"display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; top: 20px; right: 20px;\">\n"
+                            + "            <button type=\"button\" class=\"close\" style=\"position: absolute; right: 10px; top: 5px; z-index: 1033;\">×</button><span class=\"glyphicon glyphicon-ok\">\n"
+                            + "\n"
+                            + "            </span> <span data-notify=\"title\"><strong>Tuyệt vời</strong><br></span>\n"
+                            + "            <span>Bạn vừa thêm 1 sản phẩm vào mục yêu thích thành công bấm \n"
+                            + "                <a style=\"color:#2196f3\" href=\"viewWishlist\">vào đây</a> \n"
+                            + "                để tới trang yêu thích\n"
+                            + "            </span>\n"
+                            + "         \n"
+                            + "        </div>");
+                }
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(AddProductToWishlistController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

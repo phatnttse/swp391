@@ -135,6 +135,40 @@
                 color: #000
             }
 
+            .star-rating {
+                unicode-bidi: bidi-override;
+                color: #c5c5c5;
+                font-size: 25px;
+                height: 25px;
+                width: 125px;
+                margin: 0 auto;
+                position: relative;
+                padding: 0;
+                text-shadow: 0px 1px 0 #a2a2a2;
+            }
+            .star-rating span {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+            }
+            .star-rating span:before {
+                content: "\2605\2605\2605\2605\2605";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+            .star-rating span.filled:before {
+                color: #f5c518;
+            }
+            .star-rating span.half:before {
+                color: #f5c518;
+                width: 50%;
+            }
+
         </style>
     </head>
 
@@ -214,7 +248,14 @@
                                                       ><span class="a-stock">Còn hàng</span></span
                                                 >
                                             </span>
+
+
                                         </div>
+                                                                             
+                                         <div style="padding: 10px 0">
+                                            <span class="title">Lượt mua: ${product.purchases}</span>
+                                        </div>
+
 
                                         <h1 class="title-product">
                                             ${product.title}
@@ -327,33 +368,15 @@
                             </div>
                         </div>                   
                     </div>
-                    <div class="form-coment">
-                        <div class="margin-top-0 margin-bottom-30 w-100">
-                            <h5 class="title-form-coment">Viết bình luận của bạn</h5>
-                        </div>
-                        <div class="row">                           
-                            <fieldset class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-                                <textarea placeholder="Nội dung" class="form-control form-control-lg" id="comment" name="Body" rows="6" required=""></textarea>
-                            </fieldset>
-                            <div class="col-12" style="margin-bottom: 15px">
-                                <button type="submit" class="btn btn-primary button_45">Gửi bình luận</button>
-                            </div>
-                        </div>
-                    </div>
+
                     <div id="article-comments">
-                        <h5 class="title-form-coment margin-bottom-25">Bình luận (1)</h5>
+                        <h5 class="title-form-coment margin-bottom-25">Mô tả</h5>
 
                         <div class="article-comment clearfix">
-                            <figure class="article-comment-user-image">
-                                <img src="https://www.gravatar.com/avatar/2bc01cd7be112cdab638c46feff9ba2e?s=110&amp;d=identicon" alt="binh-luan" class="block">
-                            </figure>
 
-                            <div class="article-comment-user-comment">
-                                <p class="user-name-comment"><strong>Phatntt</strong>
-                                    <a href="#article_comments" class="btn-link pull-xs-right d-none">Trả lời</a></p>
-                                <span class="article-comment-date-bull">22/03/2024</span>
-                                <p class="cm">ádnaslndasklndaskldnasklndasklndasklndas</p>
 
+                            <div class="article-comment-user-comment">                             
+                                <p class="cm">${product.description}</p>
                             </div>
                         </div> 
 
@@ -368,7 +391,7 @@
                         <h2>
                             <a href="" title="Sản phẩm cùng loại">Sản phẩm cùng loại</a>
                         </h2>
-                  </div>
+                    </div>
                     <c:set var="SameCategory" value="${requestScope.SAME_CATEGORY}"/>
                     <c:if test="${not empty SameCategory}">
 
@@ -390,20 +413,33 @@
                                                         <div class="action">
                                                             <div class="actions-secondary">
                                                                 <div class="actions-primary">
-                                                                    <button class="btn-cart" title="Hết hàng" type="button">                                                                   
-                                                                        <span class="icon icon-cart">
-                                                                            <span class="icon icon-cart">
-                                                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
-                                                                                        fill:none;
-                                                                                        stroke:#000;
-                                                                                        stroke-linecap:round;
-                                                                                        stroke-linejoin:round;
-                                                                                        stroke-width:2px;
-                                                                                    }</style></defs><title></title><g><polyline class="cls-1" points="15 31 5 31 6 9 26 9 26.14 12"></polyline><path class="cls-1" d="M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6"></path><circle class="cls-1" cx="23" cy="23" r="8"></circle><line class="cls-1" x1="23" x2="23" y1="19" y2="27"></line><line class="cls-1" x1="27" x2="19" y1="23" y2="23"></line></g></svg>
-                                                                            </span>                                                                       
+                                                                   <c:if test="${productS.quantity > 0}">
+                                                                            <button type="button" onclick="addProductToCart(${productS.productId}, '${productS.title}', '${productS.thumbnail}', ${productS.discountProduct}, 1)" class="btn-cart add_to_cart " title="Thêm vào giỏ hàng">
+                                                                                <span class="icon icon-cart">
+                                                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
+                                                                                            fill:none;
+                                                                                            stroke:#000;
+                                                                                            stroke-linecap:round;
+                                                                                            stroke-linejoin:round;
+                                                                                            stroke-width:2px;
+                                                                                        }</style></defs><title></title><g><polyline class="cls-1" points="15 31 5 31 6 9 26 9 26.14 12"></polyline><path class="cls-1" d="M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6"></path><circle class="cls-1" cx="23" cy="23" r="8"></circle><line class="cls-1" x1="23" x2="23" y1="19" y2="27"></line><line class="cls-1" x1="27" x2="19" y1="23" y2="23"></line></g></svg>
+                                                                                </span>
+                                                                            </button>
+                                                                        </c:if>
 
-                                                                        </span>
-                                                                    </button>
+                                                                        <c:if test="${productS.quantity == 0}">
+                                                                            <button class="btn-cart" title="Hết hàng" type="button" disabled="disabled">
+                                                                                <span class="icon icon-outsock">
+                                                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{
+                                                                                            fill:none;
+                                                                                            stroke:#000;
+                                                                                            stroke-linecap:round;
+                                                                                            stroke-linejoin:round;
+                                                                                            stroke-width:2px;
+                                                                                        }</style></defs><title></title><g><polyline class="cls-1" points="15 31 5 31 6 9 26 9 26.14 12"></polyline><path class="cls-1" d="M11,12V6a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v6"></path><circle class="cls-1" cx="23" cy="23" r="8"></circle><line class="cls-1" x1="27" x2="19" y1="23" y2="23"></line></g></svg>
+                                                                                </span>
+                                                                            </button>
+                                                                        </c:if>
                                                                 </div>
                                                                 <button type="button" title="Xem nhanh" onclick="viewFastProduct(${product.productId})"  class="quick-view btn-views">
                                                                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12.01 20c-5.065 0-9.586-4.211-12.01-8.424 2.418-4.103 6.943-7.576 12.01-7.576 5.135 0 9.635 3.453 11.999 7.564-2.241 4.43-6.726 8.436-11.999 8.436zm-10.842-8.416c.843 1.331 5.018 7.416 10.842 7.416 6.305 0 10.112-6.103 10.851-7.405-.772-1.198-4.606-6.595-10.851-6.595-6.116 0-10.025 5.355-10.842 6.584zm10.832-4.584c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 1c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4z"></path></svg>
@@ -433,7 +469,7 @@
                                 </div>                               
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </c:if>

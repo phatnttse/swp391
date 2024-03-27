@@ -120,7 +120,7 @@ public class StaffDAO {
         return order;
     }
 
-    public List<OrderDTO> getAllOrders() throws SQLException, NamingException {
+    public List<OrderDTO> getAllOrders(int page, int limit) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
         @Cleanup
@@ -128,9 +128,12 @@ public class StaffDAO {
         if (con != null) {
             String sql = "SELECT o.*, os.name AS status_name "
                     + "FROM `orders` o "
-                    + "INNER JOIN `order_status` os ON o.status = os.status_id";
+                    + "INNER JOIN `order_status` os ON o.status = os.status_id "
+                    + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, page - 1);
+            stm.setInt(2, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -152,7 +155,7 @@ public class StaffDAO {
         return orders;
     }
 
-    public List<OrderDTO> filterOrderByStatus(int status) throws SQLException, NamingException {
+    public List<OrderDTO> filterOrderByStatus(int status, int page, int limit) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
         @Cleanup
@@ -161,10 +164,13 @@ public class StaffDAO {
             String sql = "SELECT o.*, os.name AS status_name "
                     + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
-                    + "WHERE o.status = ?";
+                    + "WHERE o.status = ? "
+                    + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, status);
+            stm.setInt(2, page - 1);
+            stm.setInt(3, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -186,7 +192,7 @@ public class StaffDAO {
         return orders;
     }
 
-    public List<OrderDTO> filterOrderByDate(String filterDate) throws SQLException, NamingException {
+    public List<OrderDTO> filterOrderByDate(String filterDate, int page, int limit) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
         @Cleanup
@@ -195,10 +201,13 @@ public class StaffDAO {
             String sql = "SELECT o.*, os.name AS status_name "
                     + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
-                    + "WHERE DATE(o.created_at) = ?";
+                    + "WHERE DATE(o.created_at) = ? "
+                    + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, filterDate);
+            stm.setInt(2, page - 1);
+            stm.setInt(3, limit);
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -220,7 +229,7 @@ public class StaffDAO {
         return orders;
     }
 
-    public List<OrderDTO> filterOrderByStatusAndDate(int status, String filterDate) throws SQLException, NamingException {
+    public List<OrderDTO> filterOrderByStatusAndDate(int status, String filterDate, int page, int limit) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
 
         @Cleanup
@@ -229,11 +238,15 @@ public class StaffDAO {
             String sql = "SELECT o.*, os.name AS status_name "
                     + "FROM `orders` o "
                     + "INNER JOIN `order_status` os ON o.status = os.status_id "
-                    + "WHERE o.status = ? AND DATE(o.created_at) = ?";
+                    + "WHERE o.status = ? AND DATE(o.created_at) = ? "
+                    + "LIMIT ?, ?";
             @Cleanup
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, status);
             stm.setString(2, filterDate);
+            stm.setInt(3, page - 1);
+            stm.setInt(4, limit);
+
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -254,27 +267,27 @@ public class StaffDAO {
 
         return orders;
     }
+
     public String getStatusNameById(int statusId) throws SQLException, NamingException {
-    String statusName = null;
+        String statusName = null;
 
-    @Cleanup
-    Connection con = DBConnect.createConnection();
-    if (con != null) {
-        String sql = "SELECT name FROM order_status WHERE status_id = ?";
         @Cleanup
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, statusId);
-        @Cleanup
-        ResultSet rs = stm.executeQuery();
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT name FROM order_status WHERE status_id = ?";
+            @Cleanup
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, statusId);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
 
-        if (rs.next()) {
-            statusName = rs.getString("name");
+            if (rs.next()) {
+                statusName = rs.getString("name");
+            }
         }
+
+        return statusName;
     }
-
-    return statusName;
-}
-
 
     public List<OrderDTO> getOrdersByCondition(String condition) throws SQLException, NamingException {
         List<OrderDTO> orders = new ArrayList<>();
@@ -384,9 +397,10 @@ public class StaffDAO {
         if (con != null) {
             String sql = "SELECT rc.id, rc.user_id, o.name, o.email, o.phone, o.amount, o.created_at AS order_date, rc.order_id, rc.reason, rc.request_status, rc.created_at "
                     + "FROM request_cancellations rc "
-                    + "JOIN `orders` o ON rc.order_id = o.order_id";
+                    + "JOIN `orders` o ON rc.order_id = o.order_id ";
             @Cleanup
-            PreparedStatement stm = con.prepareStatement(sql);
+            PreparedStatement stm = con.prepareStatement(sql);            
+
             @Cleanup
             ResultSet rs = stm.executeQuery();
 
@@ -514,4 +528,43 @@ public class StaffDAO {
         return result;
     }
 
+    public int getTotalOrders() throws SQLException, NamingException {
+        int totalProducts = 0;
+
+        @Cleanup
+        Connection con = DBConnect.createConnection();
+        if (con != null) {
+            String sql = "SELECT COUNT(*) AS total FROM orders";
+            @Cleanup
+            PreparedStatement stm = con.prepareCall(sql);
+            @Cleanup
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                totalProducts = rs.getInt("total");
+            }
+        }
+
+        return totalProducts;
+    }
+
+    public int getTotalRequests() throws SQLException, NamingException {
+    int totalProducts = 0;
+
+    @Cleanup
+    Connection con = DBConnect.createConnection();
+    if (con != null) {
+        String sql = "SELECT COUNT(*) AS total FROM request_cancellations";
+        @Cleanup
+        PreparedStatement stm = con.prepareCall(sql);
+        @Cleanup
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            totalProducts = rs.getInt("total");
+        }
+    }
+
+    return totalProducts;
+}
 }
